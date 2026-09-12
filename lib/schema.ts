@@ -9,7 +9,7 @@
  */
 
 import { SITE } from "./site";
-import type { RegistrationService } from "./services";
+import { SERVICES, type RegistrationService } from "./services";
 import type { City } from "./cities";
 
 export const ORG_ID = `${SITE.url}/#organization`;
@@ -163,5 +163,38 @@ export function graph(...nodes: object[]) {
   return {
     "@context": "https://schema.org",
     "@graph": nodes,
+  };
+}
+
+/**
+ * Homepage ItemList of the Phase 1 services (spec section 30).
+ *
+ * Makes the group identity and its four current services explicit for search
+ * engines and AI systems, using only facts already stated on the page. No
+ * subsidiaries, founding date, employee count, awards or social profiles are
+ * asserted, because none of those are verified (spec section 31).
+ */
+export function homeServiceListSchema() {
+  return {
+    "@type": "ItemList",
+    "@id": `${SITE.url}/#services`,
+    name: "Business registration services offered by Raulji Group",
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    numberOfItems: SERVICES.length,
+    itemListElement: SERVICES.map((service, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Service",
+        name: service.name,
+        description: service.definition,
+        url: abs(service.path),
+        provider: { "@id": ORG_ID },
+        areaServed: [
+          { "@type": "AdministrativeArea", name: "Gujarat" },
+          { "@type": "Country", name: "India" },
+        ],
+      },
+    })),
   };
 }

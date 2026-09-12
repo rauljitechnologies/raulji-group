@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileActionBar } from "@/components/layout/mobile-action-bar";
+import { LocationDrawerProvider } from "@/components/shared/location-drawer";
 import { JsonLd } from "@/components/ui/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 import { SITE } from "@/lib/site";
@@ -49,12 +50,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
-        <Header />
-        <main id="main" className="mobile-bar-gutter">
-          {children}
-        </main>
-        <Footer />
-        <MobileActionBar />
+        {/* One location drawer for the whole site (spec section 44). */}
+        <LocationDrawerProvider>
+          <Header />
+          <main id="main" className="mobile-bar-gutter">
+            {children}
+          </main>
+          <Footer />
+          <MobileActionBar />
+        </LocationDrawerProvider>
       </body>
     </html>
   );

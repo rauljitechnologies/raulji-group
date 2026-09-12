@@ -5,7 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, Phone, Mail, ExternalLink } from "lucide-react";
-import { NAV, PRIMARY_CTA, type NavGroup } from "@/lib/nav";
+import { NAV, PRIMARY_CTA, type NavGroup, type NavLink } from "@/lib/nav";
+import { useLocationDrawer } from "@/components/shared/location-drawer";
 import { SITE, telHref, mailHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -137,7 +138,7 @@ export function Header() {
         </button>
       </div>
 
-      {mobileOpen ? <MobileMenu /> : null}
+      {mobileOpen ? <MobileMenu onNavigate={() => setMobileOpen(false)} /> : null}
     </header>
   );
 }
@@ -196,25 +197,8 @@ function MegaMenuItem({
         >
           <ul className="space-y-0.5">
             {group.links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  className="block rounded-xl px-3 py-2.5 hover:bg-muted"
-                >
-                  <span className="flex items-center gap-1.5 text-sm font-semibold text-secondary">
-                    {link.name}
-                    {link.external ? (
-                      <ExternalLink className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
-                    ) : null}
-                  </span>
-                  {link.description ? (
-                    <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
-                      {link.description}
-                    </span>
-                  ) : null}
-                </Link>
+              <li key={link.name}>
+                <MegaMenuLink link={link} onNavigate={onClose} />
               </li>
             ))}
           </ul>
@@ -241,7 +225,7 @@ function MegaMenuItem({
   );
 }
 
-function MobileMenu() {
+function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
   return (
     <div
       id="mobile-menu"
@@ -269,15 +253,8 @@ function MobileMenu() {
                 </summary>
                 <ul className="pb-3">
                   {group.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        target={link.external ? "_blank" : undefined}
-                        rel={link.external ? "noopener noreferrer" : undefined}
-                        className="flex min-h-[2.75rem] items-center rounded-lg px-3 text-sm text-muted-foreground hover:bg-muted hover:text-secondary"
-                      >
-                        {link.name}
-                      </Link>
+                    <li key={link.name}>
+                      <MobileMenuLink link={link} onNavigate={onNavigate} />
                     </li>
                   ))}
                 </ul>
@@ -306,5 +283,89 @@ function MobileMenu() {
         </div>
       </nav>
     </div>
+  );
+}
+
+/**
+ * A nav entry is either a link or a drawer trigger (spec section 23).
+ * Both render as real interactive elements: an `<a>` when there is a URL, a
+ * `<button>` when the entry opens the location drawer.
+ */
+function MegaMenuLink({ link, onNavigate }: { link: NavLink; onNavigate: () => void }) {
+  const { open } = useLocationDrawer();
+  const className = "block w-full rounded-xl px-3 py-2.5 text-left hover:bg-muted";
+
+  const body = (
+    <>
+      <span className="flex items-center gap-1.5 text-sm font-semibold text-secondary">
+        {link.name}
+        {link.external ? (
+          <ExternalLink className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
+        ) : null}
+      </span>
+      {link.description ? (
+        <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+          {link.description}
+        </span>
+      ) : null}
+    </>
+  );
+
+  if (link.action === "locations" || !link.href) {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={() => {
+          onNavigate();
+          open("header_menu");
+        }}
+      >
+        {body}
+      </button>
+    );
+  }
+
+  return (
+    <Link
+      href={link.href}
+      target={link.external ? "_blank" : undefined}
+      rel={link.external ? "noopener noreferrer" : undefined}
+      className={className}
+    >
+      {body}
+    </Link>
+  );
+}
+
+function MobileMenuLink({ link, onNavigate }: { link: NavLink; onNavigate: () => void }) {
+  const { open } = useLocationDrawer();
+  const className =
+    "flex min-h-[2.75rem] w-full items-center rounded-lg px-3 text-left text-sm text-muted-foreground hover:bg-muted hover:text-secondary";
+
+  if (link.action === "locations" || !link.href) {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={() => {
+          onNavigate();
+          open("mobile_menu");
+        }}
+      >
+        {link.name}
+      </button>
+    );
+  }
+
+  return (
+    <Link
+      href={link.href}
+      target={link.external ? "_blank" : undefined}
+      rel={link.external ? "noopener noreferrer" : undefined}
+      className={className}
+    >
+      {link.name}
+    </Link>
   );
 }

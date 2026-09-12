@@ -3,9 +3,11 @@ import { SITE } from "./site";
 
 export interface NavLink {
   name: string;
-  href: string;
+  href?: string;
   description?: string;
   external?: boolean;
+  /** Opens the shared location drawer instead of navigating (spec section 23). */
+  action?: "locations";
 }
 
 export interface NavGroup {
@@ -57,7 +59,11 @@ export const NAV: NavGroup[] = [
         href: "/gujarat/",
         description: "Coverage across all 33 districts",
       },
-      { name: "Major Cities", href: "/gujarat/#cities", description: "Find your local market" },
+      {
+        name: "Find Your City",
+        description: "Search every city and town we have a page for",
+        action: "locations",
+      },
     ],
   },
   {

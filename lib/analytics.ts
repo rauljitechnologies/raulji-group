@@ -17,6 +17,8 @@ type EventName =
   | "service_card_click"
   | "city_page_click"
   | "gujarat_page_click"
+  | "location_drawer_open"
+  | "technologies_click"
   | "form_view"
   | "form_start"
   | "lead_form_submit"

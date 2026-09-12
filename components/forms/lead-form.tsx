@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { CheckCircle2, Loader2, Send, AlertCircle } from "lucide-react";
 import { SERVICES } from "@/lib/services";
-import { CITIES } from "@/lib/cities";
+import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -217,7 +217,7 @@ export function LeadForm({
             className={fieldClass}
           />
           <datalist id={`${id}-cities`}>
-            {CITIES.map((city) => (
+            {CITY_INDEX.map((city) => (
               <option key={city.slug} value={city.name} />
             ))}
           </datalist>

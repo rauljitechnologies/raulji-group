@@ -2,12 +2,19 @@
 
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { CITIES, FEATURED_CITY_SLUGS, type City } from "@/lib/cities";
+import { CITY_INDEX, POPULAR_CITY_SLUGS, type CityIndexEntry } from "@/lib/city-index";
 import { track } from "@/lib/analytics";
 
-/** City cards linking to root-level city URLs (spec section 23). */
+/**
+ * City cards linking to root-level city URLs (spec section 45).
+ *
+ * Defaults to the eight popular markets. Pages that genuinely want the full list
+ * (the Gujarat hub, and the "other cities" block on a city page) pass `slugs`
+ * explicitly. Data comes from the light index, never from `lib/cities.ts`, so no
+ * page ships the city prose to the browser (spec section 37).
+ */
 export function CityGrid({
-  slugs = FEATURED_CITY_SLUGS,
+  slugs,
   exclude,
   showDistrict = false,
 }: {
@@ -15,9 +22,9 @@ export function CityGrid({
   exclude?: string;
   showDistrict?: boolean;
 }) {
-  const cities = slugs
-    .map((slug) => CITIES.find((c) => c.slug === slug))
-    .filter((c): c is City => Boolean(c) && c!.slug !== exclude);
+  const cities = (slugs ?? POPULAR_CITY_SLUGS)
+    .map((slug) => CITY_INDEX.find((c) => c.slug === slug))
+    .filter((c): c is CityIndexEntry => Boolean(c) && c!.slug !== exclude);
 
   return (
     <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">

@@ -12,6 +12,8 @@
  * No city page may claim a local office.
  */
 
+import { assertCityIndexIsComplete } from "./city-index";
+
 export interface CityFAQ {
   q: string;
   a: string;
@@ -1069,13 +1071,8 @@ export function getCity(slug: string) {
 
 export const CITY_SLUGS = CITIES.map((c) => c.slug);
 
-/** Cities featured in the homepage grid, in display order. */
-export const FEATURED_CITY_SLUGS = [
-  "ahmedabad", "vadodara", "surat", "rajkot", "gandhinagar", "anand",
-  "bharuch", "nadiad", "godhra", "dahod", "vapi", "navsari",
-  "mehsana", "bhavnagar", "jamnagar", "junagadh", "gandhidham", "bhuj",
-  "morbi", "patan", "himmatnagar", "surendranagar",
-];
+// Fails the build if lib/city-index.ts and this file ever drift apart.
+assertCityIndexIsComplete(CITIES);
 
 /**
  * All 33 districts of Gujarat, for the Gujarat hub page coverage section.

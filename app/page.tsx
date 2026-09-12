@@ -1,68 +1,66 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BriefcaseBusiness,
-  Building2,
+  ArrowUpRight,
   CheckCircle2,
-  Clock,
-  CloudCog,
-  Factory,
   FileCheck2,
-  Landmark,
-  Layers3,
   MapPinned,
-  Rocket,
+  MessageSquare,
+  Phone,
   ShieldCheck,
-  ShoppingBag,
   UserCheck,
   Wallet,
 } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { ServiceCards } from "@/components/shared/service-cards";
-import { CityGrid } from "@/components/shared/city-grid";
-import { ComparisonTable } from "@/components/shared/comparison-table";
-import { CtaBanner } from "@/components/shared/cta-banner";
+import { PopularCities } from "@/components/shared/popular-cities";
+import { BusinessJourney } from "@/components/shared/business-journey";
+import { GroupDiagram } from "@/components/shared/group-diagram";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { HOME_FAQS } from "@/lib/home-faqs";
 import { SERVICES } from "@/lib/services";
-import { SITE, TIMELINE_DISCLAIMER } from "@/lib/site";
+import { SITE, telHref, TIMELINE_DISCLAIMER } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
-import { faqSchema, graph } from "@/lib/schema";
+import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
 
 export const metadata = pageMeta({
   title: "Company Registration & Business Services in Gujarat | Raulji Group",
   description:
-    "Start your business with Private Limited, LLP, Partnership Firm or Proprietorship registration support from Raulji Group, across Gujarat and India.",
+    "Raulji Group helps entrepreneurs choose and register the right business structure with Private Limited, LLP, Partnership and Proprietorship registration support across Gujarat.",
   path: "/",
   ogHeadline: "We Don't Just Build Businesses. We Build Futures.",
 });
 
+/**
+ * Why businesses choose Raulji Group (spec section 10).
+ * Practical proof only. No client counts, no ratings, no "No. 1" claims.
+ */
 const WHY_US = [
   {
     icon: UserCheck,
-    title: "Structure advice before anything is filed",
+    title: "Structure before filing",
     body: "We start by understanding what you are building, because the wrong structure is expensive to undo. If a proprietorship is genuinely right for you, we will say so rather than sell you a company.",
   },
   {
     icon: FileCheck2,
-    title: "Documentation handled end to end",
-    body: "Digital signatures, name approval, drafting, filing and responding to Registrar queries are all handled by our team. You supply documents once and we work from there.",
+    title: "A clear process",
+    body: "You know what happens from the first conversation through to filing. Digital signatures, name approval, drafting and Registrar queries are handled by our team once your documents are in.",
   },
   {
     icon: Wallet,
-    title: "Costs confirmed in writing first",
+    title: "Transparent communication",
     body: "Our professional fee and the expected government fees are set out before any filing begins, so you are not discovering charges midway through.",
   },
   {
     icon: MapPinned,
-    title: "Gujarat-wide, without needing an office everywhere",
-    body: "Incorporation is filed online and digital signatures are issued through remote verification, so we work with businesses across all 33 districts from our base in Vadodara.",
+    title: "Gujarat-wide support",
+    body: "Incorporation is filed online and digital signatures are issued through remote verification, so we work with businesses across all 33 districts from our base in Vadodara. We do not claim an office in every city.",
   },
   {
-    icon: Clock,
-    title: "Honest timelines",
-    body: "We tell you what usually happens and what can delay it. Government processing is outside anyone's control, and we would rather set expectations than miss them.",
+    icon: MessageSquare,
+    title: "Human support",
+    body: `You can reach the people doing the work. Call ${SITE.phone.display} during ${SITE.hours.display.toLowerCase()}, or email ${SITE.email}.`,
   },
   {
     icon: ShieldCheck,
@@ -71,218 +69,214 @@ const WHY_US = [
   },
 ];
 
-const HOW_IT_WORKS = [
+/**
+ * Group brands (spec sections 6 and 26).
+ * Only verified brands appear here. No invented subsidiaries, and no claim of a
+ * holding-company structure, which is not legally confirmed.
+ */
+const GROUP_BRANDS = [
   {
-    title: "Tell us what you are starting",
-    body: "A short conversation about the business, who is involved and whether outside investment is likely. That is usually enough to narrow the structure to one or two options.",
+    name: "Raulji Group",
+    role: "Group identity",
+    body: "The group platform connecting business services, registration support and growth-focused capabilities for entrepreneurs and businesses across Gujarat and India.",
+    points: [
+      "Business structure guidance before anything is filed",
+      "Private Limited, LLP, Partnership and Proprietorship registration",
+      "Local support across Gujarat's business markets",
+    ],
+    href: "/about/",
+    cta: "About Raulji Group",
+    external: false,
   },
   {
-    title: "Choose the structure",
-    body: "We set out what each option means for your liability, your annual compliance and your tax position, along with the expected cost, and you decide.",
-  },
-  {
-    title: "Send your documents",
-    body: "We give you a checklist specific to the structure you have chosen. Documents can be sent digitally and we verify them before anything is filed.",
-  },
-  {
-    title: "We file and follow through",
-    body: "Digital signatures, name approval, drafting and the statutory filings are handled by our team, including responding to any Registrar query or resubmission request.",
-  },
-  {
-    title: "You receive your registration",
-    body: "You get the incorporation certificate or registration documents, and guidance on the immediate next steps such as opening a current account and the first statutory filings.",
-  },
-];
-
-const GROUP_COMPANIES = [
-  {
-    icon: CloudCog,
-    title: "Raulji Technologies",
-    body: "Cutting-edge IT solutions powering digital transformation across industries.",
+    name: "Raulji Technologies",
+    role: "Technology brand",
+    body: "Technology, software, AI and digital transformation solutions for businesses, delivered under the group's separate technology brand.",
+    points: [
+      "Software and web application development",
+      "AI and digital transformation",
+      "Cloud and technology consulting",
+    ],
     href: SITE.technologies,
-    cta: "Explore IT Services",
-    points: [
-      "IT Services & Consulting",
-      "Website & Web App Development",
-      "Mobile App Development",
-      "Cloud, DevOps & AI Solutions",
-      "Digital Transformation",
-    ],
-  },
-  {
-    icon: BriefcaseBusiness,
-    title: "Raulji Consulting Services",
-    body: "Comprehensive business advisory driving growth and operational excellence.",
-    href: "/services/",
-    cta: "Explore Consulting Services",
-    points: [
-      "Business Consulting & Strategy",
-      "Business Registration & Structuring",
-      "Insurance Consulting",
-      "Accounting, Tax & Compliance",
-      "Website Development for Businesses",
-    ],
-  },
-];
-
-const INDUSTRIES = [
-  {
-    icon: Rocket,
-    title: "Startups",
-    body: "Accelerating innovation with strategic guidance and technology solutions.",
-  },
-  {
-    icon: Building2,
-    title: "SMEs",
-    body: "Empowering small and medium enterprises with scalable business systems.",
-  },
-  {
-    icon: Factory,
-    title: "Manufacturing",
-    body: "Optimizing operations with digital transformation and compliance support.",
-  },
-  {
-    icon: Landmark,
-    title: "Real Estate",
-    body: "Property insurance, structuring and practical legal advisory support.",
-  },
-  {
-    icon: ShoppingBag,
-    title: "Retail & E-commerce",
-    body: "Driving growth with digital solutions and business consulting.",
-  },
-  {
-    icon: Layers3,
-    title: "Enterprise",
-    body: "Enterprise-grade solutions for larger and multi-location organizations.",
+    cta: "Explore Raulji Technologies",
+    external: true,
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      <JsonLd data={graph(faqSchema(HOME_FAQS))} />
+      <JsonLd data={graph(homeServiceListSchema(), faqSchema(HOME_FAQS))} />
 
-      {/* 1. Hero */}
-      <section className="brand-gradient-soft relative overflow-hidden pt-36 pb-20 md:pt-44 md:pb-28">
+      {/* 1. Corporate hero (spec sections 3, 4, 27) */}
+      <section className="brand-gradient-soft relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
         <div className="container-wide">
-          <div className="max-w-4xl">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-              Business registration across Gujarat
-            </p>
-            <h1 className="text-4xl leading-[1.1] md:text-5xl lg:text-6xl">{SITE.tagline}</h1>
-            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Raulji Group helps entrepreneurs and businesses choose the right business structure and
-              get started with Private Limited Company, LLP, Partnership Firm and Proprietorship
-              registration support across Gujarat and India.
-            </p>
+          <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+            <div>
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-card px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                Raulji Group
+              </p>
+              <h1 className="text-4xl leading-[1.1] md:text-5xl lg:text-6xl">{SITE.tagline}</h1>
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                Raulji Group brings business services, registration support and growth-focused
+                solutions together under one group &mdash; helping entrepreneurs and businesses move
+                from an idea to a stronger future.
+              </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link
-                href="/contact/"
-                className="brand-gradient inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-xl px-8 font-semibold text-primary-foreground shadow-elevated"
-              >
-                Start Your Business
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <Link
-                href="/services/"
-                className="inline-flex min-h-[3.5rem] items-center justify-center rounded-xl border-2 border-primary px-8 font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                Explore Registration Services
-              </Link>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link
+                  href="/contact/"
+                  className="brand-gradient inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-xl px-8 font-semibold text-primary-foreground shadow-elevated"
+                >
+                  Start Your Business
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+                <Link
+                  href="#group"
+                  className="inline-flex min-h-[3.5rem] items-center justify-center rounded-xl border-2 border-primary px-8 font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+                >
+                  Explore Our Group
+                </Link>
+                <a
+                  href={telHref}
+                  className="inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-xl px-6 font-semibold text-secondary hover:text-primary"
+                >
+                  <Phone className="h-4 w-4 text-primary" aria-hidden="true" />
+                  {SITE.phone.display}
+                </a>
+              </div>
+
+              <p className="mt-8 text-sm text-muted-foreground">
+                Private Limited &middot; LLP &middot; Partnership Firm &middot; Proprietorship
+              </p>
             </div>
 
-            <p className="mt-8 text-sm text-muted-foreground">
-              Private Limited &middot; LLP &middot; Partnership Firm &middot; Proprietorship
-            </p>
+            <div className="relative mx-auto hidden w-full max-w-md md:block">
+              <GroupDiagram className="h-auto w-full" />
+            </div>
           </div>
         </div>
       </section>
 
-
-      {/* 2. Group companies */}
-      <Section id="group-companies">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      {/* 2. Raulji Group of Companies (spec section 5) */}
+      <Section id="group">
+        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start lg:gap-14">
           <SectionHeading
             eyebrow="Raulji Group of Companies"
-            title="Business, technology and consulting under one group"
-            lead="Raulji Group is a diversified holding company delivering excellence across IT, consulting and legal services with a focus on long-term value creation."
+            title="Building Businesses. Enabling Growth. Creating Long-Term Value."
             align="left"
           />
-          <div className="grid gap-5 md:grid-cols-2">
-            {GROUP_COMPANIES.map((company) => {
-              const isExternal = company.href.startsWith("http");
-              return (
-                <article
-                  key={company.title}
-                  className="rounded-2xl border border-border bg-card p-6 shadow-card"
-                >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent">
-                    <company.icon className="h-6 w-6 text-primary" aria-hidden="true" />
-                  </span>
-                  <h3 className="mt-5 text-xl">{company.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">{company.body}</p>
-                  <ul className="mt-5 space-y-3 text-sm text-secondary">
-                    {company.points.map((point) => (
-                      <li key={point} className="flex gap-2.5">
-                        <CheckCircle2
-                          className="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                          aria-hidden="true"
-                        />
-                        <span>{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={company.href}
-                    target={isExternal ? "_blank" : undefined}
-                    rel={isExternal ? "noopener noreferrer" : undefined}
-                    className="mt-6 inline-flex min-h-[2.75rem] items-center gap-2 rounded-lg border border-primary px-4 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {company.cta}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                </article>
-              );
-            })}
+          <div className="space-y-5 text-lg leading-relaxed text-muted-foreground">
+            <p>
+              Raulji Group is a group of businesses and brands focused on helping organizations
+              start, operate and grow. The group brings business services, consulting and technology
+              capabilities together under one identity, so a business does not have to assemble them
+              from scratch.
+            </p>
+            <p>
+              Today the group&rsquo;s main customer-facing service is business registration:
+              helping founders choose the right structure and get it filed correctly. Technology,
+              software and AI work is delivered separately, under{" "}
+              <a
+                href={SITE.technologies}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-primary hover:underline"
+              >
+                Raulji Technologies
+              </a>
+              .
+            </p>
+            <p className="text-base">
+              We are based in {SITE.locality}, {SITE.region}, and work with businesses across the
+              state. Raulji Group is a private business-services firm, not a government department.
+            </p>
           </div>
         </div>
       </Section>
 
-      {/* 3. Industries */}
-      <Section id="industries" tone="muted">
+      {/* 3. Group brands (spec sections 6, 7, 26) */}
+      <Section tone="muted">
         <SectionHeading
-          eyebrow="Industries We Serve"
-          title="Expertise Across Diverse Sectors"
-          lead="Our deep industry knowledge enables us to deliver tailored solutions that address the unique challenges of each sector."
+          eyebrow="Our Brands"
+          title="One group, two distinct brands"
+          lead="Each brand has its own focus. Knowing which one you need is usually the fastest way to get the right answer."
         />
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {INDUSTRIES.map((industry) => (
-            <li key={industry.title} className="rounded-2xl border border-border bg-card p-6">
-              <industry.icon className="h-6 w-6 text-primary" aria-hidden="true" />
-              <h3 className="mt-4 text-lg">{industry.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{industry.body}</p>
-            </li>
+        <div className="grid gap-6 lg:grid-cols-2">
+          {GROUP_BRANDS.map((brand) => (
+            <article
+              key={brand.name}
+              className="flex flex-col rounded-3xl border border-border bg-card p-7 shadow-card sm:p-9"
+            >
+              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                {brand.role}
+              </p>
+              <h3 className="mt-3 text-2xl md:text-3xl">{brand.name}</h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{brand.body}</p>
+              <ul className="mt-6 flex-1 space-y-3 text-sm text-secondary">
+                {brand.points.map((point) => (
+                  <li key={point} className="flex gap-2.5">
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                      aria-hidden="true"
+                    />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={brand.href}
+                target={brand.external ? "_blank" : undefined}
+                rel={brand.external ? "noopener noreferrer" : undefined}
+                className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                {brand.cta}
+                {brand.external ? (
+                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                )}
+              </Link>
+            </article>
           ))}
-        </ul>
+        </div>
+
+        {/* Technology gateway only. Technology SEO stays on the technology site (spec section 7). */}
+        <div className="mt-6 flex flex-col gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className="text-lg">Technology &amp; AI for Business Growth</h3>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              Explore technology, software, AI and digital transformation through Raulji
+              Technologies.
+            </p>
+          </div>
+          <a
+            href={SITE.technologies}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[3rem] shrink-0 items-center justify-center gap-2 rounded-xl bg-secondary px-6 text-sm font-semibold text-secondary-foreground hover:bg-secondary/90"
+          >
+            Visit Raulji Technologies
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
       </Section>
 
-      {/* 4. Four registration services */}
+      {/* 4. Business registration (spec section 8) */}
       <Section id="services">
         <SectionHeading
-          eyebrow="Business Registration"
-          title="Four ways to register your business"
-          lead="Each structure changes your liability, your annual compliance and how you can raise money. Start with the one that matches how you intend to run the business."
+          eyebrow="Start Your Business"
+          title="Choose the Right Structure for Your Business"
+          lead="The right business structure depends on ownership, liability, investment plans and how you intend to operate. Raulji Group helps you understand the options before you begin the registration process."
         />
         <ServiceCards />
       </Section>
 
-      {/* 5. Why choose Raulji Group */}
+      {/* 5. Why Raulji Group (spec section 10) */}
       <Section tone="muted">
         <SectionHeading
           eyebrow="Why Raulji Group"
-          title="Practical help, without the guesswork"
+          title="Why Businesses Choose Raulji Group"
           lead="Registration is a process with a lot of small decisions in it. Our job is to make sure the ones that matter are made deliberately."
         />
         <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -298,41 +292,31 @@ export default function HomePage() {
         </ul>
       </Section>
 
-      {/* 6. How business registration works */}
+      {/* 6. Business journey (spec section 11) */}
       <Section>
         <SectionHeading
-          eyebrow="The process"
-          title="How business registration works"
-          lead="The same five steps apply whichever structure you choose. What changes is the paperwork behind each one."
+          eyebrow="The Business Journey"
+          title="From an idea to a business that keeps growing"
+          lead="Raulji Group is not only processing a registration. We are helping entrepreneurs take the next business step."
         />
-        <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
-          {HOW_IT_WORKS.map((step, i) => (
-            <li key={step.title} className="rounded-2xl border border-border bg-card p-6">
-              <span className="brand-gradient inline-flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-primary-foreground">
-                {i + 1}
-              </span>
-              <h3 className="mt-4 text-base">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
-            </li>
-          ))}
-        </ol>
+        <BusinessJourney />
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-muted-foreground">
           {TIMELINE_DISCLAIMER}
         </p>
       </Section>
 
-      {/* 7. Gujarat coverage */}
+      {/* 7. Gujarat coverage (spec section 12) */}
       <Section tone="muted">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
-              Gujarat coverage
+              Local Business Registration
             </p>
-            <h2 className="text-3xl md:text-4xl">Business Registration Across Gujarat</h2>
+            <h2 className="text-3xl md:text-4xl">Business Registration Support Across Gujarat</h2>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-              From Ahmedabad and Vadodara to Surat, Rajkot, Godhra, Dahod, Anand and business
-              communities across Gujarat, Raulji Group helps entrepreneurs explore the right business
-              structure and registration pathway.
+              From Ahmedabad, Vadodara and Surat to Godhra, Dahod, Anand, Bharuch and business
+              communities across the state, Raulji Group helps entrepreneurs explore the right
+              business structure and registration pathway.
             </p>
             <p className="mt-4 leading-relaxed text-muted-foreground">
               Incorporation is filed online, so where you are in the state does not change the
@@ -343,7 +327,7 @@ export default function HomePage() {
               href="/gujarat/"
               className="mt-7 inline-flex min-h-[3.25rem] items-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
             >
-              Explore Gujarat Business Registration
+              Explore Gujarat
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
@@ -368,37 +352,17 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 8. City-wise coverage */}
+      {/* 8. Popular cities + location drawer (spec sections 13, 14, 15) */}
       <Section id="cities">
         <SectionHeading
-          eyebrow="Local markets"
+          eyebrow="Popular Business Markets"
           title="Find Business Registration Support in Your City"
           lead="Each city page covers all four registration structures, with the local business context that tends to shape the decision."
         />
-        <CityGrid />
-        <p className="mt-8 text-center">
-          <Link href="/gujarat/" className="link-target font-semibold text-primary hover:underline">
-            See all cities and districts we cover &rarr;
-          </Link>
-        </p>
+        <PopularCities />
       </Section>
 
-      {/* 9. Choose the right structure */}
-      <Section tone="muted" id="compare">
-        <SectionHeading
-          eyebrow="Compare"
-          title="Choose the Right Business Structure"
-          lead="The differences that matter most are liability, compliance load and whether you can raise equity. Here they are side by side."
-        />
-        <ComparisonTable />
-        <p className="mt-8 text-center">
-          <Link href="/compare/" className="link-target font-semibold text-primary hover:underline">
-            Read the full comparison guide &rarr;
-          </Link>
-        </p>
-      </Section>
-
-      {/* 10. FAQ */}
+      {/* 10. FAQ (spec section 36) */}
       <Section>
         <SectionHeading eyebrow="FAQs" title="Questions we are asked most" />
         <FaqAccordion faqs={HOME_FAQS} idPrefix="home-faq" />
@@ -419,8 +383,6 @@ export default function HomePage() {
         </p>
       </Section>
 
-      {/* 11. Final CTA */}
-      <CtaBanner />
     </>
   );
 }

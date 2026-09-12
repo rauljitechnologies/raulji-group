@@ -9,7 +9,7 @@ import { CityGrid } from "@/components/shared/city-grid";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { LeadForm } from "@/components/forms/lead-form";
-import { CITIES, getCity } from "@/lib/cities";
+import { CITIES, CITY_SLUGS, getCity } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 import { SITE, telHref, TIMELINE_DISCLAIMER } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
@@ -284,7 +284,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           title="Other cities we cover in Gujarat"
           lead="Each has its own page with local business context."
         />
-        <CityGrid exclude={city.slug} showDistrict />
+        <CityGrid slugs={CITY_SLUGS} exclude={city.slug} showDistrict />
         <p className="mt-8 text-center">
           <Link href="/gujarat/" className="link-target font-semibold text-primary hover:underline">
             See full Gujarat coverage &rarr;

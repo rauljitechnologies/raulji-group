@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 import { SITE, telHref, whatsappHref } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
-import { CITIES } from "@/lib/cities";
+import { findCityBySlug } from "@/lib/city-index";
 import { track } from "@/lib/analytics";
 
 /**
@@ -17,7 +17,7 @@ export function MobileActionBar() {
   const segments = pathname.split("/").filter(Boolean);
 
   const service = SERVICES.find((s) => pathname.startsWith(s.path.replace(/\/$/, "")));
-  const city = CITIES.find((c) => segments[0] === c.slug);
+  const city = findCityBySlug(segments[0]);
 
   const context = service
     ? `${service.name}`
