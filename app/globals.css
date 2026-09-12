@@ -1,0 +1,297 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Brand Colors */
+    --background: 210 20% 98%;
+    --foreground: 216 48% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 216 48% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 48% 18%;
+
+    --primary: 199 64% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 216 48% 18%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 96%;
+    --muted-foreground: 216 20% 46%;
+
+    --accent: 199 64% 95%;
+    --accent-foreground: 199 64% 35%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 199 64% 51%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand tokens */
+    --brand-primary: 199 64% 51%;
+    --brand-secondary: 216 48% 18%;
+    --brand-gradient: linear-gradient(135deg, hsl(199 64% 51%) 0%, hsl(216 48% 18%) 100%);
+    --brand-gradient-soft: linear-gradient(135deg, hsl(199 64% 95%) 0%, hsl(210 20% 98%) 100%);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --shadow-soft: 0 4px 30px rgba(49, 153, 212, 0.1);
+    --shadow-elevated: 0 20px 60px rgba(25, 42, 66, 0.15);
+    --shadow-card: 0 8px 32px rgba(25, 42, 66, 0.08);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 216 48% 8%;
+    --foreground: 210 20% 98%;
+
+    --card: 216 48% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 216 48% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 199 64% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 199 64% 20%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 216 48% 15%;
+    --muted-foreground: 210 20% 65%;
+
+    --accent: 199 64% 20%;
+    --accent-foreground: 199 64% 80%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 216 48% 20%;
+    --input: 216 48% 20%;
+    --ring: 199 64% 51%;
+
+    --glass-bg: rgba(25, 42, 66, 0.7);
+    --glass-border: rgba(49, 153, 212, 0.2);
+    --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-secondary;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .brand-gradient {
+    background: var(--brand-gradient);
+  }
+
+  .brand-gradient-soft {
+    background: var(--brand-gradient-soft);
+  }
+
+  .text-gradient {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-narrow {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .animate-slide-right {
+    animation: slideRight 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+}
+
+/* ---------------------------------------------------------------------------
+   Accessibility + mobile chrome (WCAG 2.2 AA)
+   --------------------------------------------------------------------------- */
+@layer base {
+  /* A visible focus ring on every interactive element, not just the styled ones. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid hsl(var(--ring));
+    outline-offset: 2px;
+    border-radius: calc(var(--radius) - 4px);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored headings clear of the fixed header. */
+    scroll-padding-top: 7rem;
+  }
+
+  body {
+    /* Room for the mobile action bar so it never covers page content. */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply sr-only;
+  }
+
+  .skip-link:focus {
+    @apply not-sr-only fixed left-4 top-4 z-[100] rounded-lg bg-secondary px-4 py-3 text-sm font-semibold text-secondary-foreground shadow-elevated;
+  }
+
+  /* Standalone links (nav lists, table headers, CTA lines) must clear the
+     24x24 CSS px target size in WCAG 2.2. Links inline in a sentence are exempt. */
+  .link-target {
+    @apply inline-flex min-h-[1.75rem] items-center;
+  }
+
+  /* Reserved gutter so the fixed mobile action bar never overlaps the last section. */
+  .mobile-bar-gutter {
+    @apply pb-24 lg:pb-0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hover-lift:hover {
+    transform: none;
+  }
+}

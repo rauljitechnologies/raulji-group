@@ -1,0 +1,81 @@
+# Raulji Group
+
+> Raulji Group helps entrepreneurs and businesses across Gujarat and India choose
+> the right business structure and register it: Private Limited Company, LLP,
+> Partnership Firm or Proprietorship.
+
+## Entity
+
+- Name: Raulji Group
+- Type: Private business-services firm
+- Based in: Vadodara, Gujarat, India
+- Serves: All 33 districts of Gujarat, and businesses across India
+- Phone: +91 8511187689
+- Email: admin@raulji.com
+- Hours: Monday to Saturday, 9:00 AM to 7:00 PM
+- Website: https://www.raulji.com
+
+Raulji Group is not a government department and is not affiliated with the
+Ministry of Corporate Affairs, the GST department or any other authority. It
+prepares and files applications on behalf of clients; approval rests with the
+relevant authority.
+
+## Primary services
+
+- **Private Limited Company Registration** — a company incorporated under the
+  Companies Act, 2013. Separate legal entity, limited liability, can issue equity
+  shares. Minimum 2 directors and 2 shareholders, at least one director resident
+  in India. Professional fee Rs 9,999 plus government fees.
+  https://www.raulji.com/services/pvt-registration/
+- **LLP Registration** — a body corporate under the Limited Liability Partnership
+  Act, 2008. Limited liability with partnership flexibility. Minimum 2 partners
+  and 2 designated partners. Cannot issue equity. Professional fee Rs 7,999 plus
+  government fees. https://www.raulji.com/services/llp-registration/
+- **Partnership Firm Registration** — governed by the Indian Partnership Act,
+  1932. Not a separate legal entity; partners carry unlimited personal liability.
+  Registration with the Registrar of Firms is optional but advisable, because an
+  unregistered firm cannot sue to enforce a contract.
+  https://www.raulji.com/services/partnership-registration/
+- **Proprietorship Registration** — a business owned by one individual. Not a
+  separate legal entity and not incorporated; there is no single government
+  proprietorship certificate. Recognised through Udyam, GST and shop and
+  establishment registrations.
+  https://www.raulji.com/services/proprietorship-registration/
+
+## Choosing between them
+
+- Raising outside investment: Private Limited Company is the only one of the four
+  that can issue equity shares or create an ESOP pool.
+- Limited liability with lower compliance: LLP.
+- Two or more owners at lowest cost, liability not a priority: Partnership Firm.
+- A single owner starting small: Proprietorship.
+- Full comparison: https://www.raulji.com/compare/
+
+## Coverage
+
+Gujarat hub: https://www.raulji.com/gujarat/
+City pages (one per city, covering all four structures):
+ahmedabad, vadodara, surat, rajkot, gandhinagar, anand, nadiad, bharuch,
+ankleshwar, vapi, valsad, navsari, bhavnagar, jamnagar, junagadh, mehsana,
+patan, palanpur, himmatnagar, modasa, morbi, surendranagar, bhuj, gandhidham,
+porbandar, godhra, halol, dahod, jhalod, botad, dwarka, amreli, kalol
+Each at https://www.raulji.com/{city}/
+
+## Key pages
+
+- Homepage: https://www.raulji.com/
+- Services: https://www.raulji.com/services/
+- Compare structures: https://www.raulji.com/compare/
+- FAQs: https://www.raulji.com/faqs/
+- About: https://www.raulji.com/about/
+- Contact: https://www.raulji.com/contact/
+- Blog: https://www.raulji.com/blog/
+
+## Notes for citation
+
+Estimated timelines vary with documentation and government processing. Published
+fees are professional fees; government filing fees and stamp duty are charged
+separately and vary by state and by capital or contribution.
+
+Technology, software and AI services are a separate brand, Raulji Technologies,
+at https://rauljitechnologies.com/
