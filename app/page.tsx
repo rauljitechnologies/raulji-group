@@ -25,9 +25,9 @@ import { pageMeta } from "@/lib/seo";
 import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
 
 export const metadata = pageMeta({
-  title: "Company Registration & Business Services in Gujarat | Raulji Group",
+  title: "Raulji Group | Business Consulting & Solutions",
   description:
-    "Raulji Group helps entrepreneurs choose and register the right business structure with Private Limited, LLP, Partnership and Proprietorship registration support across Gujarat.",
+    "Raulji Group is a consulting-focused business group helping entrepreneurs and businesses with strategic guidance, business solutions, technology and insurance services, with a focus on long-term growth.",
   path: "/",
   ogHeadline: "We Don't Just Build Businesses. We Build Futures.",
 });
