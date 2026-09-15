@@ -15,6 +15,19 @@ const nextConfig: NextConfig = {
     // redirect map and analytics expect. Destinations carry the trailing slash
     // so no redirect chains into a second hop.
     return [
+      // /rent and /rent/* are leftovers of the discontinued rentals business.
+      // Unlike /rentals/, which still carries a 410 explainer, these paths were
+      // never a real service URL, so they go straight to the homepage.
+      {
+        source: "/rent",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/rent/:path*",
+        destination: "/",
+        statusCode: 301,
+      },
       // Discontinued. /services/ is the closest genuinely relevant destination.
       {
         source: "/services/land-investment",
