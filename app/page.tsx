@@ -545,6 +545,12 @@ export default function HomePage() {
 
         <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
           <div className="order-2 lg:order-1">
+            <BrandImage
+              slot="enquiry"
+              sizes="(min-width: 1024px) 34rem, 100vw"
+              aspect="aspect-[3/2]"
+              className="mb-6 hidden lg:block"
+            />
             <dl className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-1">
               <div className="bg-card px-5 py-4">
                 <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">

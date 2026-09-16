@@ -106,16 +106,23 @@ def documents(w=1200,h=800,title="Filed correctly",sub="Company registration"):
     d.line([(sx-sr*0.4,sy),(sx-sr*0.1,sy+sr*0.35),(sx+sr*0.45,sy-sr*0.35)],fill=NAVY,width=4)
     return label(im,title,sub)
 
-# 4. Meeting: a table plan, four seats, one agenda.
+# 4. Contact: one thread, not a switchboard. A single line runs from the person
+# asking to the person doing the work, past the handoffs it does not make.
 def meeting(w=1200,h=800):
     im=base(w,h); d=ImageDraw.Draw(im)
-    cx,cy=int(w*0.70),int(h*0.35); tw,th=int(w*0.26),int(h*0.16)
-    d.rounded_rectangle([cx-tw//2,cy-th//2,cx+tw//2,cy+th//2],radius=int(h*0.05),outline=(*BLUE,200),width=3)
-    for dx,dy in [(-0.34,-0.20),(0.34,-0.20),(-0.34,0.20),(0.34,0.20)]:
-        px,py=cx+int(tw*dx*1.6),cy+int(th*dy*2.1); rr=int(w/44)
-        d.ellipse([px-rr,py-rr,px+rr,py+rr],fill=(*BLUE,200))
-        d.line([(px,py),(cx+int(tw*dx*0.8),cy+int(th*dy*0.9))],fill=(*BLUE,70),width=2)
-    return label(im,"One conversation","Talk to our team")
+    ax,ay=int(w*0.20),int(h*0.34)
+    bx,by=int(w*0.80),int(h*0.34)
+    # the single thread
+    d.line([(ax,ay),(bx,by)],fill=(*BLUE,235),width=5)
+    for px,py in ((ax,ay),(bx,by)):
+        r=int(w/26)
+        d.ellipse([px-r,py-r,px+r,py+r],fill=(*BLUE,255))
+        d.ellipse([px-int(r*1.7),py-int(r*1.7),px+int(r*1.7),py+int(r*1.7)],outline=(*BLUE,80),width=3)
+    # a message on the line
+    mx,my=int(w*0.50),ay; mw,mh=int(w*0.11),int(h*0.075)
+    d.rounded_rectangle([mx-mw//2,my-mh//2,mx+mw//2,my+mh//2],radius=int(h*0.018),fill=(*BLUE,255))
+    d.polygon([(mx-int(mw*0.10),my+mh//2),(mx+int(mw*0.10),my+mh//2),(mx,my+mh//2+int(h*0.030))],fill=(*BLUE,255))
+    return label(im,"One conversation","You reach the people doing the work")
 
 # 5. Gujarat: the coverage figure, centre and markets.
 def gujarat(w=1600,h=900):
@@ -155,6 +162,24 @@ def enquiry(w=1200,h=800):
     d.rounded_rectangle([bx2,by2,bx2+int(fw*0.44),by2+int(h*0.06)],radius=int(h*0.015),fill=(*BLUE,255))
     return label(im,"Tell us what you are building","Get business guidance")
 
+# 8. The group itself: one parent, two brands, drawn wide for a page band.
+def group(w=1800,h=771):
+    im=base(w,h); d=ImageDraw.Draw(im)
+    px,py=int(w*0.30),int(h*0.42); pr=int(w/26)
+    d.ellipse([px-pr,py-pr,px+pr,py+pr],fill=(*BLUE,255))
+    d.ellipse([px-int(pr*1.8),py-int(pr*1.8),px+int(pr*1.8),py+int(pr*1.8)],outline=(*BLUE,70),width=3)
+    for fy,lbl in ((0.22,"Consulting Services"),(0.62,"Technologies")):
+        cx,cy=int(w*0.66),int(h*fy); cr=int(w/40)
+        d.line([(px+pr,py),(cx-cr,cy)],fill=(*BLUE,120),width=4)
+        if lbl=="Technologies":
+            d.ellipse([cx-cr,cy-cr,cx+cr,cy+cr],outline=(*BLUE,220),width=4)
+        else:
+            d.ellipse([cx-cr,cy-cr,cx+cr,cy+cr],fill=(*BLUE,220))
+        d.text((cx+int(cr*1.8),cy-int(h*0.028)),lbl,font=font(int(w/56),True),fill=(205,228,244))
+    d.text((px-int(pr*2.4),py-int(h*0.20)),"Raulji Group",font=font(int(w/48),True),fill=(255,255,255))
+    return label(im,"One group, two brands","Kept separate because they do different work")
+
+save(group(),"raulji-group-structure")
 save(office(1200,900),"raulji-group-office")
 save(consulting(1200,800),"raulji-group-business-consulting")
 save(documents(1600,686,title="Filed correctly",sub="Company registration"),"raulji-group-company-registration")

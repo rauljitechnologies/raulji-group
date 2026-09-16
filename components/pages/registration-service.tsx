@@ -5,6 +5,7 @@ import { StructureFigure, STRUCTURE_BY_SLUG } from "@/components/shared/structur
 import { CITY_SERVICES, CITY_SERVICE_SLUGS } from "@/lib/city-services";
 import { getCity } from "@/lib/cities";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { BrandImage } from "@/components/ui/brand-image";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ProcessTimeline } from "@/components/shared/process-timeline";
@@ -252,6 +253,13 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                 </li>
               ))}
             </ul>
+
+            <BrandImage
+              slot="documents"
+              sizes="(min-width: 1024px) 34rem, 100vw"
+              aspect="aspect-[3/2]"
+              className="mt-10 hidden lg:block"
+            />
           </div>
           <div>
             <h2 className="text-3xl">Documents required</h2>

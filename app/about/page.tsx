@@ -112,8 +112,11 @@ export default function AboutPage() {
       </PageHeader>
 
       <Section>
+        {/* Drawn at 21:9, the ratio this band uses. It previously pointed at the
+            4:3 office panel, so object-cover threw away nearly half its height
+            along with the caption. */}
         <BrandImage
-          slot="office"
+          slot="structure"
           sizes="(min-width: 1024px) 76rem, 100vw"
           aspect="aspect-[21/9]"
           className="mb-12"

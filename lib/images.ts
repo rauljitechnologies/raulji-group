@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image";
 
+import structure from "@/public/photos/raulji-group-structure.webp";
 import office from "@/public/photos/raulji-group-office.webp";
 import consulting from "@/public/photos/raulji-group-business-consulting.webp";
 import registration from "@/public/photos/raulji-group-company-registration.webp";
@@ -44,6 +45,12 @@ export interface BrandImageEntry {
 }
 
 export const IMAGES = {
+  /** Wide band, 21:9. The group and the two brands it runs. */
+  structure: {
+    src: structure,
+    alt: "Raulji Group and its two brands, Raulji Consulting Services and Raulji Technologies",
+    placeholder: false,
+  },
   office: {
     src: office,
     alt: "Raulji Group, Vadodara, Gujarat",
