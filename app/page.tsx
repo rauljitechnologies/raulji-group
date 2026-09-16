@@ -19,6 +19,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { PopularCities } from "@/components/shared/popular-cities";
 import { GroupDiagram } from "@/components/shared/group-diagram";
+import { BusinessJourney } from "@/components/shared/business-journey";
 import { LeadForm } from "@/components/forms/lead-form";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
@@ -277,7 +278,7 @@ export default function HomePage() {
               so the section has a clear entry point instead of an even wall.
 
               It was `text-xl` with `text-pretty`, which set it at 20px on a
-              600px column — a short measure for that size — and left orphaned
+              600px column, a short measure for that size, and left orphaned
               two-word lines at the end. Now 18px on a capped 34rem measure with
               open leading, which is the readable range for a lead paragraph. */}
           <p className="max-w-[34rem] text-[1.0625rem] leading-[1.75] text-secondary md:text-lg">
@@ -417,7 +418,25 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* 5. Why Raulji Group (master rule 13). */}
+      {/*
+        5. The business journey.
+
+        Listed as a homepage section in the client's final brief. It is five
+        stages on one rail rather than five more paragraphs: the homepage is
+        already long, and this is the part of the story that reads better as a
+        shape than as prose. The same component carries the registration
+        pillar, so the two pages tell it identically.
+      */}
+      <Section>
+        <SectionHeading
+          eyebrow="How it works"
+          title="From an idea to a business that keeps working"
+          lead="Registration sits in the middle of this, not at the start and not at the end."
+        />
+        <BusinessJourney />
+      </Section>
+
+      {/* 6. Why Raulji Group (master rule 13). */}
       <Section tone="muted">
         <SectionHeading
           eyebrow="Why Raulji Group"
@@ -437,7 +456,7 @@ export default function HomePage() {
         </ul>
       </Section>
 
-      {/* 6. Gujarat and city entry point. Eight markets plus a drawer, never a
+      {/* 7. Gujarat and city entry point. Eight markets plus a drawer, never a
           full city list on the homepage (master rule 7 and 18). */}
       <Section>
         <div className="grid items-start gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
@@ -472,7 +491,7 @@ export default function HomePage() {
       </Section>
 
       {/*
-        7. Lead generation with the FAQs beside it (master rule 8 and 22).
+        8. Lead generation with the FAQs beside it (master rule 8 and 22).
 
         The FAQs used to be a separate full-width section below this one, which
         left the enquiry column with a tall empty run under the contact details

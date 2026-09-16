@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Check, FileText, MapPin } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { StructureFigure, STRUCTURE_BY_SLUG } from "@/components/shared/structure-diagram";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
@@ -70,6 +71,7 @@ export default async function CityServicePage({
 
   const { entry, city, service, path } = found;
   const siblings = getSiblingCityServices(citySlug, entry.service);
+  const structure = STRUCTURE_BY_SLUG[service.slug];
 
   const crumbs: Crumb[] = [
     { name: "Home", path: "/" },
@@ -162,14 +164,19 @@ export default async function CityServicePage({
         </div>
       </section>
 
-      {/* Who, locally. */}
+      {/* Who, locally, with the structure itself drawn alongside. These pages
+          argued about liability and ownership in prose with nothing to look at;
+          the figure is the same thing at a glance. */}
       <Section tone="muted">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <SectionHeading
-            eyebrow="Who it suits here"
-            title={`${service.shortName} in ${city.name}: who it tends to be right for`}
-            align="left"
-          />
+          <div>
+            <SectionHeading
+              eyebrow="Who it suits here"
+              title={`${service.shortName} in ${city.name}: who it tends to be right for`}
+              align="left"
+            />
+            {structure ? <StructureFigure kind={structure} className="hidden lg:block" /> : null}
+          </div>
           <ul className="space-y-3.5">
             {entry.whoLocally.map((item) => (
               <li key={item} className="flex gap-3 leading-relaxed text-secondary">
@@ -178,6 +185,7 @@ export default async function CityServicePage({
               </li>
             ))}
           </ul>
+          {structure ? <StructureFigure kind={structure} className="lg:hidden" /> : null}
         </div>
       </Section>
 

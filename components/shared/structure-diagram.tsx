@@ -9,8 +9,9 @@
  * of decorating it.
  *
  * Inline SVG: no image request, nothing to lazy-load, no layout shift, and the
- * colours follow the brand tokens. Decorative by default — every relationship
- * drawn here is also stated in the copy beside it — so it is aria-hidden unless
+ * colours follow the brand tokens. Decorative by default, because every
+ * relationship drawn here is also stated in the copy beside it, so it is
+ * aria-hidden unless
  * a `title` is passed.
  */
 

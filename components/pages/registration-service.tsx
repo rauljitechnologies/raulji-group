@@ -186,8 +186,8 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
               <p className="mt-5 leading-relaxed text-muted-foreground">
                 Registering a {service.shortName} settles three things at once: who owns the
                 business, who is responsible for running it, and how far personal liability
-                reaches if something goes wrong. Most of what follows on this page &mdash;
-                eligibility, documents, annual compliance &mdash; follows from that.
+                reaches if something goes wrong. Eligibility, documents and annual compliance
+                all follow from that.
               </p>
             </div>
             <StructureFigure kind={structure} />
