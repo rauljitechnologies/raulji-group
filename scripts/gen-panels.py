@@ -47,17 +47,49 @@ def office(w=1600,h=900):
     d.line([(int(w*0.07),by+bh),(bx+bw,by+bh)],fill=(*BLUE,120),width=3)
     return label(im,"Vadodara, Gujarat","Raulji Group")
 
-# 2. Consulting: a decision splitting into structures.
-def consulting(w=1600,h=900):
+# 2. Consulting: two routes from the same starting point. The wandering one is
+# what happens without advice; the direct one is what the section is selling.
+# Deliberately not another hub and spokes, which the Gujarat panel already uses.
+def consulting(w=1200,h=800):
+    import math
     im=base(w,h); d=ImageDraw.Draw(im)
-    cx,cy=int(w*0.66),int(h*0.36); r=int(w/28)
-    ends=[(int(w*0.86),int(h*0.16)),(int(w*0.90),int(h*0.34)),(int(w*0.86),int(h*0.52))]
-    for i,(ex,ey) in enumerate(ends):
-        d.line([(cx+r,cy),(ex,ey)],fill=(*BLUE,110 if i else 220),width=3)
-        rr=int(w/70); d.ellipse([ex-rr,ey-rr,ex+rr,ey+rr],fill=(*BLUE,230 if i==0 else 90))
-    d.ellipse([cx-r,cy-r,cx+r,cy+r],fill=(*BLUE,255))
-    d.line([(int(w*0.40),cy),(cx-r,cy)],fill=(*BLUE,150),width=3)
-    return label(im,"Clearer decisions","Business consulting")
+    x0,y0=int(w*0.14),int(h*0.55)
+    x1,y1=int(w*0.88),int(h*0.20)
+
+    # the wandering route: dotted, drifting, arriving late and low
+    pts=[(x0,y0)]
+    for i in range(1,9):
+        t=i/8
+        px=x0+(x1-x0)*t
+        py=y0-(y0-y1)*t*0.45 + int(math.sin(t*9.0)*h*0.085)
+        pts.append((px,py))
+    for i in range(len(pts)-1):
+        ax,ay=pts[i]; bx,by=pts[i+1]
+        steps=14
+        for k in range(steps):
+            if k%2: continue
+            fx=ax+(bx-ax)*k/steps; fy=ay+(by-ay)*k/steps
+            gx=ax+(bx-ax)*(k+1)/steps; gy=ay+(by-ay)*(k+1)/steps
+            d.line([(fx,fy),(gx,gy)],fill=(*BLUE,70),width=3)
+    ex,ey=pts[-1]; rr=int(w/95)
+    d.ellipse([ex-rr,ey-rr,ex+rr,ey+rr],outline=(*BLUE,110),width=3)
+
+    # the considered route: one clean rise through three waypoints
+    way=[(x0,y0),
+         (int(x0+(x1-x0)*0.34), int(y0-(y0-y1)*0.30)),
+         (int(x0+(x1-x0)*0.67), int(y0-(y0-y1)*0.70)),
+         (x1,y1)]
+    for i in range(len(way)-1):
+        d.line([way[i],way[i+1]],fill=(*BLUE,235),width=5)
+    for i,(px,py) in enumerate(way):
+        r=int(w/46) if i in (0,len(way)-1) else int(w/74)
+        d.ellipse([px-r,py-r,px+r,py+r],fill=(*BLUE,255))
+        if i==len(way)-1:
+            d.ellipse([px-r*2,py-r*2,px+r*2,py+r*2],outline=(*BLUE,90),width=3)
+
+    # the decision itself, marked where the two routes part
+    d.line([(x0,int(h*0.12)),(x0,int(h*0.63))],fill=(255,255,255,26),width=2)
+    return label(im,"Clearer decisions","Stronger business direction")
 
 # 3. Registration / documents: stacked sheets with a seal.
 def documents(w=1200,h=800,title="Filed correctly",sub="Company registration"):
@@ -123,8 +155,8 @@ def enquiry(w=1200,h=800):
     d.rounded_rectangle([bx2,by2,bx2+int(fw*0.44),by2+int(h*0.06)],radius=int(h*0.015),fill=(*BLUE,255))
     return label(im,"Tell us what you are building","Get business guidance")
 
-save(office(1600,686),"raulji-group-office")
-save(consulting(),"raulji-group-business-consulting")
+save(office(1200,900),"raulji-group-office")
+save(consulting(1200,800),"raulji-group-business-consulting")
 save(documents(1600,686,title="Filed correctly",sub="Company registration"),"raulji-group-company-registration")
 save(documents(title="Documents in order",sub="What registration needs"),"raulji-group-documents")
 save(meeting(),"raulji-group-client-meeting")
