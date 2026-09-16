@@ -274,38 +274,43 @@ export default function HomePage() {
           />
         </div>
 
-        <BrandImage
-          slot="office"
-          sizes="(min-width: 1024px) 76rem, 100vw"
-          aspect="aspect-[21/9]"
-          className="mt-10"
-        />
-
-        <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-14">
-          {/* The opening paragraph is set larger and in the darker text colour,
+        <div className="mt-12 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+          <div>
+            {/* The opening paragraph is set larger and in the darker text colour,
               so the section has a clear entry point instead of an even wall.
 
               It was `text-xl` with `text-pretty`, which set it at 20px on a
               600px column, a short measure for that size, and left orphaned
               two-word lines at the end. Now 18px on a capped 34rem measure with
               open leading, which is the readable range for a lead paragraph. */}
-          <p className="max-w-[34rem] text-[1.0625rem] leading-[1.75] text-secondary md:text-lg">
-            Raulji Group works with people who are starting or running a business and need a
-            straight answer about what to do next. That might be choosing between a company and
-            an LLP, getting an incorporation filed correctly, or working out what a business needs
-            in place before it takes on staff or investment.
-          </p>
-          <div className="space-y-4 leading-relaxed text-muted-foreground">
-            <p>
-              Consulting sits at the centre of how the group works. Registration and filing are
-              services we deliver, but the decision that comes first matters more, and it is the
-              part most founders get advice on too late.
+            <p className="text-[1.0625rem] leading-[1.75] text-secondary md:text-lg">
+              Raulji Group works with people who are starting or running a business and need a
+              straight answer about what to do next. That might be choosing between a company and
+              an LLP, getting an incorporation filed correctly, or working out what a business
+              needs in place before it takes on staff or investment.
             </p>
-            <p>
-              Raulji Group is a private business-services firm, not a government department. We
-              say what we can do, and we say where our remit ends.
-            </p>
+            <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
+              <p>
+                Consulting sits at the centre of how the group works. Registration and filing are
+                services we deliver, but the decision that comes first matters more, and it is the
+                part most founders get advice on too late.
+              </p>
+              <p>
+                Raulji Group is a private business-services firm, not a government department. We
+                say what we can do, and we say where our remit ends.
+              </p>
+            </div>
           </div>
+
+          {/* Beside the argument rather than above it. As a full width band it
+              was a 520px slab of dark colour between the heading and the first
+              line of copy, which is more weight than an illustration should
+              carry on the group's own introduction. */}
+          <BrandImage
+            slot="office"
+            sizes="(min-width: 1024px) 34rem, 100vw"
+            aspect="aspect-[4/3]"
+          />
         </div>
 
         <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
