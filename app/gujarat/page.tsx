@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Check } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { CoverageDiagram } from "@/components/shared/coverage-diagram";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
@@ -60,7 +61,8 @@ export default function GujaratPage() {
       <Breadcrumbs crumbs={crumbs} />
 
       <section className="pb-14 pt-8 md:pb-20">
-        <div className="container-wide">
+        <div className="container-wide grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div>
           {/* Plain eyebrow rather than a pill badge, matching every other page
               (the client ruled the floating badge out on the homepage hero). */}
           <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
@@ -92,6 +94,9 @@ export default function GujaratPage() {
               Find your city
             </Link>
           </div>
+        </div>
+
+          <CoverageDiagram className="mx-auto hidden h-auto w-full max-w-md lg:block" />
         </div>
       </section>
 

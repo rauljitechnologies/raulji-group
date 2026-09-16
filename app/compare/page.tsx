@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/ui/page-header";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ComparisonTable } from "@/components/shared/comparison-table";
+import { StructureFigure } from "@/components/shared/structure-diagram";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { LeadForm } from "@/components/forms/lead-form";
 import { SERVICES, type FAQ } from "@/lib/services";
@@ -79,11 +80,43 @@ export default function ComparePage() {
         lead="Private Limited Company, LLP, Partnership Firm and Proprietorship differ in ways that are expensive to reverse: who is liable, what you must file every year, how you are taxed and whether you can ever raise equity. Here is the comparison, and the questions that usually settle it."
       />
 
+      {/* The four structures drawn side by side. The table below has the detail;
+          this is the shape of the decision, which is what most people are
+          actually comparing. */}
       <Section>
-        <ComparisonTable />
+        <SectionHeading
+          eyebrow="At a glance"
+          title="The four structures, side by side"
+          lead="Who owns the business, who runs it, and where personal liability stops."
+          align="left"
+        />
+        <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          {(
+            [
+              ["pvt", "Private Limited Company"],
+              ["llp", "LLP"],
+              ["partnership", "Partnership Firm"],
+              ["proprietorship", "Proprietorship"],
+            ] as const
+          ).map(([kind, label]) => (
+            <li key={kind}>
+              <StructureFigure kind={kind} className="h-full" />
+              <p className="sr-only">{label}</p>
+            </li>
+          ))}
+        </ul>
       </Section>
 
       <Section tone="muted">
+        <SectionHeading
+          eyebrow="Side by side"
+          title="The differences that cost money to reverse"
+          align="left"
+        />
+        <ComparisonTable />
+      </Section>
+
+      <Section>
         <SectionHeading
           title="Five questions that usually decide it"
           lead="Work through these in order. By the end, the field is normally down to one or two options."

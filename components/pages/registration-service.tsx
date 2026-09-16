@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Check, X, FileText, ArrowRight, Phone, MessageCircle, Info, MapPin } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { StructureFigure, STRUCTURE_BY_SLUG } from "@/components/shared/structure-diagram";
 import { CITY_SERVICES, CITY_SERVICE_SLUGS } from "@/lib/city-services";
 import { getCity } from "@/lib/cities";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -33,6 +34,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
    * rather than hardcoded, so it stays correct if the permitted city list ever
    * changes and never links to a page that does not exist.
    */
+  const structure = STRUCTURE_BY_SLUG[service.slug];
   const localPages = CITY_SERVICES.filter((entry) => entry.service === service.slug)
     .map((entry) => {
       const city = getCity(entry.city);
@@ -165,6 +167,33 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
           </div>
         </div>
       </section>
+
+      {/*
+        How the structure is put together. The page explains liability and
+        ownership in prose either side of this; the figure is the same thing at
+        a glance, which is what most readers came for.
+      */}
+      {structure ? (
+        <Section>
+          <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
+                How it is structured
+              </p>
+              <h2 className="mt-4 text-2xl md:text-3xl">
+                Who owns it, who runs it, and who carries the risk
+              </h2>
+              <p className="mt-5 leading-relaxed text-muted-foreground">
+                Registering a {service.shortName} settles three things at once: who owns the
+                business, who is responsible for running it, and how far personal liability
+                reaches if something goes wrong. Most of what follows on this page &mdash;
+                eligibility, documents, annual compliance &mdash; follows from that.
+              </p>
+            </div>
+            <StructureFigure kind={structure} />
+          </div>
+        </Section>
+      ) : null}
 
       {/* Who should choose this */}
       <Section tone="muted">
