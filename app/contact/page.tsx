@@ -2,6 +2,7 @@ import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
+import { BrandImage } from "@/components/ui/brand-image";
 import { LeadForm } from "@/components/forms/lead-form";
 import { CityGrid } from "@/components/shared/city-grid";
 import { SITE, telHref, mailHref, whatsappHref, AUTHORITY_DISCLAIMER } from "@/lib/site";
@@ -38,6 +39,11 @@ export default function ContactPage() {
       <Section>
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.15fr]">
           <div className="space-y-4">
+            <BrandImage
+              slot="meeting"
+              sizes="(min-width: 1024px) 30rem, 100vw"
+              aspect="aspect-[3/2]"
+            />
             <a
               href={telHref}
               className="flex items-start gap-4 rounded-2xl border border-border bg-card p-6 hover:border-primary"

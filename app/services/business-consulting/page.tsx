@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, MinusCircle } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { BrandImage } from "@/components/ui/brand-image";
 import { JsonLd } from "@/components/ui/json-ld";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { LeadForm } from "@/components/forms/lead-form";
@@ -226,6 +227,13 @@ export default function BusinessConsultingPage() {
               </div>
             </div>
 
+            <div>
+            <BrandImage
+              slot="consulting"
+              sizes="(min-width: 1024px) 30rem, 100vw"
+              aspect="aspect-[3/2]"
+              className="mb-6"
+            />
             <dl className="rounded-2xl border border-border bg-muted p-7">
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 At a glance
@@ -245,6 +253,7 @@ export default function BusinessConsultingPage() {
                 ))}
               </div>
             </dl>
+            </div>
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { BrandImage } from "@/components/ui/brand-image";
 import { JsonLd } from "@/components/ui/json-ld";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { ServiceCards } from "@/components/shared/service-cards";
@@ -147,6 +148,13 @@ export default function BusinessRegistrationPage() {
               involves. The detail for each one is on its own page.
             </p>
           </div>
+
+          <BrandImage
+            slot="registration"
+            sizes="(min-width: 1024px) 76rem, 100vw"
+            aspect="aspect-[21/9]"
+            className="mt-10"
+          />
         </div>
       </section>
 

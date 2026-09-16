@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
+import { BrandImage } from "@/components/ui/brand-image";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import Image from "next/image";
@@ -111,6 +112,12 @@ export default function AboutPage() {
       </PageHeader>
 
       <Section>
+        <BrandImage
+          slot="office"
+          sizes="(min-width: 1024px) 76rem, 100vw"
+          aspect="aspect-[21/9]"
+          className="mb-12"
+        />
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <div>
             <h2 className="text-3xl">What the group does</h2>

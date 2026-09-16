@@ -23,6 +23,7 @@ import { BusinessJourney } from "@/components/shared/business-journey";
 import { LeadForm } from "@/components/forms/lead-form";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
+import { BrandImage } from "@/components/ui/brand-image";
 import { HOME_FAQS } from "@/lib/home-faqs";
 import { SERVICES } from "@/lib/services";
 import { SITE, telHref, mailHref } from "@/lib/site";
@@ -273,6 +274,13 @@ export default function HomePage() {
           />
         </div>
 
+        <BrandImage
+          slot="office"
+          sizes="(min-width: 1024px) 76rem, 100vw"
+          aspect="aspect-[21/9]"
+          className="mt-10"
+        />
+
         <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-14">
           {/* The opening paragraph is set larger and in the darker text colour,
               so the section has a clear entry point instead of an even wall.
@@ -361,6 +369,13 @@ export default function HomePage() {
               Explore Business Consulting
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+
+            <BrandImage
+              slot="consulting"
+              sizes="(min-width: 1024px) 34rem, 100vw"
+              aspect="aspect-[3/2]"
+              className="mt-10 hidden lg:block"
+            />
           </div>
 
           <div>
@@ -467,6 +482,12 @@ export default function HomePage() {
             <h2 className="mt-4 text-[1.75rem] leading-[1.3] sm:text-3xl sm:leading-[1.25] md:text-4xl md:leading-[1.2]">
               India-wide, With Deep Coverage in Gujarat
             </h2>
+            <BrandImage
+              slot="gujarat"
+              sizes="(min-width: 1024px) 36rem, 100vw"
+              aspect="aspect-[16/9]"
+              className="mt-6"
+            />
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
               Incorporation is filed online, so where you are does not change the process or the
               timeline. What does change is the local context: what a ginning firm in Surendranagar
