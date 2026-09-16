@@ -47,6 +47,11 @@ export const NAV: NavGroup[] = [
       { name: "About Raulji Group", href: "/about/", description: "Who we are and how we work" },
       { name: "Our Team", href: "/team/", description: "The people handling your work" },
       {
+        name: "Our Clients",
+        href: "/our-clients/",
+        description: "The businesses the group has worked with",
+      },
+      {
         name: "Raulji Technologies",
         href: SITE.technologies,
         description: "Software, AI and digital transformation, on our technology brand",

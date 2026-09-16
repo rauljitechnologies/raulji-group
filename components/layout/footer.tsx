@@ -44,6 +44,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
     links: [
       { name: "About Raulji Group", href: "/about/" },
       { name: "Our Team", href: "/team/" },
+      { name: "Our Clients", href: "/our-clients/" },
       { name: "Gujarat", href: "/gujarat/" },
       // The group relationship lives here now, not in a band of its own.
       { name: "Raulji Technologies", href: SITE.technologies, external: true },
