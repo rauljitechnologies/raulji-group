@@ -198,9 +198,23 @@ root-level city pages where there is genuine business/SEO value:
 `/junagadh/` `/godhra/` `/dahod/` `/halol/` `/mehsana/` `/patan/` `/palanpur/`
 `/himmatnagar/` `/modasa/` `/morbi/` `/surendranagar/` `/bhuj/` `/gandhidham/`
 
-Do NOT create `/gujarat/panchmahal/godhra/`, `/godhra/llp-registration/`, or any
-service × city URLs. One city page covers the four registration structures. Do not
-create thousands of thin location pages.
+Do NOT create `/gujarat/panchmahal/godhra/` or any district-nested URL.
+
+**City + service URLs: resolved 2026-09-16.** This rule originally banned service ×
+city URLs outright. The later client brief (its sections 16 and 21) requires them
+"where commercially justified" and gives `/ahmedabad/llp-registration/` as the
+example, which contradicted this rule. Client decision: build them for five
+priority cities only, with hand-written local content per page.
+
+- Permitted: Ahmedabad, Vadodara, Surat, Rajkot and Gandhinagar, each × the four
+  registration structures. Twenty URLs, no more.
+- Every one of those pages must carry local content written for that city and that
+  structure. A page that would only differ by a substituted city name must not ship.
+- All other cities keep one page covering all four structures.
+- Do not extend this set without a further client decision.
+
+The original concern stands and is not weakened: do not create thousands of thin
+location pages, and do not mass-generate by template.
 
 ## 18. Location UX
 

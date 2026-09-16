@@ -10,6 +10,7 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { LeadForm } from "@/components/forms/lead-form";
 import { CITIES, CITY_SLUGS, getCity } from "@/lib/cities";
+import { CITY_SERVICE_SLUGS, CITIES_WITH_SERVICE_PAGES } from "@/lib/city-services";
 import { SERVICES } from "@/lib/services";
 import { SITE, telHref, TIMELINE_DISCLAIMER } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
@@ -62,13 +63,27 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
 
   const nearby = city.nearby.map((s) => getCity(s)).filter((c): c is NonNullable<typeof c> => Boolean(c));
 
+  /**
+   * Five priority cities have a dedicated page per structure. Where they exist,
+   * this page links to them rather than to the generic service page, so the
+   * local page is the one that receives the local intent instead of competing
+   * with it (master rule 19).
+   */
+  const hasServicePages = CITIES_WITH_SERVICE_PAGES.includes(city.slug);
+  const serviceHref = (slug: string) =>
+    hasServicePages && slug in CITY_SERVICE_SLUGS
+      ? `/${city.slug}/${CITY_SERVICE_SLUGS[slug as keyof typeof CITY_SERVICE_SLUGS]}/`
+      : undefined;
+
   return (
     <>
       <JsonLd
         data={graph(
           breadcrumbSchema(crumbs),
           faqSchema(city.faqs),
-          ...SERVICES.map((service) => citySeoServiceSchema(city, service)),
+          ...SERVICES.map((service) =>
+            citySeoServiceSchema(city, service, serviceHref(service.slug)),
+          ),
         )}
       />
       <Breadcrumbs crumbs={crumbs} />
@@ -124,11 +139,13 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
           align="left"
         />
         <ul className="grid gap-6 md:grid-cols-2">
-          {SERVICES.map((service) => (
+          {SERVICES.map((service) => {
+            const local = serviceHref(service.slug);
+            return (
             <li key={service.slug} className="rounded-2xl border border-border bg-card p-6">
               <h3 className="text-xl">
-                <Link href={service.path} className="hover:text-primary hover:underline">
-                  {service.name}
+                <Link href={local ?? service.path} className="hover:text-primary hover:underline">
+                  {local ? `${service.name} in ${city.name}` : service.name}
                 </Link>
               </h3>
               <p className="mt-3 leading-relaxed text-muted-foreground">{service.definition}</p>
@@ -142,14 +159,23 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 ))}
               </ul>
               <Link
-                href={service.path}
+                href={local ?? service.path}
                 className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
               >
-                {service.cardCta}
+                {local ? `${service.shortName} in ${city.name}` : service.cardCta}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
+              {local ? (
+                <Link
+                  href={service.path}
+                  className="mt-2 block text-sm text-muted-foreground hover:text-primary hover:underline"
+                >
+                  Or the general {service.shortName} guide
+                </Link>
+              ) : null}
             </li>
-          ))}
+            );
+          })}
         </ul>
       </Section>
 

@@ -8,7 +8,7 @@
  *  - BreadcrumbList must match the breadcrumb the user can actually see.
  */
 
-import { SITE } from "./site";
+import { SITE, LEADERSHIP } from "./site";
 import { SERVICES, type RegistrationService } from "./services";
 import type { City } from "./cities";
 
@@ -118,8 +118,17 @@ export function serviceSchema(service: RegistrationService) {
   return node;
 }
 
-/** Service node scoped to a city page. No local address is claimed. */
-export function citySeoServiceSchema(city: City, service: RegistrationService) {
+/**
+ * Service node scoped to a city page. No local address is claimed.
+ *
+ * `url` overrides the target for the five cities that have a dedicated page per
+ * structure, so the structured data points where the visible links point.
+ */
+export function citySeoServiceSchema(
+  city: City,
+  service: RegistrationService,
+  url?: string,
+) {
   return {
     "@type": "Service",
     name: `${service.name} in ${city.name}`,
@@ -133,7 +142,7 @@ export function citySeoServiceSchema(city: City, service: RegistrationService) {
         name: `${city.district} district, Gujarat`,
       },
     },
-    url: abs(service.path),
+    url: abs(url ?? service.path),
   };
 }
 
@@ -196,5 +205,136 @@ export function homeServiceListSchema() {
         ],
       },
     })),
+  };
+}
+
+/**
+ * Service node for a pillar page that is not one of the four registration
+ * structures, so it carries no Offer. Consulting fees depend on scope and no
+ * figure is published, and inventing one to satisfy schema would be fake
+ * structured data.
+ */
+export function pillarServiceSchema({
+  name,
+  description,
+  path,
+  serviceType,
+  offerings,
+}: {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+  /** Named sub-services. Every one must be genuinely offered. */
+  offerings?: string[];
+}) {
+  const node: Record<string, unknown> = {
+    "@type": "Service",
+    "@id": `${abs(path)}#service`,
+    name,
+    description,
+    url: abs(path),
+    serviceType,
+    provider: { "@id": ORG_ID },
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Gujarat" },
+      { "@type": "Country", name: "India" },
+    ],
+  };
+
+  if (offerings?.length) {
+    node.hasOfferCatalog = {
+      "@type": "OfferCatalog",
+      name,
+      itemListElement: offerings.map((item) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: item },
+      })),
+    };
+  }
+
+  return node;
+}
+
+/**
+ * Service node for a city + service page.
+ *
+ * Distinct from citySeoServiceSchema, which is used on a city page where the
+ * canonical target is the service page. Here the city + service page is itself
+ * the canonical URL for this pairing, so url and @id point at it.
+ *
+ * No local address or local branch is asserted. Raulji Group works from Vadodara
+ * and areaServed is how the geographic relationship is expressed.
+ */
+export function cityServiceSchema({
+  city,
+  service,
+  path,
+  description,
+}: {
+  city: City;
+  service: RegistrationService;
+  path: string;
+  description: string;
+}) {
+  const node: Record<string, unknown> = {
+    "@type": "Service",
+    "@id": `${abs(path)}#service`,
+    name: `${service.name} in ${city.name}`,
+    description,
+    url: abs(path),
+    serviceType: service.name,
+    provider: { "@id": ORG_ID },
+    areaServed: {
+      "@type": "City",
+      name: city.name,
+      containedInPlace: {
+        "@type": "AdministrativeArea",
+        name: `${city.district} district, Gujarat`,
+      },
+    },
+  };
+
+  if (service.pricing) {
+    node.offers = {
+      "@type": "Offer",
+      priceCurrency: "INR",
+      price: service.pricing.amount.replace(/[^\d]/g, ""),
+      description: service.pricing.note,
+      url: abs(path),
+    };
+  }
+
+  return node;
+}
+
+
+/**
+ * The Chairman, as a Person node.
+ *
+ * Worth emitting because master rule 26 asks for clear entity information: a
+ * named officer linked to both group brands is how a search or AI system
+ * establishes that Raulji Group and Raulji Technologies are related rather than
+ * coincidentally similar names.
+ *
+ * jobTitle carries both roles as one string rather than being split across
+ * schema properties. The precise encoding (OrganizationRole) buys nothing here
+ * and risks misstating the relationship; a plain, accurate title does not.
+ *
+ * Nothing is asserted that the client has not confirmed: no founding claim, no
+ * biography, no social profiles, no awards.
+ */
+export function personSchema() {
+  const { chairman } = LEADERSHIP;
+  return {
+    "@type": "Person",
+    "@id": `${SITE.url}/#chairman`,
+    name: chairman.name,
+    jobTitle: chairman.jobTitle,
+    image: abs(chairman.photo),
+    worksFor: [
+      { "@id": ORG_ID },
+      { "@type": "Organization", name: "Raulji Technologies", url: SITE.technologies },
+    ],
   };
 }

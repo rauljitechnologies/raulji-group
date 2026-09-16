@@ -41,20 +41,9 @@
     --brand-secondary: 216 48% 18%;
     --brand-gradient: linear-gradient(135deg, hsl(199 64% 51%) 0%, hsl(216 48% 18%) 100%);
     --brand-gradient-soft: linear-gradient(135deg, hsl(199 64% 95%) 0%, hsl(210 20% 98%) 100%);
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.3);
     --shadow-soft: 0 4px 30px rgba(49, 153, 212, 0.1);
     --shadow-elevated: 0 20px 60px rgba(25, 42, 66, 0.15);
     --shadow-card: 0 8px 32px rgba(25, 42, 66, 0.08);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -86,8 +75,6 @@
     --input: 216 48% 20%;
     --ring: 199 64% 51%;
 
-    --glass-bg: rgba(25, 42, 66, 0.7);
-    --glass-border: rgba(49, 153, 212, 0.2);
     --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.3);
     --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.4);
     --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -110,27 +97,12 @@
 }
 
 @layer components {
-  .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-card);
-  }
-
   .brand-gradient {
     background: var(--brand-gradient);
   }
 
   .brand-gradient-soft {
     background: var(--brand-gradient-soft);
-  }
-
-  .text-gradient {
-    background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   .shadow-soft {
@@ -165,72 +137,6 @@
   .container-wide {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-}
-
-@layer utilities {
-  .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.4s ease-out forwards;
-  }
-
-  .animate-slide-right {
-    animation: slideRight 0.5s ease-out forwards;
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes scaleIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes slideRight {
-    from {
-      opacity: 0;
-      transform: translateX(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
 }
 
 /* ---------------------------------------------------------------------------

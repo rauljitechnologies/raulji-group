@@ -70,7 +70,7 @@ export const CITIES: City[] = [
     nearby: ["gandhinagar", "kalol", "nadiad", "mehsana"],
     structureNote:
       "Ahmedabad sees more Private Limited incorporations than any other city in Gujarat, largely because it has the state's deepest pool of founders who intend to raise investment or issue ESOPs. That is not automatically the right answer, though. Family trading firms that will never take outside capital often find an LLP or a partnership firm carries the liability protection they actually need at a fraction of the annual compliance cost.",
-    seoTitle: "Business Registration Services in Ahmedabad, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Ahmedabad, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for businesses in Ahmedabad, from Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -115,7 +115,7 @@ export const CITIES: City[] = [
     nearby: ["anand", "nadiad", "bharuch", "halol", "godhra"],
     structureNote:
       "Vendors supplying the large plants around Vadodara are usually pushed towards an incorporated structure by their customers rather than by their own preference. Procurement teams at refinery and petrochemical buyers often want a registered entity on the MCA record before they will onboard a vendor, which makes a Private Limited Company or an LLP the practical choice even for a two-person engineering firm. For consultancies billing a handful of clients, an LLP usually carries the same credibility with far less annual work.",
-    seoTitle: "Business Registration Services in Vadodara, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Vadodara, Gujarat | Raulji Group",
     metaDescription:
       "Raulji Group is based in Vadodara and supports Private Limited, LLP, Partnership Firm and Proprietorship registration locally. Call +91 8511187689.",
     faqs: [
@@ -160,7 +160,7 @@ export const CITIES: City[] = [
     nearby: ["navsari", "bharuch", "ankleshwar", "vapi", "valsad"],
     structureNote:
       "Surat's textile and diamond trade has traditionally run on partnership firms, and a great many still do. The pressure to convert usually comes from two directions: banks asking for cleaner documentation before extending working capital against receivables, and export buyers wanting to contract with a limited-liability entity. Where a firm is already trading through a partnership deed, moving to an LLP preserves the partner structure while capping personal liability, which is usually a better first step than jumping straight to a company.",
-    seoTitle: "Business Registration Services in Surat, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Surat, Gujarat | Raulji Group",
     metaDescription:
       "Company registration support for Surat's diamond, textile and export businesses, from Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -205,7 +205,7 @@ export const CITIES: City[] = [
     nearby: ["morbi", "jamnagar", "junagadh", "surendranagar", "botad"],
     structureNote:
       "The deciding factor for most Rajkot engineering units is who they sell to. Selling locally or to traders, a proprietorship or partnership firm handles it. Selling to OEMs and larger buyers outside the state, vendor onboarding usually requires an entity on the MCA record, and an LLP is generally the lowest-cost way to meet that. Units planning to invest heavily in machinery on credit also have a real reason to want liability capped.",
-    seoTitle: "Business Registration Services in Rajkot, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Rajkot, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for Rajkot's engineering and auto component businesses. Raulji Group.",
     faqs: [
@@ -250,7 +250,7 @@ export const CITIES: City[] = [
     nearby: ["ahmedabad", "kalol", "mehsana", "himmatnagar"],
     structureNote:
       "Firms bidding for state government work usually find the tender documents themselves settle the question, since many require a registered company or LLP with audited accounts for a stated number of years. That is worth checking before you incorporate, because the eligibility clauses often specify the entity type. Entities intending to operate inside GIFT City are a separate matter: the IFSC has its own authorisation requirements on top of incorporation, and the structure needs to be planned around those from the start.",
-    seoTitle: "Business Registration Services in Gandhinagar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Gandhinagar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for businesses in Gandhinagar and the GIFT City corridor. Raulji Group.",
     faqs: [
@@ -289,7 +289,7 @@ export const CITIES: City[] = [
     nearby: ["nadiad", "vadodara", "ahmedabad"],
     structureNote:
       "Agri-processing ventures in the Anand belt frequently start with several people contributing land, equipment or working capital in unequal measure, and want returns split accordingly. An LLP handles that cleanly, because profit sharing is set by the LLP Agreement rather than tied to shareholding proportions. Where the venture will seek institutional funding or a food-processing subsidy that requires a company, a Private Limited Company is the better starting point.",
-    seoTitle: "Business Registration Services in Anand, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Anand, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for dairy, agri and food processing ventures in Anand. Raulji Group.",
     faqs: [
@@ -317,7 +317,7 @@ export const CITIES: City[] = [
     nearby: ["anand", "ahmedabad", "vadodara"],
     structureNote:
       "Long-running family trading businesses in Nadiad are often already operating as partnership firms on a deed drawn up years ago. Where that deed has never been updated through generational changes, the useful first step is usually reviewing it rather than changing structure. Where a business is taking on bank finance or building warehouse capacity on credit, moving to an LLP to cap personal liability is worth considering.",
-    seoTitle: "Business Registration Services in Nadiad, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Nadiad, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for businesses in Nadiad and Kheda district. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -345,7 +345,7 @@ export const CITIES: City[] = [
     nearby: ["ankleshwar", "surat", "vadodara", "vapi"],
     structureNote:
       "Chemical sector work carries regulatory and environmental exposure that makes unlimited personal liability a genuine risk rather than a theoretical one. For manufacturing or handling activity in the Bharuch belt, a limited liability structure, an LLP at minimum, is worth taking seriously. Contractors supplying labour or services to the large plants also usually face vendor onboarding requirements that assume a registered entity.",
-    seoTitle: "Business Registration Services in Bharuch, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Bharuch, Gujarat | Raulji Group",
     metaDescription:
       "Company registration support for chemical, logistics and industrial businesses in Bharuch and Dahej, from Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -373,7 +373,7 @@ export const CITIES: City[] = [
     nearby: ["bharuch", "surat", "vapi"],
     structureNote:
       "Ankleshwar units almost always end up incorporated, and usually for a practical reason: the approvals, the bank finance and the customer contracts all assume an entity. Where a business is purely a trading or broking operation in intermediates with no manufacturing exposure, an LLP is usually sufficient. Where manufacturing or storage is involved, the additional protection and credibility of a Private Limited Company often justifies its heavier compliance.",
-    seoTitle: "Business Registration Services in Ankleshwar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Ankleshwar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for chemical and industrial businesses in Ankleshwar GIDC. Raulji Group.",
     faqs: [
@@ -401,7 +401,7 @@ export const CITIES: City[] = [
     nearby: ["valsad", "navsari", "surat"],
     structureNote:
       "Businesses operating across the Gujarat-Maharashtra border need to separate two things that are often confused. Incorporation is national: one Private Limited Company or LLP can trade in both states. GST registration is state-specific, so a fixed place of business in each state generally needs its own GST registration under the same PAN. Deciding which state holds the registered office is worth thinking through before filing, since it determines which Registrar handles your filings.",
-    seoTitle: "Business Registration Services in Vapi, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Vapi, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for businesses in Vapi and the Gujarat-Maharashtra corridor.",
     faqs: [
@@ -429,7 +429,7 @@ export const CITIES: City[] = [
     nearby: ["vapi", "navsari", "surat"],
     structureNote:
       "Seasonal horticulture businesses have a specific problem: revenue arrives in a compressed window and the entity sits largely idle the rest of the year, while compliance obligations run all twelve months. That makes the difference in annual upkeep between structures matter more than usual. A proprietorship or partnership firm carries almost no recurring statutory cost, while a Private Limited Company requires a statutory audit and annual ROC filings regardless of whether the business traded.",
-    seoTitle: "Business Registration Services in Valsad, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Valsad, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for horticulture, food processing and industrial businesses in Valsad.",
     faqs: [
@@ -457,7 +457,7 @@ export const CITIES: City[] = [
     nearby: ["surat", "valsad", "vapi"],
     structureNote:
       "A recurring situation in Navsari is a unit that operates here but whose principal business is registered in Surat. That is a question about branch operations rather than a second registration: one entity can have multiple places of business, and what matters is that the additional place is properly recorded in your GST registration. Independent units starting fresh usually begin as proprietorships and move to an LLP as the client base widens.",
-    seoTitle: "Business Registration Services in Navsari, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Navsari, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for businesses in Navsari district. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -485,7 +485,7 @@ export const CITIES: City[] = [
     nearby: ["botad", "amreli", "rajkot", "surendranagar"],
     structureNote:
       "Trade around Alang runs on high-value transactions between parties who often have no long relationship, which makes the enforceability point about partnership firms concrete rather than academic. An unregistered firm cannot sue to enforce a contract, so a buyer who does not pay cannot be taken to court by the firm. Anyone trading on credit in this market should either register the firm with the Registrar of Firms or use an LLP or company.",
-    seoTitle: "Business Registration Services in Bhavnagar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Bhavnagar, Gujarat | Raulji Group",
     metaDescription:
       "Registration support for steel trading, recycling and agri businesses in Bhavnagar and the Alang belt, from Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -513,7 +513,7 @@ export const CITIES: City[] = [
     nearby: ["rajkot", "morbi", "porbandar", "dwarka"],
     structureNote:
       "Brass units that export run into a structural question early. Export documentation, an Import Export Code and buyer contracts all work more smoothly with a registered entity, and overseas buyers frequently ask who they are legally contracting with. A proprietorship can hold an Import Export Code, so exporting does not by itself force incorporation, but partners and liability usually do.",
-    seoTitle: "Business Registration Services in Jamnagar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Jamnagar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for Jamnagar's brass parts and engineering businesses. Raulji Group.",
     faqs: [
@@ -541,7 +541,7 @@ export const CITIES: City[] = [
     nearby: ["rajkot", "surendranagar", "jamnagar"],
     structureNote:
       "Tile manufacturing is capital-intensive, and Morbi units routinely carry substantial machinery finance and fuel credit. That combination, large borrowing plus multiple family members involved, is exactly where the difference between a partnership firm and an LLP stops being technical. Merchant exporters with no manufacturing exposure, by contrast, often run perfectly well as an LLP or even a proprietorship.",
-    seoTitle: "Business Registration Services in Morbi, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Morbi, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for ceramic tile, sanitaryware and export businesses in Morbi.",
     faqs: [
@@ -569,7 +569,7 @@ export const CITIES: City[] = [
     nearby: ["rajkot", "amreli", "porbandar"],
     structureNote:
       "Hospitality businesses in the Gir belt have a specific reason to think about structure carefully: they deal directly with the public, which creates liability exposure that a purely trading business does not carry. Agri commodity traders, meanwhile, face the same credit enforcement issue as elsewhere in Saurashtra, which makes registering a partnership firm with the Registrar of Firms worthwhile rather than optional.",
-    seoTitle: "Business Registration Services in Junagadh, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Junagadh, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for agri, tourism and trading businesses in Junagadh. Raulji Group.",
     faqs: [
@@ -597,7 +597,7 @@ export const CITIES: City[] = [
     nearby: ["gandhinagar", "patan", "palanpur", "ahmedabad", "kalol"],
     structureNote:
       "Firms providing technical services to oil and gas operators in the Mehsana fields face the same vendor onboarding pattern as industrial suppliers elsewhere: the customer usually wants a registered entity with a verifiable record before issuing a work order. For those businesses the structure decision is often made by the customer's procurement policy. Dairy-linked and agro-processing ventures with several contributors are generally better served by an LLP.",
-    seoTitle: "Business Registration Services in Mehsana, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Mehsana, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for dairy, oil and gas and agro-processing businesses in Mehsana.",
     faqs: [
@@ -625,7 +625,7 @@ export const CITIES: City[] = [
     nearby: ["halol", "dahod", "vadodara", "jhalod"],
     structureNote:
       "Most businesses in Godhra are owner-run and sell within the district, which makes a proprietorship or a partnership firm a genuinely sensible starting point rather than a compromise. The situation that changes the answer is supplying the industrial units at Halol, where vendor onboarding usually assumes a registered entity. For a distributor extending credit across the district, registering the partnership firm with the Registrar of Firms is the single most useful step.",
-    seoTitle: "Business Registration Services in Godhra, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Godhra, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for businesses in Godhra and Panchmahal district. Raulji Group.",
     faqs: [
@@ -657,7 +657,7 @@ export const CITIES: City[] = [
     nearby: ["godhra", "vadodara", "dahod"],
     structureNote:
       "Supplying an automotive plant means entering a vendor system with its own documentation standards, and that usually settles the structure question before you get to weigh it. Tier suppliers are commonly expected to be incorporated, hold GST and Udyam registration, and in some cases hold quality certifications. Service contractors on the estate face a lighter version of the same requirement, where an LLP is normally sufficient.",
-    seoTitle: "Business Registration Services in Halol, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Halol, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for auto component and engineering businesses in Halol GIDC. Raulji Group.",
     faqs: [
@@ -685,7 +685,7 @@ export const CITIES: City[] = [
     nearby: ["godhra", "jhalod", "halol"],
     structureNote:
       "Businesses trading across the state border need to keep the distinction between entity and tax registration clear. One company, LLP or firm can trade into Madhya Pradesh and Rajasthan without registering separately there, but a fixed place of business in another state brings its own GST registration, and inter-state supply of goods makes GST registration compulsory regardless of turnover. That last point catches out small traders who assume they are below the threshold.",
-    seoTitle: "Business Registration Services in Dahod, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Dahod, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for businesses in Dahod district. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -713,7 +713,7 @@ export const CITIES: City[] = [
     nearby: ["dahod", "godhra"],
     structureNote:
       "For most businesses in Jhalod the realistic choice is between a proprietorship and a partnership firm, and the honest answer is usually the simpler one. Incorporating a Private Limited Company for a small local trading business means committing to a statutory audit and annual ROC filings every year, which is a recurring cost that rarely earns its keep at this scale. The exception is a business built specifically to bid for government or institutional contracts.",
-    seoTitle: "Business Registration Services in Jhalod, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Jhalod, Gujarat | Raulji Group",
     metaDescription:
       "Proprietorship, Partnership Firm, LLP and Private Limited registration support for small businesses in Jhalod, Dahod district. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -741,7 +741,7 @@ export const CITIES: City[] = [
     nearby: ["gandhidham", "morbi"],
     structureNote:
       "Artisan and handicraft exporters in Kutch often work with producer groups rather than employees, which raises a question about whether the right vehicle is a firm, an LLP or a producer-focused structure. That is worth thinking through properly, because the answer affects how earnings are shared and taxed. Tourism businesses in the Rann belt are highly seasonal, so annual compliance cost relative to a short earning window matters more here than usual.",
-    seoTitle: "Business Registration Services in Bhuj, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Bhuj, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for handicraft, tourism and trading businesses in Bhuj, Kutch.",
     faqs: [
@@ -769,7 +769,7 @@ export const CITIES: City[] = [
     nearby: ["bhuj", "morbi"],
     structureNote:
       "Logistics and clearing businesses in Gandhidham handle other people's goods and other people's money, and act on customs documentation where errors carry penalties. That exposure makes limited liability a practical consideration rather than a formality, and most established operators run as an LLP or a company. Units intending to operate inside the SEZ have separate approval requirements that should be planned alongside the entity structure.",
-    seoTitle: "Business Registration Services in Gandhidham, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Gandhidham, Gujarat | Raulji Group",
     metaDescription:
       "Registration support for logistics, freight forwarding and trading businesses in Gandhidham and Kandla, from Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -797,7 +797,7 @@ export const CITIES: City[] = [
     nearby: ["modasa", "mehsana", "patan", "gandhinagar"],
     structureNote:
       "Ceramic units in the Himmatnagar belt are generally smaller and less capital-intensive than those in Morbi, and many run comfortably as partnership firms. The consideration that tends to move them is fuel and raw material credit: once a unit is buying on running credit from multiple suppliers, partners' unlimited personal liability becomes a material risk, and an LLP addresses it without disturbing the existing profit-sharing arrangement.",
-    seoTitle: "Business Registration Services in Himmatnagar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Himmatnagar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for ceramic, agri and trading businesses in Himmatnagar. Raulji Group.",
     faqs: [
@@ -825,7 +825,7 @@ export const CITIES: City[] = [
     nearby: ["mehsana", "palanpur", "himmatnagar"],
     structureNote:
       "Craft businesses in Patan often build value in a name over generations, which makes trade mark protection a more pressing concern than the choice of entity. Whatever structure you register, screen the business name against existing trade marks first, because a name you have used locally for years is not automatically yours to use commercially. For the entity itself, most craft and agri trade operations here run well as a proprietorship or registered partnership firm.",
-    seoTitle: "Business Registration Services in Patan, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Patan, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for craft, agri and tourism businesses in Patan. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -853,7 +853,7 @@ export const CITIES: City[] = [
     nearby: ["mehsana", "patan"],
     structureNote:
       "Cold storage and agri-processing ventures in Banaskantha are capital-heavy and frequently involve several investors putting in different amounts, sometimes including land. An LLP handles that well because returns follow the LLP Agreement rather than shareholding. Where the venture is applying for a food-processing or cold-chain subsidy, check the scheme conditions first: some specify eligible entity types, and that can decide the structure for you.",
-    seoTitle: "Business Registration Services in Palanpur, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Palanpur, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for dairy, agri and trading businesses in Palanpur, Banaskantha.",
     faqs: [
@@ -881,7 +881,7 @@ export const CITIES: City[] = [
     nearby: ["rajkot", "morbi", "botad", "ahmedabad"],
     structureNote:
       "Ginning is seasonal and works on large short-term purchases funded by working capital, which produces concentrated credit exposure in a few months of the year. Where partners are personally liable without limit, a bad season reaches personal assets directly. That makes the partnership-to-LLP question more pressing in ginning than in steadier trades, and it is worth settling before rather than during a season.",
-    seoTitle: "Business Registration Services in Surendranagar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Surendranagar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership Firm and Proprietorship registration support for ginning, agri trade and industrial businesses in Surendranagar. Raulji Group.",
     faqs: [
@@ -909,7 +909,7 @@ export const CITIES: City[] = [
     nearby: ["bhavnagar", "surendranagar", "rajkot", "amreli"],
     structureNote:
       "Commission agents and traders in the Botad market work almost entirely on credit relationships, and that makes the enforceability limitation on unregistered partnership firms directly relevant. A firm that cannot sue to recover a debt has limited options when a buyer defaults. Registering the firm with the Registrar of Firms is inexpensive and removes that specific problem without changing how the business runs.",
-    seoTitle: "Business Registration Services in Botad, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Botad, Gujarat | Raulji Group",
     metaDescription:
       "Partnership Firm, Proprietorship, LLP and Private Limited registration support for ginning, agri trade and commission businesses in Botad. Raulji Group.",
     faqs: [
@@ -937,7 +937,7 @@ export const CITIES: City[] = [
     nearby: ["bhavnagar", "junagadh", "botad", "rajkot"],
     structureNote:
       "Oil milling and agri processing in Amreli usually start as family operations, and a registered partnership firm is a reasonable and inexpensive structure for that. What changes the calculation is institutional finance: term loans for plant and machinery, or a food-processing subsidy application, often come with entity requirements attached. If either is on your roadmap, it is cheaper to register the right structure now than to convert mid-project.",
-    seoTitle: "Business Registration Services in Amreli, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Amreli, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for agri processing and trading businesses in Amreli. Raulji Group.",
     faqs: [
@@ -965,7 +965,7 @@ export const CITIES: City[] = [
     nearby: ["junagadh", "jamnagar", "dwarka"],
     structureNote:
       "Marine product exporters face both food safety regulation and export documentation, which means the entity registration is only part of the setup. Where the business will hold an export licence and deal with overseas buyers, an LLP or company is generally expected. Fishing operations themselves are often family-run and work adequately as partnership firms, provided the deed is registered so the firm can enforce its contracts.",
-    seoTitle: "Business Registration Services in Porbandar, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Porbandar, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for marine, export and trading businesses in Porbandar.",
     faqs: [
@@ -993,7 +993,7 @@ export const CITIES: City[] = [
     nearby: ["jamnagar", "porbandar"],
     structureNote:
       "Hospitality and food service deal directly with the public, which creates liability exposure that most trading businesses do not carry. At the same time, extreme seasonality means annual compliance cost is measured against a short earning window. Those two pressures point in opposite directions, and the resolution usually depends on scale: a small guesthouse works as a proprietorship, while a hotel with staff and significant capital investment has real reason to be an LLP or company.",
-    seoTitle: "Business Registration Services in Dwarka, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Dwarka, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for hospitality, travel and retail businesses in Dwarka. Raulji Group.",
     faqs: [
@@ -1021,7 +1021,7 @@ export const CITIES: City[] = [
     nearby: ["himmatnagar", "mehsana"],
     structureNote:
       "For a town of Modasa's scale the useful advice is usually to resist over-structuring. A proprietorship or a registered partnership firm handles most local trading and service businesses properly, and the money that would go into maintaining a company is better spent on the business. The clear exceptions are businesses bidding for government contracts and those planning to take significant institutional finance.",
-    seoTitle: "Business Registration Services in Modasa, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Modasa, Gujarat | Raulji Group",
     metaDescription:
       "Proprietorship, Partnership Firm, LLP and Private Limited registration support for businesses in Modasa and Aravalli district. Raulji Group. Call +91 8511187689.",
     faqs: [
@@ -1049,7 +1049,7 @@ export const CITIES: City[] = [
     nearby: ["gandhinagar", "ahmedabad", "mehsana"],
     structureNote:
       "A frequent question in the Kalol and Chhatral belt is where to place the registered office when the plant is here and the office is in Ahmedabad. Both fall within Gujarat, so one GST registration can cover both provided the additional place of business is recorded, and the registered office simply determines which Registrar handles your filings. Choose the address where statutory correspondence will actually be received and acted on.",
-    seoTitle: "Business Registration Services in Kalol, Gujarat | Raulji Group",
+    seoTitle: "Business Registration in Kalol, Gujarat | Raulji Group",
     metaDescription:
       "Private Limited, LLP, Partnership and Proprietorship registration support for manufacturing and logistics businesses in Kalol and Chhatral.",
     faqs: [

@@ -27,11 +27,17 @@ interface FooterLink {
 
 const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
-    heading: "Business Registration",
-    links: SERVICES.map((service) => ({
-      name: service.shortName === "Private Limited" ? "Private Limited Company" : service.name,
-      href: service.path,
-    })),
+    heading: "Services",
+    links: [
+      // Consulting leads, because it is the primary focus of the group.
+      { name: "Business Consulting", href: "/services/business-consulting/" },
+      { name: "Business Registration", href: "/services/business-registration/" },
+      ...SERVICES.map((service) => ({
+        name: service.shortName === "Private Limited" ? "Private Limited Company" : service.name,
+        href: service.path,
+      })),
+      { name: "All Services", href: "/services/" },
+    ],
   },
   {
     heading: "Group",
@@ -99,7 +105,7 @@ export function Footer() {
 
             <Link
               href="/contact/"
-              onClick={() => track("start_business_click", { label: "footer" })}
+              onClick={() => track("primary_cta_click", { label: "footer" })}
               className="mt-4 inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
             >
               Start Your Business
@@ -185,6 +191,15 @@ function FooterColumn({ column }: { column: { heading: string; links: FooterLink
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
+                onClick={
+                  // Master rule 29 names these two specifically. Everything else
+                  // in the footer is ordinary navigation and stays untracked.
+                  link.href === "/gujarat/"
+                    ? () => track("gujarat_page_click", { label: "footer" })
+                    : link.href === SITE.technologies
+                      ? () => track("technology_click", { label: "footer" })
+                      : undefined
+                }
                 className="inline-flex min-h-[2.25rem] items-center gap-1.5 text-secondary-foreground/70 hover:text-primary hover:underline md:min-h-[1.875rem]"
               >
                 {link.name}

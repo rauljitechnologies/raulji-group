@@ -57,7 +57,7 @@ export function MobileActionBar() {
         </a>
         <Link
           href="/contact/"
-          onClick={() => track("start_business_click", params)}
+          onClick={() => track("primary_cta_click", params)}
           className="brand-gradient flex min-h-[3.5rem] flex-col items-center justify-center gap-0.5 text-xs font-semibold text-primary-foreground"
         >
           <ArrowRight className="h-4 w-4" aria-hidden="true" />

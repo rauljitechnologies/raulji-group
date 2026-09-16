@@ -9,9 +9,30 @@ import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 
-const REGISTRATION_OPTIONS = [
-  ...SERVICES.map((s) => s.shortName),
-  "Not sure yet, help me choose",
+/**
+ * "What do you need help with?" options (master rule 23).
+ *
+ * Grouped rather than flat, because consulting and a specific structure are
+ * different kinds of answer and a flat list of six made the consulting option
+ * look like a fifth registration type. Values are sent to the CRM verbatim, so
+ * they double as the lead-source label the team reads.
+ *
+ * Insurance is deliberately absent: it is not a Phase 1 service and offering it
+ * here would generate enquiries for something we are not leading with.
+ */
+const SERVICE_OPTION_GROUPS: { label: string; options: string[] }[] = [
+  {
+    label: "Consulting",
+    options: ["Business Consulting"],
+  },
+  {
+    label: "Business Registration",
+    options: SERVICES.map((s) => s.shortName),
+  },
+  {
+    label: "Something else",
+    options: ["Not sure yet, help me choose", "Technology or digital work", "Other"],
+  },
 ];
 
 interface LeadFormProps {
@@ -95,33 +116,34 @@ export function LeadForm({
 
       if (result.success) {
         setStatus("success");
-        track("lead_form_submit", {
+        track("form_submit", {
           registration_type: payload.registrationType || "Not specified",
           city: payload.city || undefined,
         });
       } else {
         setStatus("error");
         setError(result.error ?? "Something went wrong. Please try again.");
-        track("lead_form_error", { registration_type: payload.registrationType });
+        track("form_error", { registration_type: payload.registrationType });
       }
     } catch {
       setStatus("error");
       setError(`Network problem while submitting. Please try again or call ${SITE.phone.display}.`);
-      track("lead_form_error", { registration_type: payload.registrationType });
+      track("form_error", { registration_type: payload.registrationType });
     }
   }
 
   if (status === "success") {
     return (
       <div
-        className={cn("glass-card rounded-3xl p-8 text-center", className)}
+        className={cn("rounded-2xl border border-border bg-card p-8 text-center", className)}
         role="status"
         aria-live="polite"
       >
         <CheckCircle2 className="mx-auto h-12 w-12 text-primary" aria-hidden="true" />
         <h2 className="mt-4 text-xl">Thank you. Your enquiry has been received.</h2>
         <p className="mt-3 leading-relaxed text-muted-foreground">
-          A Raulji Group representative will contact you shortly. If your matter is urgent, call{" "}
+          A Raulji Group representative will contact you using the details provided. If your matter
+          is urgent, call{" "}
           <a href={telHref} className="font-semibold text-primary hover:underline">
             {SITE.phone.display}
           </a>
@@ -132,14 +154,14 @@ export function LeadForm({
   }
 
   return (
-    <div className={cn("glass-card rounded-3xl p-6 sm:p-8", className)}>
+    <div className={cn("rounded-2xl border border-border bg-card p-6 sm:p-8", className)}>
       <h2 className="text-xl">{heading}</h2>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{lead}</p>
 
       <form ref={formRef} onSubmit={handleSubmit} onInput={handleFirstInput} className="mt-6 space-y-4" noValidate>
         <div>
           <label htmlFor={`${id}-type`} className="mb-1.5 block text-sm font-medium text-secondary">
-            What do you want to register?
+            What do you need help with?
           </label>
           <select
             id={`${id}-type`}
@@ -148,10 +170,14 @@ export function LeadForm({
             className={fieldClass}
           >
             <option value="">Select an option</option>
-            {REGISTRATION_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
+            {SERVICE_OPTION_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </div>
@@ -264,7 +290,7 @@ export function LeadForm({
             </>
           ) : (
             <>
-              Send enquiry
+              Get Business Guidance
               <Send className="h-4 w-4" aria-hidden="true" />
             </>
           )}

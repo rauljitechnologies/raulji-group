@@ -1,8 +1,10 @@
 # Raulji Group
 
-> Raulji Group helps entrepreneurs and businesses across Gujarat and India choose
-> the right business structure and register it: Private Limited Company, LLP,
-> Partnership Firm or Proprietorship.
+> Raulji Group is a consulting-focused business group in Vadodara, Gujarat. It
+> advises entrepreneurs and businesses on business structure, planning and growth,
+> and provides business registration and MCA filing support for the four Indian
+> business structures: Private Limited Company, LLP, Partnership Firm and
+> Proprietorship.
 
 ## Entity
 
@@ -20,27 +22,55 @@ Ministry of Corporate Affairs, the GST department or any other authority. It
 prepares and files applications on behalf of clients; approval rests with the
 relevant authority.
 
-## Primary services
+## Group of companies
 
-- **Private Limited Company Registration** — a company incorporated under the
+Raulji Group has two brands:
+
+- **Raulji Consulting Services**: the consulting and business-services arm.
+  Business advisory, structure decisions, business registration and MCA filing
+  support. It operates as part of Raulji Group on raulji.com and has no separate
+  domain. https://www.raulji.com/services/business-consulting/
+- **Raulji Technologies**: the technology brand, covering software, AI and
+  digital transformation. It operates on its own website and its technology
+  service catalogue lives there, not on raulji.com.
+  https://rauljitechnologies.com/
+
+## Primary focus: business consulting
+
+Business consulting is the primary focus of the group. It covers business
+structure and restructuring, business planning, growth and expansion planning,
+operational and process guidance, review of existing registrations and
+documentation, and business advisory for owners. Fees depend on scope and are
+quoted after a first conversation; no standard consulting fee is published.
+
+Outside its remit: legal representation before courts or tribunals, audit reports
+and certifications, valuations, and investment, securities or insurance advice.
+https://www.raulji.com/services/business-consulting/
+
+## Business registration
+
+- **Private Limited Company Registration**: a company incorporated under the
   Companies Act, 2013. Separate legal entity, limited liability, can issue equity
   shares. Minimum 2 directors and 2 shareholders, at least one director resident
   in India. Professional fee Rs 9,999 plus government fees.
   https://www.raulji.com/services/pvt-registration/
-- **LLP Registration** — a body corporate under the Limited Liability Partnership
+- **LLP Registration**: a body corporate under the Limited Liability Partnership
   Act, 2008. Limited liability with partnership flexibility. Minimum 2 partners
   and 2 designated partners. Cannot issue equity. Professional fee Rs 7,999 plus
   government fees. https://www.raulji.com/services/llp-registration/
-- **Partnership Firm Registration** — governed by the Indian Partnership Act,
+- **Partnership Firm Registration**: governed by the Indian Partnership Act,
   1932. Not a separate legal entity; partners carry unlimited personal liability.
   Registration with the Registrar of Firms is optional but advisable, because an
   unregistered firm cannot sue to enforce a contract.
   https://www.raulji.com/services/partnership-registration/
-- **Proprietorship Registration** — a business owned by one individual. Not a
+- **Proprietorship Registration**: a business owned by one individual. Not a
   separate legal entity and not incorporated; there is no single government
   proprietorship certificate. Recognised through Udyam, GST and shop and
   establishment registrations.
   https://www.raulji.com/services/proprietorship-registration/
+
+Registration pillar page:
+https://www.raulji.com/services/business-registration/
 
 ## Choosing between them
 
@@ -61,10 +91,21 @@ patan, palanpur, himmatnagar, modasa, morbi, surendranagar, bhuj, gandhidham,
 porbandar, godhra, halol, dahod, jhalod, botad, dwarka, amreli, kalol
 Each at https://www.raulji.com/{city}/
 
+City and service pages exist for five priority cities only: ahmedabad, vadodara,
+surat, rajkot and gandhinagar. Each has one page per structure, at
+https://www.raulji.com/{city}/private-limited-company-registration/
+https://www.raulji.com/{city}/llp-registration/
+https://www.raulji.com/{city}/partnership-registration/
+https://www.raulji.com/{city}/proprietorship-registration/
+No other city has service-specific pages, and no service x city URL exists
+outside those five cities.
+
 ## Key pages
 
 - Homepage: https://www.raulji.com/
-- Services: https://www.raulji.com/services/
+- Services hub: https://www.raulji.com/services/
+- Business consulting: https://www.raulji.com/services/business-consulting/
+- Business registration: https://www.raulji.com/services/business-registration/
 - Compare structures: https://www.raulji.com/compare/
 - FAQs: https://www.raulji.com/faqs/
 - About: https://www.raulji.com/about/

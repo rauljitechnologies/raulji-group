@@ -73,7 +73,12 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
       <Section tone="muted">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div>
-            <h2 className="text-2xl">What this covers</h2>
+            {/* On a technology page the list describes another brand's work, so
+                the heading has to say so. Calling it "what this covers" implies
+                raulji.com delivers it (master rule 14). */}
+            <h2 className="text-2xl">
+              {isTechnology ? "What Raulji Technologies covers" : "What this covers"}
+            </h2>
             <ul className="mt-6 space-y-3">
               {service.includes.map((item) => (
                 <li key={item} className="flex items-start gap-3">

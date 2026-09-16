@@ -3,26 +3,28 @@
 /**
  * Analytics event layer (spec sections 48 and 49).
  *
+ * Event names match master rule 29 exactly, because the client reads them in
+ * their own container and a renamed event is a silently broken report.
+ *
  * Events are pushed to window.dataLayer so a tag manager container can route
- * them onward. Nothing here collects personal data: only the service, city and
+ * them onward. page_view is not pushed here: the container emits it on load. Nothing here collects personal data: only the service, city and
  * page context needed to attribute a lead. Never pass a name, phone or email.
  */
 
 type EventName =
-  | "cta_click"
   | "phone_click"
   | "email_click"
   | "whatsapp_click"
-  | "start_business_click"
+  | "primary_cta_click"
   | "service_card_click"
   | "city_page_click"
   | "gujarat_page_click"
   | "location_drawer_open"
-  | "technologies_click"
+  | "technology_click"
   | "form_view"
   | "form_start"
-  | "lead_form_submit"
-  | "lead_form_error";
+  | "form_submit"
+  | "form_error";
 
 export interface EventParams {
   /** Pvt Ltd, LLP, Partnership, Proprietorship, or unset. */

@@ -43,7 +43,7 @@ export function CtaBanner({
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/contact/"
-              onClick={() => track("start_business_click", params)}
+              onClick={() => track("primary_cta_click", params)}
               className="brand-gradient inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-xl px-7 font-semibold text-primary-foreground shadow-elevated sm:w-auto"
             >
               Start Your Business

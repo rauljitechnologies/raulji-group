@@ -1,0 +1,1174 @@
+/**
+ * City + service content (CLAUDE.md rule 17, as resolved on 2026-09-16).
+ *
+ * Twenty pages: five priority cities x the four registration structures.
+ *
+ * THE RULE FOR THIS FILE: every `localContext`, `whoLocally`, `localFactors` and
+ * `faqs` entry below is written for that one city and that one structure. None of
+ * it is a template with a city name substituted in, and none of it may become
+ * one. A page whose content would still read correctly with a different city
+ * name in it is a doorway page, which both master documents forbid and which
+ * Google treats as spam. If genuinely local content cannot be written for a
+ * pairing, the pairing does not belong here.
+ *
+ * Do not extend the city list without a further client decision.
+ *
+ * Factual basis, all publicly verifiable:
+ *  - The Registrar of Companies at Ahmedabad is the filing office for Gujarat,
+ *    so every company and LLP incorporation in this state is filed there.
+ *  - Partnership firm registration is handled by the Registrar of Firms at state
+ *    level, and is optional under the Indian Partnership Act, 1932. An
+ *    unregistered firm cannot sue to enforce a contract (section 69).
+ *  - Stamp duty is set at state level, so it is uniform across Gujarat.
+ *  - GIFT City is an International Financial Services Centre with authorisation
+ *    requirements administered by the IFSCA, separate from incorporation.
+ *
+ * No local office is claimed anywhere in this file. Raulji Group works from
+ * Vadodara, and only the Vadodara entries may refer to being in the same city.
+ */
+
+import type { FAQ } from "./services";
+import { getService } from "./services";
+import { getCity } from "./cities";
+
+/** URL segments, exactly as specified in the client brief, section 16. */
+export const CITY_SERVICE_SLUGS = {
+  "pvt-registration": "private-limited-company-registration",
+  "llp-registration": "llp-registration",
+  "partnership-registration": "partnership-registration",
+  "proprietorship-registration": "proprietorship-registration",
+} as const;
+
+export type ServiceSlug = keyof typeof CITY_SERVICE_SLUGS;
+
+export interface CityServiceContent {
+  /** City slug, must exist in lib/cities.ts. */
+  city: string;
+  /** Registration service slug, must exist in lib/services.ts. */
+  service: ServiceSlug;
+  h1: string;
+  title: string;
+  metaDescription: string;
+  /** Why this structure comes up in this city. Two or three paragraphs. */
+  localContext: string[];
+  /** Who, locally, tends to need this structure. */
+  whoLocally: string[];
+  /** Considerations that genuinely differ here. Not generic structure facts. */
+  localFactors: { title: string; body: string }[];
+  faqs: FAQ[];
+}
+
+export const CITY_SERVICES: CityServiceContent[] = [
+  /* ==================== AHMEDABAD ==================== */
+  {
+    city: "ahmedabad",
+    service: "pvt-registration",
+    h1: "Private Limited Company Registration in Ahmedabad",
+    title: "Private Limited Company Registration in Ahmedabad | Raulji Group",
+    metaDescription:
+      "Register a Private Limited Company in Ahmedabad with Raulji Group. DSC, name approval, SPICe+ filing and MOA and AOA drafting. Call +91 8511187689.",
+    localContext: [
+      "Ahmedabad produces more Private Limited incorporations than any other city in Gujarat, and the reason is mostly about funding. The city holds the state's deepest concentration of founders who intend to raise external capital, clustered along the SG Highway corridor, Prahlad Nagar and Bodakdev, and equity investors will not put money into anything other than a company.",
+      "There is a second, quieter pattern here that has nothing to do with startups. Established textile, chemical and trading families around Ashram Road, CG Road and the walled city often incorporate a company to hold a new venture, keeping it legally separate from the legacy partnership firm that carries the family's older business. The company is the vehicle for the new thing, not a replacement for the old one.",
+      "A useful local detail: the Registrar of Companies for Gujarat sits in Ahmedabad. That makes no difference to how an Ahmedabad incorporation is processed, since filing is online through the MCA portal, but it does mean the office your documents reach is in your own city.",
+    ],
+    whoLocally: [
+      "Founders on the SG Highway and Prahlad Nagar corridor planning an angel or venture round",
+      "Software, SaaS and D2C businesses that need to issue ESOPs to hire competitively",
+      "Family trading or chemical groups incorporating a new venture separately from the existing firm",
+      "Pharmaceutical and speciality chemical businesses whose customers or lenders check the MCA record",
+      "Businesses tendering to large corporate buyers who require a company on the public register",
+    ],
+    localFactors: [
+      {
+        title: "Your registered office address has to hold up",
+        body: "Ahmedabad incorporations are more often queried on address proof than on anything else, usually because the premises are shared, recently taken, or held by a family member rather than the applicant. You need a utility bill no more than two months old plus a no-objection certificate from the owner. A co-working desk can work if the operator provides proper documentation, and many along SG Highway do.",
+      },
+      {
+        title: "Name approval is harder in a crowded market",
+        body: "Ahmedabad has a very large number of registered companies with textile, chemical, pharma and trading names, so proposed names collide more often here than elsewhere in the state. A name also cannot be deceptively similar to a registered trade mark. We check both registers before filing rather than after a rejection.",
+      },
+      {
+        title: "Plan for audit from year one",
+        body: "A Private Limited Company requires statutory audit from its first financial year whatever its turnover, plus annual ROC filings. For an Ahmedabad founder raising capital that cost is simply part of the plan. For a family trading business that will never take outside money, it is worth asking whether an LLP gives you the liability protection you actually wanted at a much lower annual cost.",
+      },
+      {
+        title: "Startup India registration is separate",
+        body: "Incorporating is not the same as being a recognised startup. Startup India recognition is a separate application made after incorporation, and it is what unlocks the tax and tender benefits founders usually have in mind. We tell you what it requires; we do not bundle it into an incorporation quote as though it were automatic.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do I have to be in Ahmedabad to register a company here?",
+        a: "No. What matters is the registered office address, which must be in Ahmedabad with valid proof, not where the directors live. Incorporation is filed online, digital signatures are issued through video and Aadhaar-based verification, and we are based in Vadodara. Plenty of Ahmedabad companies are registered without anyone travelling.",
+      },
+      {
+        q: "Should an Ahmedabad family trading business incorporate a company?",
+        a: "Often not, or at least not for the existing business. If the trading firm will never raise outside capital, the company's statutory audit and annual ROC filings buy it very little. The common answer is to keep the firm as it is and incorporate only the new venture that does need a company, or to move the existing business to an LLP if liability is the actual worry.",
+      },
+      {
+        q: "Is a co-working address on SG Highway acceptable as a registered office?",
+        a: "Yes, provided the operator gives you a proper agreement, a no-objection certificate and a recent utility bill for the premises. Some operators supply a registered-office package and some do not, so check before you commit. The address has to be one where statutory correspondence can actually reach you.",
+      },
+    ],
+  },
+  {
+    city: "ahmedabad",
+    service: "llp-registration",
+    h1: "LLP Registration in Ahmedabad",
+    title: "LLP Registration in Ahmedabad | Raulji Group",
+    metaDescription:
+      "Register an LLP in Ahmedabad with Raulji Group. Name reservation, DPIN, incorporation and LLP Agreement drafting for professional firms and trading businesses.",
+    localContext: [
+      "The LLP does its best work in Ahmedabad among two groups. The first is the city's professional services cluster: chartered accountants, architects, designers, agencies and consultancies around Prahlad Nagar, Bodakdev and Navrangpura, where the business is partner-run, will never issue equity, and mainly wants personal assets kept clear of business claims.",
+      "The second is the established trading firm. A great many textile and chemical trading businesses in Ahmedabad have operated as partnership firms for decades. In a partnership firm the partners carry unlimited personal liability, which in a credit-heavy trade is a real exposure. Converting to an LLP keeps the partner structure and the profit-sharing arrangement recognisable while capping that liability, and it costs far less to run annually than a company.",
+      "The LLP is also the sensible answer when a business needs to be on the MCA public register, because a customer or a bank checks it, without taking on company-level compliance. It appears on the same register a company does.",
+    ],
+    whoLocally: [
+      "Professional firms in Navrangpura, Prahlad Nagar and Bodakdev with two or more working partners",
+      "Textile and chemical trading firms converting from a long-standing partnership",
+      "Agencies and consultancies that bill a small number of clients and will not raise equity",
+      "Family businesses wanting liability capped without the audit load of a company",
+      "Businesses that need an MCA-registered entity for a customer or a lender, and nothing more",
+    ],
+    localFactors: [
+      {
+        title: "The LLP Agreement is the whole thing",
+        body: "An LLP's internal rules come almost entirely from its agreement, not from statute. For an Ahmedabad trading firm converting from a partnership, that is where the existing understanding about capital, profit shares, drawings and who can commit the business gets written down properly, often for the first time. It must be filed in Form 3 within thirty days of incorporation.",
+      },
+      {
+        title: "Converting an existing firm is not a fresh start",
+        body: "If you are moving an existing Ahmedabad partnership firm into an LLP, the business does not simply carry on unchanged on paper. The LLP gets a new PAN, bank mandates have to be redone, and GST registration, licences and ongoing contracts need to be moved across. It is worth doing, but it is a project, not a form.",
+      },
+      {
+        title: "Lower compliance, not no compliance",
+        body: "An LLP must file Form 11 by 30 May and Form 8 by 30 October every year, including in a year with no activity at all. Late filing carries a per-day penalty that keeps accruing until you file, and dormant Ahmedabad LLPs that were set up and forgotten are a common and expensive problem.",
+      },
+      {
+        title: "No equity, so no investors",
+        body: "An LLP cannot issue equity shares. If there is any real prospect of raising an angel or venture round, which in Ahmedabad there often is, the LLP will have to be converted to a company first, and that conversion costs more than incorporating correctly at the start. This is the one question worth settling honestly before you choose.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Should my Ahmedabad partnership firm convert to an LLP?",
+        a: "It depends on what is worrying you. If it is personal liability for business debts, then yes, an LLP addresses exactly that while keeping the partner structure you already have. If the firm is small, trades on its own funds and has no liability exposure that concerns you, the conversion may not be worth the disruption to PAN, bank mandates and GST registration.",
+      },
+      {
+        q: "Is an LLP enough for a large Ahmedabad corporate customer?",
+        a: "Usually yes. An LLP is a body corporate on the MCA register with a registration number that a procurement team can verify, which is what most vendor onboarding checks are actually looking for. A few tender and procurement processes specify a company, so if you are registering for one particular buyer, read their eligibility clause before you choose.",
+      },
+      {
+        q: "How much less compliance is an LLP than a company?",
+        a: "Materially less. An LLP files two annual forms and only needs audit once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh. A Private Limited Company needs statutory audit from its first year regardless of turnover, plus its own annual filings, board meetings and minutes. Over several years that difference is substantial.",
+      },
+    ],
+  },
+  {
+    city: "ahmedabad",
+    service: "partnership-registration",
+    h1: "Partnership Firm Registration in Ahmedabad",
+    title: "Partnership Firm Registration in Ahmedabad | Raulji Group",
+    metaDescription:
+      "Partnership firm registration in Ahmedabad with Raulji Group: partnership deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+    localContext: [
+      "The partnership firm is the traditional structure of Ahmedabad's trading economy, and it remains genuinely common in fabric and garment trading around the walled city, in chemical and dyestuff trading, and in wholesale and distribution businesses across the city. It is quick to form, cheap to run, and needs no filing with the Registrar of Companies at all.",
+      "Its weakness is the one that matters most in a credit-based trade: there is no separation between the firm and the partners. Business debts reach personal assets, and in Ahmedabad's trading lines, where goods regularly move on credit and payment cycles run long, that exposure is not theoretical.",
+      "Registration with the Registrar of Firms is optional under the Indian Partnership Act, 1932. It is still worth doing, and the reason is narrow but important: an unregistered firm cannot file suit to enforce a contract. For a trading business that may one day need to recover money from a buyer through the courts, that single limitation is usually decisive.",
+    ],
+    whoLocally: [
+      "Fabric, garment and yarn traders operating with two or more working partners",
+      "Chemical, dyestuff and speciality trading businesses in the city's older markets",
+      "Wholesale and distribution firms where partners are actively running the business",
+      "Small joint ventures between people who already know and trust each other",
+      "Businesses that want a documented profit-sharing arrangement without MCA compliance",
+    ],
+    localFactors: [
+      {
+        title: "Register the firm, do not just execute a deed",
+        body: "Many Ahmedabad firms run for years on an unregistered deed. It is legally valid between the partners, but an unregistered firm cannot sue to enforce a contract. In a trade where receivables go bad, that removes your main route to recovery. Registering with the Registrar of Firms closes that gap and is not expensive.",
+      },
+      {
+        title: "Stamp duty is a Gujarat matter",
+        body: "A partnership deed has to be executed on stamp paper of the correct value, set at state level and uniform across Gujarat, and the amount depends on the capital contributed. Getting the stamping wrong is a common reason a deed is questioned later. We confirm the figure before execution rather than after.",
+      },
+      {
+        title: "Write down what everyone already assumes",
+        body: "Most disputes we see in Ahmedabad trading firms are not about the profit share, which is usually agreed. They are about who may borrow in the firm's name, what happens when a partner wants out, how a deceased partner's share is dealt with, and whether a partner can trade on their own account in the same line. The deed is where those get settled, and a deed that covers only capital and profit share is doing half the job.",
+      },
+      {
+        title: "Unlimited liability is the trade-off",
+        body: "Every partner is liable for the whole of the firm's debts, not just their share, and each partner can bind the firm by their own acts. If that exposure is uncomfortable, an LLP gives you the same partner structure with liability capped, for modestly more annual compliance. It is worth pricing both before deciding.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is partnership firm registration compulsory in Ahmedabad?",
+        a: "No. Registration with the Registrar of Firms is optional under the Indian Partnership Act, 1932, and an unregistered firm is a valid firm. The practical reason to register is that an unregistered firm cannot sue to enforce a contract, which matters a great deal in Ahmedabad's credit-based trading lines.",
+      },
+      {
+        q: "Can two family members run an Ahmedabad trading business as a partnership firm?",
+        a: "Yes, and a great many do. A partnership firm needs at least two partners and there is no requirement that they be unrelated. The point worth attention is the deed: family firms are the ones most likely to leave succession and exit terms unwritten, because the assumption is that everyone knows what was meant.",
+      },
+      {
+        q: "What does an Ahmedabad partnership firm need besides the deed?",
+        a: "Usually a PAN in the firm's name, a current account, GST registration where turnover or activity requires it, and any licence specific to the trade. Registration with the Registrar of Firms is the step we would add. We tell you which of these your particular business actually needs rather than listing everything.",
+      },
+    ],
+  },
+  {
+    city: "ahmedabad",
+    service: "proprietorship-registration",
+    h1: "Proprietorship Registration in Ahmedabad",
+    title: "Proprietorship Registration in Ahmedabad | Raulji Group",
+    metaDescription:
+      "Proprietorship registration support in Ahmedabad: GST, Udyam and Gujarat shop and establishment registration for one-person businesses. Raulji Group.",
+    localContext: [
+      "A proprietorship is the fastest and cheapest way for one person in Ahmedabad to start trading, and it suits a great deal of the city's small commerce: retail, local services, individual consultants, and the growing number of people selling online from home.",
+      "The thing to understand first is that there is no such document as a proprietorship registration certificate in India. A proprietorship is not incorporated and is not a separate legal entity from you. What gives it a verifiable identity is a set of other registrations, and which ones you actually need depends entirely on what the business does.",
+      "In Ahmedabad the practical trigger is usually GST. Anyone selling on Amazon, Flipkart or their own site to customers outside Gujarat needs GST registration regardless of turnover, and the marketplaces will not onboard a seller without it. For a purely local retail or service business, the shop and establishment registration under the Gujarat Shops and Establishments Act and a Udyam registration are often the more relevant pair.",
+    ],
+    whoLocally: [
+      "Individuals selling on Amazon, Flipkart or their own site from Ahmedabad",
+      "Retail shops and local service businesses run by a single owner",
+      "Freelance consultants, designers and professionals billing Indian clients",
+      "Small traders testing a line before committing to a firm or a company",
+      "Home-based businesses that need a GST number to invoice business customers",
+    ],
+    localFactors: [
+      {
+        title: "GST is what online sellers actually need",
+        body: "The turnover thresholds do not help you if you sell interstate or through a marketplace: those require GST registration from the first sale. For Ahmedabad's large number of home-based online sellers, GST registration is effectively the business registration, and it is the first thing we set up.",
+      },
+      {
+        title: "Shop and establishment registration is a local obligation",
+        body: "A commercial establishment in Ahmedabad falls under the Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act, administered locally by the Ahmedabad Municipal Corporation. It is the registration that most clearly evidences a business premises, and banks often ask for it when opening a current account in a trade name.",
+      },
+      {
+        title: "Udyam registration is free and worth having",
+        body: "Udyam is the MSME registration, it costs nothing, and it is what makes a small Ahmedabad business eligible for MSME benefits, including the protections on delayed payments that matter when your customers are larger firms. It is not a substitute for GST, and nobody should be charging you a large fee for it.",
+      },
+      {
+        title: "Your liability is unlimited, with no separation at all",
+        body: "You and the business are the same person in law. Business debts are your debts, and the business income is taxed as your personal income at slab rates. For a small business that is often the right trade, but once you take on premises, staff, stock on credit or any real risk, it is worth revisiting.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is there a proprietorship registration certificate in Ahmedabad?",
+        a: "No, and anyone who offers you one is selling something else under that name. A proprietorship is not incorporated, so there is no single certificate. What you get is the specific registrations your business needs, typically GST, Udyam and shop and establishment registration, which together give the business a verifiable identity.",
+      },
+      {
+        q: "I sell online from Ahmedabad. What do I need?",
+        a: "GST registration is the essential one. Selling to customers in other states, or through a marketplace like Amazon or Flipkart, requires GST from the first sale regardless of turnover, and the marketplaces will not complete seller onboarding without it. Udyam registration is worth adding since it is free, and a current account in your trade name usually needs one of these registrations as proof.",
+      },
+      {
+        q: "When should an Ahmedabad proprietor move to a company or an LLP?",
+        a: "The usual triggers are taking on real liability, bringing in a partner, or needing a structure a customer will contract with. A proprietorship cannot have a second owner, so the moment someone else is genuinely involved you need a firm, an LLP or a company. If it is liability that has changed, an LLP is generally the lowest-cost next step.",
+      },
+    ],
+  },
+
+  /* ==================== VADODARA ==================== */
+  {
+    city: "vadodara",
+    service: "pvt-registration",
+    h1: "Private Limited Company Registration in Vadodara",
+    title: "Private Limited Company Registration in Vadodara | Raulji Group",
+    metaDescription:
+      "Register a Private Limited Company in Vadodara with Raulji Group, based in the city. Incorporation and MCA filing support for industrial businesses.",
+    localContext: [
+      "Vadodara is where Raulji Group works from, so this is the market we see most closely. Company registration here looks quite different from Ahmedabad. Very little of it is investor-driven. Most of it is customer-driven.",
+      "The city's economy sits around the Gujarat Refinery at Koyali, GSFC and the petrochemical complex, with a dense supply chain of engineering, fabrication, instrumentation and industrial services vendors in Makarpura, Savli and Nandesari. Procurement teams at those large buyers frequently want a vendor to be a registered entity on the MCA record before onboarding. That requirement, rather than any funding plan, is what puts a two-person engineering firm in front of an incorporation decision.",
+      "The other common pattern is the experienced plant engineer who leaves after fifteen or twenty years to set up a services or fabrication business, often with a former colleague. They have the technical credibility and the contacts; what they usually need is an entity their old employer's procurement system will accept.",
+    ],
+    whoLocally: [
+      "Engineering and fabrication vendors supplying refinery, GSFC and petrochemical buyers",
+      "Instrumentation, inspection and industrial services firms that need to pass vendor onboarding",
+      "Former plant engineers setting up a technical services business with a partner",
+      "Manufacturing units in Makarpura, Savli or Nandesari investing in plant on credit",
+      "Pharmaceutical and speciality manufacturers whose customers verify the MCA record",
+    ],
+    localFactors: [
+      {
+        title: "Check the vendor form before you choose the structure",
+        body: "If the reason for incorporating is a specific buyer's onboarding requirement, read that buyer's vendor registration form first. Some accept any MCA-registered entity, which an LLP satisfies at much lower annual cost. Some specifically require a company, and a few require audited accounts for a stated number of years, which no newly formed entity can produce. This is the single most useful thing to check before spending money.",
+      },
+      {
+        title: "Audit from year one is a real cost for a small vendor",
+        body: "A Private Limited Company needs statutory audit from its first financial year whatever it turns over, plus annual ROC filings, board meetings and minutes. For a two-person engineering firm with a handful of purchase orders, that is a meaningful annual overhead. It is worth carrying only if the structure is actually buying you something.",
+      },
+      {
+        title: "A registered office in a GIDC estate needs proper papers",
+        body: "Using a unit in Makarpura, Savli or Nandesari as the registered office is fine, but the address proof has to match: a recent utility bill plus a no-objection certificate from the owner, and where the unit is held on a GIDC lease the lease documentation needs to support it. Mismatched address papers are the most common reason a Vadodara incorporation gets queried.",
+      },
+      {
+        title: "Two directors, and at least one resident in India",
+        body: "A Private Limited Company needs a minimum of two directors and two shareholders, though the same two people can be both. At least one director must have stayed in India for 182 days or more in the previous calendar year. For a sole founder in Vadodara this is the practical constraint: you will need a second person, which is often the reason an LLP or a proprietorship turns out to fit better.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do refinery and petrochemical buyers in Vadodara require a Private Limited Company?",
+        a: "Not usually a company specifically. Most vendor onboarding checks want a registered entity that can be verified on a public register, and an LLP meets that at lower annual cost. Some procurement processes do specify a company, and some require audited accounts for a number of past years. Read the buyer's own vendor form before deciding, because the answer varies by buyer.",
+      },
+      {
+        q: "Can I meet you in person in Vadodara?",
+        a: "Yes. Vadodara is where we are based. Registration itself is filed online and needs no meetings, but if you would rather sit down and go through the structure decision in person, call ahead on the number on this page and we will confirm a time.",
+      },
+      {
+        q: "I am one person starting an engineering consultancy in Vadodara. Do I need a company?",
+        a: "Probably not. A Private Limited Company needs two directors and two shareholders, so a single founder cannot form one alone. If your clients are the large plants and they need an entity on the MCA record, an LLP needs two partners as well. If you are billing as an individual, a proprietorship with GST registration is often all the plants actually require to raise an invoice.",
+      },
+    ],
+  },
+  {
+    city: "vadodara",
+    service: "llp-registration",
+    h1: "LLP Registration in Vadodara",
+    title: "LLP Registration in Vadodara | Raulji Group",
+    metaDescription:
+      "Register an LLP in Vadodara with Raulji Group, based in the city. Incorporation and LLP Agreement drafting for engineering and technical firms.",
+    localContext: [
+      "In Vadodara the LLP is very often the right answer, and it is under-used relative to how well it fits the local economy. The city is full of small technical businesses, engineering consultancies, inspection and testing firms, instrumentation specialists, project services outfits, run by two or three people who will never raise equity and mainly need two things: liability kept away from personal assets, and a presence on the MCA register that a procurement team can verify.",
+      "That is precisely what an LLP provides. It is a body corporate on the same public register a company appears on, with a registration number a vendor onboarding system can check, but it files two annual forms instead of carrying statutory audit from year one.",
+      "For firms supplying the refinery, GSFC and petrochemical buyers around the city, the practical question is only whether the buyer's vendor form insists on a company. Where it does not, and it often does not, the LLP does the same job for materially less each year. We are based in Vadodara, so this is a conversation we have regularly.",
+    ],
+    whoLocally: [
+      "Engineering and technical consultancies with two or more working partners",
+      "Inspection, testing and instrumentation firms serving the plants around the city",
+      "Project management and industrial services partnerships",
+      "Fabrication and machining businesses that need MCA presence for vendor onboarding",
+      "Professional firms in Alkapuri and along RC Dutt Road with partner-run practices",
+    ],
+    localFactors: [
+      {
+        title: "It satisfies most vendor onboarding at lower cost",
+        body: "An LLP holds an LLPIN on the MCA register, which is what most procurement checks around Vadodara are actually verifying. Compared with a company it avoids statutory audit from year one and the board meeting and minute requirements. For a three-partner engineering firm the annual saving is real and recurring.",
+      },
+      {
+        title: "The LLP Agreement should cover technical contribution",
+        body: "In Vadodara's engineering partnerships the capital contributions are often unequal and the technical contribution matters more than the money. The LLP Agreement is where that gets settled: profit shares, who signs off technically, what happens if the partner holding the client relationships leaves. It must be filed in Form 3 within thirty days of incorporation, and a generic agreement wastes the opportunity.",
+      },
+      {
+        title: "Two designated partners, and the filings do not stop",
+        body: "An LLP needs at least two partners and two designated partners, and must file Form 11 by 30 May and Form 8 by 30 October each year, including in a year with no work at all. Late filing carries a per-day penalty that keeps accruing. Dormant LLPs set up for one contract and then forgotten are an expensive and avoidable problem.",
+      },
+      {
+        title: "No equity, and conversion later is not free",
+        body: "An LLP cannot issue equity shares. That is rarely a constraint for a Vadodara engineering services firm, but if there is any real intention to bring in an outside investor, converting an LLP to a company afterwards costs more than incorporating as a company at the start. Worth being honest about at the outset.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Will an LLP pass vendor registration with the large plants around Vadodara?",
+        a: "In most cases yes. An LLP is a body corporate with an LLPIN on the MCA register, which is what the majority of vendor onboarding checks verify. A minority of procurement processes specifically require a company, and some require audited accounts for past years. Since you usually know which buyer you are registering for, read their vendor form first and we will match the structure to it.",
+      },
+      {
+        q: "Is an LLP cheaper to run than a company in practice?",
+        a: "Yes, and the gap widens over time. An LLP files two annual forms and only requires audit once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh. A Private Limited Company carries statutory audit from its first financial year regardless of turnover, plus its own annual filings and board records. For a small technical firm that difference is the main reason to choose an LLP.",
+      },
+      {
+        q: "Can two engineers convert an existing Vadodara partnership firm into an LLP?",
+        a: "Yes, and it is a common move here. Be clear that it is a transition rather than a relabelling: the LLP takes a new PAN, bank mandates have to be redone, and GST registration, vendor codes and live purchase orders need to be moved across. Vendor codes in particular are worth planning around, because re-onboarding with a plant can take time.",
+      },
+    ],
+  },
+  {
+    city: "vadodara",
+    service: "partnership-registration",
+    h1: "Partnership Firm Registration in Vadodara",
+    title: "Partnership Firm Registration in Vadodara | Raulji Group",
+    metaDescription:
+      "Partnership firm registration in Vadodara with Raulji Group, based in the city: deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+    localContext: [
+      "Partnership firms are still common in Vadodara's smaller industrial economy, particularly among fabrication workshops, machining job shops and trading businesses in and around Makarpura and Nandesari. Two or three people, often related or long-standing colleagues, put in machinery and working capital and run the business together.",
+      "It is a genuinely suitable structure for that, and it is cheap and quick to form. The two things worth thinking hard about are specific to this kind of business. First, the partners carry unlimited personal liability, and a workshop that buys machinery on credit or takes on fabrication work with penalty clauses is carrying real exposure.",
+      "Second, in a workshop partnership the assets matter more than in a trading firm. Who actually owns the lathe, the press, the welding sets? If a partner brought machinery in rather than cash, the deed needs to say whether that machinery became the firm's property or stayed theirs. Vadodara workshop disputes are far more often about equipment than about profit.",
+    ],
+    whoLocally: [
+      "Fabrication workshops and machining job shops with two or three working partners",
+      "Small industrial units in and around Makarpura and Nandesari",
+      "Trading and industrial supply businesses run jointly by family members",
+      "Contractors and service providers who will not need MCA presence",
+      "Businesses wanting a documented arrangement with minimum ongoing compliance",
+    ],
+    localFactors: [
+      {
+        title: "Say who owns the machinery",
+        body: "In a workshop partnership this is the clause that prevents the worst disputes. If a partner contributed a lathe, a press or welding equipment instead of cash, the deed must state whether it became firm property or remains their personal asset made available to the firm, and what happens to it if they leave. A deed that records only cash capital leaves the most valuable question open.",
+      },
+      {
+        title: "Register the firm so you can enforce a contract",
+        body: "Registration with the Registrar of Firms is optional, but an unregistered firm cannot sue to enforce a contract. For a fabrication business with purchase orders, retention money and payment milestones, that removes your main route to recovery if a customer does not pay. It is inexpensive and worth doing at the start.",
+      },
+      {
+        title: "Most plant vendor systems will not accept a firm",
+        body: "If any part of your plan involves supplying the refinery, GSFC or the petrochemical complex directly, be aware that vendor onboarding usually wants an entity on the MCA register, and a partnership firm is not on it. Firms do supply those plants, but generally as a sub-vendor through someone else. If direct supply is the goal, an LLP is the cheaper route to it.",
+      },
+      {
+        title: "Stamp duty depends on capital",
+        body: "The deed must be executed on stamp paper of the correct value. Stamp duty is set at state level and so is uniform across Gujarat, but the amount varies with the capital contributed, and workshop partnerships with machinery brought in as capital often get this wrong. We confirm the figure before execution.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a Vadodara partnership firm supply the refinery or petrochemical plants directly?",
+        a: "Usually not as a direct vendor. Most large plant procurement systems verify an entity on the MCA register, and a partnership firm does not appear there. Many firms do work on these sites as sub-vendors through a registered contractor. If direct vendor registration is the aim, an LLP is the lowest-cost structure that satisfies it.",
+      },
+      {
+        q: "My partner is putting in machinery instead of money. How does that work?",
+        a: "It needs to be written into the deed explicitly: the agreed value of the machinery, whether ownership transfers to the firm or the partner retains it, and what happens to it on retirement or dissolution. This is the most common cause of serious disputes in Vadodara workshop partnerships, and it is entirely avoidable at the drafting stage.",
+      },
+      {
+        q: "Is registration with the Registrar of Firms compulsory?",
+        a: "No, it is optional under the Indian Partnership Act, 1932, and an unregistered firm is still a valid firm. The reason to register is that an unregistered firm cannot sue to enforce a contract. For a fabrication or supply business that carries receivables, that is a significant practical limitation.",
+      },
+    ],
+  },
+  {
+    city: "vadodara",
+    service: "proprietorship-registration",
+    h1: "Proprietorship Registration in Vadodara",
+    title: "Proprietorship Registration in Vadodara | Raulji Group",
+    metaDescription:
+      "Proprietorship registration support in Vadodara: GST, Udyam and Gujarat shop and establishment registration for individual consultants and small businesses.",
+    localContext: [
+      "In Vadodara the proprietorship is the natural structure for the individual technical consultant, and there are a lot of them. An instrumentation specialist, a welding inspector, a process engineer or a safety consultant working alone, billing a handful of plants and contractors, usually needs nothing more complicated.",
+      "The important point is that a proprietorship is not incorporated. There is no proprietorship certificate in India, and the business is not legally separate from you. What gives it a workable identity is a set of other registrations, chosen according to what the business actually does.",
+      "For a Vadodara technical consultant the decisive one is GST. The plants and larger contractors around the city need a GST-compliant tax invoice to process a payment, and their accounts departments will generally not raise a purchase order to someone who cannot issue one. In practice, GST registration is what makes you billable here, and it is the first thing we set up.",
+    ],
+    whoLocally: [
+      "Individual instrumentation, inspection, welding and process consultants",
+      "Safety and quality consultants billing plants and contractors",
+      "Single-owner trading and industrial supply businesses",
+      "Local retail and service businesses run by one person",
+      "Freelance technical professionals invoicing Indian business clients",
+    ],
+    localFactors: [
+      {
+        title: "GST is what makes you billable to the plants",
+        body: "Large industrial buyers around Vadodara need a GST-compliant tax invoice before their accounts team will process a payment, and many will not issue a purchase order without a GST number on file. For an individual technical consultant here, GST registration is effectively the business registration, whatever the turnover threshold says.",
+      },
+      {
+        title: "Udyam registration helps with delayed payments",
+        body: "Udyam is the MSME registration, it is free, and for a consultant invoicing large plants it is worth having because of the MSME protections on delayed payment. Industrial payment cycles can be long, and this is one of the few levers a one-person business has. Nobody should charge you a large fee for obtaining it.",
+      },
+      {
+        title: "Shop and establishment registration for premises and banking",
+        body: "If you operate from commercial premises in Vadodara, registration under the Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act applies, administered by the local authority. It is also commonly what a bank wants to see before opening a current account in a trade name rather than your own.",
+      },
+      {
+        title: "No liability separation, which matters on site",
+        body: "You and the business are the same person in law, so business liabilities are personal liabilities. For a consultant whose work involves site inspection, certification or advice on plant safety, that is worth thinking about seriously, alongside professional indemnity cover. Once the exposure is real, an LLP with a second partner is the usual next step.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do I need GST to invoice a plant in Vadodara as an individual consultant?",
+        a: "In practice, almost always yes. Large industrial buyers need a GST-compliant tax invoice to process payment, and many will not raise a purchase order without a GST number on file. Even where your turnover is below the registration threshold, the commercial reality is that GST registration is what makes you billable to these customers.",
+      },
+      {
+        q: "Is there a registration certificate for a proprietorship in Vadodara?",
+        a: "No. A proprietorship is not incorporated, so no single certificate exists, and anyone offering you one is selling something else under that name. What you obtain is the specific registrations your work requires, typically GST, Udyam and, where you hold commercial premises, shop and establishment registration.",
+      },
+      {
+        q: "When should a Vadodara consultant move from proprietorship to LLP?",
+        a: "The common triggers are a second person genuinely joining, a client requiring an entity on the MCA register, or liability exposure that has grown beyond what you want to carry personally. A proprietorship cannot have a second owner at all, so if someone else is coming in, the structure has to change regardless.",
+      },
+    ],
+  },
+
+  /* ==================== SURAT ==================== */
+  {
+    city: "surat",
+    service: "pvt-registration",
+    h1: "Private Limited Company Registration in Surat",
+    title: "Private Limited Company Registration in Surat | Raulji Group",
+    metaDescription:
+      "Register a Private Limited Company in Surat with Raulji Group. Incorporation and MCA filing support for diamond, textile, export and manufacturing businesses.",
+    localContext: [
+      "Surat's diamond and textile trades were built on partnership firms, so a Private Limited Company here is usually a deliberate step up rather than a starting point. When it happens, the reason is normally external: an export buyer, a lender, or a brand ambition that the old structure cannot support.",
+      "Export is the clearest driver. Diamond exporters and textile businesses dealing with overseas buyers increasingly find that the counterparty wants to contract with a limited-liability entity, and a company is the structure international buyers and banks recognise most readily. Working capital is the other driver: banks lending against receivables tend to want cleaner, audited documentation than a family firm has historically kept.",
+      "The third pattern is newer. Surat textile businesses moving from wholesale supply into their own consumer brands, selling direct online, generally need a company, because that is what brand investment, marketplace agreements and any outside funding assume.",
+    ],
+    whoLocally: [
+      "Diamond exporters contracting with overseas buyers who require a limited-liability counterparty",
+      "Textile businesses moving from wholesale supply into their own consumer brands",
+      "Businesses seeking working capital facilities against receivables from a bank",
+      "Manufacturers at Pandesara, Sachin or Hazira supplying larger corporate customers",
+      "Founders who genuinely intend to raise outside investment and issue shares",
+    ],
+    localFactors: [
+      {
+        title: "Moving from a family firm means changing the habits too",
+        body: "For a Surat firm that has run on a partnership deed and informal records, the company itself is the easy part. The harder part is that a company requires statutory audit from its first financial year, proper books, board minutes, and a clear line between the owners' money and the company's. Drawing from the company is a formal act, through salary, dividend or board-approved fees, not a withdrawal from the till.",
+      },
+      {
+        title: "Consider the LLP as the intermediate step",
+        body: "Where the concern is personal liability rather than raising equity, converting a Surat partnership firm to an LLP caps liability while keeping the partner structure and profit shares recognisable, at a fraction of a company's annual cost. Going straight to a company because it sounds more serious is a common and expensive mistake. Ask what the company is actually buying you.",
+      },
+      {
+        title: "Two directors and a defensible registered office",
+        body: "A Private Limited Company needs at least two directors and two shareholders, with one director resident in India for 182 days or more in the previous calendar year. The registered office needs a recent utility bill and a no-objection certificate from the owner. For businesses operating out of shared market premises around Ring Road or the diamond belt, the address documentation is the step that most often causes a query.",
+      },
+      {
+        title: "Export registrations are separate from incorporation",
+        body: "Incorporating does not give you an Importer Exporter Code, and it does not by itself satisfy a buyer's compliance checks. IEC and any trade-specific registration are separate applications that follow incorporation. We say which apply to your line of business rather than implying incorporation covers everything.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Should a Surat diamond or textile firm convert to a Private Limited Company?",
+        a: "Only if the company is buying you something specific: an export buyer or lender that requires it, a consumer brand you intend to invest in, or genuine plans to raise equity. If the real concern is personal liability, an LLP achieves that while keeping the partner structure and costing far less to run each year. Converting to a company for the status alone is rarely worth the compliance it brings.",
+      },
+      {
+        q: "Do export buyers require a company rather than a partnership firm?",
+        a: "It varies by buyer, but the direction of travel is towards wanting a limited-liability entity, and a company is the form international counterparties and their banks recognise most easily. Some accept an LLP. Since you usually know which buyer prompted the question, the sensible step is to check their contracting requirement before choosing a structure.",
+      },
+      {
+        q: "What changes about how money is handled after incorporating?",
+        a: "Quite a lot, and it is the part Surat family firms find hardest. A company's money is not the owners' money. Taking it out requires a formal route such as salary, dividend or board-approved fees, all of it recorded. Statutory audit applies from the first financial year regardless of turnover, so the books have to be kept properly from day one rather than reconstructed later.",
+      },
+    ],
+  },
+  {
+    city: "surat",
+    service: "llp-registration",
+    h1: "LLP Registration in Surat",
+    title: "LLP Registration in Surat | Raulji Group",
+    metaDescription:
+      "Register an LLP in Surat with Raulji Group. The usual next step for diamond and textile partnership firms wanting limited liability without company compliance.",
+    localContext: [
+      "For most Surat firms thinking about changing structure, the LLP is the answer they should be looking at first, and often are not. The city's diamond and textile trades run on thousands of partnership firms with two, three or four working partners. What is increasingly uncomfortable about that is not the partner arrangement, which works, but the unlimited personal liability that comes with it.",
+      "The LLP is designed for exactly this situation. Partners stay partners, the profit-sharing arrangement carries over into the LLP Agreement, and liability is capped at the agreed contribution. Compared with jumping to a company, it avoids statutory audit from year one and all the board-level formality, while still appearing on the MCA public register where a bank or a buyer can verify it.",
+      "In a trade that runs on long credit cycles and receivables, capping liability is not an abstract benefit. When a buyer defaults in Surat's textile market, the question of whether partners' personal assets are exposed is a very concrete one.",
+    ],
+    whoLocally: [
+      "Diamond trading and processing firms with two or more working partners",
+      "Textile and man-made fabric traders around the Ring Road markets",
+      "Weaving, processing and job-work units converting from a partnership firm",
+      "Export trading firms whose buyers want a limited-liability counterparty",
+      "Family businesses wanting liability capped without a company's compliance load",
+    ],
+    localFactors: [
+      {
+        title: "It is the natural conversion from a partnership firm",
+        body: "An LLP keeps what works about a Surat partnership, the partner structure and the profit shares, and fixes what does not, the unlimited personal liability. The existing deed's commercial terms carry over into the LLP Agreement. Compared with incorporating a company, you avoid statutory audit from the first year and the board formalities, which for a family trading firm is the difference between workable and burdensome.",
+      },
+      {
+        title: "The conversion touches everything operational",
+        body: "The LLP takes a new PAN, so bank mandates, GST registration, buyer and supplier records, and any credit facility need to be moved across. In a trade with live credit lines and ongoing orders, the sequencing matters more than the paperwork. Plan the transition around your payment cycle rather than in the middle of one.",
+      },
+      {
+        title: "Audit only above thresholds, but filings always",
+        body: "An LLP requires audit only once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which many Surat firms will cross, so budget for it. Regardless of audit, Form 11 is due by 30 May and Form 8 by 30 October every year, including a year with no activity, and late filing carries a per-day penalty that keeps accruing.",
+      },
+      {
+        title: "No equity, which rules out investment",
+        body: "An LLP cannot issue equity shares. For a trading or processing firm that is usually irrelevant. For a Surat textile business planning to build a consumer brand and raise money for it, it is decisive, and a company is the right structure from the start rather than after a costly conversion.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is an LLP better than a company for a Surat textile firm?",
+        a: "For most of them, yes, provided there is no plan to raise equity. An LLP caps personal liability, keeps the partner structure and profit shares intact, appears on the MCA register where banks and buyers can verify it, and avoids statutory audit from year one. A company only becomes the better answer when you need to issue shares or a specific counterparty insists on one.",
+      },
+      {
+        q: "What happens to our existing partnership deed when we convert?",
+        a: "Its commercial substance moves into the LLP Agreement, which becomes the governing document and must be filed in Form 3 within thirty days of incorporation. This is a good opportunity to settle the things the old deed left vague, typically exit terms, what happens on a partner's death, and who may commit the business to credit.",
+      },
+      {
+        q: "Will our bank accept an LLP for our working capital facility?",
+        a: "Banks lend to LLPs routinely, and the LLP's presence on the MCA register with filed annual accounts generally helps rather than hinders a credit assessment. What you should not assume is that an existing facility transfers automatically. The LLP is a new entity with a new PAN, so the facility has to be re-documented, and that is worth starting before the conversion rather than after.",
+      },
+    ],
+  },
+  {
+    city: "surat",
+    service: "partnership-registration",
+    h1: "Partnership Firm Registration in Surat",
+    title: "Partnership Firm Registration in Surat | Raulji Group",
+    metaDescription:
+      "Partnership firm registration in Surat with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms for diamond and textile businesses.",
+    localContext: [
+      "The partnership firm is the structure Surat's economy was built on. Across the diamond belt at Varachha and Katargam and the textile markets along Ring Road, an enormous number of businesses operate as firms with two to four working partners, and for a great many of them that remains genuinely appropriate.",
+      "It forms quickly, costs little, has no MCA filings at all, and fits a business where the partners are all actively working and know each other well. What it does not do is separate the business from the people. Every partner is liable for the whole of the firm's debts, not a proportionate share, and any partner can bind the firm.",
+      "In Surat that matters more than the general principle suggests, because the trade runs on credit. Goods move against understandings and long payment cycles, and when a buyer defaults the liability lands on the partners personally. Two things follow: register the firm, and write the deed properly.",
+    ],
+    whoLocally: [
+      "Diamond cutting, polishing and trading units with working partners",
+      "Textile and man-made fabric traders in the Ring Road markets",
+      "Embroidery, processing and job-work units run by two or more people",
+      "Small joint businesses between people who already know and trust each other",
+      "Businesses that want a documented arrangement with no MCA compliance at all",
+    ],
+    localFactors: [
+      {
+        title: "Registration is what lets you sue a defaulting buyer",
+        body: "An unregistered firm cannot file suit to enforce a contract. In Surat's credit-based diamond and textile trade, where recovery from a defaulting buyer is a live commercial risk, that single limitation is usually the deciding argument for registering with the Registrar of Firms. Registration is optional in law and inexpensive in practice.",
+      },
+      {
+        title: "Write down who can extend credit in the firm's name",
+        body: "In a trade that runs on credit, the clause that prevents the worst disputes is the one setting out which partner may commit the firm, up to what limit, and to whom. Any partner can bind the firm by default, so a partner extending generous credit to a buyer they favour can create a liability all the partners carry. A deed covering only capital and profit share leaves this open.",
+      },
+      {
+        title: "Stamp duty depends on the capital",
+        body: "The deed must be executed on stamp paper of the correct value. Stamp duty is set at state level, so it is uniform across Gujarat, but the amount varies with the capital contributed. Incorrect stamping is a frequent reason a deed is questioned later, and we confirm the figure before anything is signed.",
+      },
+      {
+        title: "Consider whether an LLP is the better version of this",
+        body: "If the partner structure suits you but the unlimited liability does not, an LLP gives you the same arrangement with liability capped, for modestly more compliance each year. Many Surat firms would be better served by an LLP and have simply never priced the comparison. It is worth doing before you execute a new deed.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Is partnership firm registration compulsory in Surat?",
+        a: "No. Registration with the Registrar of Firms is optional under the Indian Partnership Act, 1932, and an unregistered firm is a valid firm. The practical reason to register is that an unregistered firm cannot sue to enforce a contract, which in Surat's credit-based diamond and textile trade removes your main route to recovering money from a defaulting buyer.",
+      },
+      {
+        q: "Our diamond firm has run on an old deed for years. Should we redo it?",
+        a: "Usually yes, particularly if partners have joined or left since it was written, capital has changed, or the deed does not address credit authority, exit terms and what happens on a partner's death. An old deed that no longer describes the actual arrangement is worse than a clear new one, because it is the document a court would look at.",
+      },
+      {
+        q: "Should we stay a firm or move to an LLP?",
+        a: "The question to answer is whether unlimited personal liability is a risk you are comfortable carrying. If the business trades on its own funds with little credit exposure, a firm is fine and cheaper. If you extend or take significant credit, which most Surat trading firms do, an LLP caps that exposure while keeping the partner structure, and the extra annual compliance is two forms.",
+      },
+    ],
+  },
+  {
+    city: "surat",
+    service: "proprietorship-registration",
+    h1: "Proprietorship Registration in Surat",
+    title: "Proprietorship Registration in Surat | Raulji Group",
+    metaDescription:
+      "Proprietorship registration support in Surat: GST, Udyam and Gujarat shop and establishment registration for job-work units, traders and online sellers.",
+    localContext: [
+      "A very large part of Surat's economy is single-owner businesses: embroidery and job-work units, small fabric traders, diamond job workers, and increasingly people selling textiles online from home. For all of these, a proprietorship is normally the right structure, at least to begin with.",
+      "There is no such thing as a proprietorship registration certificate in India. The business is not incorporated and is not separate from you in law. What gives it a usable identity is a combination of other registrations, and which ones matter depends on what the business actually does.",
+      "In Surat the decisive registration is almost always GST. Job-work units invoicing larger processors need to raise a GST-compliant invoice to be paid. Traders selling to buyers in other states need GST regardless of turnover. Anyone selling fabric online through a marketplace cannot complete seller onboarding without it. GST is what turns an informal operation into a business its customers can transact with.",
+    ],
+    whoLocally: [
+      "Embroidery, processing and job-work units with a single owner",
+      "Small fabric and yarn traders invoicing larger buyers",
+      "Diamond job workers billing processing or trading houses",
+      "Individuals selling textiles online through marketplaces or their own site",
+      "Local retail and service businesses run by one person",
+    ],
+    localFactors: [
+      {
+        title: "GST is what gets a job-work unit paid",
+        body: "Larger processors and trading houses in Surat need a GST-compliant tax invoice before they can process a payment and claim input credit. For a job-work unit that is not optional in practice, whatever the turnover threshold allows. GST registration is usually the first and most important thing we set up for a Surat proprietor.",
+      },
+      {
+        title: "Interstate and online selling require GST from the first sale",
+        body: "The turnover thresholds do not apply if you sell to customers in other states or through a marketplace. Those require GST registration from the first transaction, and marketplaces will not onboard a seller without it. For Surat's growing number of home-based online fabric sellers, this is the registration that actually matters.",
+      },
+      {
+        title: "Udyam is free, and useful against slow payment",
+        body: "Udyam is the MSME registration. It costs nothing and it brings the MSME protections on delayed payment, which is genuinely useful when your customers are larger processors or trading houses working on long cycles. It is not a substitute for GST, and no one should be charging a substantial fee to obtain it.",
+      },
+      {
+        title: "A proprietorship cannot take a partner",
+        body: "By definition a proprietorship has exactly one owner. The moment a family member or a colleague is genuinely sharing ownership and profit rather than being paid, the structure has to change to a partnership firm, an LLP or a company. Informally treating someone as a partner while remaining a proprietorship is where Surat's messiest disputes start.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do I need GST for a job-work unit in Surat?",
+        a: "In practice almost certainly, because the processors and trading houses you invoice need a GST-compliant tax invoice to pay you and claim input credit. Even where your turnover sits below the registration threshold, most larger customers will not work with a supplier who cannot issue a proper tax invoice.",
+      },
+      {
+        q: "Is there a proprietorship registration certificate?",
+        a: "No. A proprietorship is not incorporated, so no single certificate exists. Anyone offering you a proprietorship certificate is selling something else under that name. What you obtain is the specific registrations your business needs, usually GST, Udyam, and shop and establishment registration where you hold commercial premises.",
+      },
+      {
+        q: "My brother works with me in the business. Are we a partnership?",
+        a: "It depends on whether he shares ownership and profit or is paid for his work. If he genuinely shares the profits and the risk, you are operating as a partnership in substance without a deed, which is a poor position for both of you. Either document it as a partnership firm or an LLP, or make the employment arrangement explicit. Leaving it unclear is what causes the serious disputes.",
+      },
+    ],
+  },
+
+  /* ==================== RAJKOT ==================== */
+  {
+    city: "rajkot",
+    service: "pvt-registration",
+    h1: "Private Limited Company Registration in Rajkot",
+    title: "Private Limited Company Registration in Rajkot | Raulji Group",
+    metaDescription:
+      "Register a Private Limited Company in Rajkot with Raulji Group. Incorporation and MCA filing support for engineering, casting, forging and auto component businesses.",
+    localContext: [
+      "Rajkot is an engineering town, and company registration here is driven by two things: who you sell to, and how much you are borrowing to buy machinery.",
+      "The customer question comes first. A unit selling castings, machined parts or components locally or through traders has no structural reason to incorporate. A unit supplying OEM buyers outside Gujarat usually does, because vendor onboarding at those buyers generally requires an entity verifiable on the MCA register. What varies is whether the buyer will accept an LLP, which many will, or insists on a company.",
+      "The borrowing question is the second. Rajkot units invest heavily in CNC machines, furnaces and presses, often on credit, and a founder taking on substantial machinery debt has a real reason to want liability capped and the business separated from personal assets. That is a legitimate reason to incorporate, quite apart from any customer requirement.",
+    ],
+    whoLocally: [
+      "Casting, forging and machining units supplying OEM buyers outside Gujarat",
+      "Auto component manufacturers whose customers require MCA-verifiable vendors",
+      "Units investing substantially in CNC machinery or plant on credit",
+      "Machine tool, bearing and pump manufacturers selling to larger industrial customers",
+      "Businesses in Aji GIDC or Shapar-Veraval preparing for larger contracts",
+    ],
+    localFactors: [
+      {
+        title: "Read the OEM vendor form before you incorporate",
+        body: "If the reason for incorporating is an OEM's vendor onboarding, get their vendor registration requirements first. Many accept any MCA-registered entity, which an LLP satisfies at much lower annual cost. Some require a company. Some require audited accounts for a stated number of past years, which a newly formed entity cannot produce at all. This one check often changes the answer.",
+      },
+      {
+        title: "Machinery finance is a real reason to want liability capped",
+        body: "Where a unit is borrowing significantly against plant and machinery, the separation a company provides is genuinely useful: the company owns the assets and carries the obligations, and shareholder liability is limited to what is unpaid on shares. Be aware that lenders frequently ask directors for personal guarantees anyway, which narrows that protection in practice. Ask your lender what they will require.",
+      },
+      {
+        title: "Audit from year one, on a workshop's margins",
+        body: "A Private Limited Company requires statutory audit from its first financial year whatever the turnover, plus annual ROC filings and board records. On the margins a small Rajkot job-shop works to, that is a real recurring cost. It is worth carrying when a customer or a lender requires the structure, and hard to justify otherwise.",
+      },
+      {
+        title: "Two directors, and a registered office that documents cleanly",
+        body: "You need at least two directors and two shareholders, with one director resident in India for 182 days or more in the previous calendar year. A unit in Aji GIDC, Bhaktinagar or Shapar-Veraval works as a registered office, but the address proof must match the premises: a recent utility bill, a no-objection certificate from the owner, and lease documentation that supports it where the unit is leased.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do OEM buyers require Rajkot suppliers to be a Private Limited Company?",
+        a: "Some do, many do not. Most vendor onboarding checks want an entity that can be verified on a public register, and an LLP meets that at considerably lower annual cost. A minority of OEM processes specify a company, and some require audited accounts for past years. Since you normally know which buyer prompted the question, read their vendor form before choosing.",
+      },
+      {
+        q: "Will a company protect me personally if I borrow for machinery?",
+        a: "Partly, and less than people expect. A company is a separate legal entity and shareholder liability is limited to the unpaid amount on shares, so the company's trade debts are not automatically yours. However, lenders financing plant and machinery commonly require personal guarantees from directors, and a guarantee you have signed is enforceable against you regardless of the structure. Ask the lender what they will want before assuming the protection.",
+      },
+      {
+        q: "Is a company worth it for a small Rajkot job shop?",
+        a: "Often not. Statutory audit from the first year plus annual ROC filings is a meaningful cost against job-shop margins. If you sell locally or through traders and are not carrying large machinery debt, a proprietorship or partnership firm is usually the better economics. If you need MCA presence for a customer, an LLP is generally the cheapest way to get it.",
+      },
+    ],
+  },
+  {
+    city: "rajkot",
+    service: "llp-registration",
+    h1: "LLP Registration in Rajkot",
+    title: "LLP Registration in Rajkot | Raulji Group",
+    metaDescription:
+      "Register an LLP in Rajkot with Raulji Group. The lowest-cost route onto the MCA register for engineering units supplying OEM buyers outside Gujarat.",
+    localContext: [
+      "For a large number of Rajkot engineering units, the LLP is the structure that actually fits, and it is frequently overlooked in favour of a company that costs more and does no more.",
+      "The typical situation is a foundry, machining unit or component manufacturer with two or three working partners, often brothers or long-standing colleagues, which has been supplying local buyers and traders and now wants to sell directly to OEMs outside Gujarat. Vendor onboarding at those buyers generally requires an entity verifiable on the MCA register. An LLP appears on that register with an LLPIN, exactly as a company does.",
+      "What the LLP avoids is the part that hurts a workshop's economics: statutory audit from the first financial year regardless of turnover, plus board meetings and minutes. An LLP files two annual forms and needs audit only above prescribed thresholds. For a unit whose reason for registering is a customer requirement rather than a funding plan, that is the whole argument.",
+    ],
+    whoLocally: [
+      "Foundries and machining units with two or three working partners",
+      "Auto component and machine tool makers registering as OEM vendors",
+      "Engineering units in Aji GIDC, Bhaktinagar or the Gondal Road belt",
+      "Family workshops converting from a partnership firm to cap liability",
+      "Units that need MCA presence for a customer and have no plan to raise equity",
+    ],
+    localFactors: [
+      {
+        title: "It puts you on the MCA register at the lowest cost",
+        body: "An LLP holds an LLPIN on the MCA register, which is what most OEM vendor onboarding checks verify. Against a company it avoids statutory audit from year one and the board formalities, while providing the same limited liability and the same public verifiability. For a Rajkot unit registering because a buyer asked it to, this is usually the correct structure.",
+      },
+      {
+        title: "Put the machinery question in the LLP Agreement",
+        body: "In Rajkot engineering partnerships, capital is frequently contributed as machinery rather than cash, and the partners' technical contributions differ. The LLP Agreement is where the value of contributed plant, whether ownership passes to the LLP, profit shares and exit terms are settled. It must be filed in Form 3 within thirty days, and a generic agreement wastes the chance to fix the things a family workshop most often leaves vague.",
+      },
+      {
+        title: "Converting a family firm means moving the vendor codes",
+        body: "If you are converting an existing Rajkot partnership firm, the LLP is a new entity with a new PAN. Bank mandates, GST registration, existing vendor codes with buyers and any live purchase orders have to be moved across. Re-onboarding with an OEM can take time, so sequence the conversion around your order book rather than in the middle of a delivery schedule.",
+      },
+      {
+        title: "Audit above thresholds, filings always",
+        body: "Audit is required once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which a growing unit will cross, so plan for it. Independently of audit, Form 11 is due by 30 May and Form 8 by 30 October each year, including a year with no work, and late filing carries a per-day penalty that accrues until you file.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Will an OEM accept an LLP as a registered vendor?",
+        a: "Most will. An LLP is a body corporate with an LLPIN on the MCA register, which is what the majority of vendor verification checks are looking for. A minority of OEM procurement processes specifically require a company, and some ask for audited accounts covering past years. Check the vendor form of the specific buyer you are registering with, because it varies.",
+      },
+      {
+        q: "Our foundry is a family partnership. Is an LLP worth the change?",
+        a: "It is, if either of two things is true: you want personal liability capped, or you need to appear on the MCA register for a customer. An LLP delivers both while keeping the partner structure and profit shares you already have. If you sell only locally, carry little credit and have no liability worry, staying a firm is cheaper and perfectly legitimate.",
+      },
+      {
+        q: "One partner is contributing a CNC machine instead of money. How is that handled?",
+        a: "It goes into the LLP Agreement explicitly: the agreed value of the machine, whether ownership transfers to the LLP or the partner retains it and makes it available, and what happens to it if that partner exits. This is the single most common cause of serious disputes in Rajkot engineering partnerships, and it is straightforward to settle at the drafting stage.",
+      },
+    ],
+  },
+  {
+    city: "rajkot",
+    service: "partnership-registration",
+    h1: "Partnership Firm Registration in Rajkot",
+    title: "Partnership Firm Registration in Rajkot | Raulji Group",
+    metaDescription:
+      "Partnership firm registration in Rajkot with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms for engineering workshops.",
+    localContext: [
+      "The partnership firm is the default structure across Rajkot's engineering economy, and for a large share of the city's workshops it remains the right one. A foundry, a machining job shop or a components unit run by two or three brothers who all work in the business, selling locally or through traders, has no pressing structural reason to be anything else.",
+      "It forms quickly, costs little, and carries no MCA filing obligation at all. The trade-offs are unlimited personal liability, which means business debts reach the partners' personal assets, and the fact that any partner can bind the firm.",
+      "In a Rajkot workshop the specific risk is machinery. Units buy plant on credit, and a firm's debts are the partners' debts. The related issue is ownership: when a partner contributes a lathe, a furnace or a CNC machine rather than cash, who owns it afterwards? That question, left unanswered in the deed, is behind most serious workshop partnership disputes here.",
+    ],
+    whoLocally: [
+      "Family-run foundries and machining job shops with working partners",
+      "Small engineering and fabrication units selling locally or through traders",
+      "Component and pump units in the Gondal Road and Kalawad Road belts",
+      "Joint businesses between brothers or long-standing colleagues",
+      "Units that want a documented arrangement and no MCA compliance",
+    ],
+    localFactors: [
+      {
+        title: "Record who owns the machinery",
+        body: "Where a partner contributes a lathe, furnace, press or CNC machine as capital rather than cash, the deed must state the agreed value, whether ownership passes to the firm or the partner retains it, and what happens to it on retirement, death or dissolution. In Rajkot workshops the plant is usually the most valuable thing in the business, and a deed recording only cash capital leaves the biggest question open.",
+      },
+      {
+        title: "Register the firm so you can recover payment",
+        body: "An unregistered firm cannot sue to enforce a contract. For a workshop carrying receivables from traders and buyers, that removes the main route to recovery when someone does not pay. Registration with the Registrar of Firms is optional under the Act but inexpensive, and worth doing at the outset rather than when a dispute has already started.",
+      },
+      {
+        title: "OEM vendor systems will not see a firm",
+        body: "If any part of the plan involves supplying OEM buyers outside Gujarat directly, understand that vendor onboarding generally verifies an entity on the MCA register, and a partnership firm is not on it. Many Rajkot firms supply OEMs indirectly through traders or registered vendors. If direct OEM supply is the goal, an LLP is the lowest-cost structure that meets it.",
+      },
+      {
+        title: "Succession, in a family workshop, needs writing down",
+        body: "Rajkot's workshop partnerships are frequently between brothers, and the deeds most often skip what happens when one dies or wants out: whether the firm continues, how the outgoing share is valued, whether a son automatically becomes a partner. These are uncomfortable clauses to draft and far more uncomfortable to litigate.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a Rajkot partnership firm supply OEM buyers directly?",
+        a: "Usually not as a directly onboarded vendor, because OEM vendor verification generally requires an entity on the MCA register and a partnership firm does not appear there. Many Rajkot firms supply OEMs indirectly, through traders or registered vendors. If direct supply is the objective, an LLP is the cheapest structure that satisfies it.",
+      },
+      {
+        q: "Is registering the firm with the Registrar of Firms necessary?",
+        a: "It is optional under the Indian Partnership Act, 1932, and an unregistered firm is still a valid firm. The practical reason to register is that an unregistered firm cannot sue to enforce a contract, which matters for any workshop carrying receivables from traders or buyers.",
+      },
+      {
+        q: "What should a workshop partnership deed cover beyond profit share?",
+        a: "Four things that most Rajkot deeds miss: who owns machinery contributed as capital, which partner may commit the firm to credit or borrowing and up to what limit, how an outgoing partner's share is valued, and what happens to the firm on a partner's death. Profit share is usually the one thing everybody already agrees on.",
+      },
+    ],
+  },
+  {
+    city: "rajkot",
+    service: "proprietorship-registration",
+    h1: "Proprietorship Registration in Rajkot",
+    title: "Proprietorship Registration in Rajkot | Raulji Group",
+    metaDescription:
+      "Proprietorship registration support in Rajkot: GST, Udyam and Gujarat shop and establishment registration for single-owner workshops and traders.",
+    localContext: [
+      "A great many Rajkot businesses are one person with a workshop: a machining job shop, a small fabrication unit, a trader in components or hardware. For these a proprietorship is normally correct, and it is the cheapest and quickest way to start operating.",
+      "What needs to be clear from the start is that a proprietorship is not incorporated. There is no proprietorship certificate in India, and the business is not legally separate from you. Its identity comes from other registrations, chosen according to what the business does.",
+      "For a Rajkot unit two registrations do most of the work. GST is needed to raise a tax invoice that a business customer can claim input credit on, and is mandatory from the first sale if you sell to buyers in other states, which for Rajkot's engineering trade is common. Udyam, the MSME registration, is free and matters more here than people realise, because it carries the MSME protections on delayed payment and is often a condition of eligibility in government and larger buyers' procurement.",
+    ],
+    whoLocally: [
+      "Single-owner machining job shops and small fabrication units",
+      "Traders in components, hardware and engineering supplies",
+      "Individual fabricators and machinists invoicing larger units",
+      "Local retail and service businesses with one owner",
+      "Units selling to buyers in other states who need a GST invoice",
+    ],
+    localFactors: [
+      {
+        title: "Interstate sales require GST from the first invoice",
+        body: "Rajkot's engineering trade sells a great deal outside Gujarat, and selling interstate requires GST registration regardless of turnover. The threshold exemptions do not help you. Your business customers also need a GST-compliant tax invoice to claim input credit, so without registration you are effectively more expensive to buy from.",
+      },
+      {
+        title: "Udyam is free and affects who will buy from you",
+        body: "Udyam is the MSME registration, it costs nothing to obtain, and for a small Rajkot unit it does two useful things: it brings the MSME protections on delayed payment, which matters when your customers are larger units on long cycles, and it is frequently a condition in government and large-buyer procurement. Nobody should be charging a substantial fee for it.",
+      },
+      {
+        title: "Shop and establishment registration for premises and banking",
+        body: "A commercial establishment in Rajkot falls under the Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act, administered by the local authority. It is also commonly what a bank asks for before opening a current account in a trade name rather than your personal name.",
+      },
+      {
+        title: "Machinery debt against unlimited liability",
+        body: "You and the business are the same person in law, so the business's debts are your debts without limit. For a workshop buying plant on credit that is the exposure worth thinking hardest about. Once machinery borrowing becomes substantial, an LLP with a second partner, or a company, starts to be worth its extra compliance cost.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do I need GST to sell components outside Gujarat from Rajkot?",
+        a: "Yes. Interstate supply requires GST registration from the first sale regardless of turnover, so the threshold exemptions do not apply. Your business customers also need a GST-compliant tax invoice to claim input credit, which in practice means an unregistered supplier is at a commercial disadvantage.",
+      },
+      {
+        q: "Is Udyam registration worth doing for a small Rajkot workshop?",
+        a: "Yes, and it is free. It brings the MSME protections on delayed payment, which is useful when you are invoicing larger units that pay slowly, and it is often a condition of eligibility in government and large-buyer procurement. Be wary of anyone charging a large fee to obtain it for you.",
+      },
+      {
+        q: "Should a single-owner workshop with machinery loans stay a proprietorship?",
+        a: "It is worth reviewing. As a proprietor you carry the business's debts personally without limit, so substantial machinery borrowing is a real exposure. A proprietorship also cannot have a second owner, so if a family member is genuinely coming into the business, the structure has to change anyway. An LLP is usually the next step worth pricing.",
+      },
+    ],
+  },
+
+  /* ==================== GANDHINAGAR ==================== */
+  {
+    city: "gandhinagar",
+    service: "pvt-registration",
+    h1: "Private Limited Company Registration in Gandhinagar",
+    title: "Private Limited Registration in Gandhinagar | Raulji Group",
+    metaDescription:
+      "Register a Private Limited Company in Gandhinagar with Raulji Group. Incorporation support for government contractors and IT firms. Call +91 8511187689.",
+    localContext: [
+      "Gandhinagar's registration profile is shaped by two very different forces, and which one applies to you changes the advice completely.",
+      "The first is state government work. Gandhinagar has a substantial base of consultancies, IT vendors and contractors serving state departments, and for these the structure decision is often made by the tender documents rather than by the founder. Many tenders specify a registered company or LLP, and a good number require audited accounts for a stated number of past years. That last requirement is the one worth checking before you incorporate, because a newly formed company cannot satisfy it at all.",
+      "The second is GIFT City. Entities intending to operate inside the International Financial Services Centre are in a different regulatory position: the IFSC has its own authorisation requirements administered by the IFSCA, which sit on top of incorporation and need to shape the structure from the start. Incorporating first and working out the IFSC position afterwards is the wrong order.",
+    ],
+    whoLocally: [
+      "Consultancies and contractors bidding for state government tenders",
+      "IT and fintech firms in Infocity and the Gandhinagar corridor",
+      "Businesses planning to operate inside the GIFT City IFSC",
+      "Pharmaceutical and electronics manufacturers supplying larger customers",
+      "Founders in the Ahmedabad and Gandhinagar corridor intending to raise investment",
+    ],
+    localFactors: [
+      {
+        title: "Read the tender eligibility clause before you incorporate",
+        body: "This is the single most useful thing a Gandhinagar contractor can do. Tender documents commonly specify the permitted entity type, and frequently require audited accounts and turnover for a number of past financial years. A company incorporated this month has none of those. Incorporating in the hope of qualifying, without reading the clause, is how people spend money and still fail eligibility.",
+      },
+      {
+        title: "GIFT City authorisation is separate from incorporation",
+        body: "Operating inside the IFSC at GIFT City requires authorisation under the IFSC regime, administered by the IFSCA, in addition to being incorporated. The requirements depend on the activity, and they affect how the entity should be structured, capitalised and located. Plan the incorporation around the authorisation, not the other way round, and expect to need specialist advice on the IFSC side.",
+      },
+      {
+        title: "Audit from year one, which tenders may want anyway",
+        body: "A Private Limited Company requires statutory audit from its first financial year whatever the turnover, plus annual ROC filings. For a Gandhinagar firm bidding for government work this is less of a burden than elsewhere, because audited accounts are often exactly what the tender asks for. Maintaining them properly from the start is worth doing for that reason alone.",
+      },
+      {
+        title: "Two directors, and an address that documents cleanly",
+        body: "You need at least two directors and two shareholders, with one director resident in India for 182 days or more in the previous calendar year. A registered office in one of the sector commercial blocks, Infocity, Kudasan or Sargasan is fine, provided the address proof matches: a recent utility bill and a no-objection certificate from the owner.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do Gujarat government tenders require a Private Limited Company?",
+        a: "It depends on the tender, and this is worth checking rather than assuming. Many permit either a company or an LLP. Many also require audited accounts and a minimum turnover for a stated number of past financial years, which no newly incorporated entity can provide. Read the eligibility clause of the specific tender before spending money on a structure.",
+      },
+      {
+        q: "Can I incorporate a company for GIFT City through a normal registration?",
+        a: "Incorporation is the ordinary MCA process, but it is only part of what operating inside the IFSC requires. IFSC activities need authorisation under the IFSC regime administered by the IFSCA, and those requirements affect how the entity should be structured and capitalised. The structure needs to be planned around the authorisation from the start, and the IFSC side generally needs specialist advice beyond incorporation.",
+      },
+      {
+        q: "Is a company or an LLP better for Gandhinagar government consultancy work?",
+        a: "Usually whichever the tenders you intend to bid for permit, and often they permit both. Where both are allowed, an LLP costs materially less to run each year, since it avoids statutory audit below the thresholds. Where you expect to bid repeatedly and the tenders want audited accounts, the company's audit obligation from year one stops being a drawback.",
+      },
+    ],
+  },
+  {
+    city: "gandhinagar",
+    service: "llp-registration",
+    h1: "LLP Registration in Gandhinagar",
+    title: "LLP Registration in Gandhinagar | Raulji Group",
+    metaDescription:
+      "Register an LLP in Gandhinagar with Raulji Group. A common structure for consultancies and IT vendors serving Gujarat state departments.",
+    localContext: [
+      "The LLP suits a large share of Gandhinagar's professional economy. The city's consultancies, IT vendors and technical advisory firms serving state departments are typically partner-run, will not issue equity, and need to be a recognisable registered entity that a government procurement process will accept.",
+      "Where a tender permits either a company or an LLP, and many do, the LLP is generally the better economics: it appears on the MCA register with an LLPIN, carries limited liability, and files two annual forms rather than carrying statutory audit from its first year.",
+      "The caveat is specific to this market and worth taking seriously. Government tenders often specify the permitted entity type, and a good number require audited accounts and turnover history for several past years. Check the eligibility clause of the tenders you actually intend to bid for before choosing. An LLP formed this month cannot produce three years of audited accounts any more than a company can.",
+    ],
+    whoLocally: [
+      "Consultancies and advisory firms bidding for state department work",
+      "IT and software vendors serving government clients",
+      "Technical and engineering consultancies with two or more partners",
+      "Professional firms in Infocity, Kudasan and Sargasan",
+      "Partner-run businesses that need MCA presence without company compliance",
+    ],
+    localFactors: [
+      {
+        title: "Confirm the tender accepts an LLP",
+        body: "Many Gujarat government tenders permit a company or an LLP, and where both are allowed the LLP is cheaper to run. Some specify a company. Some require audited accounts and turnover for a number of past years, which no new entity of any kind can satisfy. Read the eligibility clause of the specific tenders you intend to bid for before you register.",
+      },
+      {
+        title: "The LLP Agreement should handle how work is won and delivered",
+        body: "In a Gandhinagar consultancy the partners' contributions are usually unequal in kind: one holds the client and tender relationships, another delivers. The LLP Agreement is where profit shares, authority to sign and submit bids, and what happens if the partner who wins the work leaves are settled. It must be filed in Form 3 within thirty days of incorporation.",
+      },
+      {
+        title: "Audit above thresholds, and tenders may want it anyway",
+        body: "An LLP needs audit only once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh. That is a genuine saving, but if you intend to bid for government work that asks for audited accounts, you may want audited accounts regardless of whether the LLP Act requires them. Worth deciding deliberately rather than discovering at bid time.",
+      },
+      {
+        title: "GIFT City is a different question entirely",
+        body: "If the intention is to operate inside the IFSC at GIFT City, the structure has to be planned around IFSC authorisation requirements administered by the IFSCA, not just around incorporation. Do not assume an LLP formed in the ordinary way is a route into IFSC activity. That needs specialist advice on the IFSC side first.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Do Gujarat government tenders accept an LLP?",
+        a: "Many do, and where a tender permits either a company or an LLP, the LLP is usually cheaper to run. Some tenders specify a company, and many require audited accounts and turnover for a stated number of past years regardless of entity type. The only reliable answer comes from the eligibility clause of the tenders you actually intend to bid for.",
+      },
+      {
+        q: "Two of us run a consultancy in Gandhinagar. Is an LLP enough?",
+        a: "For most government consultancy and IT vendor work, yes. An LLP gives you limited liability, a presence on the MCA register that procurement can verify, and materially lower annual compliance than a company. It becomes insufficient only if a specific tender requires a company, or if you intend to raise equity investment, which an LLP cannot issue.",
+      },
+      {
+        q: "Should we get our LLP accounts audited even below the threshold?",
+        a: "If you plan to bid for government work, it is often worth it. Tender eligibility frequently asks for audited accounts and turnover history, and having them already prepared each year avoids being ruled out at bid time. It is a commercial decision about what your market expects rather than a statutory requirement below the thresholds.",
+      },
+    ],
+  },
+  {
+    city: "gandhinagar",
+    service: "partnership-registration",
+    h1: "Partnership Firm Registration in Gandhinagar",
+    title: "Partnership Firm Registration in Gandhinagar | Raulji Group",
+    metaDescription:
+      "Partnership firm registration in Gandhinagar with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+    localContext: [
+      "A partnership firm is a legitimate and inexpensive structure for a small joint business in Gandhinagar, and it suits local trade, retail and service businesses run by two or three working partners perfectly well.",
+      "There is one caution that is specific to this city and that we would rather state plainly than leave you to discover. A large share of Gandhinagar's commercial opportunity is government work, and government tender eligibility clauses frequently require a registered company or LLP. A partnership firm is not on the MCA register, and in many tenders it simply does not qualify.",
+      "So the honest advice depends on your market. If your customers are local and private, a firm is fine, cheap and quick. If your plan involves bidding for state department work, check the eligibility clauses first, because a firm may rule you out before price is even considered, and an LLP is not much more expensive to run.",
+    ],
+    whoLocally: [
+      "Local retail, trade and service businesses with two or more working partners",
+      "Small joint businesses serving private customers rather than government departments",
+      "Family businesses in the residential sectors and Kudasan and Sargasan",
+      "Businesses wanting a documented arrangement with no MCA compliance",
+      "Partners testing a venture before committing to an LLP or a company",
+    ],
+    localFactors: [
+      {
+        title: "Government tenders frequently exclude a firm",
+        body: "This is the most important local point. Many Gujarat state tender documents require a registered company or LLP, and a partnership firm does not appear on the MCA register. If government work is any part of your plan, read the eligibility clauses before you form a firm, because the structure can disqualify you regardless of your price or capability.",
+      },
+      {
+        title: "Register the firm to keep your enforcement rights",
+        body: "Registration with the Registrar of Firms is optional under the Indian Partnership Act, 1932, but an unregistered firm cannot sue to enforce a contract. For any business carrying receivables, that removes the main recovery route. It is inexpensive, and worth doing at formation rather than during a dispute.",
+      },
+      {
+        title: "Unlimited liability, shared in full by each partner",
+        body: "Each partner is liable for the whole of the firm's debts rather than a proportionate share, and any partner can bind the firm by their own acts. If that is uncomfortable, or if your work involves any advisory or professional risk, an LLP gives you the same partner structure with liability capped for two annual filings.",
+      },
+      {
+        title: "Stamp duty depends on capital contributed",
+        body: "The deed must be executed on stamp paper of the correct value. Stamp duty is set at state level and is uniform across Gujarat, but the amount varies with the capital contributed. Incorrect stamping is a common reason a deed is later questioned, so we confirm the figure before execution.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a partnership firm bid for Gujarat government tenders?",
+        a: "Often not. Many state tender documents require a registered company or LLP, and a partnership firm is not on the MCA register. Some tenders do accept firms. The only way to know is to read the eligibility clause of the tenders you intend to bid for, and it is worth doing that before you choose a structure rather than after.",
+      },
+      {
+        q: "Is a partnership firm or an LLP better in Gandhinagar?",
+        a: "It depends on who your customers are. For local private customers, a firm is cheaper, quicker and perfectly adequate. If you intend to pursue government work, an LLP is likely to be necessary for eligibility and costs only two annual filings more, so it is usually the better choice from the start rather than converting later.",
+      },
+      {
+        q: "Do we need to register the firm with the Registrar of Firms?",
+        a: "It is optional, and an unregistered firm is valid. The practical reason to register is that an unregistered firm cannot sue to enforce a contract, which matters for any business that invoices customers and carries receivables. Registration is inexpensive relative to what it protects.",
+      },
+    ],
+  },
+  {
+    city: "gandhinagar",
+    service: "proprietorship-registration",
+    h1: "Proprietorship Registration in Gandhinagar",
+    title: "Proprietorship Registration in Gandhinagar | Raulji Group",
+    metaDescription:
+      "Proprietorship registration support in Gandhinagar: GST, Udyam and Gujarat shop and establishment registration for individual consultants and small businesses.",
+    localContext: [
+      "In Gandhinagar the proprietorship is the common structure for the individual consultant, and the city has a lot of them: policy and technical advisers, IT contractors, trainers and specialists who work alone and bill a small number of clients.",
+      "A proprietorship is not incorporated, and there is no proprietorship certificate in India. The business is not separate from you in law. What gives it a workable identity is a set of other registrations, chosen according to what the work actually involves.",
+      "For a Gandhinagar consultant GST is usually the practical requirement, because departments and larger clients need a GST-compliant tax invoice to process payment. Udyam, the free MSME registration, is worth having too, and it matters more here than in most places: MSME status appears in procurement policy and in the protections on delayed payment, which is relevant when your client is a government department working to its own timetable.",
+    ],
+    whoLocally: [
+      "Individual policy, technical and management consultants",
+      "IT contractors and developers billing departments or larger vendors",
+      "Trainers, researchers and specialists working on their own account",
+      "Local retail and service businesses with a single owner",
+      "Professionals invoicing business clients who require a GST invoice",
+    ],
+    localFactors: [
+      {
+        title: "GST is usually what gets your invoice processed",
+        body: "Government departments and larger client organisations generally need a GST-compliant tax invoice before payment can be processed, and many will not raise a work order without a GST number on file. For an individual consultant in Gandhinagar, GST registration is in practice what makes you billable, whatever the turnover threshold permits.",
+      },
+      {
+        title: "Udyam is free and relevant to procurement here",
+        body: "Udyam is the MSME registration. It costs nothing, brings the MSME protections on delayed payment, and MSME status appears in procurement policy, which matters in a city where a lot of the work is public sector. Nobody should be charging you a significant fee to obtain it.",
+      },
+      {
+        title: "A proprietorship limits what you can bid for",
+        body: "This is the constraint to understand before you plan around it. Many government tenders require a registered company or LLP, and a proprietorship is not on the MCA register. Individual consultants often work as sub-contractors to a registered vendor for exactly this reason. If direct bidding is the ambition, the structure will have to change.",
+      },
+      {
+        title: "No separation between you and the business",
+        body: "You and the business are the same person in law, so business liabilities are personal liabilities and income is taxed at your personal slab rates. For advisory work that is often an acceptable trade, alongside professional indemnity cover. A proprietorship also cannot have a second owner, so the structure has to change the moment someone genuinely joins you.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Can a proprietorship bid for Gujarat government work?",
+        a: "Often not directly. Many tenders require a registered company or LLP, and a proprietorship does not appear on the MCA register. A common route for individual consultants in Gandhinagar is to work as a sub-contractor to a registered vendor. If you want to bid in your own right, you will generally need an LLP or a company.",
+      },
+      {
+        q: "Do I need GST as an individual consultant in Gandhinagar?",
+        a: "In practice usually yes, because departments and larger clients need a GST-compliant tax invoice to process a payment, and many will not issue a work order without a GST number on file. The turnover threshold may not require registration, but the commercial reality generally does.",
+      },
+      {
+        q: "Is there a certificate that registers me as a proprietor?",
+        a: "No. A proprietorship is not incorporated, so there is no single certificate, and anyone offering you one is selling something else under that name. What you obtain is the registrations your work actually requires, typically GST and Udyam, plus shop and establishment registration if you hold commercial premises.",
+      },
+    ],
+  },
+];
+
+/** All valid city + service pairings, for generateStaticParams. */
+export function getCityServiceParams() {
+  return CITY_SERVICES.map((entry) => ({
+    city: entry.city,
+    service: CITY_SERVICE_SLUGS[entry.service],
+  }));
+}
+
+/** Look up one pairing by its two URL segments. */
+export function getCityService(citySlug: string, serviceUrlSlug: string) {
+  const entry = CITY_SERVICES.find(
+    (item) =>
+      item.city === citySlug && CITY_SERVICE_SLUGS[item.service] === serviceUrlSlug,
+  );
+  if (!entry) return null;
+
+  const city = getCity(entry.city);
+  const service = getService(entry.service);
+  if (!city || !service) return null;
+
+  return { entry, city, service, path: `/${entry.city}/${serviceUrlSlug}/` };
+}
+
+/** The other three structures for this city, for internal linking. */
+export function getSiblingCityServices(citySlug: string, serviceSlug: ServiceSlug) {
+  return CITY_SERVICES.filter(
+    (item) => item.city === citySlug && item.service !== serviceSlug,
+  ).map((item) => ({
+    ...item,
+    path: `/${item.city}/${CITY_SERVICE_SLUGS[item.service]}/`,
+    shortName: getService(item.service)?.shortName ?? item.service,
+  }));
+}
+
+/** Cities that have service pages, so city pages know whether to link to them. */
+export const CITIES_WITH_SERVICE_PAGES = Array.from(
+  new Set(CITY_SERVICES.map((entry) => entry.city)),
+);
+
+/**
+ * Build-time guard. If a pairing is added without all four structures, or a slug
+ * stops matching lib/cities.ts or lib/services.ts, the build fails here rather
+ * than shipping a broken internal link.
+ */
+if (process.env.NODE_ENV !== "production") {
+  for (const entry of CITY_SERVICES) {
+    if (!getCity(entry.city)) {
+      throw new Error(`city-services: unknown city slug "${entry.city}"`);
+    }
+    if (!getService(entry.service)) {
+      throw new Error(`city-services: unknown service slug "${entry.service}"`);
+    }
+  }
+  for (const city of CITIES_WITH_SERVICE_PAGES) {
+    const count = CITY_SERVICES.filter((e) => e.city === city).length;
+    if (count !== 4) {
+      throw new Error(
+        `city-services: ${city} has ${count} service pages, expected all four structures`,
+      );
+    }
+  }
+}

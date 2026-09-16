@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { getTeamMembers } from "@/lib/content";
-import { SITE, mailHref, telHref } from "@/lib/site";
+import { SITE, LEADERSHIP, mailHref, telHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
 
@@ -38,10 +38,15 @@ export default async function TeamPage() {
           <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">
             The team behind your registration
           </h1>
+          {/* Confirmed by the client on 2026-09-16, and recorded in LEADERSHIP in
+              lib/site.ts. "Founder" is deliberately not used: the confirmation
+              covered Chairman only (master rule 41 and 42). */}
           <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Raulji Group operates from {SITE.locality} under the leadership of Chairman and Founder
-            Dharmendrasinh Raulji. When you register through us, you deal with the same people
-            throughout rather than being passed between desks.
+            Raulji Group works from {SITE.locality}, {SITE.region}, under the leadership of{" "}
+            {LEADERSHIP.chairman.name}, {LEADERSHIP.chairman.roles[0]} and{" "}
+            {LEADERSHIP.chairman.roles[1]}. When you work with us you deal with the same people
+            throughout rather than being passed between desks, which is the main practical reason we
+            keep the team small.
           </p>
         </div>
       </section>

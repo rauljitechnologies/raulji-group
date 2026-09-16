@@ -7,6 +7,12 @@
  *
  * Land Investment and Rentals are absent on purpose: both are discontinued.
  * Land Investment 301s to /services/, Rentals returns 410.
+ *
+ * Business Consulting is absent for a different reason: it was promoted out of
+ * this file into a full pillar page at /services/business-consulting/, because
+ * consulting is the primary focus of the group and the compact template here
+ * could not carry it. /services/consulting/ 301s to the pillar. Do not re-add a
+ * consulting entry here; it would create two pages for the same intent.
  */
 
 export interface SecondaryService {
@@ -24,25 +30,6 @@ export interface SecondaryService {
 }
 
 export const SECONDARY_SERVICES: SecondaryService[] = [
-  {
-    slug: "consulting",
-    path: "/services/consulting/",
-    name: "Business Consulting",
-    h1: "Business Consulting Services",
-    title: "Business Consulting Services | Raulji Group",
-    metaDescription:
-      "Business consulting from Raulji Group: structure selection, startup setup, process and growth advisory for businesses in Gujarat and India.",
-    group: "Advisory",
-    intro:
-      "Advisory work for businesses that are past the registration stage and deciding what to do next: how to structure operations, where the obligations sit, and what has to be in place before growth is workable.",
-    includes: [
-      "Choosing and reviewing the right business structure",
-      "Setting up a new business from scratch, end to end",
-      "Reviewing existing registrations and licences for gaps",
-      "Documentation and process review",
-      "Guidance on statutory obligations attached to your activity",
-    ],
-  },
   {
     slug: "legal",
     path: "/services/legal/",

@@ -35,6 +35,31 @@ export const SITE = {
   ogImage: "/og/default.png",
 } as const;
 
+/**
+ * Leadership. Confirmed by the client on 2026-09-16.
+ *
+ * Titles are recorded exactly as the client gave them. Note that "Founder" is
+ * deliberately absent: an earlier version of the site said "Chairman and
+ * Founder", the client's confirmation said Chairman only, and a founder claim
+ * is company history that needs its own confirmation (master rule 42).
+ *
+ * `photo` is a PLACEHOLDER. It is the LinkedIn profile picture the client
+ * supplied as a stand-in, and it is a casual photograph rather than a corporate
+ * portrait. Replace the file at that path with the official photograph when it
+ * arrives; nothing else needs to change, because the layout crops to 4:5 and
+ * every use points at this one constant.
+ */
+export const LEADERSHIP = {
+  chairman: {
+    name: "Dharmendrasinh Raulji",
+    roles: ["Chairman, Raulji Group", "Director, Raulji Technologies"],
+    /** Single string form, for schema.org jobTitle. */
+    jobTitle: "Chairman, Raulji Group and Director, Raulji Technologies",
+    photo: "/leadership/dharmendrasinh-raulji.jpg",
+    photoIsPlaceholder: true,
+  },
+} as const;
+
 export const telHref = `tel:${SITE.phone.e164}`;
 export const mailHref = `mailto:${SITE.email}`;
 

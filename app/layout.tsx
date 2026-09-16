@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileActionBar } from "@/components/layout/mobile-action-bar";
+import { Analytics } from "@/components/layout/analytics";
 import { LocationDrawerProvider } from "@/components/shared/location-drawer";
 import { JsonLd } from "@/components/ui/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
@@ -20,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "Company Registration & Business Services in Gujarat | Raulji Group",
+    default: "Raulji Group | Business Consulting & Solutions",
     template: "%s | Raulji Group",
   },
   description: SITE.description,
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <MobileActionBar />
         </LocationDrawerProvider>
+        <Analytics />
       </body>
     </html>
   );

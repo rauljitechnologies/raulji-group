@@ -3,6 +3,7 @@ import {
   ArrowRight,
   Building2,
   Compass,
+  GitCompareArrows,
   HelpCircle,
   MapPinned,
   MessageSquare,
@@ -23,20 +24,33 @@ import { SITE, telHref, mailHref, whatsappHref } from "@/lib/site";
  */
 
 /**
- * Where people who land here actually need to go.
- * Consulting is the primary pillar under master rule 8, but it is deliberately
- * absent until /services/business-consulting/ exists — this page must not link
- * to a page that would itself 404.
+ * A 404 already returns a 404 status, so it will not be indexed on merit. The
+ * explicit directive is kept anyway: it costs nothing and it covers the case
+ * where this component is reached by a soft navigation rather than a hard 404.
+ * follow stays true so the links out of here are still crawled.
  */
+export const metadata = {
+  title: { absolute: "Page not found | Raulji Group" },
+  robots: { index: false, follow: true },
+};
+
+/** Where people who land here actually need to go. Consulting leads, because it
+ * is the primary focus of the group. */
 const DESTINATIONS = [
+  {
+    icon: Compass,
+    title: "Business consulting",
+    body: "Advice on structure, planning and growth, before anything gets filed.",
+    href: "/services/business-consulting/",
+  },
   {
     icon: Building2,
     title: "Business registration",
     body: "Private Limited, LLP, Partnership and Proprietorship, with what each one involves.",
-    href: "/services/",
+    href: "/services/business-registration/",
   },
   {
-    icon: Compass,
+    icon: GitCompareArrows,
     title: "Compare structures",
     body: "All four side by side on liability, compliance, tax and funding.",
     href: "/compare/",
@@ -106,7 +120,7 @@ export default function NotFound() {
       <section className="py-14 md:py-20">
         <div className="container-wide">
           <h2 className="text-2xl md:text-3xl">Popular places on this site</h2>
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {DESTINATIONS.map((item) => (
               <li key={item.title}>
                 <Link

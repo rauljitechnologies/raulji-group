@@ -119,7 +119,7 @@ export function Header() {
         <div className="hidden shrink-0 items-center gap-3 lg:flex">
           <Link
             href={PRIMARY_CTA.href}
-            onClick={() => track("start_business_click", { label: "header" })}
+            onClick={() => track("primary_cta_click", { label: "header" })}
             className="brand-gradient inline-flex h-11 items-center rounded-lg px-5 text-sm font-semibold text-primary-foreground shadow-soft transition-shadow hover:shadow-elevated"
           >
             {PRIMARY_CTA.name}
@@ -156,6 +156,27 @@ function MegaMenuItem({
   onOpen: () => void;
   onClose: () => void;
 }) {
+  // A group with no children is a plain top-level link. Rendering it as a
+  // disclosure button with an empty panel would be a dead control, and an
+  // aria-expanded button that reveals nothing is worse than no button.
+  if (!group.links.length && group.href) {
+    return (
+      <li>
+        <Link
+          href={group.href}
+          className={cn(
+            "block rounded-lg px-4 py-2 text-sm font-medium transition-colors",
+            active
+              ? "bg-accent text-primary"
+              : "text-muted-foreground hover:bg-muted hover:text-secondary",
+          )}
+        >
+          {group.name}
+        </Link>
+      </li>
+    );
+  }
+
   return (
     <li
       className="relative"
@@ -183,15 +204,28 @@ function MegaMenuItem({
         />
       </button>
 
-      <div
-        className={cn(
-          "absolute left-0 top-full z-50 pt-2 transition-all duration-150",
-          open ? "visible opacity-100" : "invisible -translate-y-1 opacity-0",
-        )}
-      >
+      {/*
+        Centred on the trigger rather than left-aligned to it.
+
+        Left-aligned, the 42rem Services panel ran 82px past the right edge of a
+        1024px viewport, which is a width the master rules require us to test.
+        Centring keeps every panel inside the viewport from 1024 up, and the
+        max-width clamp is the backstop if a wider panel is ever added.
+
+        The centring transform sits on the outer element and the open/close
+        transform on the inner one, because putting both on the same element
+        would mean the enter animation fights the centring.
+      */}
+      <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
         <div
           className={cn(
-            "rounded-2xl border border-border bg-card p-3 shadow-elevated",
+            "transition-all duration-150",
+            open ? "visible opacity-100" : "invisible -translate-y-1 opacity-0",
+          )}
+        >
+        <div
+          className={cn(
+            "max-w-[calc(100vw-2rem)] rounded-2xl border border-border bg-card p-3 shadow-elevated",
             group.feature ? "grid w-[42rem] grid-cols-[1fr_16rem] gap-3" : "w-[22rem]",
           )}
         >
@@ -220,6 +254,7 @@ function MegaMenuItem({
             </div>
           ) : null}
         </div>
+        </div>
       </div>
     </li>
   );
@@ -234,14 +269,26 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
       <nav aria-label="Mobile" className="container-wide py-4">
         <Link
           href={PRIMARY_CTA.href}
-          onClick={() => track("start_business_click", { label: "mobile_menu" })}
+          onClick={() => track("primary_cta_click", { label: "mobile_menu" })}
           className="brand-gradient mb-4 flex min-h-[3rem] items-center justify-center rounded-xl px-5 font-semibold text-primary-foreground"
         >
           {PRIMARY_CTA.name}
         </Link>
 
         <ul className="divide-y divide-border">
-          {NAV.map((group) => (
+          {NAV.map((group) =>
+            // Same reasoning as the desktop menu: no children means a plain link.
+            !group.links.length && group.href ? (
+              <li key={group.name}>
+                <Link
+                  href={group.href}
+                  onClick={onNavigate}
+                  className="flex min-h-[3.25rem] items-center font-semibold text-secondary"
+                >
+                  {group.name}
+                </Link>
+              </li>
+            ) : (
             <li key={group.name}>
               <details className="group" name="mobile-nav">
                 <summary className="flex min-h-[3.25rem] cursor-pointer list-none items-center justify-between font-semibold text-secondary marker:hidden">
@@ -260,10 +307,12 @@ function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
                 </ul>
               </details>
             </li>
-          ))}
+            ),
+          )}
           <li>
             <Link
               href="/contact/"
+              onClick={onNavigate}
               className="flex min-h-[3.25rem] items-center font-semibold text-secondary"
             >
               Contact

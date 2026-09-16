@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
   // The live site canonicalises every URL to a trailing slash. Keeping that form
   // means existing indexed URLs and backlinks land on a 200 with no redirect hop.
   trailingSlash: true,
@@ -44,6 +45,31 @@ const nextConfig: NextConfig = {
       {
         source: "/services/company-registration",
         destination: "/services/pvt-registration/",
+        statusCode: 301,
+      },
+      // Consulting was promoted from a compact secondary page to the primary
+      // pillar. Same intent, more content, so a 301 rather than a 410.
+      {
+        source: "/services/consulting",
+        destination: "/services/business-consulting/",
+        statusCode: 301,
+      },
+      // /services/ was the registration overview before the dedicated pillar
+      // existed. Both URLs are kept: /services/ is now the whole-catalogue hub,
+      // so these are aliases people and old links may still use.
+      {
+        source: "/services/registration",
+        destination: "/services/business-registration/",
+        statusCode: 301,
+      },
+      {
+        source: "/business-registration",
+        destination: "/services/business-registration/",
+        statusCode: 301,
+      },
+      {
+        source: "/business-consulting",
+        destination: "/services/business-consulting/",
         statusCode: 301,
       },
     ];

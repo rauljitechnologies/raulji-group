@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { Check, X, FileText, ArrowRight, Phone, MessageCircle, Info } from "lucide-react";
+import { Check, X, FileText, ArrowRight, Phone, MessageCircle, Info, MapPin } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { CITY_SERVICES, CITY_SERVICE_SLUGS } from "@/lib/city-services";
+import { getCity } from "@/lib/cities";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
@@ -25,6 +27,23 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
   const wa = whatsappHref(`Hello Raulji Group, I would like to know more about ${service.name}.`);
+
+  /**
+   * City pages that exist for this specific structure. Derived from the data
+   * rather than hardcoded, so it stays correct if the permitted city list ever
+   * changes and never links to a page that does not exist.
+   */
+  const localPages = CITY_SERVICES.filter((entry) => entry.service === service.slug)
+    .map((entry) => {
+      const city = getCity(entry.city);
+      if (!city) return null;
+      return {
+        path: `/${entry.city}/${CITY_SERVICE_SLUGS[entry.service]}/`,
+        cityName: city.name,
+        district: city.district,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
     <>
@@ -89,7 +108,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
           {/* Pricing, only where it is published. Otherwise a quote CTA. */}
           <div>
             {service.pricing ? (
-              <div className="glass-card rounded-3xl p-7">
+              <div className="rounded-2xl border border-border bg-card p-7">
                 <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                   {service.name} package
                 </p>
@@ -113,7 +132,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                 </Link>
               </div>
             ) : (
-              <div className="glass-card rounded-3xl p-7">
+              <div className="rounded-2xl border border-border bg-card p-7">
                 <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                   What it costs
                 </p>
@@ -302,6 +321,45 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
         />
         <FaqAccordion faqs={service.faqs} idPrefix={`${service.slug}-faq`} />
       </Section>
+
+      {/* Local pages for this structure. Completes the link graph: the service
+          page points down to the five city pages, and each of those points back
+          here for the full guide (master rule 19). */}
+      {localPages.length ? (
+        <Section>
+          <SectionHeading
+            eyebrow="By location"
+            title={`${service.shortName} registration in your city`}
+            lead="These pages cover the same structure with the local business context that tends to shape the decision."
+            align="left"
+          />
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {localPages.map((page) => (
+              <li key={page.path}>
+                <Link
+                  href={page.path}
+                  className="flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-colors hover:border-primary/40"
+                >
+                  <span className="flex items-center gap-2 text-base font-bold text-secondary">
+                    <MapPin className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                    {page.cityName}
+                  </span>
+                  <span className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {page.district} district
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-sm text-muted-foreground">
+            Not listed?{" "}
+            <Link href="/gujarat/" className="font-semibold text-primary hover:underline">
+              We cover all 33 districts of Gujarat
+            </Link>
+            , and the process is the same wherever you are.
+          </p>
+        </Section>
+      ) : null}
 
       {/* Related structures */}
       <Section tone="muted">
