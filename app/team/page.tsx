@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Linkedin } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Linkedin, Mail, Phone } from "lucide-react";
+import { Section } from "@/components/ui/section";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { getTeamMembers } from "@/lib/content";
 import { SITE, LEADERSHIP, mailHref, telHref } from "@/lib/site";
+import chairmanPhoto from "@/public/leadership/dharmendrasinh-raulji.jpg";
 import { pageMeta } from "@/lib/seo";
-import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
+import { breadcrumbSchema, graph, personSchema, type Crumb } from "@/lib/schema";
 
 export const revalidate = 3600;
 
@@ -30,26 +31,55 @@ export default async function TeamPage() {
 
   return (
     <>
-      <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
+      <JsonLd data={graph(breadcrumbSchema(crumbs), personSchema())} />
+      {/* The leadership sentence is confirmed by the client on 2026-09-16 and
+          recorded in LEADERSHIP in lib/site.ts. "Founder" is deliberately not
+          used: the confirmation covered Chairman only (master rule 13). */}
+      <PageHeader
+        crumbs={crumbs}
+        title="The team behind your registration"
+        lead={`Raulji Group works from ${SITE.locality}, ${SITE.region}. When you work with us you deal with the same people throughout rather than being passed between desks, which is the main practical reason we keep the team small.`}
+      />
 
-      <section className="pb-12 pt-8">
-        <div className="container-wide max-w-4xl">
-          <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">
-            The team behind your registration
-          </h1>
-          {/* Confirmed by the client on 2026-09-16, and recorded in LEADERSHIP in
-              lib/site.ts. "Founder" is deliberately not used: the confirmation
-              covered Chairman only (master rule 41 and 42). */}
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Raulji Group works from {SITE.locality}, {SITE.region}, under the leadership of{" "}
-            {LEADERSHIP.chairman.name}, {LEADERSHIP.chairman.roles[0]} and{" "}
-            {LEADERSHIP.chairman.roles[1]}. When you work with us you deal with the same people
-            throughout rather than being passed between desks, which is the main practical reason we
-            keep the team small.
-          </p>
+      {/*
+        The page opened on a heading, a paragraph and then a small centred
+        "profiles are being updated" card marooned in white space, because the
+        Supabase team table is empty. The named, accountable person at the top
+        of the group is verified, so the page leads with him and the empty
+        table becomes a note rather than the entire page.
+      */}
+      <Section>
+        <div className="grid gap-8 md:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] md:gap-12">
+          <Image
+            src={chairmanPhoto}
+            alt={`${LEADERSHIP.chairman.name}, ${LEADERSHIP.chairman.roles[0]}`}
+            placeholder="blur"
+            sizes="(min-width: 768px) 14rem, 100vw"
+            className="aspect-[4/5] w-full max-w-[14rem] rounded-2xl border border-border object-cover object-top"
+          />
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">Leadership</p>
+            <h2 className="mt-3 text-2xl md:text-3xl">{LEADERSHIP.chairman.name}</h2>
+            <ul className="mt-3 space-y-0.5">
+              {LEADERSHIP.chairman.roles.map((role) => (
+                <li key={role} className="font-medium text-muted-foreground">
+                  {role}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 leading-relaxed text-muted-foreground">
+              The same person leads both brands, which is why a structure decision, the registration
+              that follows from it and the technology a business needs afterwards can be handled as
+              one conversation rather than three.
+            </p>
+            <p className="mt-6">
+              <Link href="/about/" className="link-target font-semibold text-primary hover:underline">
+                More about Raulji Group &rarr;
+              </Link>
+            </p>
+          </div>
         </div>
-      </section>
+      </Section>
 
       {members.length > 0 ? (
         <Section>
@@ -99,43 +129,56 @@ export default async function TeamPage() {
           </ul>
         </Section>
       ) : (
-        <Section>
-          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-8 text-center">
-            <h2 className="text-xl">Team profiles are being updated</h2>
-            <p className="mt-3 leading-relaxed text-muted-foreground">
-              Rather than publish placeholder profiles, we would rather you spoke to us directly.
-              Call{" "}
-              <a href={telHref} className="font-semibold text-primary hover:underline">
+        /* No placeholder profiles (master rule 13). Stated as a note with the
+           two ways to reach the person who would do the work, rather than a
+           small centred card alone in a full section. */
+        <Section tone="muted">
+          <div className="grid gap-6 rounded-2xl border border-border bg-card p-6 sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
+            <div>
+              <h2 className="text-xl">Team profiles are being updated</h2>
+              <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+                Rather than publish placeholder profiles, we would rather you spoke to us directly.
+                Either way you reach the person who would handle your registration.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 sm:flex-row md:w-[15rem] md:flex-col">
+              <a
+                href={telHref}
+                className="inline-flex min-h-[3rem] flex-1 items-center justify-center gap-2 rounded-xl border-2 border-primary px-5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                <Phone className="h-4 w-4" aria-hidden="true" />
                 {SITE.phone.display}
-              </a>{" "}
-              or email{" "}
-              <a href={mailHref} className="font-semibold text-primary hover:underline">
+              </a>
+              <a
+                href={mailHref}
+                className="inline-flex min-h-[3rem] flex-1 items-center justify-center gap-2 rounded-xl border border-border px-5 text-sm font-semibold text-secondary transition-colors hover:border-primary hover:text-primary"
+              >
+                <Mail className="h-4 w-4 text-primary" aria-hidden="true" />
                 {SITE.email}
-              </a>{" "}
-              and you will reach the person who would handle your registration.
-            </p>
+              </a>
+            </div>
           </div>
         </Section>
       )}
 
-      <Section tone="muted">
-        <SectionHeading
-          title="Work with us"
-          lead="We are open to hearing from people who want to do this work properly."
-        />
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="leading-relaxed text-muted-foreground">
-            If you are interested in joining Raulji Group, email{" "}
-            <a href={mailHref} className="font-semibold text-primary hover:underline">
-              {SITE.email}
-            </a>{" "}
-            with your details.
-          </p>
-          <p className="mt-6">
-            <Link href="/about/" className="link-target font-semibold text-primary hover:underline">
-              More about Raulji Group &rarr;
-            </Link>
-          </p>
+      {/* Careers. A short note, not a centred display heading over two lines of
+          text: there is no vacancy list to justify the weight. */}
+      <Section>
+        <div className="grid gap-6 border-t border-border pt-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-12">
+          <div className="max-w-2xl">
+            <h2 className="text-2xl">Work with us</h2>
+            <p className="mt-3 leading-relaxed text-muted-foreground">
+              We are open to hearing from people who want to do this work properly. If you are
+              interested in joining Raulji Group, email your details and we will read them.
+            </p>
+          </div>
+          <a
+            href={mailHref}
+            className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            <Mail className="h-4 w-4" aria-hidden="true" />
+            {SITE.email}
+          </a>
         </div>
       </Section>
 

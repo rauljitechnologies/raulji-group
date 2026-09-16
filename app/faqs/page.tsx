@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Section } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
@@ -39,33 +39,26 @@ export default function FaqsPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs), faqSchema(allFaqs))} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-10 pt-8">
-        <div className="container-wide max-w-4xl">
-          <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">
-            Business Registration FAQs
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            The questions we are asked most about registering and running a business in India,
-            grouped by structure.
-          </p>
-          <nav aria-label="FAQ sections" className="mt-8">
-            <ul className="flex flex-wrap gap-2">
-              {sections.map((section) => (
-                <li key={section.id}>
-                  <a
-                    href={`#${section.id}`}
-                    className="inline-flex rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-secondary hover:border-primary hover:text-primary"
-                  >
-                    {section.heading}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </section>
+      <PageHeader
+        crumbs={crumbs}
+        title="Business Registration FAQs"
+        lead="The questions we are asked most about registering and running a business in India, grouped by structure."
+      >
+        <nav aria-label="FAQ sections" className="mt-8">
+          <ul className="flex flex-wrap gap-2">
+            {sections.map((section) => (
+              <li key={section.id}>
+                <a
+                  href={`#${section.id}`}
+                  className="inline-flex min-h-[2.5rem] items-center rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-secondary hover:border-primary hover:text-primary"
+                >
+                  {section.heading}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </PageHeader>
 
       {sections.map((section, i) => (
         <Section key={section.id} id={section.id} tone={i % 2 === 1 ? "muted" : "default"}>

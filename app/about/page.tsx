@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
@@ -92,17 +92,13 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs), personSchema())} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-12 pt-8">
-        <div className="container-wide max-w-4xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            The Raulji Group
-          </p>
-          <h1 className="mt-3 text-balance text-3xl leading-tight md:text-4xl lg:text-5xl">
-            About Raulji Group
-          </h1>
-          <p className="mt-5 text-xl font-semibold text-secondary">
+      <PageHeader
+        crumbs={crumbs}
+        eyebrow="The Raulji Group"
+        title="About Raulji Group"
+      >
+        <div className="mt-5 max-w-3xl">
+          <p className="text-lg font-semibold leading-snug text-secondary md:text-xl">
             Leadership Built on Relationships. Trust Built for the Long Term.
           </p>
           <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -112,9 +108,9 @@ export default function AboutPage() {
             needs to be in place before it grows.
           </p>
         </div>
-      </section>
+      </PageHeader>
 
-      <Section tone="muted">
+      <Section>
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
           <div>
             <h2 className="text-3xl">What the group does</h2>

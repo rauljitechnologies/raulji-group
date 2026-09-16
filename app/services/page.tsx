@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
@@ -69,23 +69,12 @@ export default function ServicesPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-12 pt-8">
-        <div className="container-wide max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Raulji Group
-          </p>
-          <h1 className="mt-3 text-balance text-3xl leading-tight md:text-4xl lg:text-5xl">
-            Our Services
-          </h1>
-          <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
-            Two things sit at the centre of what the group does: advising on business decisions, and
-            getting businesses correctly registered. Everything else on this page supports one of
-            those two.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        crumbs={crumbs}
+        eyebrow="Raulji Group"
+        title="Our Services"
+        lead="Two things sit at the centre of what the group does: advising on business decisions, and getting businesses correctly registered. Everything else on this page supports one of those two."
+      />
 
       {/* The two pillars. */}
       <Section className="pt-0">

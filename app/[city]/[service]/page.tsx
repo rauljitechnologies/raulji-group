@@ -99,11 +99,11 @@ export default async function CityServicePage({
         <div className="container-wide">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
             <div>
-              <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-accent px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+              <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
+                <MapPin className="h-4 w-4" aria-hidden="true" />
                 {city.name}, {city.district} district
               </p>
-              <h1 className="text-balance text-3xl leading-tight md:text-4xl lg:text-[2.75rem]">
+              <h1 className="mt-4 text-balance text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-[2.75rem] lg:leading-[1.15]">
                 {entry.h1}
               </h1>
               <div className="mt-5 space-y-4 text-pretty leading-relaxed text-muted-foreground">

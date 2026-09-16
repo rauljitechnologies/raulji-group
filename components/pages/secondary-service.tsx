@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Check, Info, ArrowRight, Phone } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
@@ -29,16 +29,8 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-12 pt-8">
-        <div className="container-wide max-w-4xl">
-          <p className="mb-4 inline-flex rounded-full border border-border bg-muted px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            {service.group}
-          </p>
-          <h1 className="text-3xl leading-tight md:text-4xl">{service.h1}</h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{service.intro}</p>
-
+      <PageHeader crumbs={crumbs} eyebrow={service.group} title={service.h1} lead={service.intro}>
+        <div className="max-w-3xl">
           {isTechnology ? (
             <a
               href={SITE.technologies}
@@ -68,9 +60,9 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
             </div>
           )}
         </div>
-      </section>
+      </PageHeader>
 
-      <Section tone="muted">
+      <Section>
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div>
             {/* On a technology page the list describes another brand's work, so

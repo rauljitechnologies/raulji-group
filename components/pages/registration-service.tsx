@@ -56,10 +56,12 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
       <section className="pb-14 pt-8 md:pb-20">
         <div className="container-wide grid gap-12 lg:grid-cols-[1.15fr_1fr]">
           <div>
-            <p className="mb-4 inline-flex rounded-full border border-primary/25 bg-accent px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
               {service.eyebrow}
             </p>
-            <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">{service.h1}</h1>
+            <h1 className="mt-4 text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-5xl lg:leading-[1.1]">
+              {service.h1}
+            </h1>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">{service.heroSub}</p>
 
             {/* Plain-language definition, kept near the top so it is easy to cite. */}

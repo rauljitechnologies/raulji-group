@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ComparisonTable } from "@/components/shared/comparison-table";
@@ -73,21 +73,11 @@ export default function ComparePage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs), faqSchema(COMPARE_FAQS))} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-12 pt-8">
-        <div className="container-wide max-w-4xl">
-          <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">
-            Choose the Right Business Structure
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Private Limited Company, LLP, Partnership Firm and Proprietorship differ in ways that are
-            expensive to reverse: who is liable, what you must file every year, how you are taxed and
-            whether you can ever raise equity. Here is the comparison, and the questions that usually
-            settle it.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        crumbs={crumbs}
+        title="Choose the Right Business Structure"
+        lead="Private Limited Company, LLP, Partnership Firm and Proprietorship differ in ways that are expensive to reverse: who is liable, what you must file every year, how you are taxed and whether you can ever raise equity. Here is the comparison, and the questions that usually settle it."
+      />
 
       <Section>
         <ComparisonTable />

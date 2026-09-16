@@ -1,6 +1,6 @@
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Section } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { LeadForm } from "@/components/forms/lead-form";
 import { CityGrid } from "@/components/shared/city-grid";
@@ -29,18 +29,11 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
-
-      <section className="pb-10 pt-8">
-        <div className="container-wide max-w-4xl">
-          <h1 className="text-3xl leading-tight md:text-4xl lg:text-5xl">Start Your Business</h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            Tell us what you are starting and we will come back to you on which structure fits, what
-            documents you need and what it will cost. No obligation, and nothing gets filed until you
-            say so.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        crumbs={crumbs}
+        title="Start Your Business"
+        lead="Tell us what you are starting and we will come back to you on which structure fits, what documents you need and what it will cost. No obligation, and nothing gets filed until you say so."
+      />
 
       <Section>
         <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.15fr]">

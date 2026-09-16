@@ -91,11 +91,12 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
       {/* Hero */}
       <section className="pb-14 pt-8 md:pb-20">
         <div className="container-wide">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-accent px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-            <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+          {/* Plain eyebrow rather than a pill badge, matching every other page. */}
+          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
+            <MapPin className="h-4 w-4" aria-hidden="true" />
             {city.district} district, Gujarat
           </p>
-          <h1 className="max-w-4xl text-3xl leading-tight md:text-4xl lg:text-5xl">
+          <h1 className="mt-4 max-w-4xl text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-5xl lg:leading-[1.1]">
             Business Registration Services in {city.name}, Gujarat
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{city.intro}</p>

@@ -6,9 +6,22 @@ import type { Crumb } from "@/lib/schema";
  * Visible breadcrumb. The trail passed here is the same array used to build
  * BreadcrumbList schema, so the two can never drift apart (spec section 38).
  */
-export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
+export function Breadcrumbs({
+  crumbs,
+  inline = false,
+}: {
+  crumbs: Crumb[];
+  /**
+   * Render just the trail, with no container or fixed-header offset, for
+   * placements that already provide both (see PageHeader).
+   */
+  inline?: boolean;
+}) {
   return (
-    <nav aria-label="Breadcrumb" className="container-wide pt-28 md:pt-32">
+    <nav
+      aria-label="Breadcrumb"
+      className={inline ? undefined : "container-wide pt-28 md:pt-32"}
+    >
       <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
         {crumbs.map((crumb, i) => {
           const isLast = i === crumbs.length - 1;

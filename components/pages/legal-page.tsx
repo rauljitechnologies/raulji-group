@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { SITE, telHref, mailHref } from "@/lib/site";
 import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
@@ -25,14 +25,15 @@ export function LegalPage({
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
+      <PageHeader crumbs={crumbs} title={title} lead={intro}>
+        <p className="mt-6 text-sm text-muted-foreground">Last updated: {updated}</p>
+      </PageHeader>
 
-      <article className="container-narrow py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl">{title}</h1>
-        <p className="mt-3 text-sm text-muted-foreground">Last updated: {updated}</p>
-        {intro ? <p className="mt-6 text-lg leading-relaxed text-muted-foreground">{intro}</p> : null}
-
-        <div className="mt-10 space-y-10">
+      {/* Left-aligned to the page gutter like every other page, with the measure
+          held at 48rem by the inner column rather than by centring the whole
+          document, which left the heading aligned to nothing. */}
+      <article className="container-wide py-12 md:py-16">
+        <div className="max-w-3xl space-y-10">
           {sections.map((section, i) => (
             <section key={section.heading}>
               <h2 className="text-xl md:text-2xl">

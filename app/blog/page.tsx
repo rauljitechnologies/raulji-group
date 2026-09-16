@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { CalendarDays, Clock } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { ArrowRight, CalendarDays, Clock } from "lucide-react";
+import { Section } from "@/components/ui/section";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { getPublishedPosts } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
-import { SITE } from "@/lib/site";
+import { SITE, telHref } from "@/lib/site";
 
 // Rebuild hourly so new posts appear without a redeploy.
 export const revalidate = 3600;
@@ -39,30 +39,45 @@ export default async function BlogPage() {
   return (
     <>
       <JsonLd data={graph(breadcrumbSchema(crumbs))} />
-      <Breadcrumbs crumbs={crumbs} />
+      <PageHeader
+        crumbs={crumbs}
+        eyebrow="Blog"
+        title="Notes on registering and running a business"
+        lead="Practical writing on business structures, registration and the obligations that follow, from the people who handle the filings."
+      />
 
       <Section>
-        <SectionHeading
-          eyebrow="Blog"
-          as="h1"
-          title="Notes on registering and running a business"
-          lead="Practical writing on business structures, registration and the obligations that follow, from the people who handle the filings."
-        />
-
         {posts.length === 0 ? (
-          <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-8 text-center">
+          /* Nothing published yet, so the block sends people to the pages that
+             do answer the question instead of sitting as a centred card alone
+             in the middle of the page. */
+          <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
             <h2 className="text-xl">No posts published yet</h2>
-            <p className="mt-3 leading-relaxed text-muted-foreground">
-              We are working on the first set of guides. In the meantime, the service pages cover
-              process, documents and costs in detail, and you can call {SITE.phone.display} with a
-              specific question.
+            <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+              We are working on the first set of guides. In the meantime the service pages cover
+              process, documents and costs in detail, and you can call{" "}
+              <a href={telHref} className="font-semibold text-primary hover:underline">
+                {SITE.phone.display}
+              </a>{" "}
+              with a specific question.
             </p>
-            <Link
-              href="/services/"
-              className="mt-6 inline-flex font-semibold text-primary hover:underline"
-            >
-              Explore registration services &rarr;
-            </Link>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { href: "/services/business-registration/", label: "Business Registration" },
+                { href: "/compare/", label: "Compare the four structures" },
+                { href: "/faqs/", label: "Frequently asked questions" },
+                { href: "/services/business-consulting/", label: "Business Consulting" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex min-h-[3.25rem] items-center justify-between gap-3 rounded-xl border border-border px-4 py-3 text-sm font-semibold text-secondary transition-colors hover:border-primary hover:bg-accent"
+                >
+                  {link.label}
+                  <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
           </div>
         ) : (
           <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

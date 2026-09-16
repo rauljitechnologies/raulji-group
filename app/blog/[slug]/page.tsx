@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CalendarDays, Clock, User } from "lucide-react";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { getPostBySlug, getPublishedPosts } from "@/lib/content";
@@ -60,17 +60,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           }),
         )}
       />
-      <Breadcrumbs crumbs={crumbs} />
+      <PageHeader crumbs={crumbs} eyebrow={post.category ?? undefined} title={post.title} />
 
-      <article className="container-narrow py-12 md:py-16">
-        {post.category ? (
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-            {post.category}
-          </p>
-        ) : null}
-        <h1 className="mt-3 text-3xl leading-tight md:text-4xl">{post.title}</h1>
-
-        <div className="mt-6 flex flex-wrap items-center gap-5 border-y border-border py-4 text-sm text-muted-foreground">
+      <article className="container-wide py-12 md:py-16">
+        <div className="max-w-3xl">
+        <div className="flex flex-wrap items-center gap-5 border-b border-border pb-4 text-sm text-muted-foreground">
           <span className="inline-flex items-center gap-1.5">
             <User className="h-4 w-4" aria-hidden="true" />
             {post.author ?? "Raulji Group"}
@@ -99,11 +93,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         ) : null}
 
-        <p className="mt-12 border-t border-border pt-8">
-          <Link href="/blog/" className="font-semibold text-primary hover:underline">
-            &larr; Back to all posts
-          </Link>
-        </p>
+          <p className="mt-12 border-t border-border pt-8">
+            <Link href="/blog/" className="font-semibold text-primary hover:underline">
+              &larr; Back to all posts
+            </Link>
+          </p>
+        </div>
       </article>
 
       <CtaBanner />
