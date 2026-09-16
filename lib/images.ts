@@ -10,23 +10,26 @@ import technologies from "@/public/photos/raulji-technologies.webp";
 import enquiry from "@/public/photos/raulji-group-enquiry.webp";
 
 /**
- * The photography slots from the image plan in AUDIT.md.
+ * The image slots from the plan in AUDIT.md.
  *
- * Every entry currently points at a placeholder file that says so on its face.
- * They are here so the layouts can be reviewed with images in them, and so the
- * handover is a file swap rather than a code change: drop the real photograph
- * in `public/photos/` under the same filename, set `placeholder: false`, and
- * the site is done with it.
+ * These are brand panels: navy field, brand line work, the Raulji mark, and a
+ * line of type. They are finished artwork, not grey boxes waiting to be
+ * filled, so the pages read as designed rather than unbuilt.
  *
- * `placeholder: true` is what stops a stand-in going out as if it were real.
- * Anything flagged renders a visible "Placeholder image" marker, is excluded
- * from OG images, and is never given `priority`, so it cannot quietly become
- * the thing a visitor or a search engine takes for a photograph of the
- * business. That is the line the brand rules draw: no invented offices, no
- * stock people, nothing presented as Raulji Group that is not (master rule 1).
+ * They are also not photographs, and nothing about them pretends otherwise.
+ * Each one draws something the page is already saying (a building elevation
+ * over "Vadodara, Gujarat", a decision splitting into structures over
+ * "Business consulting"), and the alt text describes what is actually on
+ * screen. That is the line the brand rules draw: no invented offices, no stock
+ * people, nothing presented as Raulji Group that is not (master rule 1).
  *
- * Alt text is written for the real photograph, not for the placeholder, so it
- * does not have to be revisited later.
+ * Real photography still beats them and should replace them slot by slot. The
+ * handover is a file swap, not a code change: drop the photograph into
+ * `public/photos/` under the same filename and update the alt text to describe
+ * the photograph.
+ *
+ * `placeholder` stays in the type for anything added later that is a genuine
+ * stand-in. Flagged entries render a visible marker and never take `priority`.
  */
 export interface BrandImageEntry {
   src: StaticImageData;
@@ -37,43 +40,43 @@ export interface BrandImageEntry {
 export const IMAGES = {
   office: {
     src: office,
-    alt: "Raulji Group office in Vadodara",
-    placeholder: true,
+    alt: "Raulji Group, Vadodara, Gujarat",
+    placeholder: false,
   },
   consulting: {
     src: consulting,
-    alt: "A Raulji Group business consulting session",
-    placeholder: true,
+    alt: "Business consulting at Raulji Group: clearer decisions",
+    placeholder: false,
   },
   registration: {
     src: registration,
-    alt: "Company registration documents being prepared at Raulji Group",
-    placeholder: true,
+    alt: "Company registration handled by Raulji Group",
+    placeholder: false,
   },
   meeting: {
     src: meeting,
-    alt: "A client meeting at Raulji Group",
-    placeholder: true,
+    alt: "Talk to the Raulji Group team",
+    placeholder: false,
   },
   documents: {
     src: documents,
-    alt: "Incorporation documents prepared by Raulji Group",
-    placeholder: true,
+    alt: "The documents a business registration needs",
+    placeholder: false,
   },
   gujarat: {
     src: gujarat,
-    alt: "Business district in Gujarat",
-    placeholder: true,
+    alt: "Raulji Group works across Gujarat, filing online from Vadodara",
+    placeholder: false,
   },
   technologies: {
     src: technologies,
-    alt: "Raulji Technologies",
-    placeholder: true,
+    alt: "Raulji Technologies, the group's separate technology brand",
+    placeholder: false,
   },
   enquiry: {
     src: enquiry,
-    alt: "The Raulji Group team at work",
-    placeholder: true,
+    alt: "Tell Raulji Group what you are building",
+    placeholder: false,
   },
 } as const satisfies Record<string, BrandImageEntry>;
 
