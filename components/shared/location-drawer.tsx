@@ -53,10 +53,23 @@ export function LocationDrawerProvider({ children }: { children: React.ReactNode
     track("location_drawer_open", { label: source });
   }, []);
 
-  const close = useCallback(() => {
+  /**
+   * `restoreFocus` is false when the drawer closes because the user navigated.
+   *
+   * The trigger is usually the footer's "Explore All Locations" button, and the
+   * footer lives in the root layout, so it is the same DOM node before and
+   * after a route change. Focusing it once the new page had rendered scrolled
+   * that page down to its footer, which looked like every city page loading at
+   * the bottom. On a new document, focus belongs at the start of it anyway, not
+   * on a control from the page you just left.
+   *
+   * `preventScroll` covers the same-page case: dismissing the drawer returns
+   * focus for keyboard users without yanking the page to wherever the trigger
+   * happens to be.
+   */
+  const close = useCallback((restoreFocus = true) => {
     setIsOpen(false);
-    // Return focus to the control that opened the drawer.
-    triggerRef.current?.focus?.();
+    if (restoreFocus) triggerRef.current?.focus?.({ preventScroll: true });
     triggerRef.current = null;
   }, []);
 
@@ -74,16 +87,23 @@ function normalise(value: string) {
   return value.toLowerCase().trim();
 }
 
-function LocationDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function LocationDrawer({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: (restoreFocus?: boolean) => void;
+}) {
   const pathname = usePathname();
   const [query, setQuery] = useState("");
   const panelRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const headingId = "location-drawer-heading";
 
-  // Navigating to a city closes the drawer.
+  // Navigating to a city closes the drawer, without returning focus to the
+  // trigger: see the note on `close` above.
   useEffect(() => {
-    onClose();
+    onClose(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -159,7 +179,7 @@ function LocationDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
         type="button"
         aria-label="Close locations"
         tabIndex={-1}
-        onClick={onClose}
+        onClick={() => onClose()}
         className="absolute inset-0 h-full w-full cursor-default bg-secondary/60 backdrop-blur-sm"
       />
 
@@ -182,7 +202,7 @@ function LocationDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             </div>
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => onClose()}
               className="-mr-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border text-secondary hover:bg-muted"
             >
               <span className="sr-only">Close locations</span>
