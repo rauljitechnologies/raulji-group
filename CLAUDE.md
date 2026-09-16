@@ -166,6 +166,19 @@ technology service catalogue on Raulji.com.
 
 ## 15. Outdated services
 
+**Resolved 2026-09-16.** The client confirmed that Legal & Compliance, Finance
+Advisory and GST/DIN/MCA are not Raulji Group services. They were removed from
+`lib/secondary-services.ts` and their URLs 301 to the homepage at the client's
+explicit instruction, which is a documented exception to the rule below about
+redirecting only to genuinely relevant destinations. Insurance, IT, Digital,
+Private Limited Compliance and LLP Compliance were confirmed as staying.
+
+**Also resolved 2026-09-16.** The client's final brief proposed a different
+header navigation (section 29) and a different enquiry button label
+(section 11). The client chose to keep both as specified here: the navigation
+in rule 16, and "Get Business Guidance" in rule 23.
+
+
 Audit for Land Investment, Rentals, Finance, Legal & Compliance and other
 discontinued services. If no longer part of current strategy, remove from main
 navigation, homepage, service listings, footer and internal links.

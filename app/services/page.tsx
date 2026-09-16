@@ -150,7 +150,10 @@ export default function ServicesPage() {
                       >
                         <h4 className="text-base font-bold text-secondary">{service.name}</h4>
                         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                          {service.intro.split(". ")[0]}.
+                          {/* First sentence only. The trailing stop is stripped before
+                              one is added back, because an intro that is a single
+                              sentence already ends in one and was rendering "made..". */}
+                          {service.intro.split(". ")[0].replace(/\.$/, "")}.
                         </p>
                         <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
                           Learn more

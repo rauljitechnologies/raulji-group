@@ -29,47 +29,16 @@ export interface SecondaryService {
   note?: string;
 }
 
+/*
+ * Confirmed by the client on 2026-09-16: Legal & Compliance, Finance Advisory
+ * and GST/DIN/MCA are not Raulji Group services. Their entries are removed
+ * here, which takes them out of /services/, the sitemap and every internal
+ * link at once, and next.config.ts redirects the three URLs.
+ *
+ * Nothing else in this list was touched: insurance, IT, digital and the two
+ * compliance pages stay live on the client's instruction.
+ */
 export const SECONDARY_SERVICES: SecondaryService[] = [
-  {
-    slug: "legal",
-    path: "/services/legal/",
-    name: "Legal & Compliance",
-    h1: "Legal and Compliance Support",
-    title: "Legal & Compliance Support | Raulji Group",
-    metaDescription:
-      "Legal and compliance support from Raulji Group, including agreement drafting, statutory filings and compliance reviews for businesses in Gujarat.",
-    group: "Compliance",
-    intro:
-      "Support with the documents and filings that follow registration, from partnership deeds and commercial agreements to the statutory filings an entity carries year on year.",
-    includes: [
-      "Partnership deed and LLP Agreement drafting",
-      "Commercial agreement drafting and review",
-      "Statutory filing calendars and reminders",
-      "Compliance reviews for existing entities",
-      "Coordination with professionals where certification is required",
-    ],
-    note: "We are not a law firm and do not provide representation before courts or tribunals. Where a matter requires an advocate, a chartered accountant or a company secretary, we say so and coordinate rather than act outside our remit.",
-  },
-  {
-    slug: "finance",
-    path: "/services/finance/",
-    name: "Finance Advisory",
-    h1: "Finance and Accounting Advisory",
-    title: "Finance & Accounting Advisory | Raulji Group",
-    metaDescription:
-      "Finance and accounting advisory from Raulji Group: bookkeeping support, GST and tax filing coordination, and financial documentation for businesses in Gujarat.",
-    group: "Advisory",
-    intro:
-      "Help with the financial side of running a registered business: keeping books in order, meeting return deadlines, and having documentation ready when a bank or a buyer asks for it.",
-    includes: [
-      "Bookkeeping and accounting support",
-      "GST registration and return filing coordination",
-      "Income tax return coordination",
-      "Financial documentation for bank and lender requirements",
-      "Guidance on record-keeping obligations",
-    ],
-    note: "Tax outcomes depend on your specific facts and on the law as it applies at the time. We do not guarantee any tax position or assessment outcome.",
-  },
   {
     slug: "insurance",
     path: "/services/insurance/",
@@ -170,26 +139,6 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Designated partner KYC",
     ],
     note: "Audit is required where turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing of Form 8 or Form 11 attracts a per-day penalty that continues to accrue until the filing is made.",
-  },
-  {
-    slug: "gst-din-mca",
-    path: "/services/gst-din-mca/",
-    name: "GST, DIN and MCA Services",
-    h1: "GST, DIN and MCA Filing Support",
-    title: "GST, DIN & MCA Filing Support | Raulji Group",
-    metaDescription:
-      "Support with GST registration and returns, DIN and DSC applications, and MCA filings for companies and LLPs in Gujarat and India.",
-    group: "Compliance",
-    intro:
-      "The individual registrations and filings that sit around an entity: GST, director identification, digital signatures and the various MCA forms an entity has to file as it changes.",
-    includes: [
-      "GST registration and return filing",
-      "Director Identification Number applications and KYC",
-      "Class 3 Digital Signature Certificate issuance and renewal",
-      "MCA filings for changes in directors, registered office or capital",
-      "Charge creation and satisfaction filings",
-      "Udyam (MSME) registration",
-    ],
   },
 ];
 

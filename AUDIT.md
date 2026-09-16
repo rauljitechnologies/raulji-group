@@ -61,10 +61,6 @@ BreadcrumbList, Person. No review or rating schema anywhere, which is correct.
    Six pages carry inline SVG figures (homepage hero, the four registration
    pages, `/compare/`, `/gujarat/`). Everything else is text, icons and rules.
    See "Image plan" below.
-2. **Header navigation.** Currently Group, Consulting, Services, Gujarat,
-   Resources, Contact. Brief section 29 asks for About, Services, Locations,
-   Team, Blog, Contact. This contradicts master rule 16. Client decision
-   needed, listed under VERIFY.
 3. **Homepage length.** 1804 words. Brief section 7 wants it shorter and more
    focused. The sections are the ones the brief lists, so the work is trimming
    copy inside sections rather than removing sections.
@@ -84,35 +80,47 @@ BreadcrumbList, Person. No review or rating schema anywhere, which is correct.
 3. **A process figure** for the registration journey, replacing text-heavy
    step lists on the service pages.
 
-## REMOVE
+## REMOVE (done)
 
-Nothing yet. No fake claims, no invented data, no placeholder content was found
-to remove. Removal candidates are all in VERIFY below, because removing a live
-URL without the client's confirmation would destroy SEO value (master rule 37,
-brief section 35).
+`/services/legal/`, `/services/finance/` and `/services/gst-din-mca/`, on the
+client's confirmation that Raulji Group does not provide them. Removing the
+entries from `lib/secondary-services.ts` takes them out of `/services/`, the
+sitemap and every internal link in one move. Sitemap: 79 URLs down to 76.
 
-## REDIRECT
+No fake claims, invented data or placeholder content was found anywhere, so
+there was nothing else to remove.
 
-No redirect changes proposed in this pass. The existing map is correct and no
-URL is being renamed.
+## REDIRECT (done)
 
-## VERIFY (client decisions needed, blocking those items only)
+The three removed URLs 301 to the homepage, per the client's instruction. See
+the note under VERIFY. Nothing else was renamed, and the existing redirect map
+is unchanged.
 
-1. **Eight service URLs exist that the brief tells us to question.** They are
-   live, indexed and in the sitemap:
-   `/services/insurance/`, `/services/finance/`, `/services/legal/`,
-   `/services/it/`, `/services/digital/`, `/services/pvt-compliance/`,
-   `/services/llp-compliance/`, `/services/gst-din-mca/`.
-   Brief section 19 says do not include GST, DIN, DSC, ROC or compliance
-   services unless confirmed. Brief section 36 lists insurance and finance as
-   audit candidates, while master rule 39 calls insurance a supporting
-   service. For each one we need: does Raulji Group currently provide this?
-   Then KEEP, 301 or 410 per URL. Until answered they stay exactly as they
-   are.
-2. **Header navigation** (brief section 29 vs master rule 16).
-3. **Enquiry button label.** Brief section 11 says "Send Enquiry". Master
-   rule 23 says "Get Business Guidance". Currently the latter.
-4. **Photography.** Nothing else unblocks the image system.
+## VERIFY: answered by the client on 2026-09-16
+
+1. **The eight questioned service URLs. Resolved.** Legal & Compliance,
+   Finance Advisory and GST/DIN/MCA are not Raulji Group services. Their
+   entries are removed from `lib/secondary-services.ts`, which takes them out
+   of `/services/`, the sitemap and every internal link at once, and
+   `next.config.ts` 301s all three to the homepage on the client's explicit
+   instruction. Insurance, IT, Digital, Private Limited Compliance and LLP
+   Compliance stay live, unchanged.
+
+   Recorded for the record, not as a blocker: master rule 15 and 37, and the
+   client's own brief at section 35, say not to redirect unrelated pages to
+   the homepage. A redirect to a page that does not answer the original query
+   is commonly treated as a soft 404 and passes little of the old page's
+   value. The rule-consistent handling would be 410 for `/services/legal/`
+   and `/services/finance/`, which have no successor, and 301 for
+   `/services/gst-din-mca/` to `/services/business-registration/`, which
+   covers MCA filing support. The client asked for the homepage. Changing it
+   later is a one line change per URL.
+2. **Header navigation. Resolved: keep the current nav** (Group, Consulting,
+   Services, Gujarat, Resources, Contact), per master rule 16. Brief section
+   29 does not apply.
+3. **Enquiry button. Resolved: keep "Get Business Guidance"**, per master
+   rule 23. Brief section 11's "Send Enquiry" does not apply.
+4. **Photography. Still open.** Nothing else unblocks the image system.
 
 ## Image plan (brief sections 24 and 25)
 

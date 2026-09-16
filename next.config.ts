@@ -35,6 +35,35 @@ const nextConfig: NextConfig = {
         destination: "/services/",
         statusCode: 301,
       },
+      /*
+       * Confirmed by the client on 2026-09-16 as services Raulji Group does not
+       * provide, and redirected to the homepage on their explicit instruction.
+       *
+       * Noted for the record: master rule 15 and 37, and the client's own brief
+       * at section 35, say not to send unrelated pages to the homepage, because
+       * a redirect to a page that does not answer the original query is
+       * commonly treated as a soft 404 and passes little of the old page's
+       * value. The rule-consistent handling would be 410 for /services/legal/
+       * and /services/finance/, which have no successor, and 301 for
+       * /services/gst-din-mca/ to /services/business-registration/, which
+       * covers MCA filing support. The client asked for the homepage, so that
+       * is what these do, and switching them later is a one line change.
+       */
+      {
+        source: "/services/legal",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/services/finance",
+        destination: "/",
+        statusCode: 301,
+      },
+      {
+        source: "/services/gst-din-mca",
+        destination: "/",
+        statusCode: 301,
+      },
       // Previous services overview, folded into /services/.
       {
         source: "/industries",
