@@ -138,17 +138,34 @@ def gujarat(w=1600,h=900):
     cr=int(w/26); d.ellipse([cx-cr,cy-cr,cx+cr,cy+cr],fill=(*BLUE,255))
     return label(im,"Across Gujarat","Filed online from Vadodara")
 
-# 6. Technologies: the separate brand, shown as a second node.
+# 6. Technologies: two sites, not one catalogue.
+# The page this sits on exists to send people somewhere else, so the drawing is
+# two separate frames and the one link between them. The right hand one is
+# outline only: it is not this site, and it is not drawn as though it were.
 def technologies(w=1200,h=800):
     im=base(w,h); d=ImageDraw.Draw(im)
-    y=int(h*0.34); ax,bx=int(w*0.56),int(w*0.84); r=int(w/22)
-    d.line([(ax+r,y),(bx-r,y)],fill=(*BLUE,110),width=3)
-    d.ellipse([ax-r,y-r,ax+r,y+r],outline=(*BLUE,220),width=4)
-    d.ellipse([bx-r,y-r,bx+r,y+r],fill=(*BLUE,255))
-    for i in range(3):
-        yy=y+int(h*0.16)+i*int(h*0.06)
-        d.line([(bx-r,yy),(bx+r,yy)],fill=(*BLUE,70),width=2)
-    return label(im,"Raulji Technologies","A separate technology brand")
+    top=int(h*0.14); fh=int(h*0.30)
+    def frame(x0,x1,here):
+        bar=int(h*0.045)
+        a=235 if here else 110
+        d.rounded_rectangle([x0,top,x1,top+fh],radius=int(h*0.022),outline=(*BLUE,a),width=4 if here else 3)
+        d.line([(x0,top+bar),(x1,top+bar)],fill=(*BLUE,a-40),width=3)
+        for i in range(3):
+            ly=top+bar+int(fh*(i+1)/4.6)
+            lw=(x1-x0)*(0.62 if i%2 else 0.40)
+            d.line([(x0+int((x1-x0)*0.10),ly),(x0+int((x1-x0)*0.10)+lw,ly)],fill=(*BLUE,90 if here else 55),width=3)
+    ax0,ax1=int(w*0.09),int(w*0.44)
+    bx0,bx1=int(w*0.56),int(w*0.91)
+    frame(ax0,ax1,True)
+    frame(bx0,bx1,False)
+    # the one link between them, drawn as a link and nothing more
+    my=top+fh//2
+    d.line([(ax1+int(w*0.015),my),(bx0-int(w*0.030),my)],fill=(*BLUE,150),width=3)
+    d.polygon([(bx0-int(w*0.012),my),(bx0-int(w*0.032),my-int(h*0.018)),(bx0-int(w*0.032),my+int(h*0.018))],fill=(*BLUE,200))
+    f=font(int(w/56),True)
+    d.text((ax0,top+fh+int(h*0.045)),"raulji.com",font=f,fill=(210,230,245))
+    d.text((bx0,top+fh+int(h*0.045)),"rauljitechnologies.com",font=f,fill=(150,195,228))
+    return label(im,"On its own domain","Technology work is delivered by Raulji Technologies")
 
 # 7. Enquiry: a form and a reply.
 def enquiry(w=1200,h=800):
@@ -179,12 +196,75 @@ def group(w=1800,h=771):
     d.text((px-int(pr*2.4),py-int(h*0.20)),"Raulji Group",font=font(int(w/48),True),fill=(255,255,255))
     return label(im,"One group, two brands","Kept separate because they do different work")
 
+# 9. The registration pillar: the four structures, side by side.
+# It previously reused the documents drawing, which is what every page below it
+# already shows, so the pillar and its four children carried one picture between
+# them. This draws what the pillar is for: the choice, not the filing. The
+# number of rules inside each card falls from left to right because the annual
+# compliance does too, which is what the page says in words.
+def structures(w=1600,h=686):
+    im=base(w,h); d=ImageDraw.Draw(im)
+    names=[("Private Limited",4),("LLP",3),("Partnership",2),("Proprietorship",1)]
+    x0,x1=int(w*0.07),int(w*0.93); gap=int(w*0.035)
+    cw=(x1-x0-gap*(len(names)-1))//len(names)
+    top=int(h*0.13); ch=int(h*0.35)
+    for i,(name,rules) in enumerate(names):
+        x=x0+i*(cw+gap)
+        d.rounded_rectangle([x,top,x+cw,top+ch],radius=int(h*0.035),outline=(*BLUE,175),width=3)
+        d.rounded_rectangle([x+int(cw*0.10),top+int(ch*0.16),x+int(cw*0.44),top+int(ch*0.16)+int(h*0.028)],
+                            radius=int(h*0.012),fill=(*BLUE,235))
+        for k in range(rules):
+            ly=top+int(ch*0.42)+k*int(ch*0.13)
+            d.line([(x+int(cw*0.10),ly),(x+int(cw*(0.86 if k%2==0 else 0.64)),ly)],fill=(*BLUE,85),width=3)
+        d.text((x,top+ch+int(h*0.075)),name,font=font(int(w/54),True),fill=(205,228,244))
+    return label(im,"Choosing between them","Liability, annual filing, and whether the business can raise equity")
+
+# 10. Insurance: what the page can honestly claim. Cover is arranged over a
+# business; the terms belong to the insurer, and the caption says so rather than
+# drawing a guarantee.
+def insurance(w=1200,h=800):
+    im=base(w,h); d=ImageDraw.Draw(im)
+    cx,base_y=int(w*0.70),int(h*0.47)
+    bw,bh=int(w*0.15),int(h*0.15)
+    d.rounded_rectangle([cx-bw//2,base_y-bh,cx+bw//2,base_y],radius=int(h*0.02),outline=(*BLUE,220),width=4)
+    for i in range(2):
+        ly=base_y-bh+int(bh*(i+1)/3)
+        d.line([(cx-bw//2,ly),(cx+bw//2,ly)],fill=(*BLUE,70),width=2)
+    for r,alpha,dash in ((int(w*0.19),200,False),(int(w*0.25),95,True)):
+        box=[cx-r,base_y-r,cx+r,base_y+r]
+        if not dash:
+            d.arc(box,200,340,fill=(*BLUE,alpha),width=5)
+        else:
+            for a in range(200,340,10):
+                d.arc(box,a,a+6,fill=(*BLUE,alpha),width=4)
+    d.line([(cx-int(w*0.26),base_y),(cx+int(w*0.26),base_y)],fill=(*BLUE,70),width=3)
+    return label(im,"Cover that fits the business","We help arrange it; the insurer sets the terms")
+
+# 11. Compliance: the year, with the dates that come round on it. Not a chart,
+# and nothing counted: an annual cycle drawn as an annual cycle.
+def compliance(w=1200,h=800):
+    im=base(w,h); d=ImageDraw.Draw(im)
+    x0,x1=int(w*0.40),int(w*0.93); y=int(h*0.30); bh=int(h*0.095)
+    d.rounded_rectangle([x0,y,x1,y+bh],radius=int(h*0.014),outline=(*BLUE,170),width=3)
+    seg=(x1-x0)/12
+    for i in range(1,12):
+        d.line([(x0+int(seg*i),y),(x0+int(seg*i),y+bh)],fill=(*BLUE,55),width=2)
+    for i in (2,5,8,10):
+        d.rounded_rectangle([x0+int(seg*i)+3,y+3,x0+int(seg*(i+1))-3,y+bh-3],radius=int(h*0.008),fill=(*BLUE,230))
+        mx=x0+int(seg*(i+0.5))
+        d.polygon([(mx,y-int(h*0.026)),(mx-int(w*0.014),y-int(h*0.070)),(mx+int(w*0.014),y-int(h*0.070))],fill=(*BLUE,170))
+    d.line([(x0,y+bh+int(h*0.055)),(x1,y+bh+int(h*0.055))],fill=(*BLUE,45),width=2)
+    d.text((x0,y+bh+int(h*0.085)),"One financial year",font=font(int(w/58),True),fill=(150,195,228))
+    return label(im,"The filings a year brings","The dates that come round every year")
+
 save(group(),"raulji-group-structure")
 save(office(1200,900),"raulji-group-office")
 save(consulting(1200,800),"raulji-group-business-consulting")
-save(documents(1600,686,title="Filed correctly",sub="Company registration"),"raulji-group-company-registration")
+save(structures(),"raulji-group-company-registration")
 save(documents(title="Documents in order",sub="What registration needs"),"raulji-group-documents")
 save(meeting(),"raulji-group-client-meeting")
 save(gujarat(),"raulji-group-gujarat")
 save(technologies(),"raulji-technologies")
 save(enquiry(),"raulji-group-enquiry")
+save(insurance(),"raulji-group-insurance")
+save(compliance(),"raulji-group-compliance")

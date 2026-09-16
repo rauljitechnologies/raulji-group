@@ -15,6 +15,8 @@
  * consulting entry here; it would create two pages for the same intent.
  */
 
+import type { ImageSlot } from "@/lib/images";
+
 export interface SecondaryService {
   slug: string;
   path: string;
@@ -27,6 +29,14 @@ export interface SecondaryService {
   /** What the service actually covers. No outcome guarantees. */
   includes: string[];
   note?: string;
+  /**
+   * The panel this page shows. These pages are compact by design, and the left
+   * column runs out well before the enquiry form beside it does, which left a
+   * blank half-page on every one of them. One image per service closes it.
+   * Pages in the same group share a panel; nothing here is drawn twice for the
+   * sake of having a different picture.
+   */
+  image: ImageSlot;
 }
 
 /*
@@ -58,6 +68,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Support through the claims process",
     ],
     note: "Policy terms, premiums and claim outcomes are set by the insurer, not by us. We help you understand and arrange cover; we do not underwrite it.",
+    image: "insurance",
   },
   {
     slug: "it",
@@ -78,6 +89,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Cloud and infrastructure support",
     ],
     note: "Technology services are offered through Raulji Technologies at rauljitechnologies.com.",
+    image: "technologies",
   },
   {
     slug: "digital",
@@ -98,6 +110,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Analytics and reporting",
     ],
     note: "Digital marketing services are offered through Raulji Technologies at rauljitechnologies.com.",
+    image: "technologies",
   },
   {
     slug: "pvt-compliance",
@@ -119,6 +132,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Board meeting and minute record-keeping",
     ],
     note: "Statutory audit is required for a Private Limited Company from its first financial year regardless of turnover. Late ROC filing attracts additional fees that accrue over time.",
+    image: "compliance",
   },
   {
     slug: "llp-compliance",
@@ -139,6 +153,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Designated partner KYC",
     ],
     note: "Audit is required where turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing of Form 8 or Form 11 attracts a per-day penalty that continues to accrue until the filing is made.",
+    image: "compliance",
   },
 ];
 

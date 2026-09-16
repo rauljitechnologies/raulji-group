@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { LeadForm } from "@/components/forms/lead-form";
+import { BrandImage } from "@/components/ui/brand-image";
 import type { SecondaryService } from "@/lib/secondary-services";
 import { SITE, telHref } from "@/lib/site";
 import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
@@ -85,6 +86,19 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
                 {service.note}
               </p>
             ) : null}
+
+            {/* The enquiry form beside this column is taller than the list, so
+                the column ended in half a page of nothing on every one of these
+                pages. Drawn at 3:2, the ratio it renders at, and hidden below lg
+                where the two columns stack and it would only add scroll. */}
+            {!isTechnology ? (
+              <BrandImage
+                slot={service.image}
+                sizes="(min-width: 1024px) 34rem, 100vw"
+                aspect="aspect-[3/2]"
+                className="mt-10 hidden lg:block"
+              />
+            ) : null}
           </div>
 
           {!isTechnology ? (
@@ -110,6 +124,16 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
               >
                 Go to rauljitechnologies.com &rarr;
               </a>
+              {/* A technology page has no enquiry form, so this card carried
+                  three lines of text and a large empty box below them. The
+                  panel draws the same point the card makes: two sites, one
+                  link. */}
+              <BrandImage
+                slot={service.image}
+                sizes="(min-width: 1024px) 30rem, 100vw"
+                aspect="aspect-[3/2]"
+                className="mt-7"
+              />
             </div>
           )}
         </div>

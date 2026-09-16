@@ -9,6 +9,8 @@ import documents from "@/public/photos/raulji-group-documents.webp";
 import gujarat from "@/public/photos/raulji-group-gujarat.webp";
 import technologies from "@/public/photos/raulji-technologies.webp";
 import enquiry from "@/public/photos/raulji-group-enquiry.webp";
+import insurance from "@/public/photos/raulji-group-insurance.webp";
+import compliance from "@/public/photos/raulji-group-compliance.webp";
 
 /**
  * The image slots from the plan in AUDIT.md.
@@ -61,9 +63,10 @@ export const IMAGES = {
     alt: "Business consulting at Raulji Group: clearer decisions",
     placeholder: false,
   },
+  /** Wide band, 21:9. The four structures a business can register as. */
   registration: {
     src: registration,
-    alt: "Company registration handled by Raulji Group",
+    alt: "The four registration structures side by side: Private Limited, LLP, Partnership and Proprietorship, each with less annual filing than the last",
     placeholder: false,
   },
   meeting: {
@@ -83,12 +86,22 @@ export const IMAGES = {
   },
   technologies: {
     src: technologies,
-    alt: "Raulji Technologies, the group's separate technology brand",
+    alt: "raulji.com and rauljitechnologies.com drawn as two separate sites with one link between them",
     placeholder: false,
   },
   enquiry: {
     src: enquiry,
     alt: "Tell Raulji Group what you are building",
+    placeholder: false,
+  },
+  insurance: {
+    src: insurance,
+    alt: "Insurance cover drawn over a business, arranged by Raulji Group and underwritten by the insurer",
+    placeholder: false,
+  },
+  compliance: {
+    src: compliance,
+    alt: "One financial year with its filing dates marked on it",
     placeholder: false,
   },
 } as const satisfies Record<string, BrandImageEntry>;
