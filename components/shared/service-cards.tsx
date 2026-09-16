@@ -34,16 +34,22 @@ export function ServiceCards({ city }: { city?: string }) {
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                 {service.cardBlurb}
               </p>
-              {service.pricing ? (
-                <p className="mt-4 text-sm font-semibold text-secondary">
-                  From {service.pricing.amount}
-                  <span className="font-normal text-muted-foreground"> + government fees</span>
-                </p>
-              ) : null}
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+              {/*
+                No price on these cards. Only two of the four structures have a
+                published starting figure, so a price line here compared four
+                services on a number that exists for half of them, and the
+                homepage is not a pricing page (master rule 12). The starting
+                fee, what it covers and what is statutory all live on each
+                service page, which is where a price can be stated properly.
+
+                The CTA row keeps a reserved height because the labels wrap onto
+                one or two lines depending on the service name; without it each
+                card put its link at a different height from the card beside it.
+              */}
+              <span className="mt-5 inline-flex min-h-[2.75rem] items-start gap-1.5 text-sm font-semibold text-primary">
                 {service.cardCta}
                 <ArrowRight
-                  className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                  className="mt-0.5 h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5"
                   aria-hidden="true"
                 />
               </span>

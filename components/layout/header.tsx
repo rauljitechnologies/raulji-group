@@ -216,7 +216,21 @@ function MegaMenuItem({
         transform on the inner one, because putting both on the same element
         would mean the enter animation fights the centring.
       */}
-      <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2">
+      {/*
+        The closed panel still occupies its full box in the layout, because
+        `invisible` hides it without removing it. That box hangs below the
+        header over the top of the page, so while it is hit-testable it both
+        swallows clicks meant for the hero and fires mouseenter on this <li>,
+        which opened the menu whenever the pointer crossed empty page area.
+        `pointer-events-none` while closed is what confines hover to the
+        trigger itself; it is not a cosmetic class.
+      */}
+      <div
+        className={cn(
+          "absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2",
+          open ? "pointer-events-auto" : "pointer-events-none",
+        )}
+      >
         <div
           className={cn(
             "transition-all duration-150",
@@ -237,8 +251,11 @@ function MegaMenuItem({
             ))}
           </ul>
 
+          {/* The card still fills the column, but its content is top-aligned:
+              `justify-between` used to push the link to the bottom edge and
+              leave a large empty band in the middle of the panel. */}
           {group.feature ? (
-            <div className="flex flex-col justify-between rounded-xl bg-accent p-4">
+            <div className="flex flex-col rounded-xl bg-accent p-4">
               <div>
                 <p className="text-sm font-semibold text-accent-foreground">{group.feature.title}</p>
                 <p className="mt-1.5 text-xs leading-relaxed text-accent-foreground/80">

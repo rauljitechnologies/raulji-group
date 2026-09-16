@@ -11,6 +11,13 @@ export const SITE = {
   /** Canonical origin. The live site canonicalises to the www host. */
   url: "https://www.raulji.com",
   tagline: "We Don't Just Build Businesses. We Build Futures.",
+  /**
+   * The same tagline as two sentences, for the places that set it as a
+   * headline and colour the second half differently. Kept beside `tagline`
+   * rather than split at runtime so the wording has one source (master rule 4:
+   * the H1 text is fixed).
+   */
+  taglineParts: ["We Don't Just Build Businesses.", "We Build Futures."],
   description:
     "Business registration and business-growth support for entrepreneurs and businesses across Gujarat and India.",
   phone: {

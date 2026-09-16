@@ -1,4 +1,5 @@
 import type { FAQ } from "@/lib/services";
+import { cn } from "@/lib/utils";
 
 /**
  * Native details/summary accordion.
@@ -7,9 +8,23 @@ import type { FAQ } from "@/lib/services";
  * screen-reader correct with no client bundle, and the answer text stays in the
  * DOM so the visible content matches the FAQPage schema (spec section 30).
  */
-export function FaqAccordion({ faqs, idPrefix = "faq" }: { faqs: FAQ[]; idPrefix?: string }) {
+export function FaqAccordion({
+  faqs,
+  idPrefix = "faq",
+  className,
+}: {
+  faqs: FAQ[];
+  idPrefix?: string;
+  /** For placements that are already inside a column, e.g. `max-w-none`. */
+  className?: string;
+}) {
   return (
-    <div className="mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-card">
+    <div
+      className={cn(
+        "mx-auto max-w-3xl divide-y divide-border rounded-2xl border border-border bg-card",
+        className,
+      )}
+    >
       {faqs.map((faq, i) => (
         <details key={faq.q} className="group" id={`${idPrefix}-${i + 1}`} name={idPrefix}>
           <summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 text-left font-semibold text-secondary marker:hidden hover:bg-muted/60 sm:px-6">

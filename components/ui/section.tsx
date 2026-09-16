@@ -40,7 +40,7 @@ export function SectionHeading({
   align?: "center" | "left";
 }) {
   return (
-    <div className={cn("mb-12 max-w-3xl", align === "center" && "mx-auto text-center")}>
+    <div className={cn("mb-10 max-w-3xl", align === "center" && "mx-auto text-center")}>
       {eyebrow ? (
         <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
           {eyebrow}

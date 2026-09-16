@@ -93,6 +93,11 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-bold tracking-tight text-secondary;
+    /* Fallback leading for headings that carry no text-* utility. Without it
+       they inherit the body's 1.5, which looks slack at display sizes. Any
+       text-* or leading-* utility still wins, so this changes nothing that is
+       already set deliberately. */
+    line-height: 1.2;
   }
 }
 
@@ -126,8 +131,12 @@
     box-shadow: var(--shadow-elevated);
   }
 
+  /* Vertical rhythm. The previous 16/24/32 scale put 256px of empty space
+     between two desktop sections, which read as unfinished rather than
+     spacious. This keeps the sections clearly separated at every breakpoint
+     without the dead runs of background. */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-14 md:py-20 lg:py-24;
   }
 
   .container-narrow {
