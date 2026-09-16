@@ -118,6 +118,11 @@ export const CLIENTS: Client[] = [
  */
 export const CLIENT_COUNT = CLIENTS.length;
 
+/** How many of the wall each company in the group accounts for. */
+export function countByBrand(brand: Client["brand"]) {
+  return CLIENTS.filter((c) => c.brand === brand).length;
+}
+
 /** Split into n roughly equal rows, in order, for the marquee. */
 export function clientRows(count: number): Client[][] {
   const per = Math.ceil(CLIENTS.length / count);
