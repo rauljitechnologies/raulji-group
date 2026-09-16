@@ -30,8 +30,21 @@ export const metadata: Metadata = {
   creator: SITE.name,
   publisher: SITE.name,
   formatDetection: { telephone: true, email: true, address: false },
+  /*
+   * All three files are the Raulji mark cut from the real logo.
+   *
+   * /favicon.ico is listed explicitly and first because browsers, feed
+   * readers and link-preview crawlers request that path by convention
+   * whether or not it is declared, and whatever answers there is what shows
+   * in the tab. Declaring only the PNG left that request to whatever file
+   * happened to sit at /favicon.ico.
+   */
   icons: {
-    icon: [{ url: "/favicon.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.png", type: "image/png", sizes: "256x256" },
+    ],
+    shortcut: [{ url: "/favicon.ico" }],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
 };
