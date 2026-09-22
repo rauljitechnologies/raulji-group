@@ -153,18 +153,39 @@ export function articleSchema(post: {
   published: string;
   updated?: string;
   image?: string;
+  /**
+   * Named author, where the article carries one.
+   *
+   * Defaults to the organisation. The health insurance guide is bylined to the
+   * Chairman personally, and the Person node already exists in the graph
+   * (personSchema), so this points at it by @id rather than restating a name
+   * that could drift from the visible byline.
+   */
+  author?: "organization" | "chairman";
+  /** Section, matching the visible category. */
+  category?: string;
+  keywords?: string[];
 }) {
-  return {
+  const node: Record<string, unknown> = {
     "@type": "Article",
     headline: post.title,
     description: post.description,
     url: abs(`/blog/${post.slug}/`),
+    mainEntityOfPage: { "@type": "WebPage", "@id": abs(`/blog/${post.slug}/`) },
     datePublished: post.published,
     dateModified: post.updated ?? post.published,
-    author: { "@id": ORG_ID },
+    author:
+      post.author === "chairman" ? { "@id": `${SITE.url}/#chairman` } : { "@id": ORG_ID },
     publisher: { "@id": ORG_ID },
-    ...(post.image ? { image: post.image } : {}),
+    isPartOf: { "@id": WEBSITE_ID },
+    inLanguage: "en-IN",
   };
+
+  if (post.image) node.image = post.image;
+  if (post.category) node.articleSection = post.category;
+  if (post.keywords?.length) node.keywords = post.keywords.join(", ");
+
+  return node;
 }
 
 /** Wrap nodes into a single @graph document. */
@@ -205,6 +226,53 @@ export function homeServiceListSchema() {
         ],
       },
     })),
+  };
+}
+
+/**
+ * The client wall as a machine-readable list (master rule 20).
+ *
+ * A CollectionPage whose mainEntity is an ItemList of the businesses named on
+ * the page, each one an Organization. This is what lets a search or AI system
+ * read the wall as 37 named entities instead of 37 logo images, which is the
+ * whole point of publishing it.
+ *
+ * What is deliberately absent matters as much. No Review, no AggregateRating,
+ * no testimonial, no outcome and no relationship claim beyond the fact that
+ * each is named on this page: none of that is verified, and structured data is
+ * exactly where an unverified claim does the most damage (master rule 13).
+ * Each client carries its name and the logo file this site serves, nothing
+ * else, and `provider` points at the group so the relationship is stated once,
+ * in the page copy, rather than asserted per client in markup.
+ */
+export function clientListSchema(
+  clients: { slug: string; name: string }[],
+  { path, logoPath }: { path: string; logoPath: (slug: string) => string },
+) {
+  return {
+    "@type": "CollectionPage",
+    "@id": `${abs(path)}#clients`,
+    url: abs(path),
+    name: "Clients of Raulji Group",
+    description:
+      "Businesses named publicly as clients of Raulji Group, delivered through its two companies, Raulji Consulting Services and Raulji Technologies.",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+    mainEntity: {
+      "@type": "ItemList",
+      name: "Businesses Raulji Group has worked with",
+      itemListOrder: "https://schema.org/ItemListUnordered",
+      numberOfItems: clients.length,
+      itemListElement: clients.map((client, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Organization",
+          name: client.name,
+          logo: abs(logoPath(client.slug)),
+        },
+      })),
+    },
   };
 }
 

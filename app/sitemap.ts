@@ -5,6 +5,7 @@ import { SECONDARY_SERVICES } from "@/lib/secondary-services";
 import { CITIES } from "@/lib/cities";
 import { getCityServiceParams } from "@/lib/city-services";
 import { getPublishedPosts } from "@/lib/content";
+import { ARTICLES, ARTICLE_SLUGS } from "@/lib/blog";
 
 export const revalidate = 3600;
 
@@ -66,15 +67,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  const posts = await getPublishedPosts();
-  const blog: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: url(`/blog/${post.slug}/`),
-    lastModified: new Date(post.updated_at),
+  // The 2026 Business Guide Series. Higher priority than the legacy posts
+  // because these are the pages built to rank and to carry the internal links
+  // into the registration pillar.
+  const guides: MetadataRoute.Sitemap = ARTICLES.map((article) => ({
+    url: url(`/blog/${article.slug}/`),
+    lastModified: new Date(article.updated),
     changeFrequency: "monthly",
-    priority: 0.5,
+    priority: 0.7,
   }));
 
-  return [...core, ...registration, ...secondary, ...cities, ...cityServices, ...blog].map(
+  const posts = await getPublishedPosts();
+  const blog: MetadataRoute.Sitemap = posts
+    // A Supabase row sharing a slug with a guide resolves to the guide, so it
+    // must not be emitted twice.
+    .filter((post) => !ARTICLE_SLUGS.includes(post.slug))
+    .map((post) => ({
+      url: url(`/blog/${post.slug}/`),
+      lastModified: new Date(post.updated_at),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    }));
+
+  return [
+    ...core,
+    ...registration,
+    ...secondary,
+    ...cities,
+    ...cityServices,
+    ...guides,
+    ...blog,
+  ].map(
     (entry) => ({
       lastModified: now,
       ...entry,

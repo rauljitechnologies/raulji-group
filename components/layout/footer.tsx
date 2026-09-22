@@ -54,10 +54,10 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "Resources",
     links: [
-      // "Business Guides" from the spec is deliberately absent: there is no guides
-      // page yet, and a second link to /blog/ would just be a duplicate. Add it
-      // here the moment a real guides index exists.
-      { name: "Blog", href: "/blog/" },
+      // One link, not two. The spec lists "Blog" and "Business Guides"
+      // separately, but /blog/ is the guides index, and a second entry pointing
+      // at the same URL is a duplicate rather than a resource.
+      { name: "Business Guides", href: "/blog/" },
       { name: "Compare Business Structures", href: "/compare/" },
       { name: "FAQs", href: "/faqs/" },
     ],

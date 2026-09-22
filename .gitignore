@@ -43,3 +43,9 @@ next-env.d.ts
 *.log
 .cache/
 .vercel
+
+# Stale build output from earlier runs. `.next/` above does not match these,
+# so git was walking them on every status; `.next-root-owned-old/` is owned by
+# root from a `sudo npm run dev` and cannot even be traversed.
+.next-verify/
+.next-root-owned-old/

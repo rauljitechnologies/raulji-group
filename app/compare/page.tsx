@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { StructureFigure } from "@/components/shared/structure-diagram";
 import { CtaBanner } from "@/components/shared/cta-banner";
+import { GuideLinks } from "@/components/blog/guide-links";
 import { LeadForm } from "@/components/forms/lead-form";
 import { SERVICES, type FAQ } from "@/lib/services";
 import { pageMeta } from "@/lib/seo";
@@ -179,6 +180,16 @@ export default function ComparePage() {
         <SectionHeading eyebrow="FAQs" title="Comparing business structures" />
         <FaqAccordion faqs={COMPARE_FAQS} idPrefix="compare-faq" />
       </Section>
+
+      <GuideLinks
+        slugs={[
+          "business-structure-guide-new-entrepreneurs-india",
+          "private-limited-company-vs-llp",
+          "partnership-vs-proprietorship-india",
+        ]}
+        title="The same comparison, explained at length"
+        lead="This table is the summary. These guides work through the trade-offs behind it."
+      />
 
       <CtaBanner />
     </>

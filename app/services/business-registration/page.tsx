@@ -10,6 +10,7 @@ import { ComparisonTable } from "@/components/shared/comparison-table";
 import { BusinessJourney } from "@/components/shared/business-journey";
 import { PopularCities } from "@/components/shared/popular-cities";
 import { CtaBanner } from "@/components/shared/cta-banner";
+import { GuideLinks } from "@/components/blog/guide-links";
 import { SERVICES, type FAQ } from "@/lib/services";
 import { AUTHORITY_DISCLAIMER, TIMELINE_DISCLAIMER } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
@@ -289,6 +290,16 @@ export default function BusinessRegistrationPage() {
         <SectionHeading eyebrow="FAQs" title="Business registration questions" />
         <FaqAccordion faqs={FAQS} idPrefix="registration-faq" />
       </Section>
+
+      <GuideLinks
+        slugs={[
+          "how-to-choose-business-structure-india-2026",
+          "business-structure-guide-new-entrepreneurs-india",
+          "documents-required-company-registration-india",
+        ]}
+        title="Guides that go deeper than this page"
+        lead="Longer reads on the decision itself, the full four-way comparison, and the paperwork it takes."
+      />
 
       <CtaBanner
         title="Still deciding which structure to register?"

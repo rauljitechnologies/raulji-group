@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { CtaBanner } from "@/components/shared/cta-banner";
+import { GuideLinks } from "@/components/blog/guide-links";
 import { LeadForm } from "@/components/forms/lead-form";
 import { BrandImage } from "@/components/ui/brand-image";
 import type { SecondaryService } from "@/lib/secondary-services";
@@ -147,6 +148,17 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
         />
         <ServiceCards />
       </Section>
+
+      {/* Only where the service actually has a guide behind it. Most of these
+          pages do not, and an empty or padded block would be worse than none. */}
+      {service.guides?.length ? (
+        <GuideLinks
+          slugs={service.guides}
+          tone="muted"
+          title="Read this before you decide"
+          lead="A longer guide on the same subject, written for someone making the decision rather than buying a service."
+        />
+      ) : null}
 
       <CtaBanner />
     </>

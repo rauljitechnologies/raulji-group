@@ -9,6 +9,7 @@ import { ServiceCards } from "@/components/shared/service-cards";
 import { CityGrid } from "@/components/shared/city-grid";
 import { ComparisonTable } from "@/components/shared/comparison-table";
 import { CtaBanner } from "@/components/shared/cta-banner";
+import { GuideLinks } from "@/components/blog/guide-links";
 import { LeadForm } from "@/components/forms/lead-form";
 import { CITIES, CITY_SLUGS, GUJARAT_DISTRICTS } from "@/lib/cities";
 import { SITE, TIMELINE_DISCLAIMER } from "@/lib/site";
@@ -222,6 +223,16 @@ export default function GujaratPage() {
         <SectionHeading eyebrow="FAQs" title="Registering a business in Gujarat" />
         <FaqAccordion faqs={GUJARAT_FAQS} idPrefix="gujarat-faq" />
       </Section>
+
+      <GuideLinks
+        slugs={[
+          "starting-business-gujarat-registration-guide",
+          "how-to-choose-business-structure-india-2026",
+          "common-business-registration-mistakes-india",
+        ]}
+        title="Reading for a business starting in Gujarat"
+        lead="What is national, what is specific to the state, and where new businesses lose time."
+      />
 
       <CtaBanner />
     </>
