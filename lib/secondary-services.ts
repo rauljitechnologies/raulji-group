@@ -37,6 +37,13 @@ export interface SecondaryService {
    * sake of having a different picture.
    */
   image: ImageSlot;
+  /**
+   * Blog guides to promote from this page, by slug.
+   *
+   * Optional and usually absent. Only set it where a guide genuinely covers
+   * the same ground, so the block is a recommendation rather than filler.
+   */
+  guides?: string[];
 }
 
 /*
@@ -69,6 +76,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     ],
     note: "Policy terms, premiums and claim outcomes are set by the insurer, not by us. We help you understand and arrange cover; we do not underwrite it.",
     image: "insurance",
+    guides: ["health-insurance-policy-india"],
   },
   {
     slug: "it",

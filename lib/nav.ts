@@ -109,7 +109,11 @@ export const NAV: NavGroup[] = [
   {
     name: "Resources",
     links: [
-      { name: "Blog", href: "/blog/", description: "Notes on registration and running a business" },
+      {
+        name: "Business Guides",
+        href: "/blog/",
+        description: "Structures, registration, documents and the MCA process, explained",
+      },
       {
         name: "Compare Business Structures",
         href: "/compare/",
