@@ -1,7 +1,27 @@
 import type { FAQ } from "./services";
 
-/** Homepage FAQs. Answers are also visible on the page, as FAQPage schema requires. */
+/**
+ * Homepage FAQs. Answers are also visible on the page, as FAQPage schema requires.
+ *
+ * The first two questions are the entity questions from brief section 9. They
+ * are here rather than in a decorative "answer box" because an answer engine
+ * wants one unambiguous sentence about what this organisation is and what it
+ * sells, and the accordion is the one place on this page where a question and
+ * its answer sit together in the markup and in the FAQPage graph.
+ *
+ * Both answers are deliberately literal and short. Nothing in them is a claim
+ * that would need verifying: the group's own description of itself, and a list
+ * of the four registration services that have pages on this site.
+ */
 export const HOME_FAQS: FAQ[] = [
+  {
+    q: "What does Raulji Group do?",
+    a: "Raulji Group provides business consulting, business registration, business structuring and related business solutions for entrepreneurs and businesses. It works through two brands: Raulji Consulting Services, which covers the consulting and business-services work on this site, and Raulji Technologies, the group's technology brand, which operates on its own website.",
+  },
+  {
+    q: "What business registration services does Raulji Group provide?",
+    a: "Four: Private Limited Company Registration, LLP Registration, Partnership Firm Registration and Proprietorship Registration. Each has its own page covering eligibility, documents, process and cost. Raulji Group prepares and files these applications on your behalf; it is a private business-services firm, not a government department.",
+  },
   {
     q: "Which business structure should I choose?",
     a: "It depends on three things: whether you will have co-owners, whether you intend to raise outside investment, and how much liability the business carries. A single owner starting small usually begins as a proprietorship. Two or more people who want liability capped generally choose an LLP. Founders planning to raise equity or issue ESOPs need a Private Limited Company, because it is the only one of the four that can issue shares.",

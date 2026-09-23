@@ -1,7 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /api/
-Disallow: /og
-
-Host: https://www.raulji.com
-Sitemap: https://www.raulji.com/sitemap.xml

@@ -1,23 +1,32 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Phone } from "lucide-react";
 
 import { Section, SectionHeading } from "@/components/ui/section";
 import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
+import { FaqAccordion } from "@/components/ui/faq-accordion";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { ClientWall } from "@/components/shared/client-wall";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { CLIENTS, CLIENT_COUNT, clientRows, countByBrand } from "@/lib/clients";
-import { SITE } from "@/lib/site";
+import { SITE, telHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
-import { breadcrumbSchema, graph, type Crumb } from "@/lib/schema";
+import {
+  breadcrumbSchema,
+  clientListSchema,
+  faqSchema,
+  graph,
+  type Crumb,
+} from "@/lib/schema";
 import { cn } from "@/lib/utils";
 
 export const revalidate = 3600;
 
 export const metadata = pageMeta({
+  // 155 characters. The previous one ran past 250 and was truncated in the
+  // SERP halfway through the first company's name.
   title: "Our Clients | Raulji Group",
-  description:
-    "The businesses Raulji Group works with, across both companies in the group: consulting, registration and insurance through Raulji Consulting Services, and software, eCommerce and digital through Raulji Technologies.",
+  description: `The ${CLIENT_COUNT} businesses Raulji Group works with, across both companies in the group: consulting and registration, and software, eCommerce and digital.`,
   path: "/our-clients/",
   ogHeadline: "The businesses we work with",
 });
@@ -45,6 +54,19 @@ const crumbs: Crumb[] = [
  * data carries a `brand` on every client, so the moment a consulting list
  * exists those entries drop into the same wall, the same alphabetical list and
  * the same counts with no change here.
+ *
+ * Built to be quotable as well as readable. A logo wall is invisible to a
+ * search engine and to an AI system: images carry no meaning, and the question
+ * people actually ask ("who does Raulji Group work with?") has to be answered
+ * somewhere in words. So the page carries a direct-answer block in plain
+ * sentences, the full list as text, a visible FAQ, and an ItemList in JSON-LD
+ * naming all 37 as organisations. Every one of those is the same set of facts,
+ * stated for a different reader (master rules 20 and 21).
+ *
+ * Nothing about sectors, revenue, results or client geography is asserted
+ * anywhere. Those would all have been inferred from logo artwork rather than
+ * confirmed by the client, and an inferred fact on a client page is a fake one
+ * (master rule 13).
  */
 
 const GROUP_SERVICES = [
@@ -74,6 +96,38 @@ const GROUP_SERVICES = [
   },
 ] as const;
 
+/**
+ * Written as answers, not as copy.
+ *
+ * Each one is a question a person actually types, answered in the first
+ * sentence so it can be lifted whole into a snippet or an AI summary without
+ * the rest of the page for context. Everything in them is already stated
+ * elsewhere on this site; none of it is new, and none of it is a promise
+ * (master rules 20, 21 and 34).
+ */
+const FAQS = [
+  {
+    q: "Who are Raulji Group's clients?",
+    a: `Raulji Group works through two companies, and a client of either is a client of the group. The ${CLIENT_COUNT} businesses named on this page are clients of Raulji Technologies, the group's technology brand, on software, eCommerce, SEO and digital work. Consulting, registration and compliance clients are not named publicly.`,
+  },
+  {
+    q: "Why are Raulji Group's consulting and registration clients not listed?",
+    a: "Because that work is confidential by its nature. Which structure a business chose, what it was advised, and when it was registered are the client's information to disclose, not ours. We do not publish those names, and we do not publish a count of them either. If you want to know whether we have handled something close to your situation, ask us on a call and we will tell you.",
+  },
+  {
+    q: "What does Raulji Group do for the businesses on this page?",
+    a: "Raulji Technologies delivers their software and web development, eCommerce and marketplace work, SEO and digital marketing, and AI and digital transformation. Raulji Consulting Services covers the other half of the group: business consulting, company registration, annual compliance and insurance guidance.",
+  },
+  {
+    q: "Can Raulji Group work with a business outside Gujarat?",
+    a: `Yes. Company incorporation is filed online through the MCA portal and digital signatures are issued through remote verification, so the process does not depend on where the business is. Technology work is delivered remotely in the same way. The group is based in ${SITE.locality}, ${SITE.region}, and works with businesses across India.`,
+  },
+  {
+    q: "How do I become a client of Raulji Group?",
+    a: `Call ${SITE.phone.display} or send an enquiry, and describe what you are building. The first conversation is about what you actually need, which is often less than people expect. Our professional fee and the expected government fees are set out before any work begins, so nothing is filed or billed before you have agreed to it.`,
+  },
+];
+
 export default function OurClientsPage() {
   const rows = clientRows(3);
   const alphabetical = [...CLIENTS].sort((a, b) =>
@@ -87,13 +141,24 @@ export default function OurClientsPage() {
 
   return (
     <>
-      <JsonLd data={graph(breadcrumbSchema(crumbs))} />
+      <JsonLd
+        data={graph(
+          breadcrumbSchema(crumbs),
+          clientListSchema(CLIENTS, {
+            path: "/our-clients/",
+            logoPath: (slug) => `/clients/${slug}.webp`,
+          }),
+          // Valid because every one of these questions is on the page, visible,
+          // with the same answer text (master rule 20).
+          faqSchema(FAQS),
+        )}
+      />
 
       <PageHeader
         crumbs={crumbs}
         eyebrow="Raulji Group"
         title="The businesses we work with"
-        lead={`Raulji Group works through two companies, and a client of either is a client of the group. This is the whole wall in one place: ${CLIENT_COUNT} businesses across retail and marketplaces, manufacturing, fashion and safety, in India, the Gulf, the United Kingdom and East Africa.`}
+        lead={`Raulji Group works through two companies, and a client of either is a client of the group. This is the whole wall in one place: ${CLIENT_COUNT} businesses named publicly, with the work delivered by Raulji Technologies.`}
       />
 
       {/* The wall, straight after the masthead. It is the reason anyone opens
@@ -104,6 +169,57 @@ export default function OurClientsPage() {
           Logos are the property of their respective owners and are shown to identify the businesses
           the group has worked with.
         </p>
+      </Section>
+
+      {/*
+        The direct answer, in sentences, straight after the logos.
+        A wall of images says nothing to a search engine or an AI system, and
+        "who does Raulji Group work with" is the question this page exists to
+        answer. Putting the answer in plain prose here means it can be quoted
+        whole; leaving it to be inferred from 37 logo files means it cannot.
+      */}
+      <Section className="pt-12 md:pt-14">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-7 sm:p-9">
+          <h2 className="text-xl md:text-2xl">Who Raulji Group works with</h2>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            <strong className="font-semibold text-secondary">Raulji Group</strong> is a
+            consulting-focused business group based in {SITE.locality}, {SITE.region}, made up of two
+            companies: <strong className="font-semibold text-secondary">Raulji Consulting Services</strong>,
+            which handles business consulting, company registration, annual compliance and
+            insurance, and{" "}
+            <strong className="font-semibold text-secondary">Raulji Technologies</strong>, which
+            handles software, eCommerce, SEO and digital work on its own domain.
+          </p>
+          <p className="mt-4 leading-relaxed text-muted-foreground">
+            {CLIENT_COUNT} businesses are named publicly as clients of the group, all of them
+            through Raulji Technologies. Consulting and registration clients are not named, because
+            that work is confidential. The group works with businesses across India and is not
+            limited to Gujarat, since incorporation is filed online through the MCA portal and
+            technology work is delivered remotely.
+          </p>
+
+          {/* CRO: the wall is where interest peaks, so the ask comes here as
+              well as at the foot of the page, rather than only after another
+              four sections of reading. */}
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <TrackedLink
+              href="/contact/"
+              event="primary_cta_click"
+              params={{ label: "our-clients-answer" }}
+              className="brand-gradient inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl px-7 font-semibold text-primary-foreground shadow-elevated"
+            >
+              Talk to an Expert
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedLink>
+            <a
+              href={telHref}
+              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call {SITE.phone.display}
+            </a>
+          </div>
+        </div>
       </Section>
 
       {/* The group's services, both companies side by side. This is the part
@@ -132,12 +248,14 @@ export default function OurClientsPage() {
                   <li key={service.name} className="flex items-start gap-3">
                     <Check className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                     {service.href ? (
-                      <Link
+                      <TrackedLink
                         href={service.href}
+                        event="service_card_click"
+                        params={{ label: "our-clients-services", service: service.name }}
                         className="leading-relaxed text-secondary hover:text-primary hover:underline"
                       >
                         {service.name}
-                      </Link>
+                      </TrackedLink>
                     ) : (
                       // Technologies' catalogue lives on its own domain, so its
                       // lines are named and not linked into pages that do not
@@ -150,15 +268,16 @@ export default function OurClientsPage() {
 
               <div className="mt-8 pt-2">
                 {brand.cta.external ? (
-                  <a
+                  <TrackedLink
                     href={brand.cta.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    event="technology_click"
+                    params={{ label: "our-clients-services" }}
+                    external
                     className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary hover:bg-primary hover:text-primary-foreground"
                   >
                     {brand.cta.label}
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </a>
+                  </TrackedLink>
                 ) : (
                   <Link
                     href={brand.cta.href}
@@ -234,6 +353,46 @@ export default function OurClientsPage() {
             Tagged by the company in the group that delivered the work.
           </p>
         ) : null}
+      </Section>
+
+      {/* Questions, with the answer in the first sentence of each. */}
+      <Section>
+        <SectionHeading
+          eyebrow="Questions"
+          title="Working with Raulji Group"
+          lead="What people ask before they get in touch."
+        />
+        <FaqAccordion faqs={FAQS} idPrefix="clients-faq" />
+
+        {/* Internal linking (master rule 19): this page had been a dead end
+            apart from the two brand CTAs. */}
+        <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
+          More about the group on{" "}
+          <Link href="/about/" className="font-semibold text-primary hover:underline">
+            About Raulji Group
+          </Link>{" "}
+          and{" "}
+          <Link href="/team/" className="font-semibold text-primary hover:underline">
+            the team
+          </Link>
+          . If you are registering a business, start with{" "}
+          <Link
+            href="/services/business-registration/"
+            className="font-semibold text-primary hover:underline"
+          >
+            business registration
+          </Link>{" "}
+          or{" "}
+          <TrackedLink
+            href="/gujarat/"
+            event="gujarat_page_click"
+            params={{ label: "our-clients" }}
+            className="font-semibold text-primary hover:underline"
+          >
+            our coverage across Gujarat
+          </TrackedLink>
+          .
+        </p>
       </Section>
 
       <CtaBanner

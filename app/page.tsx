@@ -24,6 +24,8 @@ import { LeadForm } from "@/components/forms/lead-form";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { BrandImage } from "@/components/ui/brand-image";
+import type { ImageSlot } from "@/lib/images";
+import { getArticle } from "@/lib/blog";
 import { HOME_FAQS } from "@/lib/home-faqs";
 import { SERVICES } from "@/lib/services";
 import { SITE, telHref, mailHref } from "@/lib/site";
@@ -32,8 +34,14 @@ import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
 
 export const metadata = pageMeta({
   title: "Raulji Group | Business Consulting & Solutions",
+  /*
+   * The description the client's brief specifies at its section 8, verbatim.
+   * It replaces a hybrid of that line and master rule 5 which had dropped
+   * "business structuring" and the India-wide reach, both of which the page
+   * itself claims.
+   */
   description:
-    "Raulji Group helps entrepreneurs and businesses with consulting, business registration and specialized services, with a focus on long-term growth.",
+    "Raulji Group helps entrepreneurs and businesses with consulting, business registration, business structuring and related business solutions across Gujarat and India.",
   path: "/",
   ogHeadline: "We Don't Just Build Businesses. We Build Futures.",
 });
@@ -46,7 +54,16 @@ export const metadata = pageMeta({
  * invented domain of its own. Raulji Technologies keeps its own site and its
  * own service catalogue; this site introduces it and links out, nothing more.
  */
-const GROUP_BRANDS = [
+const GROUP_BRANDS: {
+  name: string;
+  role: string;
+  body: string;
+  points: string[];
+  href: string;
+  cta: string;
+  external: boolean;
+  image: ImageSlot;
+}[] = [
   {
     name: "Raulji Consulting Services",
     role: "Consulting and business services",
@@ -59,6 +76,7 @@ const GROUP_BRANDS = [
     href: "/services/business-consulting/",
     cta: "Explore Consulting",
     external: false,
+    image: "consulting",
   },
   {
     name: "Raulji Technologies",
@@ -72,8 +90,32 @@ const GROUP_BRANDS = [
     href: SITE.technologies,
     cta: "Visit Raulji Technologies",
     external: true,
+    image: "technologies",
   },
 ];
+
+/**
+ * The three guides linked from the homepage.
+ *
+ * Chosen by slug, not by date. A "latest three" list would eventually put the
+ * insurance guide on a homepage whose whole argument is consulting and
+ * registration, and the point of this band is to answer the question a visitor
+ * arrives with: which structure, Private Limited or LLP, and what changes in
+ * Gujarat. A slug that stops resolving is dropped rather than rendered dead.
+ */
+const HOME_GUIDES = [
+  "how-to-choose-business-structure-india-2026",
+  "private-limited-company-vs-llp",
+  "starting-business-gujarat-registration-guide",
+]
+  .map((slug) => getArticle(slug))
+  .filter((article): article is NonNullable<typeof article> => article !== null)
+  .map((article) => ({
+    slug: article.slug,
+    title: article.title,
+    excerpt: article.excerpt,
+    category: article.category,
+  }));
 
 /**
  * Why businesses choose Raulji Group (master rule 13).
@@ -153,20 +195,29 @@ export default function HomePage() {
                 the practical problems that come with running a business.
               </p>
 
+              {/* Both hero CTAs report. The header, footer, mobile bar and CTA
+                  banners already fired primary_cta_click, so the one CTA the
+                  most people see was the only one missing from the funnel
+                  (brief section 19). The labels carry the placement, so the
+                  report can separate a hero click from a header click. */}
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link
+                <TrackedLink
                   href="/contact/"
+                  event="primary_cta_click"
+                  params={{ label: "home_hero" }}
                   className="brand-gradient inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-xl px-8 font-semibold text-primary-foreground shadow-soft"
                 >
                   Talk to Our Team
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link
+                </TrackedLink>
+                <TrackedLink
                   href="/services/"
+                  event="service_card_click"
+                  params={{ label: "home_hero_services" }}
                   className="inline-flex min-h-[3.5rem] items-center justify-center rounded-xl border-2 border-primary px-8 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
                 >
                   Explore Our Services
-                </Link>
+                </TrackedLink>
               </div>
 
               <p className="mt-9 border-l-2 border-primary/40 pl-4 text-sm font-medium text-secondary">
@@ -184,55 +235,74 @@ export default function HomePage() {
       {/* 2. The Group of Companies (master rule 6). */}
       <Section id="group">
         <SectionHeading
-          eyebrow="Our Group of Companies"
-          title="Two brands, two distinct jobs"
+          eyebrow="Our Group"
+          title="One group, two distinct business focuses"
           lead="Knowing which part of the group you need is usually the fastest route to a useful answer."
         />
         <div className="grid gap-6 lg:grid-cols-2">
           {GROUP_BRANDS.map((brand) => (
             <article
               key={brand.name}
-              className="flex flex-col rounded-2xl border border-border bg-card p-7 sm:p-9"
+              className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card"
             >
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                {brand.role}
-              </p>
-              <h3 className="mt-3 text-2xl md:text-[1.75rem]">{brand.name}</h3>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{brand.body}</p>
-              <ul className="mt-6 flex-1 space-y-3 text-sm text-secondary">
-                {brand.points.map((point) => (
-                  <li key={point} className="flex gap-2.5">
-                    <CheckCircle2
-                      className="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                      aria-hidden="true"
-                    />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* Only the outbound brand link is tracked (master rule 29 asks for
-                  technology_click). The consulting link is ordinary internal
-                  navigation and needs no event. */}
-              {brand.external ? (
-                <TrackedLink
-                  href={brand.href}
-                  external
-                  event="technology_click"
-                  params={{ label: "home_brand_card" }}
-                  className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  {brand.cta}
-                  <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </TrackedLink>
-              ) : (
-                <Link
-                  href={brand.href}
-                  className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  {brand.cta}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              )}
+              {/*
+                Each brand carries its own visual (brief section 4). The two
+                cards were previously identical slabs of text distinguished only
+                by their heading, which is the one thing this section exists to
+                avoid: a reader should be able to tell the consulting brand from
+                the technology brand before reading a word.
+
+                These are the drawn brand panels, not photographs, and the alt
+                text in lib/images.ts describes what is actually drawn. Both are
+                below the fold and lazy by default, so neither competes for LCP.
+              */}
+              <BrandImage
+                slot={brand.image}
+                sizes="(min-width: 1024px) 34rem, (min-width: 640px) 90vw, 100vw"
+                aspect="aspect-[16/9]"
+                className="rounded-none border-0 border-b border-border"
+              />
+              <div className="flex flex-1 flex-col p-7 sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                  {brand.role}
+                </p>
+                <h3 className="mt-3 text-2xl md:text-[1.75rem]">{brand.name}</h3>
+                <p className="mt-4 leading-relaxed text-muted-foreground">{brand.body}</p>
+                <ul className="mt-6 flex-1 space-y-3 text-sm text-secondary">
+                  {brand.points.map((point) => (
+                    <li key={point} className="flex gap-2.5">
+                      <CheckCircle2
+                        className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                        aria-hidden="true"
+                      />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                {/* Only the outbound brand link is tracked (master rule 29 asks for
+                    technology_click). The consulting link is ordinary internal
+                    navigation and needs no event. */}
+                {brand.external ? (
+                  <TrackedLink
+                    href={brand.href}
+                    external
+                    event="technology_click"
+                    params={{ label: "home_brand_card" }}
+                    className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {brand.cta}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </TrackedLink>
+                ) : (
+                  <Link
+                    href={brand.href}
+                    className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {brand.cta}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                )}
+              </div>
             </article>
           ))}
         </div>
@@ -435,6 +505,32 @@ export default function HomePage() {
               Compare all four structures
             </Link>
           </p>
+          {/*
+            Where the rules actually come from (brief section 10 and 23).
+
+            The page says several times that incorporation is filed through the
+            MCA portal, and nothing on it pointed at the MCA. Naming the
+            authority and linking to it is the difference between describing a
+            government process and appearing to be its source. The link is
+            external and deliberate: one outbound link to the primary regulator
+            is worth more to an answer engine deciding whether to trust this
+            page than another internal link would be.
+          */}
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+            Company and LLP incorporation is filed with the Registrar of Companies under the
+            Ministry of Corporate Affairs. Current forms, fees and rules are published by the MCA
+            at{" "}
+            <a
+              href="https://www.mca.gov.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary hover:underline"
+            >
+              mca.gov.in
+            </a>
+            . Raulji Group prepares and files these applications on your behalf and is not a
+            government body.
+          </p>
         </div>
       </Section>
 
@@ -517,7 +613,61 @@ export default function HomePage() {
       </Section>
 
       {/*
-        8. Lead generation with the FAQs beside it (master rule 8 and 22).
+        8. Insights.
+
+        The homepage linked to every service pillar, the Gujarat hub and the
+        comparison page, and to none of the nine guides. Brief section 18 puts
+        the blog in the homepage link graph, and master rule 6 lists an Insights
+        band in the homepage order, so its absence was a real hole rather than a
+        stylistic choice: the guides are the part of this site that answers the
+        question a visitor is usually still holding when they arrive.
+
+        Three guides, named explicitly rather than taken as "the latest three",
+        so the selection stays deliberate as more are published: the structure
+        decision, the comparison people search for most, and the Gujarat piece
+        that follows the section above it. Titles and excerpts come from the
+        article data, so a retitled article cannot leave a stale link here.
+      */}
+      <Section tone="muted" id="insights">
+        <SectionHeading
+          eyebrow="Insights"
+          title="Guides for people deciding what to register"
+          lead="Written to answer the question rather than to rank for it. Each one names its sources."
+        />
+        <ul className="grid gap-6 md:grid-cols-3">
+          {HOME_GUIDES.map((guide) => (
+            <li key={guide.slug} className="h-full">
+              <Link
+                href={`/blog/${guide.slug}/`}
+                className="hover-lift group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+                  {guide.category}
+                </p>
+                <h3 className="mt-3 text-lg leading-snug">{guide.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {guide.excerpt}
+                </p>
+                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  Read the guide
+                  <ArrowRight
+                    className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5"
+                    aria-hidden="true"
+                  />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-center">
+          <Link href="/blog/" className="link-target font-semibold text-primary hover:underline">
+            All business guides
+          </Link>
+        </p>
+      </Section>
+
+      {/*
+        9. Lead generation with the FAQs beside it (master rule 8 and 22).
 
         The FAQs used to be a separate full-width section below this one, which
         left the enquiry column with a tall empty run under the contact details

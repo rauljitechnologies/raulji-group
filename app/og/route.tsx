@@ -59,7 +59,16 @@ export async function GET(request: Request) {
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 20, color: "#8FB6D4", fontSize: 24 }}>
-          <span style={{ display: "flex" }}>Business registration across Gujarat</span>
+          {/*
+            Consulting first, then registration. This strap read "Business
+            registration across Gujarat", which is the one claim the rest of the
+            site spends its homepage correcting: the group is consulting-led and
+            is not Gujarat-only (master rule 5 and 39). The OG card is the
+            description that travels furthest, into shares, previews and AI
+            summaries, so a contradiction here undoes the positioning everywhere
+            else (brief section 10).
+          */}
+          <span style={{ display: "flex" }}>Business consulting and business registration</span>
           <span style={{ display: "flex", color: "#3199D4" }}>|</span>
           <span style={{ display: "flex" }}>{SITE.phone.display}</span>
         </div>

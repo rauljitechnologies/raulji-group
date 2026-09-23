@@ -39,14 +39,6 @@ export const ARTICLES: Article[] = [
   healthInsurance,
 ];
 
-/**
- * The article promoted at the top of /blog/.
- *
- * The comprehensive structure guide, because it is the piece that answers the
- * widest question and links out to the most of the rest.
- */
-export const FEATURED_SLUG = "business-structure-guide-new-entrepreneurs-india";
-
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));
 
 export function getArticle(slug: string) {

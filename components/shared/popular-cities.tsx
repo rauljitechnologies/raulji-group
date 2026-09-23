@@ -47,7 +47,7 @@ export function PopularCities() {
         source="home_popular_cities"
         className="mt-5 inline-flex min-h-[3.25rem] w-full items-center justify-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
       >
-        View All Locations
+        Explore All Locations
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </LocationDrawerTrigger>
     </div>

@@ -56,7 +56,7 @@ export const CITY_INDEX: readonly CityIndexEntry[] = [
 
 /**
  * The eight markets shown on the homepage before the drawer opens
- * (spec section 13). Everything else lives behind "View All Locations".
+ * (spec section 13). Everything else lives behind "Explore All Locations".
  */
 export const POPULAR_CITY_SLUGS = [
   "ahmedabad",
