@@ -268,3 +268,139 @@ save(technologies(),"raulji-technologies")
 save(enquiry(),"raulji-group-enquiry")
 save(insurance(),"raulji-group-insurance")
 save(compliance(),"raulji-group-compliance")
+
+
+# ---------------------------------------------------------------------------
+# 12-15. The four registration structures, one panel each.
+#
+# The homepage design brief asks for four distinct visuals on the registration
+# cards and is explicit that four generic document images would be wrong. It is
+# right: the cards sat on four lucide icons, which told a reader the structures
+# were different without ever saying how.
+#
+# So each panel draws the one thing that actually separates its structure from
+# the other three, and nothing else:
+#
+#   Private Limited  ownership split into transferable share units
+#   LLP              two or more partners, each behind a liability shield
+#   Partnership      two partners joined by a deed, no shield
+#   Proprietorship   one person, who is the business
+#
+# 4:3 at 800x600. They sit above a card at roughly 380px wide, so they are
+# drawn for that size rather than downscaled from a banner.
+# ---------------------------------------------------------------------------
+
+def _person(d, cx, cy, r, alpha=255, fill=True):
+    """A head and shoulders, drawn small enough to read at card width."""
+    col = (*BLUE, alpha)
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=col if fill else None,
+              outline=None if fill else col, width=0 if fill else 3)
+    bw, bh = int(r * 2.5), int(r * 1.7)
+    box = [cx - bw // 2, cy + int(r * 1.15), cx + bw // 2, cy + int(r * 1.15) + bh * 2]
+    if fill:
+        d.pieslice(box, 180, 360, fill=col)
+    else:
+        d.arc(box, 180, 360, fill=col, width=3)
+
+
+def pvt_card(w=800, h=600):
+    """Ownership as share units: divisible, countable, transferable."""
+    im = base(w, h); d = ImageDraw.Draw(im)
+    cols, rows = 4, 3
+    gw, gh = int(w * 0.46), int(h * 0.34)
+    x0, y0 = int(w * 0.46), int(h * 0.17)
+    cw, ch = gw // cols, gh // rows
+    for i in range(rows):
+        for j in range(cols):
+            x, y = x0 + j * cw, y0 + i * ch
+            # A minority of units filled: shares issued against shares authorised.
+            on = (i * cols + j) in (0, 1, 4, 5, 8)
+            d.rounded_rectangle([x + 3, y + 3, x + cw - 5, y + ch - 5],
+                                radius=int(h * 0.012),
+                                fill=(*BLUE, 225) if on else None,
+                                outline=(*BLUE, 70) if not on else None,
+                                width=0 if on else 3)
+    # The company itself: one boundary around the units, separate from its owners.
+    d.rounded_rectangle([x0 - int(w * 0.03), y0 - int(h * 0.05),
+                         x0 + gw + int(w * 0.012), y0 + gh + int(h * 0.035)],
+                        radius=int(h * 0.03), outline=(*BLUE, 120), width=3)
+    return label(im, "Shares, not just owners", "Private Limited Company")
+
+
+def llp_card(w=800, h=600):
+    """Partners with a liability shield between them and the business."""
+    im = base(w, h); d = ImageDraw.Draw(im)
+    cx, cy = int(w * 0.68), int(h * 0.24)
+    for dx in (-int(w * 0.10), int(w * 0.10)):
+        _person(d, cx + dx, cy, int(w / 34))
+    # The shield: an arc the partners stand behind. Its apex is set below the
+    # shoulders rather than measured from the heads, because an arc drawn from
+    # the head position cuts straight through both figures.
+    apex = int(h * 0.455)
+    box = [cx - int(w * 0.185), apex, cx + int(w * 0.185), apex + int(h * 0.22)]
+    d.arc(box, 200, 340, fill=(*BLUE, 235), width=5)
+    mid = apex + int(h * 0.11)
+    d.line([(cx - int(w * 0.181), mid), (cx + int(w * 0.181), mid)], fill=(*BLUE, 235), width=5)
+    return label(im, "Partners, liability capped", "Limited Liability Partnership")
+
+
+def partnership_card(w=800, h=600):
+    """Two partners joined by a deed. The same people, with no shield."""
+    im = base(w, h); d = ImageDraw.Draw(im)
+    cx, cy = int(w * 0.68), int(h * 0.27)
+    ax, bx = cx - int(w * 0.11), cx + int(w * 0.11)
+    for px in (ax, bx):
+        _person(d, px, cy, int(w / 34))
+    # The deed between them: a sheet with a signature rule on it.
+    dw, dh = int(w * 0.20), int(h * 0.15)
+    dx, dy = cx - dw // 2, cy + int(h * 0.26)
+    d.rectangle([dx, dy, dx + dw, dy + dh], outline=(*BLUE, 235), width=4)
+    for i in range(3):
+        ly = dy + int(dh * (i + 1) / 4.6)
+        d.line([(dx + int(dw * 0.16), ly), (dx + int(dw * (0.84 if i < 2 else 0.55)), ly)],
+               fill=(*BLUE, 95), width=3)
+    for px in (ax, bx):
+        d.line([(px, cy + int(h * 0.15)), (px, dy), (cx + (dw // 2 if px > cx else -dw // 2), dy)],
+               fill=(*BLUE, 110), width=3)
+    return label(im, "An agreement between partners", "Partnership Firm")
+
+
+def proprietorship_card(w=800, h=600):
+    """One person and the business as the same legal thing."""
+    im = base(w, h); d = ImageDraw.Draw(im)
+    cx, cy = int(w * 0.66), int(h * 0.26)
+    pr = int(w / 27)
+    _person(d, cx, cy, pr)
+    # One ring around the single owner: the person and the business, undivided.
+    #
+    # The rings are centred on the figure's optical centre, not on the head. A
+    # head-centred ring sits high and reads as a misalignment rather than as an
+    # enclosure. There is no baseline rule here either: at this radius it cut
+    # straight through both rings.
+    ring_cy = cy + int(pr * 1.78)
+    for r, a in ((int(w * 0.150), 215), (int(w * 0.200), 80)):
+        d.ellipse([cx - r, ring_cy - r, cx + r, ring_cy + r],
+                  outline=(*BLUE, a), width=4 if a > 150 else 3)
+    return label(im, "One owner, one entity", "Proprietorship")
+
+
+save(pvt_card(), "private-limited-company-registration")
+save(llp_card(), "llp-registration-india")
+save(partnership_card(), "partnership-firm-registration")
+save(proprietorship_card(), "proprietorship-registration")
+
+
+# ---------------------------------------------------------------------------
+# 16. Hero panel, 16:9.
+#
+# The hero used to carry an inline SVG that was hidden below md, so a phone got
+# the headline and nothing else. The design brief asks for a real 16:9 image
+# there, loaded with priority, visible at every width.
+#
+# It is the group drawing rather than a new one: the hero's job is to say what
+# Raulji Group is and that it runs two brands, and that is exactly what this
+# already draws. Rendered at 16:9 rather than cropped from the 21:9 version,
+# because object-cover on the wide file cuts the caption off the left edge.
+# ---------------------------------------------------------------------------
+
+save(group(1200, 675), "raulji-group-hero")

@@ -1,19 +1,19 @@
 import type { FAQ } from "./services";
 
 /**
- * Homepage FAQs. Answers are also visible on the page, as FAQPage schema requires.
+ * The general FAQs.
  *
- * The first two questions are the entity questions from brief section 9. They
- * are here rather than in a decorative "answer box" because an answer engine
- * wants one unambiguous sentence about what this organisation is and what it
- * sells, and the accordion is the one place on this page where a question and
- * its answer sit together in the markup and in the FAQPage graph.
+ * These are the questions that are not specific to one registration structure.
+ * `/faqs/` renders all of them as its "General" section; the homepage takes the
+ * three in `HOME_ANSWERS` below and leaves the rest here.
  *
- * Both answers are deliberately literal and short. Nothing in them is a claim
- * that would need verifying: the group's own description of itself, and a list
- * of the four registration services that have pages on this site.
+ * The first two are the entity questions from the brief's AEO section. They are
+ * written literally and short because an answer engine wants one unambiguous
+ * sentence about what this organisation is and what it sells. Nothing in either
+ * is a claim that would need verifying: the group's own account of itself, and
+ * a list of the four registration services that have pages on this site.
  */
-export const HOME_FAQS: FAQ[] = [
+export const GENERAL_FAQS: FAQ[] = [
   {
     q: "What does Raulji Group do?",
     a: "Raulji Group provides business consulting, business registration, business structuring and related business solutions for entrepreneurs and businesses. It works through two brands: Raulji Consulting Services, which covers the consulting and business-services work on this site, and Raulji Technologies, the group's technology brand, which operates on its own website.",
@@ -21,6 +21,10 @@ export const HOME_FAQS: FAQ[] = [
   {
     q: "What business registration services does Raulji Group provide?",
     a: "Four: Private Limited Company Registration, LLP Registration, Partnership Firm Registration and Proprietorship Registration. Each has its own page covering eligibility, documents, process and cost. Raulji Group prepares and files these applications on your behalf; it is a private business-services firm, not a government department.",
+  },
+  {
+    q: "Is Raulji Group a government agency?",
+    a: "No. Raulji Group is a private business-services firm. We are not a government department and are not affiliated with the Ministry of Corporate Affairs, the GST department or any other authority. We prepare and file applications on your behalf, and approval always rests with the relevant authority.",
   },
   {
     q: "Which business structure should I choose?",
@@ -42,8 +46,21 @@ export const HOME_FAQS: FAQ[] = [
     q: "Can I change my business structure later?",
     a: "Yes. A proprietorship can be moved into a partnership, LLP or company, a partnership firm can convert to an LLP or a company, and an LLP can convert to a company, each subject to conditions in the relevant law. Conversion is not free: it means new registrations, new bank accounts and updating vendor and customer records, so it is worth getting the choice roughly right at the start.",
   },
-  {
-    q: "Is Raulji Group a government agency?",
-    a: "No. Raulji Group is a private business-services firm. We are not a government department and are not affiliated with the Ministry of Corporate Affairs, the GST department or any other authority. We prepare and file applications on your behalf, and approval always rests with the relevant authority.",
-  },
 ];
+
+/**
+ * The three answers the homepage carries.
+ *
+ * The homepage used to render all eight of the above in an accordion, which the
+ * design brief rules out: it lists a large FAQ among the things that belong on
+ * a dedicated page rather than the homepage, and it asks instead for short
+ * answer blocks that state what the group is.
+ *
+ * So the homepage keeps the two entity questions and the one that stops a
+ * reader mistaking a private firm for a government body, and sends everything
+ * else to `/faqs/`, which still renders all eight. They are taken by reference
+ * rather than retyped, so the wording cannot drift between the two pages, and
+ * the homepage's FAQPage schema is built from exactly this array, so the markup
+ * still matches what is visible on it.
+ */
+export const HOME_ANSWERS: FAQ[] = [GENERAL_FAQS[0]!, GENERAL_FAQS[1]!, GENERAL_FAQS[2]!];

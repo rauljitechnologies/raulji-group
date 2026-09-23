@@ -5,7 +5,7 @@ import { FaqAccordion } from "@/components/ui/faq-accordion";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { SERVICES } from "@/lib/services";
-import { HOME_FAQS } from "@/lib/home-faqs";
+import { GENERAL_FAQS } from "@/lib/home-faqs";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 
@@ -24,7 +24,7 @@ const crumbs: Crumb[] = [
 
 export default function FaqsPage() {
   const sections = [
-    { id: "general", heading: "General", faqs: HOME_FAQS, href: null as string | null },
+    { id: "general", heading: "General", faqs: GENERAL_FAQS, href: null as string | null },
     ...SERVICES.map((service) => ({
       id: service.slug,
       heading: service.name,
