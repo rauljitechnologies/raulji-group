@@ -47,6 +47,7 @@ export function BlogIndex({
 }) {
   const [category, setCategory] = useState<string | null>(null);
   const [query, setQuery] = useState("");
+  const leadSlug = articles[0]?.slug;
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -127,7 +128,19 @@ export function BlogIndex({
         <ul className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {visible.map((article) => (
             <li key={article.slug}>
-              <ArticleCard article={article} />
+              {/*
+                The first card of the unfiltered set loads eagerly. The promoted
+                article above this listing used to be the page's largest
+                contentful paint and carried `priority`; with it gone, the lead
+                card's image is what the browser paints first, and without this
+                it would be lazily fetched like the eight below it.
+
+                Keyed to the first article rather than to the first visible one
+                so filtering does not move `priority` onto a different image
+                mid-session, which would start a fresh high-priority fetch every
+                time a chip is pressed.
+              */}
+              <ArticleCard article={article} priority={article.slug === leadSlug} />
             </li>
           ))}
         </ul>
@@ -162,7 +175,7 @@ function FilterChip({
   );
 }
 
-function ArticleCard({ article }: { article: BlogCard }) {
+function ArticleCard({ article, priority }: { article: BlogCard; priority?: boolean }) {
   return (
     <article className="hover-lift flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
       {article.image ? (
@@ -171,6 +184,8 @@ function ArticleCard({ article }: { article: BlogCard }) {
             src={article.image.src}
             alt=""
             sizes="(min-width: 1024px) 24rem, (min-width: 768px) 45vw, 100vw"
+            priority={priority}
+            placeholder="blur"
             className="aspect-[16/9] w-full object-cover"
           />
         </Link>

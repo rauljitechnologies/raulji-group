@@ -1,19 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Section, SectionHeading } from "@/components/ui/section";
 import { PageHeader } from "@/components/ui/page-header";
 import { JsonLd } from "@/components/ui/json-ld";
 import { CtaBanner } from "@/components/shared/cta-banner";
 import { BlogIndex, type BlogCard } from "@/components/blog/blog-index";
-import {
-  ARTICLES,
-  FEATURED_SLUG,
-  activeCategories,
-  formatArticleDate,
-  getArticle,
-} from "@/lib/blog";
+import { ARTICLES, activeCategories, formatArticleDate } from "@/lib/blog";
 import { blogImage } from "@/lib/blog/images";
 import { getPublishedPosts } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
@@ -38,10 +31,23 @@ const crumbs: Crumb[] = [
 ];
 
 export default async function BlogPage() {
-  const featured = getArticle(FEATURED_SLUG);
-  const featuredImage = featured ? blogImage(featured.image) : null;
-
-  const guides: BlogCard[] = ARTICLES.filter((article) => article.slug !== FEATURED_SLUG).map(
+  /*
+   * Every guide, in the listing, in editorial order.
+   *
+   * There used to be a "Start here" band above this that promoted one article
+   * in a half-page card with its own image and CTA, and that article was then
+   * filtered out of the grid below. Two things were wrong with it. A reader
+   * scanning for a specific subject had to read the promoted card first and
+   * then look for their subject in a grid that was missing one guide, with
+   * nothing saying where it had gone; and the promoted card pushed the actual
+   * listing, with its filter and search, below the fold on every screen size.
+   *
+   * The client asked for the featured block to go and for the listing to show
+   * everything, which is also the right call for a nine-article index: the
+   * grid is small enough to scan whole, and the filter and search are the
+   * navigation, not a hand-picked starting point.
+   */
+  const guides: BlogCard[] = ARTICLES.map(
     (article) => {
       const image = blogImage(article.image);
       return {
@@ -123,65 +129,52 @@ export default async function BlogPage() {
         )}
       />
 
+      {/*
+        The masthead.
+
+        With the promoted article gone this is the whole of the page above the
+        listing, so it does the work that card was doing: it says what the
+        series is, how much of it there is, and what a reader is entitled to
+        expect from it, before they start scanning titles.
+
+        Every figure in the strip is counted from the article data rather than
+        written down, so none of it can drift as guides are added, and none of
+        it is a claim that would need verifying (master rule 13). An earlier
+        draft of this strip said every guide names its sources. That holds for
+        the nine series articles, where `sources` is part of the article model,
+        but `cards` also carries legacy posts published through Supabase, which
+        have no such guarantee, so the statement would have been asserting
+        something about content this page cannot check. It is replaced with the
+        series length, which is a fact about a set that is defined here.
+      */}
       <PageHeader
         crumbs={crumbs}
         eyebrow="Business guides"
         title="Guides on registering and running a business"
         lead="Written by the people who prepare the filings, checked against the official sources, and kept to what we can actually stand behind."
-      />
-
-      {featured && featuredImage ? (
-        <Section>
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Start here
-          </p>
-          <div className="mt-5 grid gap-8 overflow-hidden rounded-3xl border border-border bg-card lg:grid-cols-2 lg:gap-0">
-            <Image
-              src={featuredImage.src}
-              alt={featuredImage.alt}
-              sizes="(min-width: 1024px) 38rem, 100vw"
-              priority
-              placeholder="blur"
-              className="aspect-[16/9] w-full object-cover lg:h-full"
-            />
-            <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                {featured.category}
-              </p>
-              <h2 className="mt-3 text-2xl leading-snug md:text-3xl">
-                <Link href={`/blog/${featured.slug}/`} className="hover:text-primary">
-                  {featured.title}
-                </Link>
-              </h2>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{featured.excerpt}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="h-4 w-4" aria-hidden="true" />
-                  <time dateTime={featured.published}>
-                    {formatArticleDate(featured.published)}
-                  </time>
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="h-4 w-4" aria-hidden="true" />
-                  {featured.readMinutes} min read
-                </span>
-              </div>
-              <Link
-                href={`/blog/${featured.slug}/`}
-                className="brand-gradient mt-7 inline-flex min-h-[3rem] w-fit items-center gap-2 rounded-xl px-6 font-semibold text-primary-foreground shadow-soft"
-              >
-                Read the guide
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+      >
+        <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
+          {(
+            [
+              ["Guides published", `${cards.length}`],
+              ["Subjects covered", `${categories.length}`],
+              ["2026 Business Guide Series", `${ARTICLES.length} parts`],
+            ] as const
+          ).map(([term, value]) => (
+            <div key={term} className="bg-card px-5 py-4">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                {term}
+              </dt>
+              <dd className="mt-1.5 font-semibold text-secondary">{value}</dd>
             </div>
-          </div>
-        </Section>
-      ) : null}
+          ))}
+        </dl>
+      </PageHeader>
 
       <Section tone="muted">
         <SectionHeading
           title="All guides"
-          lead="The 2026 Business Guide Series, planned as a nine-part calendar from January to September. The month shown on each guide is its position in that series; every guide carries its real publication date."
+          lead="The 2026 Business Guide Series, planned as a nine-part calendar from January to September. The month shown on each guide is its position in that series; every guide carries its real publication date. Filter by subject or search the full text of every title, summary and keyword."
           align="left"
         />
         <BlogIndex articles={cards} categories={categories} />
