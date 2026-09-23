@@ -25,6 +25,19 @@ interface FooterLink {
   external?: boolean;
 }
 
+/*
+ * Two link columns, between the brand block and the contact block.
+ *
+ * The design brief's section 28 asks for four columns: brand, services, group,
+ * contact. That is one fewer link column than this footer had, and the naive
+ * reading of it drops Compare and FAQs entirely, which would cost the footer
+ * two internal links for no reason.
+ *
+ * So the Resources column is dissolved rather than deleted, into the column
+ * each of its links actually belongs in: comparing the four structures is part
+ * of choosing a service, and the guides and FAQs are things the group
+ * publishes. Nothing that was linked before is unlinked now.
+ */
 const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "Services",
@@ -36,6 +49,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
         name: service.shortName === "Private Limited" ? "Private Limited Company" : service.name,
         href: service.path,
       })),
+      { name: "Compare Business Structures", href: "/compare/" },
       { name: "All Services", href: "/services/" },
     ],
   },
@@ -46,20 +60,14 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
       { name: "Our Team", href: "/team/" },
       { name: "Our Clients", href: "/our-clients/" },
       { name: "Gujarat", href: "/gujarat/" },
-      // The group relationship lives here now, not in a band of its own.
+      // /blog/ is the guides index. The brief lists "Blog" and "Business
+      // Guides" as separate entries, but a second link to the same URL is a
+      // duplicate rather than a resource.
+      { name: "Business Guides", href: "/blog/" },
+      { name: "FAQs", href: "/faqs/" },
+      // The group relationship lives here, not in a band of its own.
       { name: "Raulji Technologies", href: SITE.technologies, external: true },
       { name: "Contact", href: "/contact/" },
-    ],
-  },
-  {
-    heading: "Resources",
-    links: [
-      // One link, not two. The spec lists "Blog" and "Business Guides"
-      // separately, but /blog/ is the guides index, and a second entry pointing
-      // at the same URL is a duplicate rather than a resource.
-      { name: "Business Guides", href: "/blog/" },
-      { name: "Compare Business Structures", href: "/compare/" },
-      { name: "FAQs", href: "/faqs/" },
     ],
   },
 ];
@@ -80,16 +88,39 @@ export function Footer() {
       <div className="container-wide py-10 lg:py-12">
         {/* Desktop 4-column / tablet 2-column / mobile accordion (spec section 20) */}
         <div className="grid gap-x-8 gap-y-6 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand and contact (spec sections 17, 19) */}
-          <div className="md:col-span-2 lg:col-span-1">
+          {/*
+            Column 1: who the group is (brief section 28).
+
+            The contact details used to sit here too, which left the brand
+            column carrying three unrelated jobs and no actual description of
+            the business. They now have a column of their own at the end, and
+            this one says what Raulji Group is before the link columns start
+            listing what it sells.
+          */}
+          <div>
             <p className="text-lg font-bold">{SITE.name}</p>
             <p className="mt-1.5 text-sm font-semibold leading-snug text-primary">{SITE.tagline}</p>
+            <p className="mt-4 text-sm leading-relaxed text-secondary-foreground/70">
+              A consulting-focused business group working with entrepreneurs and business owners on
+              structure, registration and the decisions that come before either.
+            </p>
+            <p className="mt-4 border-l-2 border-primary/40 pl-3 text-sm leading-snug text-secondary-foreground/80">
+              Leadership Built on Relationships. Trust Built for the Long Term.
+            </p>
+          </div>
 
-            <address className="mt-4 flex flex-col gap-1 text-sm not-italic sm:flex-row sm:gap-6 lg:flex-col lg:gap-1">
+          {COLUMNS.map((column) => (
+            <FooterColumn key={column.heading} column={column} />
+          ))}
+
+          {/* Column 4: contact (brief section 28). */}
+          <div>
+            <p className="text-sm font-semibold text-secondary-foreground">Contact</p>
+            <address className="mt-3 flex flex-col gap-1 text-sm not-italic">
               <a
                 href={telHref}
                 onClick={() => track("phone_click", { label: "footer" })}
-                className="flex min-h-[2rem] items-center gap-2.5 hover:text-primary"
+                className="flex min-h-[2rem] items-center gap-2.5 text-secondary-foreground/70 hover:text-primary"
               >
                 <Phone className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 {SITE.phone.display}
@@ -97,26 +128,27 @@ export function Footer() {
               <a
                 href={mailHref}
                 onClick={() => track("email_click", { label: "footer" })}
-                className="flex min-h-[2rem] items-center gap-2.5 hover:text-primary"
+                className="flex min-h-[2rem] items-center gap-2.5 text-secondary-foreground/70 hover:text-primary"
               >
                 <Mail className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
                 {SITE.email}
               </a>
+              <span className="flex min-h-[2rem] items-start gap-2.5 text-secondary-foreground/70">
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                {SITE.locality}, {SITE.region}, India
+              </span>
             </address>
+            <p className="mt-2 text-sm text-secondary-foreground/60">{SITE.hours.display}</p>
 
             <Link
               href="/contact/"
               onClick={() => track("primary_cta_click", { label: "footer" })}
               className="mt-4 inline-flex min-h-[2.75rem] items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
             >
-              Start Your Business
+              Talk to Our Team
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
-
-          {COLUMNS.map((column) => (
-            <FooterColumn key={column.heading} column={column} />
-          ))}
         </div>
 
         {/* Locations, without the city list (spec sections 43, 44) */}

@@ -11,6 +11,11 @@ import technologies from "@/public/photos/raulji-technologies.webp";
 import enquiry from "@/public/photos/raulji-group-enquiry.webp";
 import insurance from "@/public/photos/raulji-group-insurance.webp";
 import compliance from "@/public/photos/raulji-group-compliance.webp";
+import hero from "@/public/photos/raulji-group-hero.webp";
+import pvtStructure from "@/public/photos/private-limited-company-registration.webp";
+import llpStructure from "@/public/photos/llp-registration-india.webp";
+import partnershipStructure from "@/public/photos/partnership-firm-registration.webp";
+import proprietorshipStructure from "@/public/photos/proprietorship-registration.webp";
 
 /**
  * The image slots from the plan in AUDIT.md.
@@ -47,6 +52,19 @@ export interface BrandImageEntry {
 }
 
 export const IMAGES = {
+  /*
+   * The hero, 16:9.
+   *
+   * This is the only slot that takes `priority`, because it is the only one
+   * above the fold. It is the same drawing as `structure` rendered at 16:9
+   * rather than the 21:9 file cropped to fit: object-cover on the wide version
+   * cuts its caption off the left edge.
+   */
+  hero: {
+    src: hero,
+    alt: "Raulji Group drawn as one group holding two brands, Raulji Consulting Services and Raulji Technologies, kept separate because they do different work",
+    placeholder: false,
+  },
   /** Wide band, 21:9. The group and the two brands it runs. */
   structure: {
     src: structure,
@@ -102,6 +120,39 @@ export const IMAGES = {
   compliance: {
     src: compliance,
     alt: "One financial year with its filing dates marked on it",
+    placeholder: false,
+  },
+
+  /*
+   * One panel per registration structure, for the cards on the homepage.
+   *
+   * The design brief asks for four distinct visuals here and says explicitly
+   * that four generic document images would be wrong. It is right, and the
+   * cards were worse than that: four lucide icons, which told a reader the
+   * structures differ without ever saying how.
+   *
+   * Each panel draws the single thing that separates its structure from the
+   * other three, and the alt text describes the drawing rather than repeating
+   * the service name the card heading already carries.
+   */
+  pvtStructure: {
+    src: pvtStructure,
+    alt: "A company boundary drawn around a grid of share units, some issued and some not, showing ownership divided into transferable shares",
+    placeholder: false,
+  },
+  llpStructure: {
+    src: llpStructure,
+    alt: "Two partners standing behind an arc, showing partners whose liability is capped",
+    placeholder: false,
+  },
+  partnershipStructure: {
+    src: partnershipStructure,
+    alt: "Two partners joined by lines running down to a signed deed between them, and no liability shield",
+    placeholder: false,
+  },
+  proprietorshipStructure: {
+    src: proprietorshipStructure,
+    alt: "A single owner inside one unbroken ring, showing a person and a business that are the same legal entity",
     placeholder: false,
   },
 } as const satisfies Record<string, BrandImageEntry>;
