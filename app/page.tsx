@@ -158,7 +158,7 @@ export default function HomePage() {
         the page into an advertisement. Contact details sit in the header, the
         lead section and the footer, where people look for them.
       */}
-      <section className="relative border-b border-border bg-muted pt-28 pb-14 md:pt-36 md:pb-20">
+      <section className="relative border-b border-border bg-muted py-14 md:py-20">
         <div className="container-wide">
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>

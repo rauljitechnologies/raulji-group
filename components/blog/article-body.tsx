@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
  * it, a checklist is a list of things to do rather than a list of things that
  * are true. Anything that is only prose is a paragraph.
  *
- * Headings carry scroll-mt so the fixed header never covers the one you jumped
- * to from the contents list.
+ * Jumping to a heading from the contents list is handled once, by the
+ * `scroll-padding-top` on <html>, rather than per heading here.
  */
 export function ArticleBody({ blocks }: { blocks: Block[] }) {
   return (
@@ -33,7 +33,7 @@ function BlockView({ block }: { block: Block }) {
       return (
         <h2
           id={block.id}
-          className="mt-14 scroll-mt-28 border-t border-border pt-10 text-2xl leading-snug md:text-[1.75rem]"
+          className="mt-14 border-t border-border pt-10 text-2xl leading-snug md:text-[1.75rem]"
         >
           {block.text}
         </h2>

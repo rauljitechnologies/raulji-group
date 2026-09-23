@@ -81,7 +81,7 @@ export function ArticlePage({ article }: { article: Article }) {
       />
 
       <header className="border-b border-border bg-muted">
-        <div className="container-wide pb-10 pt-28 md:pb-14 md:pt-32">
+        <div className="container-wide py-10 md:py-14">
           <Breadcrumbs crumbs={crumbs} inline />
 
           <div className="mt-6 max-w-3xl">
@@ -273,7 +273,10 @@ export function ArticlePage({ article }: { article: Article }) {
               reader and the first paragraph without earning the space. */}
           {contents.length ? (
             <aside className="hidden lg:block">
-              <nav aria-label="On this page" className="sticky top-28">
+              {/* top-32 matches the 8rem `scroll-padding-top` in globals.css:
+                  both clear the 109px sticky header with room to spare, where
+                  the old top-28 left the rail 3px under it. */}
+              <nav aria-label="On this page" className="sticky top-32">
                 <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
                   <ListChecks className="h-4 w-4" aria-hidden="true" />
                   On this page

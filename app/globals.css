@@ -161,12 +161,16 @@
 
   html {
     scroll-behavior: smooth;
-    /* Keep anchored headings clear of the fixed header. */
-    scroll-padding-top: 7rem;
+    /*
+     * The sticky header still sits over the top of the viewport when an anchor
+     * is scrolled to, so anchored headings need to clear it. The header
+     * measures 109px at every breakpoint; 8rem lands the heading 19px below it
+     * rather than the 3px the old 7rem left.
+     */
+    scroll-padding-top: 8rem;
   }
 
   body {
-    /* Room for the mobile action bar so it never covers page content. */
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
@@ -186,9 +190,26 @@
     @apply inline-flex min-h-[1.75rem] items-center;
   }
 
-  /* Reserved gutter so the fixed mobile action bar never overlaps the last section. */
+  /*
+   * Reserved room for the fixed mobile action bar, applied to the footer.
+   *
+   * The bar is 57px tall plus whatever the device reserves at the bottom edge,
+   * and it carries that inset as its own padding, so the gutter adds the inset
+   * too or a notched phone eats the difference.
+   *
+   * 3.5rem is chosen against the footer's existing `py-10`: 40px + 56px of
+   * gutter, less the 57px the bar covers, leaves 39px of navy below the last
+   * line, which is the spacing the footer was designed with. Anything from
+   * 17px up clears the bar; this is the value that also keeps it looking right.
+   */
   .mobile-bar-gutter {
-    @apply pb-24 lg:pb-0;
+    padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-bar-gutter {
+      padding-bottom: 0;
+    }
   }
 }
 

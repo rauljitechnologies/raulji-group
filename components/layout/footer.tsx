@@ -80,7 +80,20 @@ const LEGAL_LINKS: FooterLink[] = [
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground" aria-labelledby="footer-heading">
+    /*
+      `mobile-bar-gutter` sits here rather than on <main> because the fixed
+      mobile action bar is pinned to the viewport bottom, and the footer is the
+      only element it can ever reach. On <main> it reserved space the bar never
+      used and left the footer with its own 40px of padding under a 57px bar,
+      so the authority disclaimer was 17px behind the bar on every phone.
+
+      The gutter belongs inside the footer so the navy band runs on behind the
+      bar; on <body> it would have shown a strip of page background below it.
+    */
+    <footer
+      className="mobile-bar-gutter bg-secondary text-secondary-foreground"
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Raulji Group
       </h2>

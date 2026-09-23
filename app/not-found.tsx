@@ -72,7 +72,7 @@ const DESTINATIONS = [
 export default function NotFound() {
   return (
     <>
-      <section className="border-b border-border bg-muted pt-28 pb-12 sm:pt-32 md:pt-36 md:pb-16">
+      <section className="border-b border-border bg-muted py-12 md:py-16">
         <div className="container-wide">
           <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
             <div>
