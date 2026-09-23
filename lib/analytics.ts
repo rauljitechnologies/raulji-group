@@ -29,6 +29,16 @@ type EventName =
 export interface EventParams {
   /** Pvt Ltd, LLP, Partnership, Proprietorship, or unset. */
   registration_type?: string;
+  /**
+   * A named service that is not one of the four registration structures, e.g.
+   * "Business consulting" or "Annual compliance".
+   *
+   * Separate from `registration_type` on purpose. That field is documented to
+   * the client as the structure dimension and their reports segment on it, so
+   * putting "Business consulting" in it would quietly corrupt a report rather
+   * than extend one.
+   */
+  service?: string;
   city?: string;
   page?: string;
   source?: string;

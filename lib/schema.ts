@@ -19,6 +19,43 @@ export function abs(path: string) {
   return `${SITE.url}${path}`;
 }
 
+/**
+ * The two brands the group presents, as schema.org Brand nodes.
+ *
+ * `brand` is used deliberately in place of `subOrganization`, `parentOrganization`
+ * or `department`. Those assert a corporate relationship between registered
+ * entities, and no such structure has been verified (master rule 13, brief
+ * section 1: do not claim holding company or group-of-companies legal status).
+ * `brand` asserts only what the site already says in plain words on the
+ * homepage: Raulji Group maintains these two brands.
+ *
+ * This is what lets an answer engine separate the three names it will otherwise
+ * conflate, which is the whole point of brief section 9: Raulji Group is the
+ * group, Raulji Consulting Services is the consulting and business-services
+ * brand on this site, Raulji Technologies is the technology brand on its own
+ * domain.
+ */
+function brandNodes() {
+  return [
+    {
+      "@type": "Brand",
+      "@id": `${SITE.url}/#consulting-brand`,
+      name: "Raulji Consulting Services",
+      description:
+        "The consulting and business-services brand of Raulji Group, covering business consulting, business structuring and company and business registration support.",
+      url: `${SITE.url}/services/business-consulting/`,
+    },
+    {
+      "@type": "Brand",
+      "@id": `${SITE.url}/#technologies-brand`,
+      name: "Raulji Technologies",
+      description:
+        "The technology brand of Raulji Group, covering software, AI and digital transformation work. It operates on its own website.",
+      url: SITE.technologies,
+    },
+  ];
+}
+
 export function organizationSchema() {
   return {
     "@type": "Organization",
@@ -26,6 +63,33 @@ export function organizationSchema() {
     name: SITE.name,
     url: `${SITE.url}/`,
     description: SITE.description,
+    slogan: SITE.tagline,
+    /*
+     * The real logo file, at its real dimensions. Without this an Organization
+     * node gives a search or AI system no image to attach to the entity, which
+     * is one of the few structured-data omissions that costs something visible.
+     */
+    logo: {
+      "@type": "ImageObject",
+      url: abs("/raulji-group-logo.png"),
+      width: 1920,
+      height: 511,
+    },
+    brand: brandNodes(),
+    /*
+     * Topics the group actually works in, named as they are named on the
+     * service pages. Nothing aspirational: every entry below has a page behind
+     * it (brief section 10, topical relationships).
+     */
+    knowsAbout: [
+      "Business consulting",
+      "Business structuring",
+      "Business registration in India",
+      "Private Limited Company registration",
+      "Limited Liability Partnership registration",
+      "Partnership firm registration",
+      "Proprietorship registration",
+    ],
     email: SITE.email,
     telephone: SITE.phone.e164,
     address: {

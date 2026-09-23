@@ -18,8 +18,20 @@ export const SITE = {
    * the H1 text is fixed).
    */
   taglineParts: ["We Don't Just Build Businesses.", "We Build Futures."],
+  /*
+   * The canonical one-line description of the organisation.
+   *
+   * It is not only the default meta description: `organizationSchema()` uses
+   * it, so this is the sentence a search or AI system reads as the entity's
+   * own account of itself. It previously led with registration and did not
+   * mention consulting at all, which contradicted the homepage, the service
+   * architecture and master rule 39, where consulting is the primary focus.
+   * A machine reading the structured data and a person reading the page were
+   * getting two different companies (brief section 10: no contradictory
+   * descriptions).
+   */
   description:
-    "Business registration and business-growth support for entrepreneurs and businesses across Gujarat and India.",
+    "Raulji Group is a consulting-focused business group helping entrepreneurs and businesses with business consulting, business structuring and business registration across Gujarat and India.",
   phone: {
     display: "+91 8511187689",
     /** E.164, for tel: links and schema. */
