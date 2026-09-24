@@ -11,6 +11,10 @@ import { cn } from "@/lib/utils";
  * track simply holds each row twice and animates to -50%: the seam lands
  * exactly where the second copy begins and the loop cannot be seen.
  *
+ * Logos sit in grey and take their colour on hover, as in the "Raulji Our
+ * Clients" design, so the wall reads as one calm band rather than 37 brands
+ * competing for attention.
+ *
  * Three things keep it from being the sort of animation the brand rules rule
  * out (master rule 24). It is slow enough to read as a drift rather than a
  * carousel. It stops on hover and on keyboard focus, so nobody has to chase a
@@ -53,14 +57,14 @@ export function ClientWall({ rows, className }: { rows: Client[][]; className?: 
                 {row.map((client) => (
                   <div
                     key={client.slug}
-                    className="mr-4 flex h-[4.75rem] w-[8.75rem] shrink-0 items-center justify-center rounded-xl border border-border bg-white p-3 sm:h-[5.5rem] sm:w-[10.5rem]"
+                    className="group/tile mr-4 flex h-[5.5rem] w-[10.5rem] shrink-0 items-center justify-center rounded-md border border-[#e3e9ef] bg-white px-[1.375rem] py-[1.125rem] transition duration-300 hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_14px_28px_-16px_rgba(18,38,64,0.35)] sm:h-[6.5rem] sm:w-[12.5rem]"
                   >
                     <Image
                       src={client.logo}
                       alt={copy === 0 ? `${client.name} logo` : ""}
-                      sizes="(min-width: 640px) 10.5rem, 8.75rem"
+                      sizes="(min-width: 640px) 12.5rem, 10.5rem"
                       loading={copy === 0 ? "eager" : "lazy"}
-                      className="h-auto w-full object-contain"
+                      className="max-h-full w-auto max-w-full object-contain opacity-75 grayscale transition duration-300 group-hover/tile:opacity-100 group-hover/tile:grayscale-0"
                     />
                   </div>
                 ))}

@@ -1,25 +1,47 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
   ArrowUpRight,
-  CheckCircle2,
+  BookOpen,
+  Briefcase,
+  Building2,
+  Check,
+  ClipboardList,
+  Code2,
   Compass,
+  FileText,
+  Handshake,
   Layers,
+  Link2,
+  Mail,
+  MapPin,
+  MessagesSquare,
+  Phone,
+  Route,
+  Scale,
   Settings2,
+  ShieldCheck,
+  Target,
   TrendingUp,
+  User,
+  Users,
 } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
+import heroPhoto from "@/public/photos/home-hero.webp";
+import companyConsultingPhoto from "@/public/photos/home-companyConsulting.webp";
+import companyTechPhoto from "@/public/photos/home-companyTech.webp";
+import consultingPhoto from "@/public/photos/home-consulting.webp";
+import editorialPhoto from "@/public/photos/home-editorial.webp";
+import ctaPhoto from "@/public/photos/home-cta.webp";
 import { TrackedLink } from "@/components/ui/tracked-link";
-import { ServiceCards } from "@/components/shared/service-cards";
-import { PopularCities } from "@/components/shared/popular-cities";
 import { LeadForm } from "@/components/forms/lead-form";
 import { JsonLd } from "@/components/ui/json-ld";
-import { BrandImage } from "@/components/ui/brand-image";
-import type { ImageSlot } from "@/lib/images";
+import { LocationDrawerTrigger } from "@/components/shared/location-drawer";
 import { getArticle } from "@/lib/blog";
 import { HOME_ANSWERS } from "@/lib/home-faqs";
+import { POPULAR_CITIES } from "@/lib/city-index";
 import { SERVICES } from "@/lib/services";
-import { SITE, telHref, mailHref } from "@/lib/site";
+import { SITE, LEADERSHIP, telHref, mailHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
 
@@ -32,62 +54,208 @@ export const metadata = pageMeta({
   ogHeadline: "We Don't Just Build Businesses. We Build Futures.",
 });
 
-/**
- * The Group of Companies (master rule 6).
+/*
+ * Homepage body, built to the "Raulji Home" design (claude.ai/design).
  *
- * Exactly two brands, because exactly two are verified. Raulji Consulting
- * Services is a business identity inside raulji.com and deliberately has no
- * invented domain of its own. Raulji Technologies keeps its own site and its
- * own service catalogue; this site introduces it and links out, nothing more.
+ * The header and footer are the site-wide ones and are not part of this file.
+ *
+ * The layout, section order and visual language follow the design. Its
+ * placeholder content was not carried over where it breaks the master rules:
+ *
+ * - "500+ Businesses Supported" and "9+ Years of Experience" are unverified
+ *   (master rule 13). The key-facts band keeps its shape but states only
+ *   verified facts, with no count-up animation.
+ * - The design's phone number, email and hours were placeholders. The real
+ *   ones come from SITE.
+ * - "Response within one working day", "Free first consultation" and the
+ *   language list are unverified promises (master rule 23), so they are gone.
+ * - GST, legal and documentation services were removed from the group's
+ *   offering on 2026-09-16 (master rule 15), so the journey band and the
+ *   consulting list describe what the group actually does.
+ * - Photographs are the ones the design specifies, self-hosted as WebP in
+ *   /public/photos/home-*.webp at the client's request (2026-09-24). Alt text
+ *   describes what is in each photograph and does not present it as a Raulji
+ *   Group office or team. The leadership portrait is the client-supplied
+ *   photograph from lib/site.ts.
+ * - The India map is a static SVG in /public/maps rather than a live d3 map,
+ *   and it marks only the headquarters: the design's arcs to ten cities
+ *   implied client coverage nobody has verified.
  */
-const GROUP_BRANDS: {
-  name: string;
-  role: string;
-  body: string;
-  points: string[];
-  href: string;
-  cta: string;
-  external: boolean;
-  image: ImageSlot;
-}[] = [
+
+/* Colours from the design, all inside the brand palette (master rule 24). */
+const EYEBROW = "text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+const H2 =
+  "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+const BTN_DARK =
+  "inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-[#0c1a2d]";
+const BTN_OUTLINE =
+  "inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] border-[1.5px] border-[#122640] px-6 text-[0.9375rem] font-semibold text-[#122640] transition-colors hover:bg-white";
+const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
+const SECTION = "py-16 md:py-24 lg:py-28";
+
+const HERO_POINTS = [
+  { label: "Business Consulting", icon: Compass },
+  { label: "Business Registration", icon: Building2 },
+  { label: "Insurance Services", icon: ShieldCheck },
+  { label: "Technology & Digital", icon: Code2 },
+];
+
+/** Verified facts only, in the design's key-figures band. */
+const KEY_FACTS = [
+  { value: `${SITE.locality}, ${SITE.region}`, label: "Headquarters", icon: MapPin },
+  { value: "Gujarat & India", label: "Where we work", icon: Route },
+  { value: "Consulting-led", label: "How we approach a business", icon: Compass },
+  { value: "Two brands", label: "Consulting and technology", icon: Layers },
+];
+
+const JOURNEY = [
   {
-    name: "Raulji Consulting Services",
-    role: "Business consulting and registration",
-    body: "The consulting and business-services arm of the group. It works with founders and business owners on the decisions that come before paperwork: which structure fits, what the obligations will be, and what has to be in place before the business can grow.",
-    points: [
-      "Business consulting and structure advisory",
-      "Company and business registration support",
-      "MCA filing support for incorporation",
-    ],
+    title: "Consulting",
+    body: "Which structure fits, and what has to be in place before anything is filed.",
+    icon: Compass,
     href: "/services/business-consulting/",
-    cta: "Explore Consulting",
-    external: false,
-    image: "consulting",
   },
   {
-    name: "Raulji Technologies",
-    role: "Technology, AI and digital solutions",
-    body: "The group's technology brand, covering software, AI and digital transformation work. It operates on its own website, where the full technology service catalogue lives.",
-    points: [
-      "Software and web application development",
-      "AI and digital transformation",
-      "Cloud and technology consulting",
-    ],
+    title: "Registration",
+    body: "Private Limited, LLP, Partnership or Proprietorship.",
+    icon: Building2,
+    href: "/services/business-registration/",
+  },
+  {
+    title: "Compliance",
+    body: "Annual filings for Private Limited companies and LLPs.",
+    icon: ClipboardList,
+    href: "/services/pvt-compliance/",
+  },
+  {
+    title: "Insurance",
+    body: "Business and personal cover, arranged with the insurer.",
+    icon: ShieldCheck,
+    href: "/services/insurance/",
+  },
+  {
+    title: "Technology",
+    body: "Software, AI and digital work through Raulji Technologies.",
+    icon: Code2,
     href: SITE.technologies,
-    cta: "Visit Raulji Technologies",
     external: true,
-    image: "technologies",
   },
 ];
 
+const COMPANIES = [
+  {
+    name: "Raulji Consulting Services",
+    category: "Business Consulting",
+    body: "The consulting and business-services arm of the group. It works with founders and business owners on the decisions that come before paperwork: which structure fits, what the obligations will be, and what has to be in place before the business can grow.",
+    image: { src: companyConsultingPhoto, alt: "A bright, modern office interior" },
+    href: "/services/business-consulting/",
+    cta: "Explore Consulting",
+    external: false,
+  },
+  {
+    name: "Raulji Technologies",
+    category: "Technology & Digital",
+    body: "The group's technology brand, covering software and web application development, AI, cloud and digital transformation. It operates on its own website, where the full technology service catalogue lives.",
+    image: { src: companyTechPhoto, alt: "A laptop glowing in a dark workspace" },
+    href: SITE.technologies,
+    cta: "Explore Raulji Technologies",
+    external: true,
+  },
+];
+
+/** Consulting areas from master rule 8. Nothing outside that list. */
+const CONSULTING_AREAS = [
+  { label: "Business Strategy", icon: Target },
+  { label: "Business Planning", icon: FileText },
+  { label: "Business Structuring", icon: Layers },
+  { label: "Growth & Expansion Planning", icon: TrendingUp },
+  { label: "Operational Guidance", icon: Settings2 },
+  { label: "Business Advisory", icon: MessagesSquare },
+];
+
+/** One line per structure, drawn from the verified FAQ answers. */
+const STRUCTURE_SUMMARY: Record<string, { body: string; icon: typeof Briefcase }> = {
+  "pvt-registration": {
+    body: "For founders planning to raise investment or issue shares.",
+    icon: Briefcase,
+  },
+  "llp-registration": {
+    body: "Two or more partners who want their liability capped.",
+    icon: Link2,
+  },
+  "partnership-registration": {
+    body: "Two or more people starting together under a partnership deed.",
+    icon: Users,
+  },
+  "proprietorship-registration": {
+    body: "A single owner starting small, with the least paperwork.",
+    icon: User,
+  },
+};
+
+const STEPS = [
+  "Understand what you are building",
+  "Advise on the right structure",
+  "Prepare documents and file",
+  "Follow through to approval",
+  "Ongoing compliance support",
+];
+
+/*
+ * Why Raulji Group. Six, as the design lays out, and every one something a
+ * reader can hold us to afterwards: no client counts, ratings, awards or
+ * "most trusted" (master rule 13).
+ */
+const WHY_US = [
+  {
+    title: "Clear guidance",
+    body: "If a proprietorship is genuinely right for you, we will say so rather than sell you a company.",
+    icon: Compass,
+  },
+  {
+    title: "A structured process",
+    body: "You know what happens from the first conversation through to filing.",
+    icon: ClipboardList,
+  },
+  {
+    title: "Transparent fees",
+    body: "Our fee and the expected government fees are set out before any filing begins.",
+    icon: Scale,
+  },
+  {
+    title: "Straight about our remit",
+    body: "Where a matter needs an advocate, CA or CS, we say so and coordinate.",
+    icon: Check,
+  },
+  {
+    title: "Long-term relationships",
+    body: "The same team stays with you after registration, into compliance and growth.",
+    icon: Handshake,
+  },
+  {
+    title: "Business + technology",
+    body: "Consulting here, and technology through Raulji Technologies, under one group.",
+    icon: Code2,
+  },
+];
+
+const PRESENCE = [
+  { label: `Headquartered in ${SITE.locality}, ${SITE.region}`, icon: MapPin },
+  { label: "Working with businesses across India", icon: Compass },
+  { label: "Incorporation filed online, wherever you are", icon: FileText },
+  { label: "Support for startups and growing businesses", icon: Users },
+];
+
+const CONTACT_POINTS = [
+  "A straight answer on which structure fits",
+  "Fees set out before any filing begins",
+  "Enquiries handled by the team working on your file",
+];
+
 /**
- * The three guides linked from the homepage.
- *
- * Chosen by slug, not by date. A "latest three" list would eventually put the
- * insurance guide on a homepage whose whole argument is consulting and
- * registration, and the point of this band is to answer the question a visitor
- * arrives with: which structure, Private Limited or LLP, and what changes in
- * Gujarat. A slug that stops resolving is dropped rather than rendered dead.
+ * The three guides linked from the homepage, chosen by slug rather than date
+ * so the band always answers the question a visitor arrives with. A slug that
+ * stops resolving is dropped rather than rendered dead.
  */
 const HOME_GUIDES = [
   "how-to-choose-business-structure-india-2026",
@@ -95,600 +263,742 @@ const HOME_GUIDES = [
   "starting-business-gujarat-registration-guide",
 ]
   .map((slug) => getArticle(slug))
-  .filter((article): article is NonNullable<typeof article> => article !== null)
-  .map((article) => ({
-    slug: article.slug,
-    title: article.title,
-    excerpt: article.excerpt,
-    category: article.category,
-  }));
-
-/**
- * Why businesses work with Raulji Group.
- *
- * Four, not the six this carried before, and titled with the four headings the
- * design brief names. Six cards ran to two uneven rows and repeated the page:
- * one was the phone number, which the contact band below already gives, and
- * another was the Gujarat coverage, which has a whole section of its own.
- *
- * The bodies are unchanged in substance. Every one is something a reader can
- * hold us to afterwards, which is the only kind of reason that belongs here:
- * no client counts, no ratings, no awards, no success rates, no "No. 1" or
- * "most trusted" (master rule 13, brief section 32).
- */
-const WHY_US = [
-  {
-    number: "01",
-    title: "Clear guidance",
-    body: "We start by understanding what you are building, because the wrong structure is expensive to undo. If a proprietorship is genuinely right for you, we will say so rather than sell you a company.",
-  },
-  {
-    number: "02",
-    title: "A structured process",
-    body: "You know what happens from the first conversation through to filing. Digital signatures, name approval, drafting and Registrar queries are handled by our team once your documents are in.",
-  },
-  {
-    number: "03",
-    title: "Transparent communication",
-    body: "Our professional fee and the expected government fees are set out before any filing begins, and enquiries are answered by the team handling the file rather than passed down a queue.",
-  },
-  {
-    number: "04",
-    title: "Business-focused support",
-    body: "We are a private business-services firm that prepares and files applications on your behalf. We say what we can do, and we say where our remit ends: approval always rests with the relevant authority.",
-  },
-];
+  .filter((article): article is NonNullable<typeof article> => article !== null);
 
 export default function HomePage() {
   return (
-    <>
+    <div className="bg-white text-[#3a4656]">
       <JsonLd data={graph(homeServiceListSchema(), faqSchema(HOME_ANSWERS))} />
 
-      {/*
-        1. Hero. Text left, image right (brief section 15).
+      {/* 1. Hero. Text left on light grey, image right, full bleed. */}
+      <section
+        aria-labelledby="hero-h"
+        className="grid overflow-hidden bg-[#f4f7fa] pt-[5.5rem] sm:pt-24 lg:grid-cols-2"
+      >
+        <div className="flex flex-col justify-center gap-7 px-5 py-12 sm:px-8 md:py-20 lg:py-24 lg:pl-[max(2rem,calc((100vw-1240px)/2+2rem))] lg:pr-14">
+          <p className={EYEBROW}>Raulji Group</p>
+          <h1
+            id="hero-h"
+            className="text-balance text-[2.375rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl xl:text-[4rem]"
+          >
+            {SITE.taglineParts[0]} <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
+          </h1>
+          <p className="max-w-[32.5rem] text-pretty text-base leading-[1.7] sm:text-lg">
+            Raulji Group is a consulting-focused business group. We help entrepreneurs and business
+            owners make informed decisions, set up the right structure, and move forward with
+            clarity.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <TrackedLink
+              href="/contact/"
+              event="primary_cta_click"
+              params={{ label: "home_hero" }}
+              className={BTN_DARK}
+            >
+              Talk to an Expert
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedLink>
+            <TrackedLink
+              href="/services/"
+              event="service_card_click"
+              params={{ label: "home_hero_services" }}
+              className={BTN_OUTLINE}
+            >
+              Explore Our Services
+            </TrackedLink>
+          </div>
+          <ul className="mt-3 flex flex-wrap gap-x-7 gap-y-3 border-t border-[#dde4ec] pt-6">
+            {HERO_POINTS.map(({ label, icon: Icon }) => (
+              <li
+                key={label}
+                className="flex items-center gap-2 text-[0.8125rem] font-medium text-[#122640]"
+              >
+                <Icon className="h-[1.125rem] w-[1.125rem] text-[#329fd2]" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-        The right-hand column used to be an inline SVG hidden below `md`, so a
-        phone got a headline, a paragraph and two buttons on an empty field. It
-        is now a real 16:9 image that renders at every width, and it is the only
-        image on the page that takes `priority`, because it is the only one
-        above the fold.
+        <div className="relative min-h-[20rem] bg-[#122640] sm:min-h-[28rem] lg:min-h-[40rem]">
+          <Image
+            src={heroPhoto}
+            alt="Glass corporate office towers seen from street level against the sky"
+            fill
+            priority
+            placeholder="blur"
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,38,64,0)_55%,rgba(18,38,64,0.45))]"
+          />
+          <div className="absolute bottom-0 right-0 flex max-w-[18rem] flex-col gap-4 bg-[#122640] px-7 py-6 text-white sm:px-8 sm:py-7">
+            <p className="text-base font-medium leading-normal sm:text-[1.0625rem]">
+              Leadership Built on Relationships. Trust Built for the Long Term.
+            </p>
+            <span className="h-0.5 w-8 bg-[#329fd2]" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
 
-        No phone number here (master rule 8, brief section 15): the hero's job
-        is positioning and one clear next step, and a phone number in it turns
-        the page into an advertisement. Contact details sit in the header, the
-        lead section and the footer, where people look for them.
-      */}
-      <section className="relative border-b border-border bg-muted pt-28 pb-14 md:pt-36 md:pb-20">
-        <div className="container-wide">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div>
-              <p className="mb-5 text-sm font-semibold uppercase tracking-wider text-primary">
-                The Raulji Group
-              </p>
-              {/* Two-tone headline: the promise in navy, the payoff in brand
-                  blue. The wording is fixed by master rule 4, and these are two
-                  flat brand colours rather than a gradient, which the design
-                  rules rule out. The second sentence is display-size, so the
-                  blue clears the WCAG contrast bar for large text. */}
-              <h1 className="text-[2.5rem] leading-[1.12] sm:text-5xl sm:leading-[1.1] lg:text-6xl lg:leading-[1.05]">
-                <span className="block text-balance">{SITE.taglineParts[0]}</span>
-                <span className="block text-balance text-primary">{SITE.taglineParts[1]}</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
-                Raulji Group is a consulting-focused business group. We help entrepreneurs and
-                business owners make informed decisions, set up the right structure, and deal with
-                the practical problems that come with running a business.
-              </p>
-
-              {/* Both hero CTAs report. The header, footer, mobile bar and CTA
-                  banners already fired primary_cta_click, so the one CTA the
-                  most people see was the only one missing from the funnel. */}
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <TrackedLink
-                  href="/services/"
-                  event="service_card_click"
-                  params={{ label: "home_hero_services" }}
-                  className="brand-gradient inline-flex min-h-[3.5rem] items-center justify-center gap-2 rounded-xl px-8 font-semibold text-primary-foreground shadow-soft"
-                >
-                  Explore Our Services
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </TrackedLink>
-                <TrackedLink
-                  href="/contact/"
-                  event="primary_cta_click"
-                  params={{ label: "home_hero" }}
-                  className="inline-flex min-h-[3.5rem] items-center justify-center rounded-xl border-2 border-primary px-8 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  Talk to Our Team
-                </TrackedLink>
+      {/* 2. Key facts. The design's figures band, holding verified facts only. */}
+      <section aria-label="Key facts" className="bg-[#122640] text-white">
+        <dl className={`${CONTAINER} grid gap-6 py-8 sm:grid-cols-2 md:py-10 lg:grid-cols-4`}>
+          {KEY_FACTS.map(({ value, label, icon: Icon }) => (
+            <div key={label} className="flex items-center gap-4">
+              <Icon
+                className="h-8 w-8 shrink-0 text-[#329fd2]"
+                strokeWidth={1.4}
+                aria-hidden="true"
+              />
+              <div className="flex flex-col-reverse">
+                <dt className="mt-0.5 text-sm text-[#c9d6e3]">{label}</dt>
+                <dd className="text-xl font-bold tracking-[-0.01em] sm:text-[1.375rem]">{value}</dd>
               </div>
-
-              <p className="mt-9 border-l-2 border-primary/40 pl-4 text-sm font-medium text-secondary">
-                Leadership Built on Relationships. Trust Built for the Long Term.
-              </p>
             </div>
+          ))}
+        </dl>
+      </section>
 
-            <BrandImage
-              slot="hero"
-              sizes="(min-width: 1024px) 40rem, 100vw"
-              aspect="aspect-[16/9]"
-              priority
-              className="shadow-card"
+      {/* 3. One group, end to end. */}
+      <section aria-labelledby="e2e-h" className="pt-16 md:pt-24 lg:pt-28">
+        <div className={`${CONTAINER} flex flex-col gap-11`}>
+          <div className="grid items-end gap-x-16 gap-y-6 lg:grid-cols-2">
+            <div className="flex flex-col gap-3.5">
+              <p className={EYEBROW}>One Group. End to End.</p>
+              <h2 id="e2e-h" className={`${H2} text-balance`}>
+                From the First Decision to Growth,{" "}
+                <span className="text-[#1a7cb0]">in One Place.</span>
+              </h2>
+            </div>
+            <p className="text-pretty text-base leading-[1.7]">
+              Raulji Group covers the business journey from the structure decision through
+              registration, compliance and insurance, with technology through its sister brand. One
+              group that knows your file, rather than a new vendor at every stage.
+            </p>
+          </div>
+          <ol className="grid overflow-hidden rounded-md border border-[#e3e9ef] sm:grid-cols-2 lg:grid-cols-5">
+            {JOURNEY.map((step, i) => {
+              const last = i === JOURNEY.length - 1;
+              const Icon = step.icon;
+              const inner = (
+                <>
+                  <span className="flex items-center justify-between">
+                    <Icon
+                      className={`h-[1.625rem] w-[1.625rem] ${last ? "text-[#329fd2]" : "text-[#1a7cb0]"}`}
+                      strokeWidth={1.5}
+                      aria-hidden="true"
+                    />
+                    <span
+                      className={`text-xs font-bold tracking-[0.08em] ${last ? "text-[#329fd2]" : "text-[#1a7cb0]"}`}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </span>
+                  <h3
+                    className={`flex items-center gap-1.5 text-[1.0625rem] font-bold leading-[1.3] ${last ? "text-white" : "text-[#122640]"}`}
+                  >
+                    {step.title}
+                    {step.external ? (
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    ) : null}
+                  </h3>
+                  <p className="text-sm leading-[1.55]">{step.body}</p>
+                </>
+              );
+              const cls = `flex h-full flex-col gap-3.5 px-6 py-7 transition-colors ${
+                last
+                  ? "bg-[#122640] text-[#d5e0ea] hover:bg-[#0c1a2d]"
+                  : "bg-white hover:bg-[#fbfdfe]"
+              }`;
+              return (
+                <li
+                  key={step.title}
+                  className="border-b border-[#e3e9ef] last:border-b-0 sm:border-r lg:border-b-0"
+                >
+                  {step.external ? (
+                    <TrackedLink
+                      href={step.href}
+                      external
+                      event="technology_click"
+                      params={{ label: "home_journey" }}
+                      className={cls}
+                    >
+                      {inner}
+                    </TrackedLink>
+                  ) : (
+                    <Link href={step.href} className={cls}>
+                      {inner}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* 4. Our companies. The two verified brands of the group. */}
+      <section id="group" aria-labelledby="co-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-12`}>
+          <div className="grid items-end gap-x-16 gap-y-6 lg:grid-cols-2">
+            <div className="flex flex-col gap-3.5">
+              <p className={EYEBROW}>Our Group</p>
+              <h2 id="co-h" className={H2}>
+                Two Brands.
+                <br />
+                One Shared Vision.
+              </h2>
+            </div>
+            <p className="text-pretty border-l-2 border-[#329fd2] pl-5 text-base leading-[1.7]">
+              Raulji Group works through two brands, each focused on its own area, so you know
+              which part of the group to speak to for a useful answer.
+            </p>
+          </div>
+          <div className="grid gap-7 lg:grid-cols-2">
+            {COMPANIES.map((c) => (
+              <article
+                key={c.name}
+                className="flex flex-col overflow-hidden rounded-md border border-[#e3e9ef] bg-white transition duration-300 hover:-translate-y-[3px] hover:shadow-[0_18px_40px_-18px_rgba(18,38,64,0.28)]"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden bg-[#122640]">
+                  <Image
+                    src={c.image.src}
+                    alt={c.image.alt}
+                    fill
+                    placeholder="blur"
+                    sizes="(min-width: 1024px) 38rem, 100vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col gap-3.5 p-6 sm:p-9">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <h3 className="text-[1.375rem] font-bold tracking-[-0.01em] text-[#122640]">
+                      {c.name}
+                    </h3>
+                    <span className="rounded-[3px] bg-[#e8f5fb] px-2.5 py-1.5 text-xs font-semibold text-[#1a7cb0]">
+                      {c.category}
+                    </span>
+                  </div>
+                  <p className="flex-1 text-pretty text-[0.9375rem] leading-[1.7]">{c.body}</p>
+                  {c.external ? (
+                    <TrackedLink
+                      href={c.href}
+                      external
+                      event="technology_click"
+                      params={{ label: "home_brand_card" }}
+                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                    >
+                      {c.cta}
+                      <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                    </TrackedLink>
+                  ) : (
+                    <Link
+                      href={c.href}
+                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                    >
+                      {c.cta}
+                      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    </Link>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. What we do. Consulting, the primary focus (master rule 8). */}
+      <section id="services" aria-labelledby="svc-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} grid items-center gap-10 lg:grid-cols-2 lg:gap-20`}>
+          <div className="relative order-2 aspect-[4/5] max-h-[40rem] w-full overflow-hidden rounded-md bg-[#122640] lg:order-1">
+            <Image
+              src={consultingPhoto}
+              alt="A team working through ideas on sticky notes during a strategy session"
+              fill
+              placeholder="blur"
+              sizes="(min-width: 1024px) 36rem, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="order-1 flex flex-col gap-5 lg:order-2">
+            <p className={EYEBROW}>What We Do</p>
+            <h2 id="svc-h" className={H2}>
+              Clearer Decisions.
+              <br />
+              Stronger Business Direction.
+            </h2>
+            <p className="max-w-[33.75rem] text-pretty text-base leading-[1.7]">
+              Consulting is the primary focus of Raulji Group. Before anything is filed, it is worth
+              being certain the structure and the plan match what you are actually building.
+            </p>
+            <ul className="mt-3 grid gap-px overflow-hidden rounded-md border border-[#e3e9ef] bg-[#e3e9ef] sm:grid-cols-2">
+              {CONSULTING_AREAS.map(({ label, icon: Icon }) => (
+                <li key={label} className="flex items-center gap-3.5 bg-white p-5 sm:p-[1.375rem]">
+                  <Icon
+                    className="h-[1.625rem] w-[1.625rem] shrink-0 text-[#1a7cb0]"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-[0.9375rem] font-semibold leading-[1.35] text-[#122640]">
+                    {label}
+                  </h3>
+                </li>
+              ))}
+            </ul>
+            <Link href="/services/business-consulting/" className={`${BTN_DARK} mt-2 self-start`}>
+              Explore Business Consulting
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Business registration. Four structures, each to its own page. */}
+      <section id="registration" aria-labelledby="reg-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-12`}>
+          <div className="grid items-end gap-x-16 gap-y-6 lg:grid-cols-2">
+            <div className="flex flex-col gap-3.5">
+              <p className={EYEBROW}>Business Registration</p>
+              <h2 id="reg-h" className={H2}>
+                Start Your Business
+                <br />
+                the Right Way.
+              </h2>
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <p className="text-pretty text-base leading-[1.7]">
+                The right structure depends on ownership, liability, investment plans and how you
+                intend to operate. Each page covers eligibility, documents, process and cost.
+              </p>
+              <Link
+                href="/services/business-registration/"
+                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+              >
+                View All Registration Services
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICES.map((service) => {
+              const summary = STRUCTURE_SUMMARY[service.slug];
+              const Icon = summary?.icon ?? Building2;
+              return (
+                <li key={service.slug}>
+                  <TrackedLink
+                    href={service.path}
+                    event="service_card_click"
+                    params={{ label: `home_${service.slug}` }}
+                    className="flex h-full flex-col gap-3.5 rounded-md border border-[#e3e9ef] bg-white px-7 py-8 transition duration-300 hover:-translate-y-[3px] hover:border-[#329fd2] hover:shadow-[0_16px_36px_-20px_rgba(18,38,64,0.35)]"
+                  >
+                    <span className="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-[#e8f5fb]">
+                      <Icon className="h-6 w-6 text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
+                    </span>
+                    <h3 className="mt-2 text-lg font-bold leading-[1.3] text-[#122640]">
+                      {service.name}
+                    </h3>
+                    {summary ? (
+                      <p className="text-[0.9375rem] leading-[1.6]">{summary.body}</p>
+                    ) : null}
+                    <span className="mt-auto pt-2 text-[0.8125rem] font-semibold text-[#1a7cb0]">
+                      Learn more <span aria-hidden="true">→</span>
+                    </span>
+                  </TrackedLink>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="max-w-3xl text-sm leading-relaxed text-[#5b6778]">
+            Company and LLP incorporation is filed with the Registrar of Companies under the
+            Ministry of Corporate Affairs. Current forms, fees and rules are published at{" "}
+            <a
+              href="https://www.mca.gov.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#1a7cb0] hover:underline"
+            >
+              mca.gov.in
+            </a>
+            . Raulji Group prepares and files these applications on your behalf and is not a
+            government body.{" "}
+            <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+              Compare all four structures
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* 7. How we work. */}
+      <section id="process" aria-labelledby="pr-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-14`}>
+          <div className="flex max-w-[40rem] flex-col gap-3.5">
+            <p className={EYEBROW}>How We Work</p>
+            <h2 id="pr-h" className={H2}>
+              A Simple, Transparent Process.
+            </h2>
+            <p className="text-base leading-[1.7]">
+              You know what happens at each stage. Approval always rests with the relevant
+              authority; our job is to make sure what reaches them is complete and correct.
+            </p>
+          </div>
+          <ol className="relative flex flex-col lg:grid lg:grid-cols-5">
+            <span
+              aria-hidden="true"
+              className="absolute bottom-6 left-6 top-6 w-px bg-[#c9d6e3] lg:bottom-auto lg:left-[10%] lg:right-[10%] lg:top-7 lg:h-px lg:w-auto lg:bg-[#122640]"
+            />
+            {STEPS.map((title, i) => (
+              <li
+                key={title}
+                className="relative flex items-center gap-5 py-3 lg:flex-col lg:gap-4 lg:px-3 lg:py-0 lg:text-center"
+              >
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#122640] bg-white text-sm font-bold text-[#122640] lg:h-14 lg:w-14 lg:text-[0.9375rem]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-base font-semibold leading-[1.4] text-[#122640] lg:max-w-[11.25rem]">
+                  {title}
+                </h3>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 8. Why Raulji Group. */}
+      <section id="why" aria-labelledby="why-h" className={SECTION}>
+        <div className={`${CONTAINER} grid items-start gap-10 lg:grid-cols-2 lg:gap-20`}>
+          <div className="flex flex-col gap-5 lg:sticky lg:top-32">
+            <p className={EYEBROW}>Why Raulji Group</p>
+            <h2 id="why-h" className={H2}>
+              More Than Services.
+              <br />A Long-Term Partner.
+            </h2>
+            <p className="max-w-[32.5rem] text-pretty text-base leading-[1.7]">
+              Setting up and running a business involves a lot of small decisions. Our job is to make
+              sure the ones that matter are made deliberately.
+            </p>
+            <TrackedLink
+              href="/contact/"
+              event="primary_cta_click"
+              params={{ label: "home_why" }}
+              className={`${BTN_DARK} mt-2 self-start`}
+            >
+              Discuss Your Business
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedLink>
+          </div>
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {WHY_US.map(({ title, body, icon: Icon }) => (
+              <li
+                key={title}
+                className="flex flex-col gap-4 rounded-md border border-[#e3e9ef] px-6 py-7 transition-colors hover:border-[#329fd2]"
+              >
+                <Icon className="h-7 w-7 text-[#1a7cb0]" strokeWidth={1.5} aria-hidden="true" />
+                <h3 className="text-base font-bold leading-[1.35] text-[#122640]">{title}</h3>
+                <p className="text-sm leading-[1.6]">{body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/*
+        9. Leadership. Name and title are confirmed by the client (lib/site.ts).
+        The paragraph is the group's statement, not a quotation: no words are
+        put in a named person's mouth (master rule 13).
+      */}
+      <section aria-labelledby="lead-h" className="px-5 pb-16 sm:px-8 md:pb-24 lg:pb-28">
+        <div className="mx-auto grid max-w-[1240px] items-center gap-10 border-t border-[#e3e9ef] pt-14 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-16 md:pt-20">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[25rem] pb-[18px] pr-[18px]">
+            <span
+              aria-hidden="true"
+              className="absolute inset-[18px_0_0_18px] rounded-md border-[1.5px] border-[#329fd2]"
+            />
+            <div className="relative h-full w-full overflow-hidden rounded-md bg-[#122640]">
+              <Image
+                src={LEADERSHIP.chairman.photo}
+                alt={`${LEADERSHIP.chairman.name}, ${LEADERSHIP.chairman.roles[0]}`}
+                fill
+                sizes="(min-width: 768px) 25rem, 90vw"
+                className="object-cover object-[center_30%]"
+              />
+            </div>
+          </div>
+          <div className="flex min-w-0 flex-col gap-6">
+            <p className={EYEBROW}>Leadership</p>
+            <h2
+              id="lead-h"
+              className="text-balance text-[2rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#122640] sm:text-[2.75rem] lg:text-[3.5rem]"
+            >
+              Leadership Built on Relationships.{" "}
+              <span className="text-[#1a7cb0]">Trust Built for the Long Term.</span>
+            </h2>
+            <p className="max-w-[37.5rem] text-pretty text-[1.0625rem] leading-[1.75]">
+              Every engagement starts with understanding the person behind the business. Raulji
+              Group is built to stay with a business beyond its first registration, into compliance
+              and each stage of growth that follows.
+            </p>
+            <div className="flex max-w-[37.5rem] items-center gap-4 border-t border-[#e3e9ef] pt-5">
+              <span className="h-0.5 w-10 shrink-0 bg-[#329fd2]" aria-hidden="true" />
+              <p className="text-[0.9375rem]">
+                <strong className="block text-[1.0625rem] font-bold text-[#122640]">
+                  {LEADERSHIP.chairman.name}
+                </strong>
+                {LEADERSHIP.chairman.roles[0]}
+              </p>
+              <Link
+                href="/about/"
+                className="ml-auto inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-[#122640] hover:text-[#1a7cb0]"
+              >
+                About Us
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 10. Philosophy band. */}
+      <section aria-label="Our philosophy" className="px-5 pb-16 sm:px-8 md:pb-24 lg:pb-28">
+        <figure className="relative mx-auto flex min-h-[22.5rem] max-w-[1240px] items-center overflow-hidden rounded-md bg-[#122640] md:aspect-[21/9]">
+          <Image
+            src={editorialPhoto}
+            alt="An open-plan office with a long meeting table and floor-to-ceiling windows"
+            fill
+            placeholder="blur"
+            sizes="(min-width: 1240px) 1240px, 100vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,26,45,0.88)_0%,rgba(12,26,45,0.55)_45%,rgba(12,26,45,0)_80%)]"
+          />
+          <figcaption className="relative flex flex-col gap-5 p-7 sm:p-12 lg:p-[4.5rem]">
+            <span className="h-0.5 w-10 bg-[#329fd2]" aria-hidden="true" />
+            <p className="text-[1.625rem] font-bold leading-[1.18] tracking-[-0.02em] text-white sm:text-[2.25rem] lg:text-[2.75rem]">
+              Ideas for Business.
+              <br />
+              People for Growth.
+              <br />
+              <span className="text-[#7cc8ec]">A Better Tomorrow.</span>
+            </p>
+          </figcaption>
+        </figure>
+      </section>
+
+      {/* 11. Presence. Gujarat as the home market, India-wide positioning. */}
+      <section aria-labelledby="pres-h" className={`overflow-hidden bg-[#0c1a2d] text-white ${SECTION}`}>
+        <div className={`${CONTAINER} grid items-center gap-10 lg:grid-cols-2 lg:gap-16`}>
+          <div className="flex flex-col gap-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]">
+              Where We Work
+            </p>
+            <h2
+              id="pres-h"
+              className="text-[1.875rem] text-white font-bold leading-[1.12] tracking-[-0.02em] sm:text-4xl lg:text-[2.75rem]"
+            >
+              Serving Businesses
+              <br />
+              Across Gujarat &amp; India.
+            </h2>
+            <p className="max-w-[30rem] text-base leading-[1.7] text-[#c9d6e3]">
+              Incorporation is filed online, so where you are does not change the process. Gujarat
+              is the market we know best, and we work with businesses across India from our base in{" "}
+              {SITE.locality}.
+            </p>
+            <ul className="mt-3 flex flex-col border-t border-white/[0.12]">
+              {PRESENCE.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-3.5 border-b border-white/[0.12] py-4 text-[0.9375rem] font-medium"
+                >
+                  <Icon className="h-5 w-5 shrink-0 text-[#329fd2]" strokeWidth={1.6} aria-hidden="true" />
+                  {label}
+                </li>
+              ))}
+            </ul>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#c9d6e3]">
+                Popular locations
+              </p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {POPULAR_CITIES.map((city) => (
+                  <li key={city.slug}>
+                    <TrackedLink
+                      href={`/${city.slug}/`}
+                      event="city_page_click"
+                      params={{ city: city.name, label: "home_presence" }}
+                      className="inline-flex min-h-[2.5rem] items-center rounded-[4px] border border-white/20 px-3.5 text-sm font-medium text-white transition-colors hover:border-[#329fd2] hover:text-[#7cc8ec]"
+                    >
+                      {city.name}
+                    </TrackedLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <TrackedLink
+                href="/gujarat/"
+                event="gujarat_page_click"
+                params={{ label: "home_presence" }}
+                className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-white px-6 text-[0.9375rem] font-semibold text-[#122640] transition-colors hover:bg-[#e8f5fb]"
+              >
+                Business Support in Gujarat
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </TrackedLink>
+              <LocationDrawerTrigger
+                source="home_presence"
+                className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] border-[1.5px] border-white/60 px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:border-white"
+              >
+                Explore All Locations
+              </LocationDrawerTrigger>
+            </div>
+          </div>
+          <div className="mx-auto aspect-[600/640] w-full max-w-[35rem]">
+            {/* Static SVG, lazy-loaded: no map library or runtime fetch on the homepage. */}
+            <img
+              src="/maps/india-headquarters.svg"
+              alt={`Map of India marking the Raulji Group headquarters in ${SITE.locality}, ${SITE.region}`}
+              width={600}
+              height={640}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full"
             />
           </div>
         </div>
       </section>
 
-      {/*
-        2. Our Group. Two large cards, each with its own visual.
-
-        The two cards were previously identical slabs of text distinguished only
-        by their heading, which is the one thing this section exists to prevent:
-        a reader should be able to tell the consulting brand from the technology
-        brand before reading a word.
-      */}
-      <Section id="group">
-        <SectionHeading
-          eyebrow="Our Group"
-          title="One group, two distinct business focuses"
-          lead="Knowing which part of the group you need is usually the fastest route to a useful answer."
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          {GROUP_BRANDS.map((brand) => (
-            <article
-              key={brand.name}
-              className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card"
-            >
-              <BrandImage
-                slot={brand.image}
-                sizes="(min-width: 1024px) 34rem, (min-width: 640px) 90vw, 100vw"
-                aspect="aspect-[4/3]"
-                className="rounded-none border-0 border-b border-border"
-              />
-              <div className="flex flex-1 flex-col p-7 sm:p-9">
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  {brand.role}
-                </p>
-                <h3 className="mt-3 text-2xl md:text-[1.75rem]">{brand.name}</h3>
-                <p className="mt-4 leading-relaxed text-muted-foreground">{brand.body}</p>
-                <ul className="mt-6 flex-1 space-y-3 text-sm text-secondary">
-                  {brand.points.map((point) => (
-                    <li key={point} className="flex gap-2.5">
-                      <CheckCircle2
-                        className="mt-0.5 h-4 w-4 shrink-0 text-primary"
-                        aria-hidden="true"
-                      />
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-                {/* Only the outbound brand link is tracked (master rule 29 asks
-                    for technology_click). The consulting link is ordinary
-                    internal navigation and needs no event. */}
-                {brand.external ? (
-                  <TrackedLink
-                    href={brand.href}
-                    external
-                    event="technology_click"
-                    params={{ label: "home_brand_card" }}
-                    className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {brand.cta}
-                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                  </TrackedLink>
-                ) : (
-                  <Link
-                    href={brand.href}
-                    className="mt-8 inline-flex min-h-[3rem] items-center gap-2 self-start rounded-xl border-2 border-primary px-6 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                  >
-                    {brand.cta}
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                  </Link>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      {/*
-        3. About Raulji Group. Image left, text right.
-
-        Deliberately the mirror of the hero above and of the consulting band
-        below, so the page alternates rather than running the same column order
-        down its whole length (brief section 14).
-
-        No quotation is attributed to anyone here. Inventing words for a real
-        named person is the worst version of a fake claim, and the client has
-        not supplied a statement (master rule 4 and 13). The Chairman's
-        photograph and the Person structured data live on /about/, which is
-        where the leadership section is.
-      */}
-      <Section tone="muted">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:gap-16">
-          <BrandImage
-            slot="office"
-            sizes="(min-width: 1024px) 34rem, 100vw"
-            aspect="aspect-[4/3]"
-            className="order-2 shadow-card lg:order-1"
-          />
-
-          <div className="order-1 lg:order-2">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              About Raulji Group
-            </p>
-            <h2 className="mt-4 text-[1.75rem] leading-[1.25] sm:text-3xl md:text-4xl lg:text-[2.5rem]">
-              <span className="block">Leadership Built on Relationships.</span>
-              <span className="block">Trust Built for the Long Term.</span>
-            </h2>
-            <p className="mt-6 text-[1.0625rem] leading-[1.75] text-secondary md:text-lg">
-              Raulji Group works with people who are starting or running a business and need a
-              straight answer about what to do next. That might be choosing between a company and
-              an LLP, getting an incorporation filed correctly, or working out what a business
-              needs in place before it takes on staff or investment.
-            </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              Consulting sits at the centre of how the group works. Registration and filing are
-              services we deliver, but the decision that comes first matters more, and it is the
-              part most founders get advice on too late.
-            </p>
-
-            <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
-              {(
-                [
-                  ["Based in", `${SITE.locality}, ${SITE.region}`],
-                  ["Working across", "Gujarat and India"],
-                  ["Leads with", "Business consulting"],
-                ] as const
-              ).map(([term, value]) => (
-                <div key={term} className="bg-card px-5 py-4">
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    {term}
-                  </dt>
-                  <dd className="mt-1.5 font-semibold text-secondary">{value}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <Link
-              href="/about/"
-              className="mt-8 inline-flex min-h-[3rem] items-center gap-2 font-semibold text-primary hover:underline"
-            >
-              Learn About Raulji Group
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+      {/* 12. Insights, with three short answers (the FAQPage schema source). */}
+      <section aria-labelledby="ins-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-12`}>
+          <div className="grid items-end gap-x-16 gap-y-6 lg:grid-cols-2">
+            <div className="flex flex-col gap-3.5">
+              <p className={EYEBROW}>Insights</p>
+              <h2 id="ins-h" className={H2}>
+                Guides for People Deciding What to Register.
+              </h2>
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <p className="text-pretty text-base leading-[1.7]">
+                Written to answer the question rather than to rank for it. Each one names its
+                sources.
+              </p>
+              <Link
+                href="/blog/"
+                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+              >
+                All Business Guides
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
-        </div>
-      </Section>
-
-      {/*
-        4. What we do. Consulting, which is the primary focus of the group
-        (master rule 8), introduced rather than catalogued (master rule 7).
-      */}
-      <Section id="services">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              What We Do
-            </p>
-            <h2 className="mt-4 text-[1.75rem] leading-[1.25] sm:text-3xl md:text-4xl lg:text-[2.5rem]">
-              <span className="block">Clearer Decisions.</span>
-              <span className="block">Stronger Business Direction.</span>
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Consulting is the primary focus of Raulji Group. Before anything is filed, it is
-              worth being certain the structure matches what you are actually building.
-            </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              We only take on consulting work in areas where we can actually help. Where a matter
-              needs an advocate, a chartered accountant or a company secretary, we say so and
-              coordinate rather than work outside our remit.
-            </p>
-            <Link
-              href="/services/business-consulting/"
-              className="mt-8 inline-flex min-h-[3.25rem] items-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-            >
-              Explore Business Consulting
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </div>
-
-          <ul className="grid gap-px self-start overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2">
-            {[
-              {
-                icon: Compass,
-                label: "Business strategy and planning",
-                body: "Where the business is going, and what has to be true for it to get there.",
-              },
-              {
-                icon: Layers,
-                label: "Business structuring",
-                body: "Choosing a structure, or changing one that no longer fits.",
-              },
-              {
-                icon: TrendingUp,
-                label: "Growth and expansion planning",
-                body: "The order things should happen in, so a plan does not stall on something avoidable.",
-              },
-              {
-                icon: Settings2,
-                label: "Operational guidance",
-                body: "How the business runs day to day, reviewed by people who have seen it done badly.",
-              },
-            ].map(({ icon: Icon, label, body }) => (
-              <li key={label} className="bg-card px-6 py-7">
-                <Icon className="h-5 w-5 text-primary" aria-hidden="true" />
-                <p className="mt-4 font-semibold leading-snug text-secondary">{label}</p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{body}</p>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {HOME_GUIDES.map((guide) => (
+              <li key={guide.slug}>
+                <Link
+                  href={`/blog/${guide.slug}/`}
+                  className="flex h-full flex-col gap-3.5 rounded-md border border-[#e3e9ef] bg-white px-7 py-8 transition duration-300 hover:-translate-y-[3px] hover:border-[#329fd2] hover:shadow-[0_16px_36px_-20px_rgba(18,38,64,0.35)]"
+                >
+                  <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#1a7cb0]">
+                    <BookOpen className="h-4 w-4" aria-hidden="true" />
+                    {guide.category}
+                  </span>
+                  <h3 className="text-lg font-bold leading-[1.3] text-[#122640]">{guide.title}</h3>
+                  <p className="flex-1 text-[0.9375rem] leading-[1.6]">{guide.excerpt}</p>
+                  <span className="pt-2 text-[0.8125rem] font-semibold text-[#1a7cb0]">
+                    Read the guide <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>
+          <div className="grid gap-8 border-t border-[#e3e9ef] pt-10 md:grid-cols-3">
+            {HOME_ANSWERS.map((answer) => (
+              <div key={answer.q}>
+                <h3 className="text-base font-bold leading-snug text-[#122640]">{answer.q}</h3>
+                <p className="mt-2 border-l-2 border-[#329fd2] pl-4 text-sm leading-relaxed">
+                  {answer.a}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="text-sm">
+            More questions are answered in the{" "}
+            <Link href="/faqs/" className="font-semibold text-[#1a7cb0] hover:underline">
+              full FAQ library
+            </Link>
+            .
+          </p>
         </div>
-      </Section>
+      </section>
 
-      {/*
-        5. Business registration. Four cards, each with the visual that says how
-        its structure differs from the other three (brief section 9).
-      */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="Business Registration"
-          title="Choose the Right Structure for Your Business"
-          lead="The right structure depends on ownership, liability, investment plans and how you intend to operate. Each page below covers eligibility, documents, process and cost."
-        />
-        <ServiceCards />
-        <p className="mt-8 text-center">
-          <Link
-            href="/services/business-registration/"
-            className="link-target font-semibold text-primary hover:underline"
-          >
-            Business Registration overview
-          </Link>
-          <span className="mx-3 text-border" aria-hidden="true">
-            |
-          </span>
-          <Link href="/compare/" className="link-target font-semibold text-primary hover:underline">
-            Compare all four structures
-          </Link>
-        </p>
-        {/*
-          Where the rules actually come from (brief sections 20 and 21).
-
-          The page says several times that incorporation is filed through the
-          MCA, and nothing on it pointed at the MCA. Naming the authority and
-          linking to it is the difference between describing a government
-          process and appearing to be its source. One outbound link to the
-          primary regulator is worth more to an answer engine weighing whether
-          to trust this page than another internal link would be.
-        */}
-        <p className="mx-auto mt-4 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
-          Company and LLP incorporation is filed with the Registrar of Companies under the Ministry
-          of Corporate Affairs. Current forms, fees and rules are published by the MCA at{" "}
-          <a
-            href="https://www.mca.gov.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold text-primary hover:underline"
-          >
-            mca.gov.in
-          </a>
-          . Raulji Group prepares and files these applications on your behalf and is not a
-          government body.
-        </p>
-      </Section>
-
-      {/* 6. Why Raulji Group. Four reasons, numbered (brief section 10). */}
-      <Section>
-        <SectionHeading
-          eyebrow="Why Raulji Group"
-          title="Why Businesses Work With Us"
-          lead="Setting up a business is a process with a lot of small decisions in it. Our job is to make sure the ones that matter are made deliberately."
-        />
-        <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {WHY_US.map((item) => (
-            <li
-              key={item.title}
-              className="flex h-full flex-col rounded-2xl border border-border bg-card p-6"
-            >
-              <span aria-hidden="true" className="text-2xl font-bold tabular-nums text-primary/35">
-                {item.number}
-              </span>
-              <h3 className="mt-4 text-lg leading-snug">{item.title}</h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/*
-        7. Gujarat. Large image, short text, eight markets and the drawer.
-
-        Never a full city list on the homepage (master rule 7 and 18): the rest
-        of the cities are one tap away behind "Explore All Locations".
-      */}
-      <Section tone="muted">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <BrandImage
-            slot="gujarat"
-            sizes="(min-width: 1024px) 36rem, 100vw"
-            aspect="aspect-[16/9]"
-            className="shadow-card"
+      {/* 13. Final CTA with the consultation form (master rule 23). */}
+      <section id="enquiry" aria-labelledby="cta-h" className="px-5 pb-16 sm:px-8 md:pb-24 lg:pb-28">
+        <div className="relative mx-auto max-w-[1240px] overflow-hidden rounded-md bg-[#122640] text-white">
+          <Image
+            src={ctaPhoto}
+            alt=""
+            fill
+            sizes="(min-width: 1240px) 1240px, 100vw"
+            className="object-cover opacity-[0.12]"
           />
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              Where We Work
-            </p>
-            <h2 className="mt-4 text-[1.75rem] leading-[1.25] sm:text-3xl md:text-4xl">
-              Business Support Across Gujarat
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Incorporation is filed online, so where you are does not change the process or the
-              timeline. What changes is the local context: what a ginning firm in Surendranagar
-              needs is not what a software startup in Ahmedabad needs.
-            </p>
-            <p className="mt-4 leading-relaxed text-muted-foreground">
-              Gujarat is the market we know best, and we work with businesses across the rest of
-              India from our base in Vadodara.
-            </p>
-            <TrackedLink
-              href="/gujarat/"
-              event="gujarat_page_click"
-              params={{ label: "home_coverage" }}
-              className="mt-7 inline-flex min-h-[3.25rem] items-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-            >
-              Gujarat Coverage
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </TrackedLink>
-          </div>
-        </div>
-        <div className="mt-10">
-          <PopularCities />
-        </div>
-      </Section>
-
-      {/*
-        8. Insights.
-
-        The homepage linked to every service pillar, the Gujarat hub and the
-        comparison page, and to none of the nine guides. The guides are the part
-        of this site that answers the question a visitor is usually still
-        holding when they arrive.
-      */}
-      <Section>
-        <SectionHeading
-          eyebrow="Insights"
-          title="Guides for people deciding what to register"
-          lead="Written to answer the question rather than to rank for it. Each one names its sources."
-        />
-        <ul className="grid gap-6 md:grid-cols-3">
-          {HOME_GUIDES.map((guide) => (
-            <li key={guide.slug} className="h-full">
-              <Link
-                href={`/blog/${guide.slug}/`}
-                className="hover-lift group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-card"
+          <div className="relative grid items-start gap-10 p-6 sm:p-10 lg:grid-cols-2 lg:gap-16 lg:p-16">
+            <div className="flex flex-col gap-[1.125rem] pt-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]">
+                Talk to an Expert
+              </p>
+              <h2
+                id="cta-h"
+                className="text-balance text-white text-[1.875rem] font-bold leading-[1.1] tracking-[-0.02em] sm:text-4xl lg:text-5xl"
               >
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                  {guide.category}
-                </p>
-                <h3 className="mt-3 text-lg leading-snug">{guide.title}</h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {guide.excerpt}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                  Read the guide
-                  <ArrowRight
-                    className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5"
-                    aria-hidden="true"
-                  />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-8 text-center">
-          <Link href="/blog/" className="link-target font-semibold text-primary hover:underline">
-            All business guides
-          </Link>
-        </p>
-      </Section>
-
-      {/*
-        9. Lead generation.
-
-        The eight-question accordion that used to sit beside this form is gone.
-        The design brief lists a large FAQ among the things that belong on a
-        dedicated page rather than the homepage, and asks instead for short
-        answer blocks. Three remain, rendered open rather than collapsed: an
-        answer engine and a reader in a hurry both do better with the text on
-        the page than behind a disclosure control. All eight still render on
-        /faqs/, and the FAQPage schema here is built from exactly these three,
-        so the markup matches what is visible.
-      */}
-      <Section tone="muted" id="enquiry">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-            Talk to Our Team
-          </p>
-          <h2 className="mt-4 text-[1.75rem] leading-[1.25] sm:text-3xl md:text-4xl">
-            Tell us what you are trying to do
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            A short description of your situation is enough to start. If you are not sure which
-            structure or service you need, say so and we will work through it with you.
-          </p>
-        </div>
-
-        <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
-          <div className="order-2 lg:order-1">
-            <BrandImage
-              slot="meeting"
-              sizes="(min-width: 1024px) 34rem, 100vw"
-              aspect="aspect-[3/2]"
-              className="shadow-card"
-            />
-
-            <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-1">
-              <div className="bg-card px-5 py-4">
-                <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Call
-                </dt>
-                <dd className="mt-1.5">
-                  <a href={telHref} className="font-semibold text-primary hover:underline">
-                    {SITE.phone.display}
-                  </a>
-                  <span className="mt-0.5 block text-sm text-muted-foreground">
-                    {SITE.hours.display}
-                  </span>
-                </dd>
+                Let&rsquo;s Build Your Future Together.
+              </h2>
+              <p className="max-w-[30rem] text-pretty text-base leading-[1.7] text-[#d5e0ea]">
+                Whether you are starting a new business, choosing a structure or planning the next
+                stage, a short description of your situation is enough to start.
+              </p>
+              <ul className="mt-3 flex flex-col gap-3.5">
+                {CONTACT_POINTS.map((point) => (
+                  <li key={point} className="flex items-center gap-3 text-[0.9375rem]">
+                    <Check className="h-[1.125rem] w-[1.125rem] shrink-0 text-[#329fd2]" strokeWidth={2} aria-hidden="true" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-col gap-3 border-t border-white/[0.14] pt-6 sm:flex-row sm:flex-wrap sm:gap-x-7">
+                <TrackedLink
+                  href={telHref}
+                  event="phone_click"
+                  params={{ label: "home_cta" }}
+                  className="inline-flex min-h-[2.75rem] items-center gap-2.5 text-[0.9375rem] font-semibold text-white hover:text-[#7cc8ec]"
+                >
+                  <Phone className="h-[1.125rem] w-[1.125rem] text-[#329fd2]" strokeWidth={1.6} aria-hidden="true" />
+                  {SITE.phone.display}
+                </TrackedLink>
+                <TrackedLink
+                  href={mailHref}
+                  event="email_click"
+                  params={{ label: "home_cta" }}
+                  className="inline-flex min-h-[2.75rem] items-center gap-2.5 text-[0.9375rem] font-semibold text-white hover:text-[#7cc8ec]"
+                >
+                  <Mail className="h-[1.125rem] w-[1.125rem] text-[#329fd2]" strokeWidth={1.6} aria-hidden="true" />
+                  {SITE.email}
+                </TrackedLink>
               </div>
-              <div className="bg-card px-5 py-4">
-                <dt className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Email
-                </dt>
-                <dd className="mt-1.5">
-                  <a href={mailHref} className="font-semibold text-primary hover:underline">
-                    {SITE.email}
-                  </a>
-                </dd>
-              </div>
-            </dl>
-
-            <div className="mt-8 space-y-5">
-              {HOME_ANSWERS.map((answer) => (
-                <div key={answer.q}>
-                  <h3 className="text-base font-bold leading-snug text-secondary">{answer.q}</h3>
-                  <p className="mt-1.5 border-l-2 border-primary/40 pl-4 text-sm leading-relaxed text-muted-foreground">
-                    {answer.a}
-                  </p>
-                </div>
-              ))}
+              <p className="text-sm text-[#c9d6e3]">{SITE.hours.display}</p>
             </div>
-
-            <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-              More questions are answered in the{" "}
-              <Link href="/faqs/" className="font-semibold text-primary hover:underline">
-                full FAQ library
-              </Link>{" "}
-              and on the pages for{" "}
-              {SERVICES.map((service, i) => (
-                <span key={service.slug}>
-                  <Link href={service.path} className="text-primary hover:underline">
-                    {service.shortName}
-                  </Link>
-                  {i < SERVICES.length - 1 ? (i === SERVICES.length - 2 ? " and " : ", ") : "."}
-                </span>
-              ))}
-            </p>
-          </div>
-
-          <div className="order-1 lg:order-2">
             <LeadForm
-              heading="Get business guidance"
+              heading="Get Business Guidance"
               lead="Send us the details and a member of the Raulji Group team will get back to you."
+              className="rounded-md border-0 text-[#3a4656] shadow-[0_30px_60px_-30px_rgba(0,0,0,0.5)]"
             />
           </div>
         </div>
-      </Section>
-    </>
+      </section>
+    </div>
   );
 }
