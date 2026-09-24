@@ -1,18 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
+import {
+  ArrowRight,
+  CircleCheck,
+  Compass,
+  FileText,
+  Lightbulb,
+  Plus,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { BrandImage } from "@/components/ui/brand-image";
 import { JsonLd } from "@/components/ui/json-ld";
-import { FaqAccordion } from "@/components/ui/faq-accordion";
-import { ServiceCards } from "@/components/shared/service-cards";
-import { ComparisonTable } from "@/components/shared/comparison-table";
-import { BusinessJourney } from "@/components/shared/business-journey";
-import { PopularCities } from "@/components/shared/popular-cities";
-import { CtaBanner } from "@/components/shared/cta-banner";
-import { GuideLinks } from "@/components/blog/guide-links";
+import { TrackedLink } from "@/components/ui/tracked-link";
+import { HighlightComparison, StructureFinder } from "@/components/shared/registration-tools";
+import { getArticle } from "@/lib/blog";
+import { POPULAR_CITIES } from "@/lib/city-index";
 import { SERVICES, type FAQ } from "@/lib/services";
-import { AUTHORITY_DISCLAIMER, TIMELINE_DISCLAIMER } from "@/lib/site";
+import { AUTHORITY_DISCLAIMER, LEADERSHIP, TIMELINE_DISCLAIMER, whatsappHref } from "@/lib/site";
+import { STRUCTURE_META } from "@/lib/structure-meta";
 import { pageMeta } from "@/lib/seo";
 import {
   breadcrumbSchema,
@@ -30,6 +36,12 @@ import {
  * does not repeat eligibility lists, document lists or pricing tables that the
  * four detail pages already carry. Duplicating them here would compete with
  * those pages in search and give the reader two places to check.
+ *
+ * Laid out to the "Raulji Business Registration" design (claude.ai/design);
+ * the header and footer are the site-wide ones. The comparison table reads
+ * from lib/comparison.ts, the site's reviewed wording, rather than the
+ * design's shortened copy. The design's "Reviewed by Dharmendrasinh Raulji"
+ * line on the structure finder is left out: no such review is on record.
  */
 
 const PATH = "/services/business-registration/";
@@ -114,9 +126,100 @@ const FAQS: FAQ[] = [
   },
 ];
 
-export default function BusinessRegistrationPage() {
+const STAGES: { key: string; title: string; body: string; icon: LucideIcon }[] = [
+  {
+    key: "Idea",
+    title: "You know what you want to build",
+    body: "A conversation about the business, who is involved and whether outside investment is likely.",
+    icon: Lightbulb,
+  },
+  {
+    key: "Choose",
+    title: "Pick the structure deliberately",
+    body: "What each option means for liability, compliance and tax, with the expected cost before anything is filed.",
+    icon: Compass,
+  },
+  {
+    key: "Register",
+    title: "Documents and filings handled",
+    body: "Digital signatures, name approval, drafting and statutory filings, including any Registrar query.",
+    icon: FileText,
+  },
+  {
+    key: "Start",
+    title: "Open for business",
+    body: "Your certificate and registration documents, plus next steps such as opening a current account.",
+    icon: CircleCheck,
+  },
+  {
+    key: "Grow",
+    title: "The structure keeps working",
+    body: "As the business grows, the group helps with what the structure requires next.",
+    icon: TrendingUp,
+  },
+];
+
+const GUIDES = [
+  "how-to-choose-business-structure-india-2026",
+  "business-structure-guide-new-entrepreneurs-india",
+  "documents-required-company-registration-india",
+]
+  .map((slug) => getArticle(slug))
+  .filter((article): article is NonNullable<typeof article> => article !== null);
+
+const EYEBROW =
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+const EYEBROW_DARK =
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
+const H2 =
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+const H2_DARK =
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl lg:text-[2.75rem]";
+const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
+const SECTION = "py-16 md:py-24 lg:py-28";
+const LIFT =
+  "transition duration-[400ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1.5 hover:border-[#329fd2] hover:shadow-[0_24px_48px_-26px_rgba(18,38,64,0.4)]";
+
+function Dash() {
+  return <span className="h-0.5 w-7 bg-[#329fd2]" aria-hidden="true" />;
+}
+
+function SectionHead({
+  eyebrow,
+  title,
+  id,
+  lead,
+}: {
+  eyebrow: string;
+  title: string;
+  id: string;
+  lead?: string;
+}) {
   return (
-    <>
+    <div className="grid items-end gap-x-16 gap-y-5 lg:grid-cols-2">
+      <div className="flex flex-col gap-3.5">
+        <p className={EYEBROW}>
+          <Dash />
+          {eyebrow}
+        </p>
+        <h2 id={id} className={H2}>
+          {title}
+        </h2>
+      </div>
+      {lead ? <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">{lead}</p> : null}
+    </div>
+  );
+}
+
+export default function BusinessRegistrationPage() {
+  const structures = SERVICES.map((service) => ({
+    slug: service.slug,
+    name: service.shortName,
+    href: service.path,
+  }));
+
+  return (
+    <div className="bg-white text-[#3a4656]">
       <JsonLd
         data={graph(
           breadcrumbSchema(crumbs),
@@ -131,180 +234,479 @@ export default function BusinessRegistrationPage() {
           faqSchema(FAQS),
         )}
       />
-      <Breadcrumbs crumbs={crumbs} />
 
-      <section className="pb-12 pt-8">
-        <div className="container-wide">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-              Business Registration
-            </p>
-            <h1 className="mt-3 text-balance text-3xl leading-tight md:text-4xl lg:text-5xl">
-              Business Registration Services in India
-            </h1>
-            <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">
-              A business in India can be registered in four main forms. They differ in who carries
-              the liability, how much annual compliance they attract, and whether the business can
-              raise equity. This page covers how to choose between them and what registration
-              involves. The detail for each one is on its own page.
-            </p>
+      {/* Hero. */}
+      <section
+        aria-labelledby="br-h"
+        className="relative overflow-hidden bg-[#0c1a2d] pt-[5.5rem] text-white sm:pt-24"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-40 -top-56 h-[38.75rem] w-[38.75rem] rounded-full bg-[radial-gradient(circle,rgba(50,159,210,0.32),rgba(50,159,210,0)_65%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-52 -left-44 h-[26.25rem] w-[26.25rem] rounded-full bg-[radial-gradient(circle,rgba(26,124,176,0.28),rgba(26,124,176,0)_65%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(rgba(50,159,210,0.22)_1px,transparent_1px)] bg-[size:22px_22px] [mask-image:linear-gradient(90deg,transparent_30%,#000_100%)]"
+        />
+        <div className="relative mx-auto flex max-w-[1240px] flex-col gap-8 px-5 pb-14 pt-6 sm:px-8 md:gap-14 md:pb-24 md:pt-8">
+          <div className="[&_a:hover]:text-white [&_a]:text-[#c9d6e3] [&_li]:text-[#c9d6e3] [&_span[aria-current]]:font-semibold [&_span[aria-current]]:text-white [&_svg]:text-[#5b6f88]">
+            <Breadcrumbs crumbs={crumbs} inline />
           </div>
+          <div className="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
+            <div className="flex min-w-0 flex-col gap-[1.375rem]">
+              <p className={EYEBROW_DARK}>
+                <Dash />
+                Business Registration
+              </p>
+              <h1
+                id="br-h"
+                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.125rem]"
+              >
+                Register the right business structure,{" "}
+                <span className="text-[#7cc8ec]">the first time.</span>
+              </h1>
+              <p className="max-w-[36.25rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+                A business in India can be registered in four main forms. They differ in who carries
+                the liability, how much annual compliance they attract, and whether the business can
+                raise equity. We help you choose, then handle the filing end to end.
+              </p>
+              <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <a
+                  href="#finder"
+                  className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-white px-6 text-[0.9375rem] font-bold text-[#122640] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e8f5fb] hover:shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]"
+                >
+                  Find My Structure
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <TrackedLink
+                  href="/contact/"
+                  event="primary_cta_click"
+                  params={{ label: "registration_hero" }}
+                  className="inline-flex min-h-[3.25rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
+                >
+                  Talk to an Expert
+                </TrackedLink>
+              </div>
+              <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 text-sm font-medium text-white">
+                {["Structure advice first", "Fees confirmed in writing", "Filed online, anywhere in India"].map(
+                  (item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <CircleCheck className="h-4 w-4 text-[#329fd2]" strokeWidth={2.2} aria-hidden="true" />
+                      {item}
+                    </li>
+                  ),
+                )}
+              </ul>
+            </div>
 
-          <BrandImage
-            slot="registration"
-            sizes="(min-width: 1024px) 76rem, 100vw"
-            aspect="aspect-[21/9]"
-            className="mt-10"
-          />
+            <div className="flex min-w-0 flex-col gap-2.5">
+              <p className="flex justify-between text-[0.6875rem] font-bold tracking-[0.14em] text-[#7cc8ec]">
+                <span>MORE CONTROL &amp; SCALE</span>
+                <span>SIMPLER</span>
+              </p>
+              {SERVICES.map((service) => {
+                const meta = STRUCTURE_META[service.slug];
+                const Icon = meta.icon;
+                return (
+                  <TrackedLink
+                    key={service.slug}
+                    href={service.path}
+                    event="service_card_click"
+                    params={{ label: "registration_hero", registration_type: service.shortName }}
+                    className="group flex items-center gap-4 rounded-md border border-white/[0.12] bg-white/[0.04] px-[1.125rem] py-4 text-white transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:translate-x-1.5 hover:border-white hover:bg-white hover:text-[#122640]"
+                  >
+                    <span className="flex h-11 w-11 flex-none items-center justify-center rounded-full bg-[#329fd2]/20">
+                      <Icon className="h-5 w-5 text-[#7cc8ec]" strokeWidth={1.6} aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-base font-bold">{service.shortName}</span>
+                      <span className="block text-xs opacity-75">{meta.tag}</span>
+                    </span>
+                    <span className="flex gap-[3px]" role="img" aria-label={`Annual compliance ${meta.load} of 4`}>
+                      {[1, 2, 3, 4].map((k) => (
+                        <span
+                          key={k}
+                          className={
+                            k <= meta.load
+                              ? "h-[18px] w-1.5 rounded-sm bg-[#329fd2]"
+                              : "h-[18px] w-1.5 rounded-sm bg-white/[0.18] group-hover:bg-[#122640]/15"
+                          }
+                        />
+                      ))}
+                    </span>
+                  </TrackedLink>
+                );
+              })}
+              <p className="text-xs text-[#c9d6e3]">Bars show annual compliance load.</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* The four structures, straight away. A visitor who already knows what
-          they want should not have to read an overview first. The heading is not
-          decoration: ServiceCards renders h3, so without an h2 here the page
-          would skip a heading level. */}
-      <Section className="pt-0">
-        <h2 className="text-2xl md:text-3xl">The four structures</h2>
-        <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-          If you already know which one you need, go straight to it. Each page covers eligibility,
-          documents, the filing process and cost.
-        </p>
-        <div className="mt-8">
-          <ServiceCards />
+      {/* The four structures, straight away. */}
+      <section aria-labelledby="four-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-11`}>
+          <SectionHead
+            eyebrow="The four structures"
+            id="four-h"
+            title="Already know what you need? Go straight to it."
+            lead="Each page covers eligibility, documents, the filing process and cost."
+          />
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICES.map((service) => {
+              const meta = STRUCTURE_META[service.slug];
+              const Icon = meta.icon;
+              return (
+                <li key={service.slug} className="flex">
+                  <TrackedLink
+                    href={service.path}
+                    event="service_card_click"
+                    params={{ label: "registration_cards", registration_type: service.shortName }}
+                    className={`flex flex-1 flex-col gap-3.5 rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] py-[1.875rem] ${LIFT}`}
+                  >
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f5fb]">
+                        <Icon className="h-[1.625rem] w-[1.625rem] text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
+                      </span>
+                      <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold text-[#1a7cb0]">
+                        {meta.time}
+                      </span>
+                    </span>
+                    <h3 className="text-[1.3125rem] font-extrabold text-[#122640]">{service.name}</h3>
+                    <p className="flex-1 text-sm leading-[1.6]">{meta.body}</p>
+                    <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 border-t border-[#eef2f6] pt-3.5 text-[0.8125rem]">
+                      <dt className="text-[#5b6778]">Liability</dt>
+                      <dd className="font-semibold text-[#122640]">{meta.liability}</dd>
+                      <dt className="text-[#5b6778]">Owners</dt>
+                      <dd className="font-semibold text-[#122640]">{meta.owners}</dd>
+                    </dl>
+                    <span className="text-sm font-bold text-[#1a7cb0]">
+                      Explore {service.shortName} <span aria-hidden="true">→</span>
+                    </span>
+                  </TrackedLink>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-[0.8125rem] text-[#5b6778]">
+            Setup times are typical estimates with complete documents. {TIMELINE_DISCLAIMER}
+          </p>
         </div>
-      </Section>
+      </section>
+
+      {/* Structure finder. */}
+      <section id="finder" aria-labelledby="fd-h" className={`scroll-mt-28 bg-[#122640] text-white ${SECTION}`}>
+        <div className={`${CONTAINER} grid items-start gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-[5.5rem]`}>
+          <div className="flex min-w-0 flex-col gap-[1.125rem]">
+            <p className={EYEBROW_DARK}>
+              <Dash />
+              Structure finder
+            </p>
+            <h2 id="fd-h" className={H2_DARK}>
+              Three questions. One likely answer.
+            </h2>
+            <p className="text-base leading-[1.7] text-[#c9d6e3]">
+              A quick starting point based on the factors that decide most structures. An advisor
+              confirms it with you before anything is filed.
+            </p>
+            <p className="mt-2 border-t border-white/[0.14] pt-5 text-sm leading-[1.6] text-[#c9d6e3]">
+              Not sure about an answer? That is a{" "}
+              <Link
+                href="/services/business-consulting/"
+                className="font-semibold text-[#7cc8ec] hover:text-white hover:underline"
+              >
+                business consulting
+              </Link>{" "}
+              conversation rather than a filing question.
+            </p>
+          </div>
+          <StructureFinder structures={structures} />
+        </div>
+      </section>
 
       {/* How to choose. */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="How to choose"
-          title="Four things that decide it"
-          lead="Most structure decisions come down to these, in this order. If the first two point the same way, the choice is usually already made."
-          align="left"
-        />
-        <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-          {DECIDING_FACTORS.map((item, i) => (
-            <li key={item.title} className="bg-card p-6 sm:p-7">
-              <p className="text-sm font-semibold text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-2 text-lg">{item.title}</h3>
-              <p className="mt-2.5 leading-relaxed text-muted-foreground">{item.body}</p>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
-          If the answer is not obvious from the four above, that is a consulting conversation rather
-          than a filing question.{" "}
-          <Link
-            href="/services/business-consulting/"
-            className="font-semibold text-primary hover:underline"
-          >
-            Business consulting
-          </Link>{" "}
-          covers the structure decision in more depth.
-        </p>
-      </Section>
+      <section aria-labelledby="dec-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-11`}>
+          <SectionHead
+            eyebrow="How to choose"
+            id="dec-h"
+            title="Four things that decide it."
+            lead="Most structure decisions come down to these, in this order. If the first two point the same way, the choice is usually already made."
+          />
+          <ol className="grid gap-px overflow-hidden rounded-lg border border-[#e3e9ef] bg-[#e3e9ef] md:grid-cols-2 lg:grid-cols-4">
+            {DECIDING_FACTORS.map((item, i) => (
+              <li
+                key={item.title}
+                className="flex flex-col gap-3.5 bg-white px-7 py-8 transition-colors duration-300 hover:bg-[#f4fafd]"
+              >
+                <span
+                  aria-hidden="true"
+                  className="text-[2.75rem] font-extrabold leading-none text-transparent [-webkit-text-stroke:1.5px_#329fd2]"
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-[1.1875rem] font-bold text-[#122640]">{item.title}</h3>
+                <p className="text-sm leading-[1.7]">{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       {/* Side by side. */}
-      <Section>
-        <SectionHeading
-          title="The four structures side by side"
-          lead="Liability, compliance load and whether equity can be issued are the differences that matter most in practice."
-        />
-        <ComparisonTable />
-        <p className="mt-8 text-center">
-          <Link href="/compare/" className="link-target font-semibold text-primary hover:underline">
+      <section id="compare" aria-labelledby="cmp-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-8`}>
+          <SectionHead
+            eyebrow="Side by side"
+            id="cmp-h"
+            title="The four structures compared."
+            lead="Liability, compliance load and whether equity can be issued are the differences that matter most in practice."
+          />
+          <HighlightComparison structures={structures} />
+          <Link
+            href="/compare/"
+            className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline"
+          >
             Read the full comparison guide
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
-        </p>
-      </Section>
+        </div>
+      </section>
 
-      {/* What the process looks like. */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="How we work"
-          title="From the first conversation to a registered business"
-          lead="The same five stages apply whichever structure you choose. What changes is the filing in the middle."
-        />
-        <BusinessJourney />
-        <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-muted-foreground">
-          {TIMELINE_DISCLAIMER}
-        </p>
-      </Section>
+      {/* How we work. */}
+      <section aria-labelledby="proc-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-12`}>
+          <SectionHead
+            eyebrow="How we work"
+            id="proc-h"
+            title="From the first conversation to a registered business."
+            lead="The same five stages apply whichever structure you choose. What changes is the filing in the middle."
+          />
+          <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+            {STAGES.map(({ key, title, body, icon: Icon }, i) => (
+              <li
+                key={key}
+                className={`flex flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-[1.375rem] py-[1.625rem] ${LIFT}`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold tracking-[0.08em] text-[#1a7cb0]">STEP {i + 1}</span>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#122640]">
+                    <Icon className="h-[1.125rem] w-[1.125rem] text-white" strokeWidth={1.6} aria-hidden="true" />
+                  </span>
+                </div>
+                <p className="text-[0.8125rem] font-bold uppercase tracking-[0.06em] text-[#329fd2]">{key}</p>
+                <h3 className="text-[1.0625rem] font-bold leading-[1.35] text-[#122640]">{title}</h3>
+                <p className="text-sm leading-[1.65]">{body}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="text-[0.8125rem] text-[#5b6778]">{TIMELINE_DISCLAIMER}</p>
+        </div>
+      </section>
 
-      {/* Scope of work. */}
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-          <div>
-            <SectionHeading
-              eyebrow="What we handle"
-              title="What Raulji Group does"
-              lead="Registration involves a sequence of filings, each of which can be rejected for a formatting or documentation reason. This is the part we take on."
-              align="left"
-            />
-          </div>
-          <div>
-            <ul className="space-y-3.5">
-              {WHAT_WE_HANDLE.map((item) => (
-                <li key={item} className="flex gap-3 leading-relaxed text-secondary">
-                  <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-7 rounded-2xl border border-border bg-muted p-5 text-sm leading-relaxed text-muted-foreground">
+      {/* What we handle. */}
+      <section aria-labelledby="hdl-h" className={`bg-[#0c1a2d] text-white ${SECTION}`}>
+        <div className={`${CONTAINER} grid items-start gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-[5.5rem]`}>
+          <div className="flex min-w-0 flex-col gap-[1.125rem]">
+            <p className={EYEBROW_DARK}>
+              <Dash />
+              What we handle
+            </p>
+            <h2 id="hdl-h" className={H2_DARK}>
+              Every filing that can go wrong, handled.
+            </h2>
+            <p className="text-base leading-[1.7] text-[#c9d6e3]">
+              Registration involves a sequence of filings, each of which can be rejected for a
+              formatting or documentation reason. This is the part we take on.
+            </p>
+            <p className="rounded-[4px] border border-white/[0.12] px-4 py-3.5 text-[0.8125rem] leading-[1.6] text-[#9fb3c8]">
               {AUTHORITY_DISCLAIMER}
             </p>
           </div>
+          <ol className="flex min-w-0 flex-col border-t border-white/[0.14]">
+            {WHAT_WE_HANDLE.map((item, i) => (
+              <li
+                key={item}
+                className="flex items-center gap-[1.125rem] rounded-[4px] border-b border-white/[0.14] py-[1.125rem] text-base font-medium transition-[padding,background-color] duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:bg-[#329fd2]/[0.08] hover:pl-3.5"
+              >
+                <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full border-[1.5px] border-[#329fd2] text-xs font-bold text-[#7cc8ec]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {item}
+              </li>
+            ))}
+          </ol>
         </div>
-      </Section>
+      </section>
 
-      {/* Location entry point. Internal linking to Gujarat and city pages
-          (master rule 19). */}
-      <Section tone="muted">
-        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-wider text-primary">
+      {/* Where we work. Internal linking to Gujarat and city pages (master rule 19). */}
+      <section aria-labelledby="guj-h" className={SECTION}>
+        <div className={`${CONTAINER} grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-[5.5rem]`}>
+          <div className="flex min-w-0 flex-col gap-[1.125rem]">
+            <p className={EYEBROW}>
+              <Dash />
               Where we work
             </p>
-            <h2 className="text-3xl md:text-4xl">Registration support across Gujarat</h2>
-            <p className="mt-5 leading-relaxed text-muted-foreground">
+            <h2 id="guj-h" className={H2}>
+              Registration support across Gujarat.
+            </h2>
+            <p className="text-base leading-[1.75]">
               Incorporation is filed through the MCA portal, so the process and the timeline are the
               same wherever you are. Our city pages cover the local business character of each
               market, which is the part that actually shapes the structure decision.
             </p>
-            <Link
+            <TrackedLink
               href="/gujarat/"
-              className="mt-7 inline-flex min-h-[3.25rem] items-center gap-2 rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+              event="gujarat_page_click"
+              params={{ label: "registration_where" }}
+              className="inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
             >
               Gujarat Coverage
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
+            </TrackedLink>
           </div>
-          <PopularCities />
+          <ul className="grid min-w-0 grid-cols-2 content-start gap-2.5 sm:grid-cols-3">
+            {POPULAR_CITIES.map((city) => (
+              <li key={city.slug} className="flex min-w-0">
+                <TrackedLink
+                  href={`/${city.slug}/`}
+                  event="city_page_click"
+                  params={{ city: city.name, label: "registration_where" }}
+                  className="flex flex-1 items-center justify-between gap-2 rounded-md border border-[#e3e9ef] px-3 py-4 text-sm sm:gap-2.5 sm:px-[1.125rem] sm:text-[0.9375rem] font-semibold text-[#122640] transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-[3px] hover:border-[#122640] hover:bg-[#122640] hover:text-white"
+                >
+                  <span>{city.name}</span>
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </TrackedLink>
+              </li>
+            ))}
+          </ul>
         </div>
-      </Section>
+      </section>
 
-      <Section>
-        <SectionHeading eyebrow="FAQs" title="Business registration questions" />
-        <FaqAccordion faqs={FAQS} idPrefix="registration-faq" />
-      </Section>
+      {/* FAQs. */}
+      <section aria-labelledby="faq-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-[5.5rem]`}>
+          <div className="flex min-w-0 flex-col gap-[1.125rem]">
+            <p className={EYEBROW}>
+              <Dash />
+              FAQs
+            </p>
+            <h2 id="faq-h" className={H2}>
+              Business registration questions.
+            </h2>
+            <a
+              href="#finder"
+              className="mt-2 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0]"
+            >
+              Try the Structure Finder
+              <ArrowRight className="h-4 w-4 -rotate-90" aria-hidden="true" />
+            </a>
+          </div>
+          <div className="flex min-w-0 flex-col border-t border-[#dde4ec]">
+            {FAQS.map((item) => (
+              <details key={item.q} className="group border-b border-[#dde4ec]">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 rounded-[4px] py-[1.375rem] transition-[padding,background-color] duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:bg-white hover:px-3.5 [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640]">{item.q}</h3>
+                  <span
+                    aria-hidden="true"
+                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </span>
+                </summary>
+                <p className="pb-6 pr-12 text-[0.9375rem] leading-[1.75]">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <GuideLinks
-        slugs={[
-          "how-to-choose-business-structure-india-2026",
-          "business-structure-guide-new-entrepreneurs-india",
-          "documents-required-company-registration-india",
-        ]}
-        title="Guides that go deeper than this page"
-        lead="Longer reads on the decision itself, the full four-way comparison, and the paperwork it takes."
-      />
+      {/* Guides. */}
+      <section aria-labelledby="gd-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-8`}>
+          <div className="flex flex-col gap-3.5">
+            <p className={EYEBROW}>
+              <Dash />
+              From the blog
+            </p>
+            <h2 id="gd-h" className={H2}>
+              Guides that go deeper.
+            </h2>
+          </div>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {GUIDES.map((guide) => (
+              <li key={guide.slug} className="flex">
+                <Link
+                  href={`/blog/${guide.slug}/`}
+                  className={`flex flex-1 flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] py-7 ${LIFT}`}
+                >
+                  <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
+                    {guide.category}
+                  </span>
+                  <span className="text-lg font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
+                  <span className="flex-1 text-sm leading-[1.6]">{guide.excerpt}</span>
+                  <span className="text-sm font-bold text-[#1a7cb0]">
+                    Read the guide <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
-      <CtaBanner
-        title="Still deciding which structure to register?"
-        body="Tell us what the business does, who is involved and whether outside investment is likely. That is usually enough to narrow it to one option."
-      />
-    </>
+      {/* Closing CTA. */}
+      <section aria-labelledby="cta-h" className="px-5 pb-16 sm:px-8 md:pb-24">
+        <div className="mx-auto flex max-w-[1240px] flex-wrap items-stretch overflow-hidden rounded-lg bg-[#122640] text-white">
+          <div className="relative min-h-[15rem] flex-[1_1_100%] bg-[#0c1a2d] sm:flex-[0_1_16.25rem]">
+            <Image
+              src={LEADERSHIP.chairman.photo}
+              alt=""
+              fill
+              sizes="(min-width: 640px) 16.25rem, 100vw"
+              className="object-cover object-[center_20%]"
+            />
+          </div>
+          <div className="flex min-w-0 flex-[1_1_27.5rem] flex-col justify-center gap-3.5 p-8 sm:p-12 lg:p-14">
+          <h2
+            id="cta-h"
+            className="text-balance text-[1.75rem] font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-[2.5rem]"
+          >
+            Still deciding which structure to register?
+          </h2>
+          <p className="max-w-[35rem] text-base leading-[1.7] text-[#d5e0ea]">
+            Tell us what the business does, who is involved and whether outside investment is
+            likely. That is usually enough to narrow it to one option.
+          </p>
+          <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <TrackedLink
+              href="/contact/"
+              event="primary_cta_click"
+              params={{ label: "registration_footer_cta" }}
+              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-white px-6 text-[0.9375rem] font-bold text-[#122640] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e8f5fb] hover:shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]"
+            >
+              Start Your Business
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedLink>
+            <TrackedLink
+              href={whatsappHref(
+                "Hello Raulji Group, I would like help choosing and registering a business structure.",
+              )}
+              external
+              event="whatsapp_click"
+              params={{ label: "registration_footer_cta" }}
+              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
+            >
+              WhatsApp an Expert
+            </TrackedLink>
+          </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
