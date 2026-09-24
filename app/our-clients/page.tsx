@@ -136,7 +136,7 @@ const EYEBROW =
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 
@@ -199,11 +199,11 @@ export default function OurClientsPage() {
               </p>
               <h1
                 id="cl-h"
-                className="text-balance text-[2.5rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.5rem]"
+                className="text-balance text-[2.5rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-5xl/[1.02] xl:text-[4.5rem]"
               >
                 The businesses <span className="text-[#7cc8ec]">we work with.</span>
               </h1>
-              <p className="max-w-[37.5rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+              <p className="max-w-[37.5rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
                 Raulji Group works through two companies, and a client of either is a client of the
                 group. This is the whole wall in one place: businesses named publicly, with the
                 work delivered by Raulji Technologies.
@@ -279,7 +279,7 @@ export default function OurClientsPage() {
             <h2 id="who-h" className={H2}>
               Founders and owners across India, on both sides of the group.
             </h2>
-            <p className="text-pretty text-base leading-[1.8]">
+            <p className="text-pretty text-base/[1.8] leading-[1.8]">
               <strong className="text-[#122640]">Raulji Group</strong> is a consulting-focused
               business group based in {SITE.locality}, {SITE.region}, made up of two companies:{" "}
               <strong className="text-[#122640]">Raulji Consulting Services</strong>, which handles
@@ -287,7 +287,7 @@ export default function OurClientsPage() {
               <strong className="text-[#122640]">Raulji Technologies</strong>, which handles
               software, eCommerce, SEO and digital work on its own domain.
             </p>
-            <p className="text-pretty text-base leading-[1.8]">
+            <p className="text-pretty text-base/[1.8] leading-[1.8]">
               {CLIENT_COUNT} businesses are named publicly as clients of the group, all of them
               through Raulji Technologies. Consulting and registration clients are not named,
               because that work is confidential. The group is not limited to Gujarat: incorporation
@@ -328,7 +328,7 @@ export default function OurClientsPage() {
                 What the group does for them.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">
               Two companies, one group. Most clients start on one side and end up using the other,
               which is the practical reason they sit under one roof.
             </p>
@@ -410,7 +410,7 @@ export default function OurClientsPage() {
                 Every client, alphabetically.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">
               The same businesses as above, written out so the list can be read and searched rather
               than watched.
             </p>
@@ -444,7 +444,7 @@ export default function OurClientsPage() {
                 height={52}
                 className="h-[3.25rem] w-[3.25rem] rounded-full border-2 border-[#329fd2] object-cover object-[center_20%]"
               />
-              <p className="text-sm leading-[1.45] text-[#c9d6e3]">
+              <p className="text-sm/[1.45] leading-[1.45] text-[#c9d6e3]">
                 <strong className="text-white">{LEADERSHIP.chairman.name}</strong>
                 <br />
                 {LEADERSHIP.chairman.roles[0]}
@@ -467,7 +467,7 @@ export default function OurClientsPage() {
               </details>
             ))}
             {/* Internal linking (master rule 19). */}
-            <p className="mt-8 text-sm leading-relaxed text-[#c9d6e3]">
+            <p className="mt-8 text-sm/[1.625] leading-relaxed text-[#c9d6e3]">
               More about the group on{" "}
               <Link href="/about/" className="font-semibold text-[#7cc8ec] hover:text-white hover:underline">
                 About Raulji Group
@@ -508,7 +508,7 @@ export default function OurClientsPage() {
             >
               Want your business on this wall?
             </h2>
-            <p className="max-w-[35rem] text-base leading-[1.7] text-[#d5e0ea]">
+            <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
               Tell us what you are building. Whether it starts as a structure decision, a
               registration or a piece of software, the conversation begins the same way.
             </p>

@@ -242,7 +242,7 @@ export default async function BlogPage() {
             </p>
             <h2
               id="exp-h"
-              className="text-balance text-2xl font-bold leading-[1.18] tracking-[-0.02em] text-[#122640] sm:text-[2.125rem]"
+              className="text-balance text-2xl/[1.18] font-bold leading-[1.18] tracking-[-0.02em] text-[#122640] sm:text-[2.125rem]"
             >
               The guides explain the options. A conversation settles which one is yours.
             </h2>
@@ -362,7 +362,7 @@ export default async function BlogPage() {
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </span>
-                  <span className="text-sm leading-[1.6]">{link.blurb}</span>
+                  <span className="text-sm/[1.6] leading-[1.6]">{link.blurb}</span>
                 </Link>
               </li>
             ))}
@@ -380,7 +380,7 @@ export default async function BlogPage() {
             >
               Ready to start your business?
             </h2>
-            <p className="max-w-[32.5rem] text-base leading-[1.7] text-[#d5e0ea]">
+            <p className="max-w-[32.5rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
               Tell us what you are building and we will help you choose the right structure before
               anything is filed.
             </p>

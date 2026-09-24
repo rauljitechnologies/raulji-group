@@ -88,7 +88,7 @@ const EYEBROW =
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 const LIFT =
@@ -124,7 +124,7 @@ function SectionHead({
       </div>
       {lead ? (
         <p
-          className={`max-w-[30rem] text-base leading-[1.7] lg:justify-self-end ${dark ? "text-[#c9d6e3]" : ""}`}
+          className={`max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end ${dark ? "text-[#c9d6e3]" : ""}`}
         >
           {lead}
         </p>
@@ -184,12 +184,12 @@ export default function GujaratPage() {
               </p>
               <h1
                 id="gj-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.125rem]"
+                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
               >
                 Business registration across{" "}
                 <span className="text-[#7cc8ec]">all 33 districts of Gujarat.</span>
               </h1>
-              <p className="max-w-[36.25rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+              <p className="max-w-[36.25rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
                 Raulji Group supports entrepreneurs and businesses across Gujarat with Private
                 Limited Company, LLP, Partnership Firm and Proprietorship registration. We work from{" "}
                 {SITE.locality}, with dedicated pages for {CITY_SLUGS.length} of the state&rsquo;s main
@@ -216,7 +216,7 @@ export default function GujaratPage() {
                 <span className="text-[3.5rem] font-extrabold leading-[0.9] tracking-[-0.04em] sm:text-[5.25rem]">
                   {GUJARAT_DISTRICTS.length}
                 </span>
-                <span className="text-sm leading-[1.4] text-[#c9d6e3]">
+                <span className="text-sm/[1.4] leading-[1.4] text-[#c9d6e3]">
                   districts served,
                   <br />
                   one online process
@@ -258,7 +258,7 @@ export default function GujaratPage() {
                       </span>
                     </span>
                     <h3 className="text-[1.3125rem] font-extrabold text-[#122640]">{service.name}</h3>
-                    <p className="flex-1 text-sm leading-[1.6]">{meta.body}</p>
+                    <p className="flex-1 text-sm/[1.6] leading-[1.6]">{meta.body}</p>
                     <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 border-t border-[#eef2f6] pt-3.5 text-[0.8125rem]">
                       <dt className="text-[#5b6778]">Liability</dt>
                       <dd className="font-semibold text-[#122640]">{meta.liability}</dd>
@@ -290,13 +290,13 @@ export default function GujaratPage() {
             <h2 id="st-h" className={H2}>
               Same process in Bhuj as in Vapi.
             </h2>
-            <p className="text-base leading-[1.75]">
+            <p className="text-base/[1.75] leading-[1.75]">
               Incorporation in India is a central, online process. Applications are filed with the
               Registrar of Companies through the MCA portal, and digital signatures are issued
               through video and Aadhaar-based verification. A business anywhere in Gujarat goes
               through exactly the same steps on the same timeline.
             </p>
-            <p className="text-base leading-[1.75]">
+            <p className="text-base/[1.75] leading-[1.75]">
               What is genuinely local is the context around the decision: what your customers expect,
               what a lender will ask for, and how much liability the business carries. That is what
               our city pages cover.
@@ -312,7 +312,7 @@ export default function GujaratPage() {
                   <Icon className="h-[1.375rem] w-[1.375rem] text-[#1a7cb0]" strokeWidth={1.7} aria-hidden="true" />
                 </span>
                 <h3 className="text-[1.0625rem] font-bold text-[#122640]">{title}</h3>
-                <p className="text-sm leading-[1.65]">{body}</p>
+                <p className="text-sm/[1.65] leading-[1.65]">{body}</p>
               </li>
             ))}
           </ul>
@@ -375,7 +375,7 @@ export default function GujaratPage() {
               );
             })}
           </ul>
-          <p className="max-w-3xl text-sm leading-relaxed text-[#9fb3c8]">
+          <p className="max-w-3xl text-sm/[1.625] leading-relaxed text-[#9fb3c8]">
             We publish a city page only where there is something genuinely local to say about doing
             business there. Unlinked districts call {SITE.phone.display}.
           </p>
@@ -413,7 +413,7 @@ export default function GujaratPage() {
             <h2 id="enq-h" className={H2}>
               Tell us where you are and what you are starting.
             </h2>
-            <p className="text-base leading-[1.75]">
+            <p className="text-base/[1.75] leading-[1.75]">
               We will come back to you on the structure, the documents and the cost.
             </p>
             <ul className="mt-2 flex flex-col gap-3">
@@ -500,8 +500,8 @@ export default function GujaratPage() {
                   <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
                     {guide.category}
                   </span>
-                  <span className="text-lg font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
-                  <span className="flex-1 text-sm leading-[1.6]">{guide.excerpt}</span>
+                  <span className="text-lg/[1.35] font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
+                  <span className="flex-1 text-sm/[1.6] leading-[1.6]">{guide.excerpt}</span>
                   <span className="text-sm font-bold text-[#1a7cb0]">
                     Read the guide <span aria-hidden="true">→</span>
                   </span>
@@ -521,7 +521,7 @@ export default function GujaratPage() {
           >
             Still deciding which structure to register?
           </h2>
-          <p className="max-w-[35rem] text-base leading-[1.7] text-[#d5e0ea]">
+          <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
             Tell us what the business does, who is involved and whether outside investment is
             likely. That is usually enough to narrow it to one option.
           </p>

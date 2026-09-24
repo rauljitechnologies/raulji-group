@@ -132,7 +132,7 @@ export function StructureFinder({ structures }: { structures: StructureLink[] })
         <p className="text-2xl font-extrabold text-[#122640]">
           {structure ? structure.name : "Answer the questions above"}
         </p>
-        <p className="text-sm leading-[1.6]">
+        <p className="text-sm/[1.6] leading-[1.6]">
           {result ? result.why : "Your starting point updates as you choose."}
         </p>
         {structure ? (
@@ -198,7 +198,7 @@ export function HighlightComparison({ structures }: { structures: StructureLink[
         role="region"
         aria-label="Business structure comparison, scrollable"
       >
-        <table className="w-full min-w-[57.5rem] border-collapse text-sm leading-[1.55]">
+        <table className="w-full min-w-[57.5rem] border-collapse text-sm/[1.55] leading-[1.55]">
           <caption className="sr-only">
             Comparison of Private Limited Company, LLP, Partnership Firm and Proprietorship
           </caption>
