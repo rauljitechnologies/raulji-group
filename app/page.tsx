@@ -85,7 +85,7 @@ export const metadata = pageMeta({
 /* Colours from the design, all inside the brand palette (master rule 24). */
 const EYEBROW = "text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
 const H2 =
-  "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const BTN_DARK =
   "inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-[#0c1a2d]";
 const BTN_OUTLINE =
@@ -279,11 +279,11 @@ export default function HomePage() {
           <p className={EYEBROW}>Raulji Group</p>
           <h1
             id="hero-h"
-            className="text-balance text-[2.375rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl xl:text-[4rem]"
+            className="text-balance text-[2.375rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl/[1.06] xl:text-[4rem]"
           >
             {SITE.taglineParts[0]} <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
           </h1>
-          <p className="max-w-[32.5rem] text-pretty text-base leading-[1.7] sm:text-lg">
+          <p className="max-w-[32.5rem] text-pretty text-base/[1.7] leading-[1.7] sm:text-lg/[1.7]">
             Raulji Group is a consulting-focused business group. We help entrepreneurs and business
             owners make informed decisions, set up the right structure, and move forward with
             clarity.
@@ -335,7 +335,7 @@ export default function HomePage() {
             className="absolute inset-0 bg-[linear-gradient(180deg,rgba(18,38,64,0)_55%,rgba(18,38,64,0.45))]"
           />
           <div className="absolute bottom-0 right-0 flex max-w-[18rem] flex-col gap-4 bg-[#122640] px-7 py-6 text-white sm:px-8 sm:py-7">
-            <p className="text-base font-medium leading-normal sm:text-[1.0625rem]">
+            <p className="text-base/[1.5] font-medium leading-normal sm:text-[1.0625rem]">
               Leadership Built on Relationships. Trust Built for the Long Term.
             </p>
             <span className="h-0.5 w-8 bg-[#329fd2]" aria-hidden="true" />
@@ -373,7 +373,7 @@ export default function HomePage() {
                 <span className="text-[#1a7cb0]">in One Place.</span>
               </h2>
             </div>
-            <p className="text-pretty text-base leading-[1.7]">
+            <p className="text-pretty text-base/[1.7] leading-[1.7]">
               Raulji Group covers the business journey from the structure decision through
               registration, compliance and insurance, with technology through its sister brand. One
               group that knows your file, rather than a new vendor at every stage.
@@ -405,7 +405,7 @@ export default function HomePage() {
                       <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                     ) : null}
                   </h3>
-                  <p className="text-sm leading-[1.55]">{step.body}</p>
+                  <p className="text-sm/[1.55] leading-[1.55]">{step.body}</p>
                 </>
               );
               const cls = `flex h-full flex-col gap-3.5 px-6 py-7 transition-colors ${
@@ -452,7 +452,7 @@ export default function HomePage() {
                 One Shared Vision.
               </h2>
             </div>
-            <p className="text-pretty border-l-2 border-[#329fd2] pl-5 text-base leading-[1.7]">
+            <p className="text-pretty border-l-2 border-[#329fd2] pl-5 text-base/[1.7] leading-[1.7]">
               Raulji Group works through two brands, each focused on its own area, so you know
               which part of the group to speak to for a useful answer.
             </p>
@@ -530,7 +530,7 @@ export default function HomePage() {
               <br />
               Stronger Business Direction.
             </h2>
-            <p className="max-w-[33.75rem] text-pretty text-base leading-[1.7]">
+            <p className="max-w-[33.75rem] text-pretty text-base/[1.7] leading-[1.7]">
               Consulting is the primary focus of Raulji Group. Before anything is filed, it is worth
               being certain the structure and the plan match what you are actually building.
             </p>
@@ -569,7 +569,7 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="flex flex-col items-start gap-4">
-              <p className="text-pretty text-base leading-[1.7]">
+              <p className="text-pretty text-base/[1.7] leading-[1.7]">
                 The right structure depends on ownership, liability, investment plans and how you
                 intend to operate. Each page covers eligibility, documents, process and cost.
               </p>
@@ -597,7 +597,7 @@ export default function HomePage() {
                     <span className="flex h-[3.25rem] w-[3.25rem] items-center justify-center rounded-full bg-[#e8f5fb]">
                       <Icon className="h-6 w-6 text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
                     </span>
-                    <h3 className="mt-2 text-lg font-bold leading-[1.3] text-[#122640]">
+                    <h3 className="mt-2 text-lg/[1.3] font-bold leading-[1.3] text-[#122640]">
                       {service.name}
                     </h3>
                     {summary ? (
@@ -611,7 +611,7 @@ export default function HomePage() {
               );
             })}
           </ul>
-          <p className="max-w-3xl text-sm leading-relaxed text-[#5b6778]">
+          <p className="max-w-3xl text-sm/[1.625] leading-relaxed text-[#5b6778]">
             Company and LLP incorporation is filed with the Registrar of Companies under the
             Ministry of Corporate Affairs. Current forms, fees and rules are published at{" "}
             <a
@@ -640,7 +640,7 @@ export default function HomePage() {
             <h2 id="pr-h" className={H2}>
               A Simple, Transparent Process.
             </h2>
-            <p className="text-base leading-[1.7]">
+            <p className="text-base/[1.7] leading-[1.7]">
               You know what happens at each stage. Approval always rests with the relevant
               authority; our job is to make sure what reaches them is complete and correct.
             </p>
@@ -658,7 +658,7 @@ export default function HomePage() {
                 <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-[1.5px] border-[#122640] bg-white text-sm font-bold text-[#122640] lg:h-14 lg:w-14 lg:text-[0.9375rem]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-base font-semibold leading-[1.4] text-[#122640] lg:max-w-[11.25rem]">
+                <h3 className="text-base/[1.4] font-semibold leading-[1.4] text-[#122640] lg:max-w-[11.25rem]">
                   {title}
                 </h3>
               </li>
@@ -676,7 +676,7 @@ export default function HomePage() {
               More Than Services.
               <br />A Long-Term Partner.
             </h2>
-            <p className="max-w-[32.5rem] text-pretty text-base leading-[1.7]">
+            <p className="max-w-[32.5rem] text-pretty text-base/[1.7] leading-[1.7]">
               Setting up and running a business involves a lot of small decisions. Our job is to make
               sure the ones that matter are made deliberately.
             </p>
@@ -697,8 +697,8 @@ export default function HomePage() {
                 className="flex flex-col gap-4 rounded-md border border-[#e3e9ef] px-6 py-7 transition-colors hover:border-[#329fd2]"
               >
                 <Icon className="h-7 w-7 text-[#1a7cb0]" strokeWidth={1.5} aria-hidden="true" />
-                <h3 className="text-base font-bold leading-[1.35] text-[#122640]">{title}</h3>
-                <p className="text-sm leading-[1.6]">{body}</p>
+                <h3 className="text-base/[1.35] font-bold leading-[1.35] text-[#122640]">{title}</h3>
+                <p className="text-sm/[1.6] leading-[1.6]">{body}</p>
               </li>
             ))}
           </ul>
@@ -798,13 +798,13 @@ export default function HomePage() {
             </p>
             <h2
               id="pres-h"
-              className="text-[1.875rem] text-white font-bold leading-[1.12] tracking-[-0.02em] sm:text-4xl lg:text-[2.75rem]"
+              className="text-[1.875rem] text-white font-bold leading-[1.12] tracking-[-0.02em] sm:text-4xl/[1.12] lg:text-[2.75rem]"
             >
               Serving Businesses
               <br />
               Across Gujarat &amp; India.
             </h2>
-            <p className="max-w-[30rem] text-base leading-[1.7] text-[#c9d6e3]">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] text-[#c9d6e3]">
               Incorporation is filed online, so where you are does not change the process. Gujarat
               is the market we know best, and we work with businesses across India from our base in{" "}
               {SITE.locality}.
@@ -883,7 +883,7 @@ export default function HomePage() {
               </h2>
             </div>
             <div className="flex flex-col items-start gap-4">
-              <p className="text-pretty text-base leading-[1.7]">
+              <p className="text-pretty text-base/[1.7] leading-[1.7]">
                 Written to answer the question rather than to rank for it. Each one names its
                 sources.
               </p>
@@ -907,7 +907,7 @@ export default function HomePage() {
                     <BookOpen className="h-4 w-4" aria-hidden="true" />
                     {guide.category}
                   </span>
-                  <h3 className="text-lg font-bold leading-[1.3] text-[#122640]">{guide.title}</h3>
+                  <h3 className="text-lg/[1.3] font-bold leading-[1.3] text-[#122640]">{guide.title}</h3>
                   <p className="flex-1 text-[0.9375rem] leading-[1.6]">{guide.excerpt}</p>
                   <span className="pt-2 text-[0.8125rem] font-semibold text-[#1a7cb0]">
                     Read the guide <span aria-hidden="true">→</span>
@@ -919,8 +919,8 @@ export default function HomePage() {
           <div className="grid gap-8 border-t border-[#e3e9ef] pt-10 md:grid-cols-3">
             {HOME_ANSWERS.map((answer) => (
               <div key={answer.q}>
-                <h3 className="text-base font-bold leading-snug text-[#122640]">{answer.q}</h3>
-                <p className="mt-2 border-l-2 border-[#329fd2] pl-4 text-sm leading-relaxed">
+                <h3 className="text-base/[1.375] font-bold leading-snug text-[#122640]">{answer.q}</h3>
+                <p className="mt-2 border-l-2 border-[#329fd2] pl-4 text-sm/[1.625] leading-relaxed">
                   {answer.a}
                 </p>
               </div>
@@ -953,11 +953,11 @@ export default function HomePage() {
               </p>
               <h2
                 id="cta-h"
-                className="text-balance text-white text-[1.875rem] font-bold leading-[1.1] tracking-[-0.02em] sm:text-4xl lg:text-5xl"
+                className="text-balance text-white text-[1.875rem] font-bold leading-[1.1] tracking-[-0.02em] sm:text-4xl/[1.1] lg:text-5xl/[1.1]"
               >
                 Let&rsquo;s Build Your Future Together.
               </h2>
-              <p className="max-w-[30rem] text-pretty text-base leading-[1.7] text-[#d5e0ea]">
+              <p className="max-w-[30rem] text-pretty text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
                 Whether you are starting a new business, choosing a structure or planning the next
                 stage, a short description of your situation is enough to start.
               </p>

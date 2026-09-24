@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -10,11 +10,15 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 
-const inter = Inter({
+/*
+ * Plus Jakarta Sans, the typeface of the Raulji design files (claude.ai/design).
+ * Self-hosted by next/font, so there is no request to Google at runtime and no
+ * layout shift while it loads. Only the weights the design uses.
+ */
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
-  // Only the weights the design actually uses, to keep the font payload small.
+  variable: "--font-sans",
   weight: ["400", "500", "600", "700", "800"],
 });
 
@@ -58,7 +62,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-IN" className={inter.variable}>
+    <html lang="en-IN" className={jakarta.variable}>
       <body>
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
         <a href="#main" className="skip-link">

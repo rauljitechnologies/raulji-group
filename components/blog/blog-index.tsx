@@ -137,11 +137,11 @@ export function BlogIndex({
               </p>
               <h1
                 id="blog-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.125rem]"
+                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
               >
                 Start right. <span className="text-[#7cc8ec]">File once.</span> Grow with clarity.
               </h1>
-              <p className="max-w-[33.75rem] text-pretty text-base leading-[1.7] text-[#c9d6e3] sm:text-lg">
+              <p className="max-w-[33.75rem] text-pretty text-base/[1.7] leading-[1.7] text-[#c9d6e3] sm:text-lg/[1.7]">
                 Guides on registering and running a business in India, written by the people who
                 prepare the filings and checked against the official sources.
               </p>
@@ -192,7 +192,7 @@ export function BlogIndex({
                     className="h-8 w-8 object-contain"
                   />
                 </span>
-                <p className="text-sm leading-[1.45] text-[#c9d6e3]">
+                <p className="text-sm/[1.45] leading-[1.45] text-[#c9d6e3]">
                   Written by <strong className="text-white">the Raulji Group team</strong>
                   <br />
                   the people who handle the filings
@@ -247,7 +247,7 @@ export function BlogIndex({
                       </span>
                       <span className="text-[#c9d6e3]">{featured.readLabel}</span>
                     </div>
-                    <h2 className="text-balance text-xl font-bold leading-[1.25] text-white lg:text-2xl">
+                    <h2 className="text-balance text-xl/[1.25] font-bold leading-[1.25] text-white lg:text-2xl/[1.25]">
                       {featured.title}
                     </h2>
                     <span className="flex items-center gap-2 text-sm font-semibold text-[#7cc8ec]">
@@ -453,7 +453,7 @@ function ArticleCard({ article }: { article: BlogCard }) {
             {article.title}
           </Link>
         </h3>
-        <p className="flex-1 text-sm leading-[1.65] text-[#3a4656]">{article.excerpt}</p>
+        <p className="flex-1 text-sm/[1.65] leading-[1.65] text-[#3a4656]">{article.excerpt}</p>
         <div className="mt-1.5 flex items-center justify-between gap-3 border-t border-[#eef2f6] pt-3.5 text-xs text-[#3a4656]">
           <span className="flex items-center gap-2.5">
             <span className="flex h-[1.625rem] w-[1.625rem] flex-none items-center justify-center overflow-hidden rounded-full border border-[#e3e9ef] bg-white">

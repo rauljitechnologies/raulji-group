@@ -221,7 +221,7 @@ export function ContactWizard() {
         <h2 className="text-2xl font-extrabold tracking-[-0.01em] text-[#122640] sm:text-[2rem]">
           Thank you, {firstName}. Your enquiry has been received.
         </h2>
-        <p className="max-w-[35rem] text-base leading-[1.7] text-[#3a4656]">
+        <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#3a4656]">
           A Raulji Group representative will contact you using the details provided
           {needLabel ? (
             <>
@@ -362,7 +362,7 @@ export function ContactWizard() {
                       />
                     </span>
                     <span className="flex flex-col gap-0.5">
-                      <span className="text-sm font-bold leading-tight text-[#122640]">{item.label}</span>
+                      <span className="text-sm/[1.25] font-bold leading-tight text-[#122640]">{item.label}</span>
                       <span className="text-xs text-[#5b6778]">{item.group}</span>
                     </span>
                   </button>
@@ -569,7 +569,7 @@ export function ContactWizard() {
             )}
           </button>
         </div>
-        <p className="text-xs leading-[1.6] text-[#5b6778]">
+        <p className="text-xs/[1.6] leading-[1.6] text-[#5b6778]">
           We use your details only to respond to this enquiry. Raulji Group is a private
           business-services firm, not a government department.
         </p>

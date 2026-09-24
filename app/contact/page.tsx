@@ -75,7 +75,7 @@ const FAQS = [
 const EYEBROW =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
 const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 
@@ -154,11 +154,11 @@ export default function ContactPage() {
             </p>
             <h1
               id="ct-h"
-              className="text-balance text-[2.5rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.5rem]"
+              className="text-balance text-[2.5rem] font-extrabold leading-[1.02] tracking-[-0.03em] text-white sm:text-5xl/[1.02] xl:text-[4.5rem]"
             >
               Let&rsquo;s talk about <span className="text-[#7cc8ec]">what you&rsquo;re building.</span>
             </h1>
-            <p className="max-w-[38.75rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+            <p className="max-w-[38.75rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
               Tell us what you are starting and we will come back to you on which structure fits,
               what documents you need and what it will cost. No obligation, and nothing gets filed
               until you say so.
@@ -225,7 +225,7 @@ export default function ContactPage() {
               </TrackedLink>
             ))}
 
-            <p className="rounded-lg bg-[#f4f7fa] p-5 text-xs leading-[1.6] text-[#5b6778]">
+            <p className="rounded-lg bg-[#f4f7fa] p-5 text-xs/[1.6] leading-[1.6] text-[#5b6778]">
               {AUTHORITY_DISCLAIMER}
             </p>
           </aside>
@@ -245,7 +245,7 @@ export default function ContactPage() {
                 From enquiry to registered, clearly.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">
               No pressure and no surprises. You know the structure, the documents and the cost
               before anything is filed.
             </p>
@@ -263,7 +263,7 @@ export default function ContactPage() {
                   <span className="text-xs font-bold text-[#1a7cb0]">{item.label}</span>
                 </div>
                 <h3 className="text-lg font-bold text-[#122640]">{item.title}</h3>
-                <p className="text-sm leading-[1.65]">{item.body}</p>
+                <p className="text-sm/[1.65] leading-[1.65]">{item.body}</p>
               </li>
             ))}
           </ol>
@@ -281,7 +281,7 @@ export default function ContactPage() {
             <h2 id="where-h" className={H2}>
               {SITE.locality}, {SITE.region}, working across India.
             </h2>
-            <p className="text-base leading-[1.75]">
+            <p className="text-base/[1.75] leading-[1.75]">
               Registration is filed online, so you do not need to visit us. If you would rather meet
               in person, call ahead so we can confirm a time.
             </p>

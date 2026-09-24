@@ -172,9 +172,9 @@ const EYEBROW =
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const H2_DARK =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 const LIFT =
@@ -206,7 +206,7 @@ function SectionHead({
           {title}
         </h2>
       </div>
-      {lead ? <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">{lead}</p> : null}
+      {lead ? <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">{lead}</p> : null}
     </div>
   );
 }
@@ -264,12 +264,12 @@ export default function BusinessRegistrationPage() {
               </p>
               <h1
                 id="br-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.125rem]"
+                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
               >
                 Register the right business structure,{" "}
                 <span className="text-[#7cc8ec]">the first time.</span>
               </h1>
-              <p className="max-w-[36.25rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+              <p className="max-w-[36.25rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
                 A business in India can be registered in four main forms. They differ in who carries
                 the liability, how much annual compliance they attract, and whether the business can
                 raise equity. We help you choose, then handle the filing end to end.
@@ -377,7 +377,7 @@ export default function BusinessRegistrationPage() {
                       </span>
                     </span>
                     <h3 className="text-[1.3125rem] font-extrabold text-[#122640]">{service.name}</h3>
-                    <p className="flex-1 text-sm leading-[1.6]">{meta.body}</p>
+                    <p className="flex-1 text-sm/[1.6] leading-[1.6]">{meta.body}</p>
                     <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 border-t border-[#eef2f6] pt-3.5 text-[0.8125rem]">
                       <dt className="text-[#5b6778]">Liability</dt>
                       <dd className="font-semibold text-[#122640]">{meta.liability}</dd>
@@ -409,11 +409,11 @@ export default function BusinessRegistrationPage() {
             <h2 id="fd-h" className={H2_DARK}>
               Three questions. One likely answer.
             </h2>
-            <p className="text-base leading-[1.7] text-[#c9d6e3]">
+            <p className="text-base/[1.7] leading-[1.7] text-[#c9d6e3]">
               A quick starting point based on the factors that decide most structures. An advisor
               confirms it with you before anything is filed.
             </p>
-            <p className="mt-2 border-t border-white/[0.14] pt-5 text-sm leading-[1.6] text-[#c9d6e3]">
+            <p className="mt-2 border-t border-white/[0.14] pt-5 text-sm/[1.6] leading-[1.6] text-[#c9d6e3]">
               Not sure about an answer? That is a{" "}
               <Link
                 href="/services/business-consulting/"
@@ -450,7 +450,7 @@ export default function BusinessRegistrationPage() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="text-[1.1875rem] font-bold text-[#122640]">{item.title}</h3>
-                <p className="text-sm leading-[1.7]">{item.body}</p>
+                <p className="text-sm/[1.7] leading-[1.7]">{item.body}</p>
               </li>
             ))}
           </ol>
@@ -500,7 +500,7 @@ export default function BusinessRegistrationPage() {
                 </div>
                 <p className="text-[0.8125rem] font-bold uppercase tracking-[0.06em] text-[#329fd2]">{key}</p>
                 <h3 className="text-[1.0625rem] font-bold leading-[1.35] text-[#122640]">{title}</h3>
-                <p className="text-sm leading-[1.65]">{body}</p>
+                <p className="text-sm/[1.65] leading-[1.65]">{body}</p>
               </li>
             ))}
           </ol>
@@ -519,7 +519,7 @@ export default function BusinessRegistrationPage() {
             <h2 id="hdl-h" className={H2_DARK}>
               Every filing that can go wrong, handled.
             </h2>
-            <p className="text-base leading-[1.7] text-[#c9d6e3]">
+            <p className="text-base/[1.7] leading-[1.7] text-[#c9d6e3]">
               Registration involves a sequence of filings, each of which can be rejected for a
               formatting or documentation reason. This is the part we take on.
             </p>
@@ -554,7 +554,7 @@ export default function BusinessRegistrationPage() {
             <h2 id="guj-h" className={H2}>
               Registration support across Gujarat.
             </h2>
-            <p className="text-base leading-[1.75]">
+            <p className="text-base/[1.75] leading-[1.75]">
               Incorporation is filed through the MCA portal, so the process and the timeline are the
               same wherever you are. Our city pages cover the local business character of each
               market, which is the part that actually shapes the structure decision.
@@ -647,8 +647,8 @@ export default function BusinessRegistrationPage() {
                   <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
                     {guide.category}
                   </span>
-                  <span className="text-lg font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
-                  <span className="flex-1 text-sm leading-[1.6]">{guide.excerpt}</span>
+                  <span className="text-lg/[1.35] font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
+                  <span className="flex-1 text-sm/[1.6] leading-[1.6]">{guide.excerpt}</span>
                   <span className="text-sm font-bold text-[#1a7cb0]">
                     Read the guide <span aria-hidden="true">→</span>
                   </span>
@@ -678,7 +678,7 @@ export default function BusinessRegistrationPage() {
           >
             Still deciding which structure to register?
           </h2>
-          <p className="max-w-[35rem] text-base leading-[1.7] text-[#d5e0ea]">
+          <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
             Tell us what the business does, who is involved and whether outside investment is
             likely. That is usually enough to narrow it to one option.
           </p>

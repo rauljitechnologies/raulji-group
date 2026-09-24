@@ -70,7 +70,7 @@ const EYEBROW =
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl lg:text-[2.75rem]";
+  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 const LIFT =
@@ -240,12 +240,12 @@ export default function AboutPage() {
               </p>
               <h1
                 id="about-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl xl:text-[4.125rem]"
+                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
               >
                 Leadership Built on Relationships.{" "}
                 <span className="text-[#7cc8ec]">Trust Built for the Long Term.</span>
               </h1>
-              <p className="max-w-[36.25rem] text-pretty text-base leading-[1.75] text-[#c9d6e3] sm:text-lg">
+              <p className="max-w-[36.25rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
                 Raulji Group is a consulting-focused business group based in {SITE.locality},{" "}
                 {SITE.region}. We work with entrepreneurs and business owners on the practical
                 decisions that shape a business: how it should be structured, what has to be
@@ -402,18 +402,18 @@ export default function AboutPage() {
             <h2 id="who-h" className={H2}>
               A consulting-led group built for long-term value.
             </h2>
-            <p className="text-pretty text-base leading-[1.8]">
+            <p className="text-pretty text-base/[1.8] leading-[1.8]">
               The group exists to answer a question most founders ask too late: given what I am
               actually building, what should I do next? Sometimes the answer is a Private Limited
               Company. Often it is something simpler, and saying so is part of the job.
             </p>
-            <p className="text-pretty text-base leading-[1.8]">
+            <p className="text-pretty text-base/[1.8] leading-[1.8]">
               Based in {SITE.locality}, we work with entrepreneurs and business owners across Gujarat
               and the rest of India. Incorporation is filed online and identity verification is done
               remotely, so we do not need a local office to work with a business, and we do not
               claim to have one.
             </p>
-            <p className="rounded-[4px] bg-[#f4f7fa] px-[1.125rem] py-4 text-sm leading-[1.7]">
+            <p className="rounded-[4px] bg-[#f4f7fa] px-[1.125rem] py-4 text-sm/[1.7] leading-[1.7]">
               {AUTHORITY_DISCLAIMER}
             </p>
           </div>
@@ -434,7 +434,7 @@ export default function AboutPage() {
                   className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 border-t border-[#eef2f6] px-6 py-3.5 transition-colors first:border-t-0 hover:bg-[#f4fafd] sm:grid-cols-[8.125rem_minmax(0,1fr)]"
                 >
                   <dt className="text-[0.8125rem] text-[#5b6778]">{term}</dt>
-                  <dd className="text-sm font-semibold leading-normal text-[#122640]">{value}</dd>
+                  <dd className="text-sm/[1.5] font-semibold leading-normal text-[#122640]">{value}</dd>
                 </div>
               ))}
             </dl>
@@ -455,7 +455,7 @@ export default function AboutPage() {
                 Four areas of expertise. One accountable group.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">
               Each area brings its own depth, while the group keeps strategy, execution and support
               connected from the first conversation onwards.
             </p>
@@ -531,7 +531,7 @@ export default function AboutPage() {
             </p>
             <h2
               id="lead-h"
-              className="text-[2.125rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl lg:text-[3.375rem]"
+              className="text-[2.125rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl/[1.06] lg:text-[3.375rem]"
             >
               {LEADERSHIP.chairman.name}
             </h2>
@@ -555,7 +555,7 @@ export default function AboutPage() {
               that follows from it and the technology a business needs afterwards are usually the
               same conversation held three times.
             </p>
-            <p className="text-pretty text-base leading-[1.75]">
+            <p className="text-pretty text-base/[1.75] leading-[1.75]">
               It is also why the group is deliberately personal. You deal with the people doing the
               work, and the person accountable for it is named on this page.
             </p>
@@ -594,12 +594,12 @@ export default function AboutPage() {
               </p>
               <h2
                 id="co-h"
-                className="text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl lg:text-[2.75rem]"
+                className="text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-white sm:text-4xl/[1.12] lg:text-[2.75rem]"
               >
                 Two brands under one group.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] text-[#c9d6e3] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] text-[#c9d6e3] lg:justify-self-end">
               Kept separate because they do different work for different buyers, and connected
               because the same leadership stands behind both.
             </p>
@@ -676,14 +676,14 @@ export default function AboutPage() {
           <div className="grid gap-5 lg:grid-cols-2">
             <article className="flex flex-col gap-4 rounded-md bg-[#122640] p-7 text-white transition duration-[400ms] hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(18,38,64,0.6)] sm:p-12">
               <p className="text-xs font-bold tracking-[0.14em] text-[#7cc8ec]">OUR VISION</p>
-              <p className="text-pretty text-xl font-semibold leading-[1.4] sm:text-[1.625rem]">
+              <p className="text-pretty text-xl/[1.4] font-semibold leading-[1.4] sm:text-[1.625rem]">
                 To be the group businesses rely on for the long term, helping them flourish through
                 clear guidance and practical innovation.
               </p>
             </article>
             <article className="flex flex-col gap-4 rounded-md bg-[#e8f5fb] p-7 text-[#122640] transition duration-[400ms] hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(26,124,176,0.45)] sm:p-12">
               <p className="text-xs font-bold tracking-[0.14em] text-[#1a7cb0]">OUR MISSION</p>
-              <p className="text-pretty text-xl font-semibold leading-[1.4] sm:text-[1.625rem]">
+              <p className="text-pretty text-xl/[1.4] font-semibold leading-[1.4] sm:text-[1.625rem]">
                 To deliver sustainable success by fostering trust, promoting innovation and providing
                 expert leadership across all business verticals.
               </p>
@@ -705,7 +705,7 @@ export default function AboutPage() {
                 Six things we hold to.
               </h2>
             </div>
-            <p className="max-w-[30rem] text-base leading-[1.7] lg:justify-self-end">
+            <p className="max-w-[30rem] text-base/[1.7] leading-[1.7] lg:justify-self-end">
               Registration is a regulated process with no shortcuts in it. What we can control is how
               clearly it is handled.
             </p>
@@ -719,7 +719,7 @@ export default function AboutPage() {
                 <span className="text-[0.8125rem] font-extrabold tracking-[0.06em] text-[#329fd2]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="text-lg font-bold leading-[1.35] text-[#122640]">{item.title}</h3>
+                <h3 className="text-lg/[1.35] font-bold leading-[1.35] text-[#122640]">{item.title}</h3>
                 <p className="text-[0.9375rem] leading-[1.65]">{item.body}</p>
               </li>
             ))}
@@ -752,7 +752,7 @@ export default function AboutPage() {
                     <Icon className="h-6 w-6 text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
                   </span>
                   <h3 className="text-[1.1875rem] font-bold text-[#122640]">{title}</h3>
-                  <p className="flex-1 text-sm leading-[1.6]">{body}</p>
+                  <p className="flex-1 text-sm/[1.6] leading-[1.6]">{body}</p>
                   <span className="text-sm font-semibold text-[#1a7cb0]">
                     Explore {title} <span aria-hidden="true">→</span>
                   </span>
@@ -793,7 +793,7 @@ export default function AboutPage() {
             >
               We build futures. Let&rsquo;s build yours.
             </h2>
-            <p className="max-w-[33.75rem] text-base leading-[1.7] text-[#d5e0ea]">
+            <p className="max-w-[33.75rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
               Tell us what you are building and we will help you choose the right structure before
               anything is filed.
             </p>
