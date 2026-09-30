@@ -55,6 +55,7 @@ import benefitsPhoto from "@/public/photos/registration/benefits.webp";
 import enquiryPhoto from "@/public/photos/registration/enquiry.webp";
 import processPhoto from "@/public/photos/services-hub/registration.webp";
 import ctaPhoto from "@/public/photos/services-hub/consulting.webp";
+import { H1 } from "@/lib/typography";
 
 /**
  * Registration service page: Private Limited, LLP, Partnership, Proprietorship.
@@ -297,7 +298,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
               </p>
               <h1
                 id="service-h1"
-                className="text-balance text-[2.25rem] font-extrabold leading-[1.05] tracking-[-0.03em] text-white sm:text-5xl/[1.05] xl:text-[3.875rem]"
+                className={`${H1} text-white`}
               >
                 {service.h1} <span className="text-[#7cc8ec]">in India</span>
               </h1>

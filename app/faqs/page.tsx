@@ -13,6 +13,7 @@ import { SITE, whatsappHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 import cta from "@/public/photos/faqs/cta.webp";
+import { H1 } from "@/lib/typography";
 
 /**
  * FAQs, laid out to the "Raulji FAQs" design (claude.ai/design), photograph
@@ -94,7 +95,7 @@ export default function FaqsPage() {
             </p>
             <h1
               id="faq-h1"
-              className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-[3.25rem] xl:text-[4.125rem]"
+              className={`${H1} text-white`}
             >
               Business registration, <span className="text-[#7cc8ec]">answered plainly.</span>
             </h1>

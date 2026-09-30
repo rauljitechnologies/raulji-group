@@ -20,6 +20,7 @@ import {
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import type { Crumb } from "@/lib/schema";
 import { cn } from "@/lib/utils";
+import { H1 } from "@/lib/typography";
 
 /**
  * Serialisable shape of an article for the listing.
@@ -137,7 +138,7 @@ export function BlogIndex({
               </p>
               <h1
                 id="blog-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
+                className={`${H1} text-white`}
               >
                 Start right. <span className="text-[#7cc8ec]">File once.</span> Grow with clarity.
               </h1>

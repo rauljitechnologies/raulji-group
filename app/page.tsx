@@ -44,6 +44,7 @@ import { SERVICES } from "@/lib/services";
 import { SITE, LEADERSHIP, telHref, mailHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
+import { H1, H2 } from "@/lib/typography";
 
 export const metadata = pageMeta({
   title: "Raulji Group | Business Consulting & Solutions",
@@ -84,8 +85,6 @@ export const metadata = pageMeta({
 
 /* Colours from the design, all inside the brand palette (master rule 24). */
 const EYEBROW = "text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
-const H2 =
-  "text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const BTN_DARK =
   "inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-[#0c1a2d]";
 const BTN_OUTLINE =
@@ -279,7 +278,7 @@ export default function HomePage() {
           <p className={EYEBROW}>Raulji Group</p>
           <h1
             id="hero-h"
-            className="text-balance text-[2.375rem] font-extrabold leading-[1.06] tracking-[-0.025em] text-[#122640] sm:text-5xl/[1.06] xl:text-[4rem]"
+            className={`${H1} text-[#122640]`}
           >
             {SITE.taglineParts[0]} <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
           </h1>
