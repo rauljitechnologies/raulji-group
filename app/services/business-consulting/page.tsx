@@ -1,14 +1,35 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MinusCircle } from "lucide-react";
-import { Section, SectionHeading } from "@/components/ui/section";
-import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { ArrowRight, CircleCheck, MinusCircle } from "lucide-react";
 import { BrandImage } from "@/components/ui/brand-image";
 import { JsonLd } from "@/components/ui/json-ld";
-import { FaqAccordion } from "@/components/ui/faq-accordion";
+import {
+  PhotoFigure,
+  ServiceHeroImage,
+  resolvePhoto,
+} from "@/components/ui/service-hero-image";
+import { LeadershipFigure, ProcessVisual } from "@/components/pages/service-visuals";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { LeadForm } from "@/components/forms/lead-form";
-import { CtaBanner } from "@/components/shared/cta-banner";
+import {
+  BTN_GHOST_DARK,
+  BTN_LIGHT,
+  CARD,
+  CONTAINER,
+  Dash,
+  EYEBROW,
+  EYEBROW_DARK,
+  FaqList,
+  GuideCards,
+  H2,
+  H2_DARK,
+  LIFT,
+  SECTION,
+  SectionHead,
+  ServiceHero,
+} from "@/components/pages/service-kit";
+import type { ImageSlot } from "@/lib/images";
 import { SERVICES } from "@/lib/services";
-import { SITE } from "@/lib/site";
+import { AUTHORITY_DISCLAIMER, SITE } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import {
   breadcrumbSchema,
@@ -170,9 +191,46 @@ const FAQS: FAQ[] = [
   },
 ];
 
+/** The direct answer at the top of the page (service-page brief, section 17). */
+const QUICK_ANSWER =
+  "Business consulting at Raulji Group is advisory work on specific business decisions: which structure to use, what has to be in place before starting, what changes as the business grows, and whether existing paperwork still matches how the business operates. It starts with a conversation about your situation and ends with a plan you can act on. Where the plan involves registration or MCA filings, we carry them out.";
+
+const PANEL: Record<string, ImageSlot> = {
+  "pvt-registration": "pvtStructure",
+  "llp-registration": "llpStructure",
+  "partnership-registration": "partnershipStructure",
+  "proprietorship-registration": "proprietorshipStructure",
+};
+
+const GUIDES = [
+  "how-to-choose-business-structure-india-2026",
+  "business-structure-guide-new-entrepreneurs-india",
+  "common-business-registration-mistakes-india",
+];
+
 export default function BusinessConsultingPage() {
+  const glance: [string, string][] = [
+    ["Delivered by", "Raulji Consulting Services, part of Raulji Group"],
+    ["Typical starting point", "A structure, planning or growth decision"],
+    ["Fees", "Quoted after the first conversation, once scope is known"],
+    ["Works with", "Founders, small and medium businesses, family businesses"],
+    ["Based in", `${SITE.locality}, ${SITE.region}. Working across India.`],
+  ];
+  const trackParams = { service: "Business Consulting" };
+
+  // Scenes from lib/service-photos.ts. Each renders only once its file exists,
+  // and its section falls back to the text layout until then.
+  const photo = {
+    planning: resolvePhoto("business-consulting", "planning"),
+    structure: resolvePhoto("business-consulting", "structure"),
+    growth: resolvePhoto("business-consulting", "growth"),
+    registration: resolvePhoto("business-consulting", "registration"),
+    decision: resolvePhoto("business-consulting", "decision"),
+  };
+  const split = "(min-width: 1024px) 30rem, 100vw";
+
   return (
-    <>
+    <div className="bg-white text-[#3a4656]">
       <JsonLd
         data={graph(
           breadcrumbSchema(crumbs),
@@ -187,240 +245,302 @@ export default function BusinessConsultingPage() {
           faqSchema(FAQS),
         )}
       />
-      <Breadcrumbs crumbs={crumbs} />
 
-      {/* Hero. Text-led, with the positioning line carried as a standfirst
-          rather than as decorative oversized type. */}
-      <section className="pb-14 pt-8 md:pb-16">
-        <div className="container-wide">
-          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary">
-                Raulji Consulting Services
-              </p>
-              <h1 className="mt-3 text-balance text-3xl leading-tight md:text-4xl lg:text-5xl">
-                Business Consulting Services
-              </h1>
-              <p className="mt-5 max-w-2xl text-pretty text-xl leading-relaxed text-secondary">
-                Clearer decisions. Stronger business direction.
-              </p>
-              <p className="mt-5 max-w-2xl leading-relaxed text-muted-foreground">
-                Consulting is the primary focus of Raulji Group. Most of what we are asked is some
-                version of the same question: given what I am trying to build, what should I actually
-                do next? The answer usually depends on details a generic answer cannot account for,
-                which is why it starts with a conversation.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="#enquiry"
-                  className="brand-gradient inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl px-7 font-semibold text-primary-foreground shadow-soft"
-                >
-                  Discuss Your Business
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
-                <Link
-                  href="/services/business-registration/"
-                  className="inline-flex min-h-[3.25rem] items-center justify-center rounded-xl border-2 border-primary px-7 font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  Business Registration
-                </Link>
-              </div>
-            </div>
+      <ServiceHero
+        crumbs={crumbs}
+        eyebrow="Raulji Consulting Services"
+        title="Business Consulting Services"
+        lead="Clearer decisions. Stronger business direction. Most of what we are asked is some version of one question: given what I am trying to build, what should I actually do next?"
+        actions={
+          <>
+            <TrackedLink
+              href="#enquiry"
+              event="primary_cta_click"
+              params={{ label: "consulting_hero", ...trackParams }}
+              className={BTN_LIGHT}
+            >
+              Get Business Guidance
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedLink>
+            <a href="#how" className={BTN_GHOST_DARK}>
+              How We Work
+            </a>
+          </>
+        }
+        media={<ServiceHeroImage slug="business-consulting" />}
+      />
 
-            <div>
-            <BrandImage
-              slot="consulting"
-              sizes="(min-width: 1024px) 30rem, 100vw"
-              aspect="aspect-[3/2]"
-              className="mb-6"
-            />
-            <dl className="rounded-2xl border border-border bg-muted p-7">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                At a glance
-              </p>
-              <div className="mt-5 space-y-4 text-sm">
-                {[
-                  ["Delivered by", "Raulji Consulting Services, part of Raulji Group"],
-                  ["Typical starting point", "A structure, planning or growth decision"],
-                  ["Fees", "Quoted after the first conversation, once scope is known"],
-                  ["Works with", "Founders, small and medium businesses, family businesses"],
-                  ["Based in", `${SITE.locality}, ${SITE.region}. Working across India.`],
-                ].map(([term, desc]) => (
-                  <div key={term} className="border-l-2 border-primary/30 pl-4">
-                    <dt className="font-semibold text-secondary">{term}</dt>
-                    <dd className="mt-0.5 leading-relaxed text-muted-foreground">{desc}</dd>
-                  </div>
-                ))}
-              </div>
+      {/* Quick answer and the facts at a glance. */}
+      <section aria-labelledby="what-h" className={SECTION}>
+        <div className={`${CONTAINER} grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-16`}>
+          <div className="flex min-w-0 flex-col gap-5">
+            <p className={EYEBROW}>
+              <Dash />
+              Quick answer
+            </p>
+            <h2 id="what-h" className={H2}>
+              What does business consulting involve?
+            </h2>
+            <p className="text-[1.0625rem] leading-[1.8] text-[#26354a]">{QUICK_ANSWER}</p>
+            <p className="leading-[1.7]">
+              Consulting is the primary focus of Raulji Group. The answer usually depends on details
+              a generic answer cannot account for, which is why it starts with a conversation rather
+              than a package.
+            </p>
+          </div>
+          <div className="flex min-w-0 flex-col gap-6">
+          {photo.planning ? <PhotoFigure photo={photo.planning} sizes={split} /> : null}
+          <aside aria-labelledby="glance-h" className={`${CARD} h-fit p-7`}>
+            <h3 id="glance-h" className="text-sm font-bold uppercase tracking-[0.1em] text-[#122640]">
+              At a glance
+            </h3>
+            <dl className="mt-5 divide-y divide-[#eef2f6]">
+              {glance.map(([term, value]) => (
+                <div key={term} className="grid gap-1 py-3.5 sm:grid-cols-[10rem_1fr] sm:gap-4">
+                  <dt className="text-sm text-[#5b6778]">{term}</dt>
+                  <dd className="text-[0.9375rem] font-semibold leading-[1.5] text-[#122640]">{value}</dd>
+                </div>
+              ))}
             </dl>
-            </div>
+          </aside>
           </div>
         </div>
       </section>
 
-      {/* What we advise on. A numbered reference list rather than icon cards, so
-          it does not repeat the homepage's visual pattern. */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="What we advise on"
-          title="Six kinds of question we are usually brought in on"
-          lead="These are the areas we actually work in. If your question is outside them, we will say so rather than take the engagement."
-          align="left"
-        />
-        <ol className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-          {AREAS.map((area, i) => (
-            <li key={area.title} className="bg-card p-6 sm:p-7">
-              <p className="text-sm font-semibold text-primary">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="mt-2 text-lg">{area.title}</h3>
-              <p className="mt-2.5 leading-relaxed text-muted-foreground">{area.body}</p>
-              <p className="mt-4 border-l-2 border-primary/40 pl-3 text-sm italic text-secondary">
-                &ldquo;{area.question}&rdquo;
-              </p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      {/* What we advise on. */}
+      <section aria-labelledby="areas-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-10`}>
+          <SectionHead
+            eyebrow="What we advise on"
+            id="areas-h"
+            title="Six kinds of question we are brought in on"
+            lead="These are the areas we actually work in. If your question is outside them, we will say so rather than take the engagement."
+          />
+          {photo.structure ? (
+            <PhotoFigure
+              photo={photo.structure}
+              sizes="(min-width: 1280px) 1176px, 100vw"
+              aspect="aspect-[16/9] md:aspect-[21/9]"
+            />
+          ) : null}
+          <ol className="grid gap-px overflow-hidden rounded-lg border border-[#e3e9ef] bg-[#e3e9ef] md:grid-cols-2 lg:grid-cols-3">
+            {AREAS.map((area, i) => (
+              <li key={area.title} className="flex flex-col gap-3 bg-white p-7">
+                <span aria-hidden="true" className="text-sm font-bold text-[#329fd2]">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-lg font-bold text-[#122640]">{area.title}</h3>
+                <p className="flex-1 text-[0.9375rem] leading-[1.7]">{area.body}</p>
+                <p className="border-l-2 border-[#329fd2] pl-3 text-sm italic text-[#122640]">
+                  &ldquo;{area.question}&rdquo;
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
       {/* Who it is for. */}
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <SectionHeading eyebrow="Who it is for" title="Who we work with" align="left" />
-          <div className="divide-y divide-border">
+      <section aria-labelledby="who-h" className={SECTION}>
+        <div className={`${CONTAINER} flex flex-col gap-10`}>
+          <SectionHead
+            eyebrow="Who it is for"
+            id="who-h"
+            title="Who we work with"
+            lead="Owners making a decision that is expensive to reverse, whether the business is new or has been running for years."
+          />
+          <div
+            className={
+              photo.growth ? "grid items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-10" : ""
+            }
+          >
+          {photo.growth ? <PhotoFigure photo={photo.growth} sizes={split} aspect="aspect-[4/5]" /> : null}
+          <ul className={`grid gap-5 sm:grid-cols-2 ${photo.growth ? "" : "lg:grid-cols-4"}`}>
             {WHO_ITS_FOR.map((item) => (
-              <div key={item.title} className="py-5 first:pt-0 last:pb-0">
-                <h3 className="text-lg">{item.title}</h3>
-                <p className="mt-2 leading-relaxed text-muted-foreground">{item.body}</p>
-              </div>
+              <li key={item.title} className={`${CARD} flex flex-col gap-2.5 border-t-4 border-t-[#329fd2] p-6`}>
+                <h3 className="text-lg font-bold text-[#122640]">{item.title}</h3>
+                <p className="text-[0.9375rem] leading-[1.7]">{item.body}</p>
+              </li>
             ))}
+          </ul>
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* How the work runs. */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="How we work"
-          title="What an engagement looks like"
-          lead="Five stages, though small questions often stop at the third. There is no obligation to continue past the first conversation."
-          align="left"
-        />
-        <ol className="space-y-px overflow-hidden rounded-2xl border border-border bg-border">
-          {PROCESS.map((step, i) => (
-            <li key={step.title} className="flex flex-col gap-3 bg-card p-6 sm:flex-row sm:gap-6 sm:p-7">
-              <span
-                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent text-sm font-bold text-primary"
-                aria-hidden="true"
-              >
-                {i + 1}
-              </span>
-              <div>
-                <h3 className="text-lg">{step.title}</h3>
-                <p className="mt-2 leading-relaxed text-muted-foreground">{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      {/* How an engagement runs. */}
+      <section id="how" aria-labelledby="how-h" className={`scroll-mt-24 bg-[#0c1a2d] text-white ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-12`}>
+          <SectionHead
+            dark
+            eyebrow="How we work"
+            id="how-h"
+            title="What an engagement looks like"
+            lead="Five stages, though small questions often stop at the third. There is no obligation to continue past the first conversation."
+          />
+          <ProcessVisual steps={PROCESS} />
+        </div>
+      </section>
 
       {/* The boundary. */}
-      <Section>
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionHeading
-              eyebrow="Scope"
-              title="What is outside our remit"
-              lead="Knowing where a firm stops is more useful than a list of everything it claims to do. Where a matter needs a different professional, we say so and coordinate rather than work beyond what we are."
-              align="left"
-            />
+      <section aria-labelledby="scope-h" className={SECTION}>
+        <div className={`${CONTAINER} grid gap-10 lg:grid-cols-2 lg:gap-16`}>
+          <div className="flex flex-col gap-4">
+            <p className={EYEBROW}>
+              <Dash />
+              Scope
+            </p>
+            <h2 id="scope-h" className={H2}>
+              What is outside our remit
+            </h2>
+            <p className="leading-[1.7]">
+              Knowing where a firm stops is more useful than a list of everything it claims to do.
+              Where a matter needs a different professional, we say so and coordinate rather than
+              work beyond what we are.
+            </p>
+            {photo.decision ? <PhotoFigure photo={photo.decision} sizes={split} className="mt-4" /> : null}
           </div>
-          <ul className="space-y-4">
+          <ul className="flex flex-col border-t border-[#e3e9ef]">
             {NOT_OUR_REMIT.map((item) => (
-              <li key={item} className="flex gap-3 leading-relaxed text-muted-foreground">
-                <MinusCircle className="mt-1 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+              <li key={item} className="flex gap-3 border-b border-[#e3e9ef] py-4 leading-[1.7]">
+                <MinusCircle className="mt-1 h-4 w-4 flex-none text-[#5b6778]" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         </div>
-      </Section>
+      </section>
 
-      {/* Where consulting leads. Internal linking (master rule 19). */}
-      <Section tone="muted">
-        <SectionHeading
-          eyebrow="Related services"
-          title="Where a consulting conversation usually leads"
-          lead="Most engagements end in one of these, and you can go straight to any of them if you already know what you need."
-          align="left"
-        />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map((service) => (
-            <Link
-              key={service.slug}
-              href={service.path}
-              className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/40"
-            >
-              <h3 className="text-base font-bold text-secondary">{service.shortName}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {service.cardBlurb}
+      {/* Where consulting leads (master rule 19). */}
+      <section aria-labelledby="rel-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-10`}>
+          <SectionHead
+            eyebrow="Related services"
+            id="rel-h"
+            title="Where a consulting conversation usually leads"
+            lead={
+              <>
+                Most engagements end in one of these structures. See the{" "}
+                <Link href="/services/business-registration/" className="font-semibold text-[#1a7cb0] hover:underline">
+                  business registration overview
+                </Link>{" "}
+                or{" "}
+                <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+                  compare all four
+                </Link>
+                .
+              </>
+            }
+          />
+          {photo.registration ? (
+            <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-10">
+              <PhotoFigure photo={photo.registration} sizes={split} />
+              <p className="text-lg leading-[1.75] text-[#26354a]">
+                When a conversation ends in a registration, the filing is handled by the same team
+                that gave the advice, so the structure you agreed is the structure that gets filed.
               </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                Learn more
-                <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-              </span>
-            </Link>
-          ))}
+            </div>
+          ) : null}
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {SERVICES.map((service) => (
+              <li key={service.slug} className="flex">
+                <TrackedLink
+                  href={service.path}
+                  event="service_card_click"
+                  params={{ label: "consulting_related", registration_type: service.shortName }}
+                  className={`flex flex-1 flex-col overflow-hidden ${CARD} ${LIFT}`}
+                >
+                  <BrandImage
+                    slot={PANEL[service.slug]}
+                    sizes="(min-width: 1024px) 18rem, (min-width: 640px) 45vw, 100vw"
+                    aspect="aspect-[4/3]"
+                    className="rounded-none border-0"
+                  />
+                  <span className="flex flex-1 flex-col gap-2 p-6">
+                    <span className="text-lg font-bold leading-[1.3] text-[#122640]">{service.name}</span>
+                    <span className="flex-1 text-sm leading-[1.6]">{service.cardBlurb}</span>
+                    <span className="mt-2 text-sm font-bold text-[#1a7cb0]">
+                      Explore Service <span aria-hidden="true">→</span>
+                    </span>
+                  </span>
+                </TrackedLink>
+              </li>
+            ))}
+          </ul>
+          <p className="text-[0.9375rem]">
+            <CircleCheck className="mr-2 inline h-4 w-4 text-[#1a7cb0]" aria-hidden="true" />
+            Consulting work across Gujarat:{" "}
+            <TrackedLink
+              href="/gujarat/"
+              event="gujarat_page_click"
+              params={{ label: "consulting_related" }}
+              className="font-semibold text-[#1a7cb0] hover:underline"
+            >
+              business registration support in Gujarat
+            </TrackedLink>
+            .
+          </p>
         </div>
-        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-          {[
-            ["Business Registration overview", "/services/business-registration/"],
-            ["Compare all four structures", "/compare/"],
-            ["Business registration across Gujarat", "/gujarat/"],
-            ["All services", "/services/"],
-          ].map(([label, href]) => (
-            <li key={href}>
-              <Link
-                href={href}
-                className="link-target gap-1.5 font-semibold text-primary hover:underline"
-              >
-                <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
-                {label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Section>
+      </section>
 
-      {/* Lead generation, on the page rather than only at the foot. */}
-      <Section id="enquiry">
-        <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
-          <div>
-            <SectionHeading
-              eyebrow="Talk to our team"
-              title="Start with the question you actually have"
-              lead="Describe the situation in a few lines. If consulting is not what you need, we will point you to the page that is."
-              align="left"
+      {/* FAQs. */}
+      <section aria-labelledby="faq-h" className={SECTION}>
+        <div className={`${CONTAINER} grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16`}>
+          <div className="flex min-w-0 flex-col gap-4">
+            <p className={EYEBROW}>
+              <Dash />
+              FAQs
+            </p>
+            <h2 id="faq-h" className={H2}>
+              Business consulting questions
+            </h2>
+          </div>
+          <FaqList faqs={FAQS} />
+        </div>
+      </section>
+
+      {/* Guides. */}
+      <section aria-labelledby="gd-h" className={`bg-[#f4f7fa] ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-10`}>
+          <SectionHead
+            eyebrow="Related guides"
+            id="gd-h"
+            title="Read before the first conversation"
+            lead="Guides on the decisions consulting most often covers."
+          />
+          <GuideCards slugs={GUIDES} />
+        </div>
+      </section>
+
+      {/* Enquiry. */}
+      <section id="enquiry" aria-labelledby="enq-h" className={`scroll-mt-24 bg-[#0c1a2d] text-white ${SECTION}`}>
+        <div className={`${CONTAINER} grid items-start gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16`}>
+          <div className="flex min-w-0 flex-col gap-5">
+            <p className={EYEBROW_DARK}>
+              <Dash />
+              Talk to our team
+            </p>
+            <h2 id="enq-h" className={H2_DARK}>
+              Start with the question you actually have
+            </h2>
+            <p className="text-lg leading-[1.7] text-[#c9d6e3]">
+              Describe the situation in a few lines. If consulting is not what you need, we will
+              point you to the page that is.
+            </p>
+            <LeadershipFigure className="mt-2" />
+            <p className="rounded-[4px] border border-white/[0.12] px-4 py-3.5 text-[0.8125rem] leading-[1.6] text-[#9fb3c8]">
+              {AUTHORITY_DISCLAIMER}
+            </p>
+          </div>
+          <div className="text-[#3a4656]">
+            <LeadForm
+              defaultRegistrationType="Business Consulting"
+              heading="Get business guidance"
+              lead="Tell us about the business and what you are deciding. We will come back to you on the details you provide."
+              className="rounded-lg border-0"
             />
           </div>
-          <LeadForm
-            defaultRegistrationType="Business Consulting"
-            heading="Get business guidance"
-            lead="Tell us about the business and what you are deciding. We will come back to you on the details you provide."
-          />
         </div>
-      </Section>
-
-      <Section tone="muted">
-        <SectionHeading eyebrow="FAQs" title="Business consulting questions" />
-        <FaqAccordion faqs={FAQS} idPrefix="consulting-faq" />
-      </Section>
-
-      <CtaBanner
-        title="Not sure which service you need?"
-        body="Tell us what the business is doing and what you are trying to decide. We will tell you which part of this actually applies to you."
-        registrationType="Business Consulting"
-      />
-    </>
+      </section>
+    </div>
   );
 }
