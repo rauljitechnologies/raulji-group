@@ -22,6 +22,7 @@ import {
   graph,
   type Crumb,
 } from "@/lib/schema";
+import { H1 } from "@/lib/typography";
 
 /**
  * City + service pages: /ahmedabad/llp-registration/ and the other nineteen.
@@ -105,7 +106,7 @@ export default async function CityServicePage({
                 <MapPin className="h-4 w-4" aria-hidden="true" />
                 {city.name}, {city.district} district
               </p>
-              <h1 className="mt-4 text-balance text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-[2.75rem] lg:leading-[1.15]">
+              <h1 className={`mt-4 ${H1}`}>
                 {entry.h1}
               </h1>
               <div className="mt-5 space-y-4 text-pretty leading-relaxed text-muted-foreground">

@@ -21,6 +21,7 @@ import {
   graph,
   type Crumb,
 } from "@/lib/schema";
+import { H1 } from "@/lib/typography";
 
 /**
  * Root-level city pages: /godhra/, /ahmedabad/ and so on.
@@ -96,7 +97,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             <MapPin className="h-4 w-4" aria-hidden="true" />
             {city.district} district, Gujarat
           </p>
-          <h1 className="mt-4 max-w-4xl text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-5xl lg:leading-[1.1]">
+          <h1 className={`mt-4 max-w-4xl ${H1}`}>
             Business Registration Services in {city.name}, Gujarat
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground">{city.intro}</p>

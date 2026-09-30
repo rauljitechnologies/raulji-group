@@ -21,6 +21,7 @@ import { SITE, LEADERSHIP, AUTHORITY_DISCLAIMER, telHref } from "@/lib/site";
 import chairmanPhoto from "@/public/leadership/dharmendrasinh-raulji.jpg";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, graph, personSchema, type Crumb } from "@/lib/schema";
+import { H1, H2 } from "@/lib/typography";
 
 /**
  * About Raulji Group (master rule 42), built to the "Raulji About" design
@@ -69,8 +70,6 @@ const EYEBROW =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
-const H2 =
-  "text-balance text-[1.875rem] font-bold leading-[1.12] tracking-[-0.02em] text-[#122640] sm:text-4xl/[1.12] lg:text-[2.75rem]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 const LIFT =
@@ -240,7 +239,7 @@ export default function AboutPage() {
               </p>
               <h1
                 id="about-h"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-5xl/[1.04] xl:text-[4.125rem]"
+                className={`${H1} text-white`}
               >
                 Leadership Built on Relationships.{" "}
                 <span className="text-[#7cc8ec]">Trust Built for the Long Term.</span>

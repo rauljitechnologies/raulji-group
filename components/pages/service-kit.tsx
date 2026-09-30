@@ -7,6 +7,7 @@ import { blogImage } from "@/lib/blog/images";
 import type { FAQ } from "@/lib/services";
 import type { Crumb } from "@/lib/schema";
 import { cn } from "@/lib/utils";
+import { H1, H2, H2_DARK } from "@/lib/typography";
 
 /**
  * The service-page design system (service-page brief, section 15).
@@ -26,10 +27,7 @@ export const EYEBROW =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
 export const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
-export const H2 =
-  "text-balance text-[1.75rem] font-bold leading-[1.15] tracking-[-0.02em] text-[#122640] sm:text-[2.125rem] lg:text-[2.5rem]";
-export const H2_DARK =
-  "text-balance text-[1.75rem] font-bold leading-[1.15] tracking-[-0.02em] text-white sm:text-[2.125rem] lg:text-[2.5rem]";
+export { H2, H2_DARK };
 export const CARD = "rounded-lg border border-[#e3e9ef] bg-white";
 export const LIFT =
   "transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_20px_40px_-26px_rgba(18,38,64,0.4)]";
@@ -138,7 +136,7 @@ export function ServiceHero({
             </p>
             <h1
               id="service-h1"
-              className="text-balance text-[2.125rem] font-extrabold leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl/[1.06] xl:text-[3.5rem]"
+              className={`${H1} text-white`}
             >
               {title}
             </h1>

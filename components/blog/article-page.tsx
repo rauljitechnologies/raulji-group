@@ -30,6 +30,7 @@ import {
   type Crumb,
 } from "@/lib/schema";
 import { ogImageUrl } from "@/lib/seo";
+import { H1_LONG } from "@/lib/typography";
 
 /**
  * A guide from the 2026 Business Guide Series.
@@ -99,7 +100,7 @@ export function ArticlePage({ article }: { article: Article }) {
               </span>
             </p>
 
-            <h1 className="mt-4 text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-[2.75rem] lg:leading-[1.12]">
+            <h1 className={`mt-4 ${H1_LONG}`}>
               {article.title}
             </h1>
 

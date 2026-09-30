@@ -37,6 +37,7 @@ import { SITE, whatsappHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { abs, breadcrumbSchema, faqSchema, graph, ORG_ID, type Crumb } from "@/lib/schema";
 import { cn } from "@/lib/utils";
+import { H1 } from "@/lib/typography";
 
 /**
  * Services hub (service-page brief, section 48).
@@ -301,7 +302,7 @@ export default function ServicesPage() {
               </p>
               <h1
                 id="service-h1"
-                className="text-balance text-[2.375rem] font-extrabold leading-[1.04] tracking-[-0.03em] text-white sm:text-[3.25rem] xl:text-[4.125rem]"
+                className={`${H1} text-white`}
               >
                 Advice first. <span className="text-[#7cc8ec]">Registration done right.</span>
               </h1>
