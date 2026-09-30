@@ -76,7 +76,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     ],
     note: "Policy terms, premiums and claim outcomes are set by the insurer, not by us. We help you understand and arrange cover; we do not underwrite it.",
     image: "insurance",
-    guides: ["health-insurance-policy-india"],
+    guides: ["health-insurance-policy-guide-india"],
   },
   {
     slug: "it",

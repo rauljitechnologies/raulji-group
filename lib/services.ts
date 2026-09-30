@@ -25,6 +25,17 @@ export interface Pricing {
   includes: string[];
 }
 
+/**
+ * One line of what a registration costs, and who sets it (service-page brief,
+ * section 28). Keeps the professional fee visibly apart from government and
+ * state charges, so no figure on the page can be read as all-inclusive.
+ */
+export interface CostLine {
+  item: string;
+  setBy: string;
+  detail: string;
+}
+
 export interface RegistrationService {
   slug: string;
   path: string;
@@ -53,6 +64,35 @@ export interface RegistrationService {
   timelineEstimate: string;
   faqs: FAQ[];
   related: string[];
+
+  /**
+   * The direct answer at the top of the page (brief section 17): what the
+   * structure is and what registering it involves, in two to four sentences.
+   * Longer than `definition`, which stays short because the city pages and the
+   * schema reuse it.
+   */
+  quickAnswer: string;
+  /** The statute, for the at-a-glance panel. */
+  law: string;
+  /** Who actually registers it. Never Raulji Group. */
+  authority: string;
+  /** Three or four facts a reader should leave with (brief section 20). */
+  takeaways: string[];
+  /** What the customer has to supply or decide (brief section 5). */
+  customerProvides: string[];
+  /** Obligations and next steps once registered. */
+  afterRegistration: Step[];
+  /** Common mistakes and considerations, specific to this structure. */
+  considerations: Step[];
+  /** Every component of the cost, including the ones we do not set. */
+  costs: CostLine[];
+  /** The part of the timeline that is ours, and the part that is not (brief section 29). */
+  timeline: { ours: string; authority: string };
+  /** The one structure this page is compared against, and why that pairing. */
+  compareWith: string;
+  compareNote: string;
+  /** Blog slugs to promote from this page. Unresolved slugs are dropped. */
+  guides: string[];
 }
 
 export const SERVICES: RegistrationService[] = [
@@ -61,15 +101,103 @@ export const SERVICES: RegistrationService[] = [
     path: "/services/pvt-registration/",
     name: "Private Limited Company Registration",
     shortName: "Private Limited",
-    h1: "Private Limited Company Registration in India",
+    h1: "Private Limited Company Registration",
     title: "Private Limited Company Registration in India | Raulji Group",
     metaDescription:
-      "Register a Private Limited Company with Raulji Group: DSC, DIN, name approval, SPICe+ filing and MOA and AOA drafting. From Rs 9,999 plus government fees.",
+      "Private Limited Company registration in India: who it suits, documents, the SPICe+ process, costs and what follows incorporation. Professional fee from ₹9,999.",
     eyebrow: "Business Registration",
     definition:
       "A Private Limited Company is a company incorporated under the Companies Act, 2013. It is a separate legal entity from its shareholders, who are liable only up to the amount unpaid on the shares they hold.",
     heroSub:
-      "The structure most founders choose when they plan to raise investment, add shareholders, or build a business that outlives its founders. We handle the documentation and MCA filings end to end.",
+      "Understand the process, the information required and the obligations that follow before you incorporate. We prepare the documents and handle the MCA filings.",
+    quickAnswer:
+      "A Private Limited Company is a company incorporated under the Companies Act, 2013. It is a separate legal entity, so the company owns its assets and owes its debts, and shareholders are liable only for any amount unpaid on their shares. Registering one means reserving a name and filing the SPICe+ incorporation form with the Registrar of Companies on the MCA portal, which issues a Certificate of Incorporation on approval.",
+    law: "Companies Act, 2013",
+    authority: "Registrar of Companies, Ministry of Corporate Affairs",
+    takeaways: [
+      "Needs at least two directors and two shareholders. The same two people can be both.",
+      "The only one of the four structures that can issue equity shares to investors.",
+      "Carries the heaviest annual compliance, including a statutory audit from the first year.",
+      "Incorporation is filed online, so it can be done from anywhere in India.",
+    ],
+    customerProvides: [
+      "Identity and address documents for every director and shareholder",
+      "The proposed company name, with a second option",
+      "A short description of what the company will do, for the object clause",
+      "The proposed shareholding and authorised capital",
+      "Registered office proof and the owner's no-objection certificate",
+      "Time for DSC video verification and for signing the forms",
+    ],
+    afterRegistration: [
+      {
+        title: "Open a current account",
+        body: "The subscribers pay for their shares into the company's own account. Banks open it against the Certificate of Incorporation, the company's PAN and a board resolution.",
+      },
+      {
+        title: "Appoint the first auditor",
+        body: "The board appoints the first auditor within 30 days of incorporation. The audit applies from the first financial year, whatever the turnover.",
+      },
+      {
+        title: "Declare commencement of business",
+        body: "Form INC-20A confirms that subscribers have paid for their shares. It is due within 180 days of incorporation, and the company should not start business or borrow before it is filed.",
+      },
+      {
+        title: "Run the annual cycle",
+        body: "Board meetings, the statutory audit and the annual ROC filings follow every year, including a year with no trading. Late ROC filings attract additional fees for each day of delay.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Picking a name without a trade mark check",
+        body: "The Registrar compares names against companies and LLPs, but a name can still infringe a registered trade mark. A rejection costs days. A later trade mark dispute can cost the name.",
+      },
+      {
+        title: "Setting authorised capital higher than needed",
+        body: "Government fees and stamp duty rise with authorised capital. It can be increased later, when the company actually needs to issue more shares.",
+      },
+      {
+        title: "Address proof that is too old or in another name",
+        body: "Director address proof is generally expected to be recent and in the person's own name. It is one of the most common reasons for a resubmission request.",
+      },
+      {
+        title: "Treating incorporation as the finish line",
+        body: "INC-20A, the first auditor and the annual filings follow automatically. A company that never trades still has to file.",
+      },
+    ],
+    costs: [
+      {
+        item: "Professional fee",
+        setBy: "Raulji Group",
+        detail: "₹9,999, one time, for the work listed in the package.",
+      },
+      {
+        item: "Government filing fees",
+        setBy: "Ministry of Corporate Affairs",
+        detail: "Depend on the authorised share capital. Paid to the MCA at filing.",
+      },
+      {
+        item: "Stamp duty",
+        setBy: "State government",
+        detail: "Payable on the MOA and AOA at the rate of the state where the registered office is. Varies with capital.",
+      },
+      {
+        item: "Taxes",
+        setBy: "As applicable",
+        detail: "Any tax that applies to the professional fee is shown in the written quote.",
+      },
+    ],
+    timeline: {
+      ours: "Digital signatures, name screening, drafting and filing. This starts once every document is complete, and incomplete documents are the most common cause of delay.",
+      authority: "Name approval and incorporation are processed by the Registrar. A query or a name rejection adds a round trip that nobody outside the Registrar can shorten.",
+    },
+    compareWith: "llp-registration",
+    compareNote:
+      "The two limited-liability structures. The choice usually turns on one question: will the business raise equity investment?",
+    guides: [
+      "private-limited-company-vs-llp",
+      "mca-company-registration-process-india",
+      "documents-required-company-registration-india",
+    ],
     cardBlurb: "For businesses seeking a scalable corporate structure.",
     cardCta: "Explore Private Limited Registration",
     suitableFor: [
@@ -228,15 +356,103 @@ export const SERVICES: RegistrationService[] = [
     path: "/services/llp-registration/",
     name: "LLP Registration",
     shortName: "LLP",
-    h1: "LLP Registration in India",
+    h1: "LLP Registration",
     title: "LLP Registration in India | Raulji Group",
     metaDescription:
-      "Register an LLP with Raulji Group: DSC, DPIN, RUN-LLP name reservation, FiLLiP filing and LLP Agreement drafting. From Rs 7,999 plus government fees.",
+      "LLP registration in India: who it suits, documents, the FiLLiP process, the LLP Agreement, costs and annual filings. Professional fee from ₹7,999.",
     eyebrow: "Business Registration",
     definition:
       "A Limited Liability Partnership is a body corporate registered under the Limited Liability Partnership Act, 2008. It combines the internal flexibility of a partnership with limited liability for its partners.",
     heroSub:
-      "The structure to consider when a business is run by its partners rather than by outside investors, and you want liability protection without a company's compliance load.",
+      "Understand how an LLP is formed, what the partners need to agree and provide, and what the annual filings involve. We prepare the documents and handle the MCA filings.",
+    quickAnswer:
+      "A Limited Liability Partnership (LLP) is a body corporate registered under the Limited Liability Partnership Act, 2008. It has a legal identity of its own, and each partner's liability is limited to the contribution they agreed to bring in. Registering one means reserving a name, filing the FiLLiP incorporation form with the Registrar of Companies, and then filing the LLP Agreement within 30 days of incorporation.",
+    law: "Limited Liability Partnership Act, 2008",
+    authority: "Registrar of Companies, Ministry of Corporate Affairs",
+    takeaways: [
+      "Needs at least two designated partners, both individuals, one of them resident in India.",
+      "A partner is not personally liable for another partner's wrongful acts.",
+      "Cannot issue equity shares, so it does not suit a business planning to raise venture capital.",
+      "Form 8 and Form 11 are due every year, even in a year with no business activity.",
+    ],
+    customerProvides: [
+      "Identity and address documents for every partner",
+      "The proposed LLP name, with a second option",
+      "Each partner's capital contribution",
+      "The terms for the LLP Agreement: profit share, roles, decisions, admission and exit",
+      "Registered office proof and the owner's no-objection certificate",
+      "Time for DSC verification and for signing the filings and the agreement",
+    ],
+    afterRegistration: [
+      {
+        title: "File the LLP Agreement",
+        body: "The agreement is executed on stamp paper at the state's rate and filed in Form 3 within 30 days of incorporation. Late filing attracts additional fees for each day of delay.",
+      },
+      {
+        title: "PAN, TAN and a current account",
+        body: "The LLP gets its own PAN and TAN, and a current account is opened in its name against the Certificate of Incorporation.",
+      },
+      {
+        title: "Registrations for your activity",
+        body: "GST, a shop and establishment registration or an activity licence, depending on what the LLP actually does and where.",
+      },
+      {
+        title: "Run the annual cycle",
+        body: "Form 11 by 30 May and Form 8 by 30 October, every year. Accounts are audited once turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Leaving the LLP Agreement generic",
+        body: "A template agreement that does not record what the partners actually agreed on profit share, drawings and exit is the usual source of later disputes.",
+      },
+      {
+        title: "Missing the 30-day window for Form 3",
+        body: "Until an agreement is filed, the default rules in the First Schedule to the Act apply, which split profits and management rights equally.",
+      },
+      {
+        title: "Choosing an LLP when investment is likely",
+        body: "Investors take equity, and an LLP cannot issue it. Converting to a company later is possible, but it is a fresh process with its own cost.",
+      },
+      {
+        title: "Assuming a quiet year needs no filing",
+        body: "Form 8 and Form 11 are due whether or not the LLP traded. The late fee accrues daily until the filing is made.",
+      },
+    ],
+    costs: [
+      {
+        item: "Professional fee",
+        setBy: "Raulji Group",
+        detail: "₹7,999, one time, for the work listed in the package.",
+      },
+      {
+        item: "Government filing fees",
+        setBy: "Ministry of Corporate Affairs",
+        detail: "Depend on the total capital contribution. Paid to the MCA at filing.",
+      },
+      {
+        item: "Stamp duty on the LLP Agreement",
+        setBy: "State government",
+        detail: "At the rate of the state where the LLP is registered.",
+      },
+      {
+        item: "Taxes",
+        setBy: "As applicable",
+        detail: "Any tax that applies to the professional fee is shown in the written quote.",
+      },
+    ],
+    timeline: {
+      ours: "Digital signatures, name screening, the FiLLiP filing and drafting the LLP Agreement. This starts once every document is complete.",
+      authority: "Name reservation and incorporation are processed by the Registrar. A query or a name rejection adds a round trip that nobody outside the Registrar can shorten.",
+    },
+    compareWith: "partnership-registration",
+    compareNote:
+      "Both are run by partners. The difference is liability, legal identity and the annual filings that come with them.",
+    guides: [
+      "private-limited-company-vs-llp",
+      "how-to-choose-business-structure-india-2026",
+      "common-business-registration-mistakes-india",
+    ],
     cardBlurb: "For businesses structured around partners with limited liability.",
     cardCta: "Explore LLP Registration",
     suitableFor: [
@@ -394,15 +610,103 @@ export const SERVICES: RegistrationService[] = [
     path: "/services/partnership-registration/",
     name: "Partnership Firm Registration",
     shortName: "Partnership",
-    h1: "Partnership Firm Registration in India",
+    h1: "Partnership Firm Registration",
     title: "Partnership Firm Registration in India | Raulji Group",
     metaDescription:
-      "Partnership firm registration support from Raulji Group: deed drafting, stamping, PAN and Registrar of Firms registration across Gujarat and India.",
+      "Partnership firm registration in India: the partnership deed, documents, Registrar of Firms registration, partner liability and what it costs.",
     eyebrow: "Business Registration",
     definition:
       "A partnership firm is a business owned by two or more people who have agreed to share its profits, governed by the Indian Partnership Act, 1932. The firm is not a separate legal entity from its partners.",
     heroSub:
-      "The simplest way for two or more people to start a business together. We draft the partnership deed properly and register the firm with the Registrar of Firms where you choose to.",
+      "Understand what the partnership deed must cover, how registration with the Registrar of Firms works, and what partners take on. We draft the deed and handle the registration.",
+    quickAnswer:
+      "A partnership firm is a business carried on by two or more people who have agreed to share its profits, under the Indian Partnership Act, 1932. It is not a separate legal entity, and the partners are personally liable for the firm's debts without limit. The firm is formed by a partnership deed. Registering it with the state's Registrar of Firms is optional in law but advisable, because an unregistered firm cannot sue to enforce its contracts.",
+    law: "Indian Partnership Act, 1932",
+    authority: "Registrar of Firms of the state where the firm does business",
+    takeaways: [
+      "Formed by a signed deed between at least two partners. There is no MCA incorporation.",
+      "Partners carry unlimited personal liability, including for each other's acts.",
+      "Registration is optional, but section 69 limits what an unregistered firm can do in court.",
+      "No annual ROC filings. The firm files its own income tax return.",
+    ],
+    customerProvides: [
+      "Identity and address documents for every partner",
+      "The firm name and the business activity",
+      "Each partner's capital, profit share and any remuneration or interest on capital",
+      "Who operates the bank account and signs for the firm",
+      "What happens when a partner joins, retires or dies",
+      "Place of business proof and the owner's no-objection certificate",
+    ],
+    afterRegistration: [
+      {
+        title: "PAN and a current account",
+        body: "The firm applies for a PAN in its own name, which the bank needs to open a current account in the firm's name.",
+      },
+      {
+        title: "Registrations for your activity",
+        body: "GST where turnover or the type of supply requires it, and a shop and establishment registration for the premises.",
+      },
+      {
+        title: "The firm's income tax return",
+        body: "The firm is assessed separately at the rate for firms. A tax audit applies once turnover crosses the Income Tax threshold.",
+      },
+      {
+        title: "Keep the register accurate",
+        body: "Changes in partners, the firm name or the place of business are notified to the Registrar of Firms so the registered details match the firm.",
+      },
+    ],
+    considerations: [
+      {
+        title: "A deed that is vague on money and exit",
+        body: "Profit share, drawings, interest on capital and what happens when a partner leaves are where partnership disputes start. The default rules in the Act may not be what anyone intended.",
+      },
+      {
+        title: "Skipping registration",
+        body: "An unregistered firm cannot go to court to recover money a customer owes it. Registering later is possible, but a dispute rarely waits.",
+      },
+      {
+        title: "Underestimating personal liability",
+        body: "Every partner is liable for the firm's debts, including those created by another partner acting for the firm.",
+      },
+      {
+        title: "Under-stamping the deed",
+        body: "A deed on stamp paper of the wrong value can be refused as evidence until the shortfall and a penalty are paid.",
+      },
+    ],
+    costs: [
+      {
+        item: "Professional fee",
+        setBy: "Raulji Group",
+        detail: "Quoted once we know what the deed involves and which registrations your activity needs.",
+      },
+      {
+        item: "Stamp duty on the deed",
+        setBy: "State government",
+        detail: "Set by the state where the deed is executed.",
+      },
+      {
+        item: "Registrar of Firms fee",
+        setBy: "State government",
+        detail: "Set by the state. Payable only if the firm is registered.",
+      },
+      {
+        item: "Operating registrations",
+        setBy: "Various authorities",
+        detail: "GST registration has no government fee. Shop and establishment fees are set locally.",
+      },
+    ],
+    timeline: {
+      ours: "Drafting the deed once the partners have settled their terms, then the PAN and Registrar applications. Agreeing the terms usually takes longer than writing them down.",
+      authority: "Registrar of Firms processing, which varies from state to state.",
+    },
+    compareWith: "proprietorship-registration",
+    compareNote:
+      "The two unincorporated structures. The difference is how many owners there are and who shares the liability.",
+    guides: [
+      "partnership-vs-proprietorship-india",
+      "business-structure-guide-new-entrepreneurs-india",
+      "starting-business-gujarat-registration-guide",
+    ],
     cardBlurb: "For businesses formed by partners under a partnership structure.",
     cardCta: "Explore Partnership Registration",
     suitableFor: [
@@ -546,15 +850,102 @@ export const SERVICES: RegistrationService[] = [
     path: "/services/proprietorship-registration/",
     name: "Proprietorship Registration",
     shortName: "Proprietorship",
-    h1: "Proprietorship Registration in India",
+    h1: "Proprietorship Registration",
     title: "Proprietorship Registration in India | Raulji Group",
     metaDescription:
-      "Set up as a sole proprietor with Raulji Group: Udyam registration, GST where applicable, shop and establishment licence and bank documentation.",
+      "Proprietorship registration in India: which registrations apply, Udyam, GST and shop licence, documents, the owner's responsibilities and costs.",
     eyebrow: "Business Registration",
     definition:
       "A proprietorship is a business owned and run by one individual. It is not a separate legal entity and is not incorporated: in law the proprietor and the business are the same person.",
     heroSub:
-      "The fastest route for one person to start trading. There is no single proprietorship certificate in India, so we set up the registrations that actually give your business a verifiable identity.",
+      "Understand which registrations a sole proprietorship actually needs, what the owner is responsible for, and when another structure makes more sense. We set up the registrations your activity requires.",
+    quickAnswer:
+      "A sole proprietorship is a business owned and run by one individual. It is not incorporated and has no legal identity separate from its owner, who is personally liable for all of its debts. There is no single proprietorship certificate in India: the business is established through the registrations it holds, most commonly Udyam, GST where it applies, and a shop and establishment registration.",
+    law: "No dedicated statute. Recognised through the registrations it holds",
+    authority: "No single authority: the MSME Udyam portal, the GST portal and the state or local authority",
+    takeaways: [
+      "One owner only. The business uses the owner's own PAN.",
+      "Unlimited liability: personal assets are exposed to business debts.",
+      "No ROC filings. Obligations come from the registrations held and the owner's tax return.",
+      "There is no government proprietorship certificate, whatever a provider may offer.",
+    ],
+    customerProvides: [
+      "PAN, Aadhaar and a photograph",
+      "The business name and a clear description of the activity",
+      "Expected turnover, and whether you will sell outside your state or online",
+      "Place of business proof and the owner's no-objection certificate",
+      "Bank account details for Udyam registration",
+    ],
+    afterRegistration: [
+      {
+        title: "Open a current account",
+        body: "Most banks ask for two proofs that the business exists, which is why Udyam plus GST or a shop registration is the usual combination.",
+      },
+      {
+        title: "GST returns, if registered",
+        body: "A GST registration brings periodic returns, and they are due in months with no sales as well.",
+      },
+      {
+        title: "Your own income tax return",
+        body: "Business income goes in the proprietor's personal return. A tax audit applies once turnover crosses the Income Tax threshold.",
+      },
+      {
+        title: "Keep registrations current",
+        body: "Update Udyam, GST and the shop registration when the address or the activity changes, and renew any licence that expires.",
+      },
+    ],
+    considerations: [
+      {
+        title: "Paying for a proprietorship certificate",
+        body: "No such government certificate exists. What a proprietorship needs is the right combination of registrations for its activity.",
+      },
+      {
+        title: "Getting the GST decision wrong",
+        body: "Some supplies need GST registration from the first sale regardless of turnover, such as inter-state supply of goods or selling through an e-commerce operator. Registering when it is not needed brings returns you then have to file.",
+      },
+      {
+        title: "Mixing personal and business money",
+        body: "In law they are one person, but a separate current account makes the business far easier for a bank, the tax department or a future buyer to follow.",
+      },
+      {
+        title: "Staying a proprietorship too long",
+        body: "As turnover and risk grow, unlimited liability and individual slab rates can argue for an LLP or a company.",
+      },
+    ],
+    costs: [
+      {
+        item: "Professional fee",
+        setBy: "Raulji Group",
+        detail: "Quoted once we know which registrations your activity needs.",
+      },
+      {
+        item: "Udyam registration",
+        setBy: "Ministry of MSME",
+        detail: "No government fee.",
+      },
+      {
+        item: "GST registration",
+        setBy: "GST portal",
+        detail: "No government fee.",
+      },
+      {
+        item: "Shop and establishment",
+        setBy: "State or local authority",
+        detail: "Fee set by the state or municipality, and varies.",
+      },
+    ],
+    timeline: {
+      ours: "Working out which registrations apply to your activity and preparing each application.",
+      authority: "Udyam is usually issued the same day. GST commonly takes around 7 to 15 working days and can include a physical verification of the premises.",
+    },
+    compareWith: "pvt-registration",
+    compareNote:
+      "The simplest structure against the most formal. A Private Limited Company needs at least two people, so this comparison matters when a second director or shareholder is realistic.",
+    guides: [
+      "partnership-vs-proprietorship-india",
+      "how-to-choose-business-structure-india-2026",
+      "starting-business-gujarat-registration-guide",
+    ],
     cardBlurb: "For individuals starting and operating a business as a sole proprietor.",
     cardCta: "Explore Proprietorship Registration",
     suitableFor: [
@@ -566,7 +957,7 @@ export const SERVICES: RegistrationService[] = [
     ],
     benefits: [
       {
-        title: "Fastest and cheapest to start",
+        title: "Quick and inexpensive to start",
         body: "There is no incorporation process. Once the applicable registrations are in place and a current account is open, the business can begin trading.",
       },
       {
@@ -696,6 +1087,43 @@ export const SERVICES: RegistrationService[] = [
     related: ["partnership-registration", "llp-registration", "pvt-registration"],
   },
 ];
+
+/**
+ * Who acts at each process step, keyed by the step title in `process` above.
+ *
+ * Shown on the process timeline so a reader can see which steps are our work
+ * and which rest with an authority. Raulji Group prepares, files and follows
+ * up; it never decides (service-page brief, section 31; master rule 13).
+ */
+export const STEP_ACTOR: Record<string, string> = {
+  // Private Limited
+  "Digital Signature Certificate (DSC)": "Raulji Group arranges",
+  "Name reservation": "Registrar decides",
+  "Drafting the MOA and AOA": "Raulji Group drafts",
+  "SPICe+ Part B filing": "Raulji Group files",
+  "Certificate of Incorporation": "Registrar issues",
+  "Post-incorporation steps": "You, with our guidance",
+  // LLP
+  "Digital Signature Certificate": "Raulji Group arranges",
+  "Name reservation (RUN-LLP)": "Registrar decides",
+  "Incorporation filing (FiLLiP)": "Raulji Group files",
+  "LLP Agreement (Form 3)": "Partners sign, we file",
+  "PAN, TAN and operating registrations": "You, with our support",
+  // Partnership
+  "Agree the commercial terms": "Partners decide",
+  "Draft the partnership deed": "Raulji Group drafts",
+  "Stamp and execute the deed": "Partners sign",
+  "Apply for the firm's PAN": "Raulji Group applies",
+  "Register with the Registrar of Firms": "Registrar of Firms decides",
+  "Open the bank account and take operating registrations": "You, with our support",
+  // Proprietorship
+  "Decide the business name and activity": "You decide, we screen",
+  "Udyam (MSME) registration": "Raulji Group applies",
+  "GST registration, where applicable": "GST officer decides",
+  "Shop and establishment registration": "Local authority decides",
+  "Any activity-specific licences": "Relevant authority decides",
+  "Open a current account": "You and your bank",
+};
 
 export function getService(slug: string) {
   return SERVICES.find((s) => s.slug === slug);
