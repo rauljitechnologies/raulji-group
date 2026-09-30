@@ -24,12 +24,20 @@ const LeadSchema = z.object({
   email: z
     .union([z.string().trim().email("Please enter a valid email address"), z.literal("")])
     .optional(),
+  /** Business or company name, or the proposed name (master rule 23). Optional. */
+  businessName: z.string().trim().max(120, "Please shorten the business name to 120 characters").optional(),
   city: z.string().trim().max(80).optional(),
   registrationType: z.string().trim().max(80).optional(),
   message: z.string().trim().max(2000).optional(),
   sourcePage: z.string().trim().max(200).optional(),
   // Honeypot. Deliberately permissive: a value is handled below by silently
   // accepting, rather than rejected here, so a bot learns nothing from the error.
+  //
+  // It used to be called `company`, which browsers autofill with the visitor's
+  // employer, so a real lead could be dropped as spam. It is now `hp_note`, a
+  // name no autofill profile maps to, and `company` is still honoured as a trap
+  // for any page loaded before the rename.
+  hp_note: z.string().max(200).optional(),
   company: z.string().max(200).optional(),
 });
 
@@ -99,7 +107,7 @@ export async function POST(request: Request) {
   const data = parsed.data;
 
   // Honeypot tripped: accept silently so the bot does not learn it was caught.
-  if (data.company) {
+  if (data.hp_note || data.company) {
     return NextResponse.json({ success: true });
   }
 
@@ -123,7 +131,9 @@ export async function POST(request: Request) {
     );
   }
 
+  const businessName = clean(data.businessName);
   const notes = [
+    businessName ? `Business / company: ${businessName}` : null,
     data.registrationType ? `Registration type: ${data.registrationType}` : null,
     data.sourcePage ? `Submitted from: ${data.sourcePage}` : null,
     clean(data.message),
@@ -144,6 +154,7 @@ export async function POST(request: Request) {
         notes: notes || undefined,
         customFields: {
           registrationType: data.registrationType ?? "Not specified",
+          businessName: businessName ?? "",
           sourcePage: data.sourcePage ?? "",
         },
       }),

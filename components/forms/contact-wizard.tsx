@@ -65,7 +65,7 @@ const WHENS = ["This week", "Within a month", "In 1–3 months", "Just exploring
 
 const STEP_LABELS = ["Your need", "Your details", "Confirm"];
 
-type Fields = { name: string; phone: string; email: string; city: string; message: string };
+type Fields = { name: string; phone: string; email: string; businessName: string; city: string; message: string };
 type Errors = Partial<Record<"need" | "name" | "phone" | "email", string>>;
 
 const inputClass =
@@ -81,8 +81,8 @@ export function ContactWizard() {
   const [step, setStep] = useState(1);
   const [need, setNeed] = useState("");
   const [when, setWhen] = useState("");
-  const [fields, setFields] = useState<Fields>({ name: "", phone: "", email: "", city: "", message: "" });
-  const [company, setCompany] = useState("");
+  const [fields, setFields] = useState<Fields>({ name: "", phone: "", email: "", businessName: "", city: "", message: "" });
+  const [hpNote, setHpNote] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -147,10 +147,11 @@ export function ContactWizard() {
       name: fields.name,
       phone: fields.phone,
       email: fields.email,
+      businessName: fields.businessName,
       city: fields.city,
       registrationType: need,
       message,
-      company,
+      hp_note: hpNote,
       sourcePage: pathname,
     };
     try {
@@ -198,7 +199,7 @@ export function ContactWizard() {
     setStep(1);
     setNeed("");
     setWhen("");
-    setFields({ name: "", phone: "", email: "", city: "", message: "" });
+    setFields({ name: "", phone: "", email: "", businessName: "", city: "", message: "" });
     setErrors({});
     setStatus("idle");
     setSubmitError(null);
@@ -278,6 +279,7 @@ export function ContactWizard() {
     ["Name", fields.name, 2],
     ["Phone", fields.phone, 2],
     ["Email", fields.email || "—", 2],
+    ["Business", fields.businessName || "—", 2],
     ["City", fields.city || "—", 2],
   ];
 
@@ -446,7 +448,19 @@ export function ContactWizard() {
                   className={cn(inputClass, errors.email ? "border-[#c0392b]" : "border-[#cfd9e3]")}
                 />
               </Field>
-              <Field id={`${id}-city`} label="City">
+              <Field id={`${id}-business`} label="Business / company name">
+                <input
+                  id={`${id}-business`}
+                  name="businessName"
+                  value={fields.businessName}
+                  onChange={(e) => setField("businessName", e.target.value)}
+                  autoComplete="organization"
+                  placeholder="Registered or proposed name"
+                  maxLength={120}
+                  className={cn(inputClass, "border-[#cfd9e3]")}
+                />
+              </Field>
+              <Field id={`${id}-city`} label="City" className="sm:col-span-2">
                 <input
                   id={`${id}-city`}
                   name="city"
@@ -479,15 +493,15 @@ export function ContactWizard() {
             </Field>
             {/* Honeypot. Hidden from users and from assistive technology. */}
             <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
-              <label htmlFor={`${id}-company`}>Company (leave blank)</label>
+              <label htmlFor={`${id}-hp`}>Leave this field blank</label>
               <input
-                id={`${id}-company`}
-                name="company"
+                id={`${id}-hp`}
+                name="hp_note"
                 type="text"
                 tabIndex={-1}
                 autoComplete="off"
-                value={company}
-                onChange={(e) => setCompany(e.target.value)}
+                value={hpNote}
+                onChange={(e) => setHpNote(e.target.value)}
               />
             </div>
           </div>
@@ -583,16 +597,18 @@ function Field({
   label,
   required,
   error,
+  className,
   children,
 }: {
   id: string;
   label: string;
   required?: boolean;
   error?: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={id} className="text-[0.8125rem] font-semibold text-[#122640]">
         {label}
         {required ? <span className="text-[#c0392b]"> *</span> : null}

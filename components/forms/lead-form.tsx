@@ -138,7 +138,8 @@ export function LeadForm({
       city: String(formData.get("city") ?? ""),
       registrationType: String(formData.get("registrationType") ?? ""),
       message: String(formData.get("message") ?? ""),
-      company: String(formData.get("company") ?? ""),
+      businessName: String(formData.get("businessName") ?? ""),
+      hp_note: String(formData.get("hp_note") ?? ""),
       sourcePage: pathname,
     };
 
@@ -278,7 +279,18 @@ export function LeadForm({
               className={cn(fieldClass, border("email"))}
             />
           </Field>
-          <Field id={`${id}-city`} label="City">
+          <Field id={`${id}-business`} label="Business / company name">
+            <input
+              id={`${id}-business`}
+              name="businessName"
+              type="text"
+              autoComplete="organization"
+              maxLength={120}
+              placeholder="Registered or proposed name"
+              className={cn(fieldClass, "border-[#cfd9e3]")}
+            />
+          </Field>
+          <Field id={`${id}-city`} label="City" className="sm:col-span-2">
             <input
               id={`${id}-city`}
               name="city"
@@ -309,10 +321,11 @@ export function LeadForm({
           />
         </Field>
 
-        {/* Honeypot. Hidden from users and from assistive technology. */}
+        {/* Honeypot. Hidden from users and from assistive technology. Not named
+            "company" or anything else autofill recognises. */}
         <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
-          <label htmlFor={`${id}-company`}>Company (leave blank)</label>
-          <input id={`${id}-company`} name="company" type="text" tabIndex={-1} autoComplete="off" />
+          <label htmlFor={`${id}-hp`}>Leave this field blank</label>
+          <input id={`${id}-hp`} name="hp_note" type="text" tabIndex={-1} autoComplete="off" />
         </div>
 
         {error ? (
@@ -359,16 +372,18 @@ function Field({
   label,
   required,
   error,
+  className,
   children,
 }: {
   id: string;
   label: string;
   required?: boolean;
   error?: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className={cn("flex flex-col gap-2", className)}>
       <label htmlFor={id} className={labelClass}>
         {label}
         {required ? <span className="text-[#c0392b]"> *</span> : null}
