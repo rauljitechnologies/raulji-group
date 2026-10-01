@@ -326,7 +326,9 @@ export default function HomePage() {
             fill
             priority
             placeholder="blur"
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            // The column is half the page but stretches to the copy beside it,
+            // so the photograph is drawn wider than the column. Measured.
+            sizes="(min-width: 1024px) 1180px, (min-width: 640px) 100vw, 480px"
             className="object-cover"
           />
           <div
@@ -518,7 +520,7 @@ export default function HomePage() {
               alt="A team working through ideas on sticky notes during a strategy session"
               fill
               placeholder="blur"
-              sizes="(min-width: 1024px) 36rem, 100vw"
+              sizes="(min-width: 1024px) 60rem, (min-width: 640px) 100vw, 630px"
               className="object-cover"
             />
           </div>
@@ -768,7 +770,7 @@ export default function HomePage() {
             alt="An open-plan office with a long meeting table and floor-to-ceiling windows"
             fill
             placeholder="blur"
-            sizes="(min-width: 1240px) 1240px, 100vw"
+            sizes="(min-width: 1240px) 1240px, (min-width: 640px) 100vw, 540px"
             className="object-cover"
           />
           <div

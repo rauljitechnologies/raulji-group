@@ -11,6 +11,7 @@ import { CITIES, getCity } from "@/lib/cities";
 import { CITY_INDEX } from "@/lib/city-index";
 import { CITY_SERVICE_SLUGS, CITIES_WITH_SERVICE_PAGES } from "@/lib/city-services";
 import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS } from "@/lib/city-photos";
+import { coverScale, coverWidth, scaleSizes } from "@/lib/image-sizes";
 import { SERVICES } from "@/lib/services";
 import { STRUCTURE_META } from "@/lib/structure-meta";
 import { SITE, telHref, whatsappHref, TIMELINE_DISCLAIMER } from "@/lib/site";
@@ -66,6 +67,17 @@ const BTN_LIGHT =
 const BTN_OUTLINE =
   "inline-flex min-h-[3.25rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#329fd2] hover:text-[#0c1a2d]";
 const PHOTO = "object-cover";
+
+/**
+ * The environment grid has fixed heights (18.75rem, sm 22rem, lg 26.25rem),
+ * with the first photograph spanning both rows and taking 1.4fr of the width.
+ * Widths are the widest each column gets at that breakpoint.
+ */
+function environmentSizes(image: { width: number; height: number }, tall: boolean): string {
+  return tall
+    ? `(min-width: 1024px) ${coverWidth(image, 420, 400)}px, (min-width: 640px) ${coverWidth(image, 352, 560)}px, ${coverWidth(image, 300, 370)}px`
+    : `(min-width: 1024px) ${coverWidth(image, 204, 280)}px, (min-width: 640px) ${coverWidth(image, 170, 400)}px, ${coverWidth(image, 144, 270)}px`;
+}
 
 function Dash() {
   return <span className="h-0.5 w-7 bg-[#329fd2]" aria-hidden="true" />;
@@ -235,7 +247,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   src={g.src}
                   alt={g.alt}
                   fill
-                  sizes="(min-width: 1024px) 300px, 50vw"
+                  sizes={scaleSizes("(min-width: 1024px) 300px, 50vw", coverScale(g.src, 4 / 3))}
                   placeholder="blur"
                   className={PHOTO}
                 />
@@ -276,7 +288,10 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                         src={photo.src}
                         alt={photo.alt}
                         fill
-                        sizes="(min-width: 1024px) 240px, (min-width: 640px) 40vw, 100vw"
+                        // The strip is narrow but stretches to the card's text, so
+                        // object-cover draws the landscape photograph several times
+                        // wider than the strip. Measured, not the strip width.
+                        sizes="(min-width: 1024px) 1080px, (min-width: 640px) 900px, 100vw"
                         placeholder="blur"
                         className={PHOTO}
                       />
@@ -357,7 +372,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                       src={photo.src}
                       alt={photo.alt}
                       fill
-                      sizes={i === 0 ? "(min-width: 1024px) 400px, 58vw" : "(min-width: 1024px) 280px, 42vw"}
+                      sizes={environmentSizes(photo.src, i === 0)}
                       placeholder="blur"
                       className={PHOTO}
                     />
@@ -430,7 +445,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 src={CITY_PAGE_PHOTOS.remote.src}
                 alt={CITY_PAGE_PHOTOS.remote.alt}
                 fill
-                sizes="(min-width: 1024px) 300px, (min-width: 640px) 40vw, 100vw"
+                sizes="(min-width: 640px) 840px, 100vw"
                 placeholder="blur"
                 className={PHOTO}
               />
@@ -559,7 +574,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 src={CITY_PAGE_PHOTOS.enquiry.src}
                 alt={CITY_PAGE_PHOTOS.enquiry.alt}
                 fill
-                sizes="(min-width: 1024px) 460px, 100vw"
+                sizes="(min-width: 1024px) 900px, 100vw"
                 placeholder="blur"
                 className={PHOTO}
               />
@@ -661,7 +676,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                           src={photo.src}
                           alt=""
                           fill
-                          sizes="56px"
+                          sizes={`${coverWidth(photo.src, 88, 56)}px`}
                           placeholder="blur"
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
@@ -692,7 +707,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 src={place.cta}
                 alt=""
                 fill
-                sizes="(min-width: 1240px) 1240px, 100vw"
+                sizes={`(min-width: 1240px) 1240px, (min-width: 640px) 100vw, ${coverWidth(place.cta, 420, 375)}px`}
                 placeholder="blur"
                 className={PHOTO}
               />
