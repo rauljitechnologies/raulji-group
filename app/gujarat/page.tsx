@@ -17,7 +17,7 @@ import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 import type { FAQ } from "@/lib/services";
 import { H1, H2 } from "@/lib/typography";
-import { CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
+import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
 
 export const metadata = pageMeta({
   title: "Business Registration Services Across Gujarat | Raulji Group",
@@ -89,8 +89,8 @@ const GUIDES = [
 /*
  * Photographs from the "Raulji Gujarat v2" design. All of them are already
  * self-hosted for the city pages (lib/city-photos.ts), so this page adds no
- * new files. The city finder's cards stay photo-free: the design's per-city
- * picks could not be confirmed as showing the city named on the card.
+ * new files. Only four city finder cards carry a photo (CITY_CARD_PHOTOS):
+ * the design's other per-city picks did not all show the city on the card.
  */
 const AHD = CITY_PLACE_PHOTOS.ahmedabad;
 const VAD = CITY_PLACE_PHOTOS.vadodara;
@@ -157,6 +157,7 @@ export default function GujaratPage() {
       name: c.name,
       district: c.district,
       region: DISTRICT_REGION[c.district] ?? "Central",
+      photo: CITY_CARD_PHOTOS[c.slug]?.src,
     }));
   const regionCounts = REGIONS.map((region) => ({
     region,

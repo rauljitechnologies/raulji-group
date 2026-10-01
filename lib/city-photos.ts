@@ -43,6 +43,8 @@ import dwkBeach from "@/public/photos/cities/dwarka/beach.webp";
 import dwkAnchor from "@/public/photos/cities/dwarka/boats-at-anchor.webp";
 import dwkGulls from "@/public/photos/cities/dwarka/boat-and-gulls.webp";
 
+import jndMaqbara from "@/public/photos/cities/junagadh/mahabat-maqbara.webp";
+
 /**
  * Photographs for the city pages, taken from the "Raulji Ahmedabad" design
  * (claude.ai/design) at the owner's request, 2026-10-01.
@@ -226,4 +228,17 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
       { kind: "District", photo: DWK_SETU },
     ],
   },
+};
+
+/**
+ * Photographs on the Gujarat hub's city finder cards. Only cities whose
+ * photograph has been checked as showing that city get one; the design's
+ * picks for the rest did not all show the city named on the card. Add a
+ * city here only with a photograph of that city.
+ */
+export const CITY_CARD_PHOTOS: Record<string, Photo> = {
+  ahmedabad: CITY_PLACE_PHOTOS.ahmedabad.hero,
+  vadodara: CITY_PLACE_PHOTOS.vadodara.gallery[0],
+  junagadh: { src: jndMaqbara, alt: "Mahabat Maqbara, Junagadh" },
+  dwarka: CITY_PLACE_PHOTOS.dwarka.gallery[2],
 };
