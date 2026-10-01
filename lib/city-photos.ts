@@ -45,6 +45,35 @@ import dwkGulls from "@/public/photos/cities/dwarka/boat-and-gulls.webp";
 
 import jndMaqbara from "@/public/photos/cities/junagadh/mahabat-maqbara.webp";
 
+import cardAmreli from "@/public/photos/cities/cards/amreli.webp";
+import cardAnand from "@/public/photos/cities/cards/anand.webp";
+import cardAnkleshwar from "@/public/photos/cities/cards/ankleshwar.webp";
+import cardBharuch from "@/public/photos/cities/cards/bharuch.webp";
+import cardBhavnagar from "@/public/photos/cities/cards/bhavnagar.webp";
+import cardBhuj from "@/public/photos/cities/cards/bhuj.webp";
+import cardBotad from "@/public/photos/cities/cards/botad.webp";
+import cardDahod from "@/public/photos/cities/cards/dahod.webp";
+import cardGandhidham from "@/public/photos/cities/cards/gandhidham.webp";
+import cardGodhra from "@/public/photos/cities/cards/godhra.webp";
+import cardHalol from "@/public/photos/cities/cards/halol.webp";
+import cardHimmatnagar from "@/public/photos/cities/cards/himmatnagar.webp";
+import cardJamnagar from "@/public/photos/cities/cards/jamnagar.webp";
+import cardJhalod from "@/public/photos/cities/cards/jhalod.webp";
+import cardKalol from "@/public/photos/cities/cards/kalol.webp";
+import cardMehsana from "@/public/photos/cities/cards/mehsana.webp";
+import cardModasa from "@/public/photos/cities/cards/modasa.webp";
+import cardMorbi from "@/public/photos/cities/cards/morbi.webp";
+import cardNadiad from "@/public/photos/cities/cards/nadiad.webp";
+import cardNavsari from "@/public/photos/cities/cards/navsari.webp";
+import cardPalanpur from "@/public/photos/cities/cards/palanpur.webp";
+import cardPatan from "@/public/photos/cities/cards/patan.webp";
+import cardPorbandar from "@/public/photos/cities/cards/porbandar.webp";
+import cardRajkot from "@/public/photos/cities/cards/rajkot.webp";
+import cardSurat from "@/public/photos/cities/cards/surat.webp";
+import cardSurendranagar from "@/public/photos/cities/cards/surendranagar.webp";
+import cardValsad from "@/public/photos/cities/cards/valsad.webp";
+import cardVapi from "@/public/photos/cities/cards/vapi.webp";
+
 /**
  * Photographs for the city pages, taken from the "Raulji Ahmedabad" design
  * (claude.ai/design) at the owner's request, 2026-10-01.
@@ -231,14 +260,48 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
 };
 
 /**
- * Photographs on the Gujarat hub's city finder cards. Only cities whose
- * photograph has been checked as showing that city get one; the design's
- * picks for the rest did not all show the city named on the card. Add a
- * city here only with a photograph of that city.
+ * Photographs on the city cards: the Gujarat hub's city finder and the
+ * "Other cities" list at the foot of every city page. Decorative (alt="").
+ *
+ * Ahmedabad, Vadodara, Gandhinagar, Junagadh and Dwarka use photographs
+ * checked as showing that city. Every other city uses the "Raulji Gujarat
+ * v2" design's pick, at the owner's request (2026-10-01), knowing that some
+ * of those do not show the named city (Surat, Godhra, Patan, Kalol and
+ * Amreli among them). Replace a file under public/photos/cities/cards/ with
+ * a real photograph of that city when one is available.
  */
 export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   ahmedabad: CITY_PLACE_PHOTOS.ahmedabad.hero,
   vadodara: CITY_PLACE_PHOTOS.vadodara.gallery[0],
+  gandhinagar: CITY_PLACE_PHOTOS.gandhinagar.hero,
   junagadh: { src: jndMaqbara, alt: "Mahabat Maqbara, Junagadh" },
   dwarka: CITY_PLACE_PHOTOS.dwarka.gallery[2],
+  amreli: { src: cardAmreli, alt: "" },
+  anand: { src: cardAnand, alt: "" },
+  ankleshwar: { src: cardAnkleshwar, alt: "" },
+  bharuch: { src: cardBharuch, alt: "" },
+  bhavnagar: { src: cardBhavnagar, alt: "" },
+  bhuj: { src: cardBhuj, alt: "" },
+  botad: { src: cardBotad, alt: "" },
+  dahod: { src: cardDahod, alt: "" },
+  gandhidham: { src: cardGandhidham, alt: "" },
+  godhra: { src: cardGodhra, alt: "" },
+  halol: { src: cardHalol, alt: "" },
+  himmatnagar: { src: cardHimmatnagar, alt: "" },
+  jamnagar: { src: cardJamnagar, alt: "" },
+  jhalod: { src: cardJhalod, alt: "" },
+  kalol: { src: cardKalol, alt: "" },
+  mehsana: { src: cardMehsana, alt: "" },
+  modasa: { src: cardModasa, alt: "" },
+  morbi: { src: cardMorbi, alt: "" },
+  nadiad: { src: cardNadiad, alt: "" },
+  navsari: { src: cardNavsari, alt: "" },
+  palanpur: { src: cardPalanpur, alt: "" },
+  patan: { src: cardPatan, alt: "" },
+  porbandar: { src: cardPorbandar, alt: "" },
+  rajkot: { src: cardRajkot, alt: "" },
+  surat: { src: cardSurat, alt: "" },
+  surendranagar: { src: cardSurendranagar, alt: "" },
+  valsad: { src: cardValsad, alt: "" },
+  vapi: { src: cardVapi, alt: "" },
 };
