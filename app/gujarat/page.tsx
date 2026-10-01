@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, FileText, Globe, MapPin, Plus, Users, type LucideIcon } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -16,6 +17,7 @@ import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 import type { FAQ } from "@/lib/services";
 import { H1, H2 } from "@/lib/typography";
+import { CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
 
 export const metadata = pageMeta({
   title: "Business Registration Services Across Gujarat | Raulji Group",
@@ -83,6 +85,22 @@ const GUIDES = [
 ]
   .map((slug) => getArticle(slug))
   .filter((article): article is NonNullable<typeof article> => article !== null);
+
+/*
+ * Photographs from the "Raulji Gujarat v2" design. All of them are already
+ * self-hosted for the city pages (lib/city-photos.ts), so this page adds no
+ * new files. The city finder's cards stay photo-free: the design's per-city
+ * picks could not be confirmed as showing the city named on the card.
+ */
+const AHD = CITY_PLACE_PHOTOS.ahmedabad;
+const VAD = CITY_PLACE_PHOTOS.vadodara;
+const GALLERY: { city: string; slug: string; caption: string; photo: Photo }[] = [
+  { city: "Ahmedabad", slug: "ahmedabad", caption: "Gujarat\u2019s largest commercial centre", photo: AHD.hero },
+  { city: "Vadodara", slug: "vadodara", caption: "Where Raulji Group is based", photo: VAD.hero },
+  { city: "Ahmedabad", slug: "ahmedabad", caption: "Startups to trading families", photo: AHD.gallery[3] },
+  { city: "Vadodara", slug: "vadodara", caption: "Engineering and process industry", photo: VAD.environment[1] },
+];
+const PHOTO = "object-cover";
 
 const EYEBROW =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
@@ -159,17 +177,18 @@ export default function GujaratPage() {
         aria-labelledby="gj-h"
         className="relative overflow-hidden bg-[#0c1a2d] pt-[5.5rem] text-white sm:pt-24"
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-56 h-[38.75rem] w-[38.75rem] rounded-full bg-[radial-gradient(circle,rgba(50,159,210,0.32),rgba(50,159,210,0)_65%)]"
+        <Image
+          src={AHD.environment[0].src}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          placeholder="blur"
+          className={PHOTO}
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-52 -left-44 h-[26.25rem] w-[26.25rem] rounded-full bg-[radial-gradient(circle,rgba(26,124,176,0.28),rgba(26,124,176,0)_65%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-[radial-gradient(rgba(50,159,210,0.22)_1px,transparent_1px)] bg-[size:22px_22px] [mask-image:linear-gradient(90deg,transparent_30%,#000_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(90deg,rgba(12,26,45,.96)_0%,rgba(12,26,45,.88)_50%,rgba(12,26,45,.6)_100%)]"
         />
         <div className="relative mx-auto flex max-w-[1240px] flex-col gap-8 px-5 pb-14 pt-6 sm:px-8 md:gap-14 md:pb-24 md:pt-8">
           <div className="[&_a:hover]:text-white [&_a]:text-[#c9d6e3] [&_li]:text-[#c9d6e3] [&_span[aria-current]]:font-semibold [&_span[aria-current]]:text-white [&_svg]:text-[#5b6f88]">
@@ -227,6 +246,41 @@ export default function GujaratPage() {
         </div>
       </section>
 
+      {/* Gujarat in pictures. */}
+      <section aria-label="Gujarat in pictures" className="pt-5 md:pt-8">
+        <ul className={`${CONTAINER} grid grid-cols-2 gap-3 lg:grid-cols-4`}>
+          {GALLERY.map((g) => (
+            <li key={g.caption}>
+              <TrackedLink
+                href={`/${g.slug}/`}
+                event="city_page_click"
+                params={{ city: g.city, label: "gujarat_gallery" }}
+                className="group relative block aspect-[4/3] overflow-hidden rounded-lg bg-[#1b3350] outline-offset-2 hover:outline hover:outline-2 hover:outline-[#329fd2]"
+              >
+                <Image
+                  src={g.photo.src}
+                  alt={g.photo.alt}
+                  fill
+                  sizes="(min-width: 1024px) 300px, 50vw"
+                  placeholder="blur"
+                  className={`${PHOTO} transition-transform duration-500 group-hover:scale-105`}
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,26,45,0)_40%,rgba(12,26,45,.88)_100%)]"
+                />
+                <span className="absolute inset-x-4 bottom-3.5 flex flex-col gap-0.5 text-white">
+                  <span className="text-[0.9375rem] font-extrabold sm:text-base">
+                    {g.city} <span aria-hidden="true">→</span>
+                  </span>
+                  <span className="hidden text-[0.8125rem] text-[#d5e0ea] sm:block">{g.caption}</span>
+                </span>
+              </TrackedLink>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {/* The four structures. */}
       <section aria-labelledby="four-h" className={SECTION}>
         <div className={`${CONTAINER} flex flex-col gap-11`}>
@@ -240,14 +294,27 @@ export default function GujaratPage() {
             {SERVICES.map((service) => {
               const meta = STRUCTURE_META[service.slug];
               const Icon = meta.icon;
+              const photo = CITY_PAGE_PHOTOS.structures[service.slug];
               return (
                 <li key={service.slug} className="flex">
                   <TrackedLink
                     href={service.path}
                     event="service_card_click"
                     params={{ label: "gujarat_cards", registration_type: service.shortName }}
-                    className={`flex flex-1 flex-col gap-3.5 rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] py-[1.875rem] ${LIFT}`}
+                    className={`flex flex-1 flex-col gap-3.5 overflow-hidden rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] pb-[1.875rem] ${LIFT}`}
                   >
+                    <span className="relative -mx-[1.625rem] mb-1 block aspect-video bg-[#e8f5fb]">
+                      {photo ? (
+                        <Image
+                          src={photo.src}
+                          alt={photo.alt}
+                          fill
+                          sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw"
+                          placeholder="blur"
+                          className={PHOTO}
+                        />
+                      ) : null}
+                    </span>
                     <span className="flex items-center justify-between gap-2">
                       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f5fb]">
                         <Icon className="h-[1.625rem] w-[1.625rem] text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
@@ -300,6 +367,16 @@ export default function GujaratPage() {
               what a lender will ask for, and how much liability the business carries. That is what
               our city pages cover.
             </p>
+            <div className="relative mt-2 aspect-[16/10] overflow-hidden rounded-lg bg-[#e8f5fb]">
+              <Image
+                src={CITY_PAGE_PHOTOS.remote.src}
+                alt={CITY_PAGE_PHOTOS.remote.alt}
+                fill
+                sizes="(min-width: 1024px) 460px, 100vw"
+                placeholder="blur"
+                className={PHOTO}
+              />
+            </div>
           </div>
           <ul className="grid min-w-0 gap-4 sm:grid-cols-2">
             {STATE_FACTS.map(({ title, body, icon: Icon }) => (
@@ -332,8 +409,10 @@ export default function GujaratPage() {
       </section>
 
       {/* All 33 districts. */}
-      <section aria-labelledby="ds-h" className={`bg-[#0c1a2d] text-white ${SECTION}`}>
-        <div className={`${CONTAINER} flex flex-col gap-8`}>
+      <section aria-labelledby="ds-h" className={`relative overflow-hidden bg-[#0c1a2d] text-white ${SECTION}`}>
+        <Image src={AHD.cta} alt="" fill sizes="100vw" placeholder="blur" className={PHOTO} />
+        <div aria-hidden="true" className="absolute inset-0 bg-[rgba(12,26,45,.9)]" />
+        <div className={`${CONTAINER} relative flex flex-col gap-8`}>
           <SectionHead
             dark
             eyebrow="All 33 districts"
@@ -431,6 +510,16 @@ export default function GujaratPage() {
             >
               Prefer to talk? {SITE.phone.display}
             </TrackedLink>
+            <div className="relative mt-2 aspect-[4/3] overflow-hidden rounded-lg bg-[#1b3350]">
+              <Image
+                src={CITY_PAGE_PHOTOS.enquiry.src}
+                alt={CITY_PAGE_PHOTOS.enquiry.alt}
+                fill
+                sizes="(min-width: 1024px) 420px, 100vw"
+                placeholder="blur"
+                className={PHOTO}
+              />
+            </div>
           </div>
           <LeadForm
             heading="Gujarat business registration enquiry"
@@ -457,6 +546,16 @@ export default function GujaratPage() {
               Send an Enquiry
               <ArrowRight className="h-4 w-4 rotate-90" aria-hidden="true" />
             </a>
+            <div className="relative mt-2 hidden aspect-[4/3] overflow-hidden rounded-lg bg-[#1b3350] lg:block">
+              <Image
+                src={CITY_PAGE_PHOTOS.faqs.src}
+                alt={CITY_PAGE_PHOTOS.faqs.alt}
+                fill
+                sizes="360px"
+                placeholder="blur"
+                className={PHOTO}
+              />
+            </div>
           </div>
           <div className="flex min-w-0 flex-col border-t border-[#dde4ec]">
             {GUJARAT_FAQS.map((item) => (
@@ -513,38 +612,50 @@ export default function GujaratPage() {
 
       {/* Closing CTA. */}
       <section aria-labelledby="cta-h" className="px-5 pb-16 sm:px-8 md:pb-24">
-        <div className="mx-auto flex max-w-[1240px] flex-col gap-3.5 rounded-lg bg-[#122640] p-8 text-white sm:p-12 lg:p-14">
-          <h2
-            id="cta-h"
-            className="text-balance text-[1.75rem] font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-[2.5rem]"
-          >
-            Still deciding which structure to register?
-          </h2>
-          <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
-            Tell us what the business does, who is involved and whether outside investment is
-            likely. That is usually enough to narrow it to one option.
-          </p>
-          <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <TrackedLink
-              href="/contact/"
-              event="primary_cta_click"
-              params={{ label: "gujarat_footer_cta" }}
-              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-white px-6 text-[0.9375rem] font-bold text-[#122640] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e8f5fb] hover:shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]"
+        <div className="mx-auto flex max-w-[1240px] flex-col overflow-hidden rounded-lg bg-[#122640] text-white md:flex-row">
+          <div className="relative min-h-[16.25rem] bg-[#1b3350] md:w-[42%] md:flex-none">
+            <Image
+              src={CITY_PAGE_PHOTOS.structures["partnership-registration"].src}
+              alt={CITY_PAGE_PHOTOS.structures["partnership-registration"].alt}
+              fill
+              sizes="(min-width: 768px) 520px, 100vw"
+              placeholder="blur"
+              className={PHOTO}
+            />
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col justify-center gap-3.5 p-8 sm:p-12 lg:p-14">
+            <h2
+              id="cta-h"
+              className="text-balance text-[1.75rem] font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-[2.5rem]"
             >
-              Start Your Business
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </TrackedLink>
-            <TrackedLink
-              href={whatsappHref(
-                "Hello Raulji Group, I would like help choosing and registering a business structure.",
-              )}
-              external
-              event="whatsapp_click"
-              params={{ label: "gujarat_footer_cta" }}
-              className="inline-flex min-h-[3.25rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
-            >
-              WhatsApp an Expert
-            </TrackedLink>
+              Still deciding which structure to register?
+            </h2>
+            <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#d5e0ea]">
+              Tell us what the business does, who is involved and whether outside investment is
+              likely. That is usually enough to narrow it to one option.
+            </p>
+            <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <TrackedLink
+                href="/contact/"
+                event="primary_cta_click"
+                params={{ label: "gujarat_footer_cta" }}
+                className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-white px-6 text-[0.9375rem] font-bold text-[#122640] transition duration-200 hover:-translate-y-0.5 hover:bg-[#e8f5fb] hover:shadow-[0_14px_28px_-12px_rgba(0,0,0,0.5)]"
+              >
+                Start Your Business
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </TrackedLink>
+              <TrackedLink
+                href={whatsappHref(
+                  "Hello Raulji Group, I would like help choosing and registering a business structure.",
+                )}
+                external
+                event="whatsapp_click"
+                params={{ label: "gujarat_footer_cta" }}
+                className="inline-flex min-h-[3.25rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
+              >
+                WhatsApp an Expert
+              </TrackedLink>
+            </div>
           </div>
         </div>
       </section>
