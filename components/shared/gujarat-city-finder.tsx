@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 
@@ -23,6 +24,8 @@ export interface FinderCity {
   name: string;
   district: string;
   region: Region;
+  /** Only for cities with a confirmed photograph of the place. Decorative. */
+  photo?: StaticImageData;
 }
 
 const REGION_EVENT = "gujarat-region";
@@ -123,19 +126,33 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
               <Link
                 href={`/${city.slug}/`}
                 onClick={() => track("city_page_click", { city: city.name, label: "gujarat_city_finder" })}
-                className="group flex flex-1 flex-col gap-1.5 rounded-lg border border-[#e3e9ef] bg-white px-5 py-[1.125rem] transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_18px_36px_-22px_rgba(18,38,64,0.4)]"
+                className="group flex flex-1 overflow-hidden rounded-lg border border-[#e3e9ef] bg-white transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_18px_36px_-22px_rgba(18,38,64,0.4)]"
               >
-                <span className="flex items-center justify-between gap-2">
-                  <span className="text-[1.0625rem] font-bold text-[#122640]">{city.name}</span>
-                  <span
-                    aria-hidden="true"
-                    className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1a7cb0] transition-colors group-hover:bg-[#122640] group-hover:text-white"
-                  >
-                    <ArrowRight className="h-3.5 w-3.5" />
+                {city.photo ? (
+                  <span className="relative w-[4.5rem] flex-none overflow-hidden bg-[#e8f5fb]">
+                    <Image
+                      src={city.photo}
+                      alt=""
+                      fill
+                      sizes="72px"
+                      placeholder="blur"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
                   </span>
-                </span>
-                <span className="text-[0.8125rem] text-[#5b6778]">
-                  {city.district} district · {regionLabel(city.region)}
+                ) : null}
+                <span className="flex min-w-0 flex-1 flex-col gap-1.5 px-5 py-[1.125rem]">
+                  <span className="flex items-center justify-between gap-2">
+                    <span className="text-[1.0625rem] font-bold text-[#122640]">{city.name}</span>
+                    <span
+                      aria-hidden="true"
+                      className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1a7cb0] transition-colors group-hover:bg-[#122640] group-hover:text-white"
+                    >
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </span>
+                  <span className="text-[0.8125rem] text-[#5b6778]">
+                    {city.district} district · {regionLabel(city.region)}
+                  </span>
                 </span>
               </Link>
             </li>

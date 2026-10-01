@@ -32,6 +32,11 @@ export interface City {
   sectors: string[];
   /** Commercial areas, markets or industrial estates a local reader would recognise. */
   businessAreas: string[];
+  /**
+   * The line beside "Business areas in and around …". Optional: without it
+   * the page says the city and its industrial belt, which suits most towns.
+   */
+  areasLead?: string;
   /** Nearby markets this city trades with. Used for internal linking. */
   nearby: string[];
   /** Which structures tend to come up locally, and why. Must be city-specific. */
@@ -247,6 +252,8 @@ export const CITIES: City[] = [
       "Kudasan and Sargasan",
       "Gandhinagar-Ahmedabad corridor",
     ],
+    areasLead:
+      "We serve businesses across the capital and the GIFT City corridor, remotely, from Vadodara.",
     nearby: ["ahmedabad", "kalol", "mehsana", "himmatnagar"],
     structureNote:
       "Firms bidding for state government work usually find the tender documents themselves settle the question, since many require a registered company or LLP with audited accounts for a stated number of years. That is worth checking before you incorporate, because the eligibility clauses often specify the entity type. Entities intending to operate inside GIFT City are a separate matter: the IFSC has its own authorisation requirements on top of incorporation, and the structure needs to be planned around those from the start.",
@@ -990,6 +997,7 @@ export const CITIES: City[] = [
       "Pilgrimage tourism drives hotels, guesthouses, restaurants, transport operators and religious retail. The coastal belt supports fishing and salt, and the district carries port-related and industrial activity around Okha. Visitor numbers concentrate sharply around festival periods, which makes seasonality a defining feature of local business planning.",
     sectors: ["Pilgrimage tourism", "Hospitality", "Travel and transport", "Food service and retail", "Fishing", "Port services"],
     businessAreas: ["Dwarka temple town", "Okha port belt", "Coastal hospitality strip", "Devbhumi Dwarka district corridor"],
+    areasLead: "We serve businesses across the temple town and the coast, remotely, from Vadodara.",
     nearby: ["jamnagar", "porbandar"],
     structureNote:
       "Hospitality and food service deal directly with the public, which creates liability exposure that most trading businesses do not carry. At the same time, extreme seasonality means annual compliance cost is measured against a short earning window. Those two pressures point in opposite directions, and the resolution usually depends on scale: a small guesthouse works as a proprietorship, while a hotel with staff and significant capital investment has real reason to be an LLP or company.",
