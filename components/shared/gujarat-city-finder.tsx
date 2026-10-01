@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 
 import { REGIONS, regionLabel, type Region } from "@/lib/gujarat-regions";
+import { coverWidth } from "@/lib/image-sizes";
 import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -134,7 +135,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
                       src={city.photo}
                       alt=""
                       fill
-                      sizes="72px"
+                      sizes={`${coverWidth(city.photo, 130, 72)}px`}
                       placeholder="blur"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />

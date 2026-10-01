@@ -9,6 +9,7 @@ import { HighlightComparison } from "@/components/shared/registration-tools";
 import { GujaratCityFinder, RegionCards } from "@/components/shared/gujarat-city-finder";
 import { DISTRICT_REGION, REGIONS } from "@/lib/gujarat-regions";
 import { getArticle } from "@/lib/blog";
+import { coverScale, scaleSizes } from "@/lib/image-sizes";
 import { CITIES, CITY_SLUGS, GUJARAT_DISTRICTS } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 import { STRUCTURE_META } from "@/lib/structure-meta";
@@ -262,7 +263,7 @@ export default function GujaratPage() {
                   src={g.photo.src}
                   alt={g.photo.alt}
                   fill
-                  sizes="(min-width: 1024px) 300px, 50vw"
+                  sizes={scaleSizes("(min-width: 1024px) 300px, 50vw", coverScale(g.photo.src, 4 / 3))}
                   placeholder="blur"
                   className={`${PHOTO} transition-transform duration-500 group-hover:scale-105`}
                 />
@@ -516,7 +517,7 @@ export default function GujaratPage() {
                 src={CITY_PAGE_PHOTOS.enquiry.src}
                 alt={CITY_PAGE_PHOTOS.enquiry.alt}
                 fill
-                sizes="(min-width: 1024px) 420px, 100vw"
+                sizes="(min-width: 1024px) 480px, 100vw"
                 placeholder="blur"
                 className={PHOTO}
               />

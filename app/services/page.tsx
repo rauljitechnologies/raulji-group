@@ -469,7 +469,7 @@ export default function ServicesPage() {
           <figure className="group relative m-0 overflow-hidden rounded-lg">
             <Photo
               photo="structures"
-              sizes="(min-width: 1280px) 1176px, 100vw"
+              sizes="(min-width: 1280px) 1176px, (min-width: 660px) 100vw, 660px"
               className="aspect-[21/7] min-h-[220px] bg-[#e8f5fb]"
             />
             <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(0deg,rgba(12,26,45,0.9),rgba(12,26,45,0))] p-5 text-[1.0625rem] font-bold text-white sm:p-8 sm:text-[1.3125rem]">

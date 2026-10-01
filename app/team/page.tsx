@@ -54,7 +54,7 @@ export default async function TeamPage() {
             src={chairmanPhoto}
             alt={`${LEADERSHIP.chairman.name}, ${LEADERSHIP.chairman.roles[0]}`}
             placeholder="blur"
-            sizes="(min-width: 768px) 14rem, 100vw"
+            sizes="280px"
             className="aspect-[4/5] w-full max-w-[14rem] rounded-2xl border border-border object-cover object-top"
           />
           <div>

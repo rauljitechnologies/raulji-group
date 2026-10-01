@@ -8,7 +8,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
-    formats: ["image/avif", "image/webp"],
+    // WebP only. At the default quality of 75 the optimiser encodes AVIF at
+    // quality 47, which smooths away fine detail: on these photographs it
+    // measured 3 to 4 dB PSNR below WebP at the same width, and read as soft.
+    // WebP costs roughly twice the bytes at 640px and stays sharp.
+    formats: ["image/webp"],
   },
   async redirects() {
     // statusCode 301 rather than `permanent: true`, which emits 308. Both are
