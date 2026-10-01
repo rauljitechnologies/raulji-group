@@ -231,7 +231,8 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
 };
 
 /**
- * Photographs on the Gujarat hub's city finder cards. Only cities whose
+ * Photographs on the city cards: the Gujarat hub's city finder and the
+ * "Other cities" list at the foot of every city page. Only cities whose
  * photograph has been checked as showing that city get one; the design's
  * picks for the rest did not all show the city named on the card. Add a
  * city here only with a photograph of that city.
@@ -239,6 +240,7 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
 export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   ahmedabad: CITY_PLACE_PHOTOS.ahmedabad.hero,
   vadodara: CITY_PLACE_PHOTOS.vadodara.gallery[0],
+  gandhinagar: CITY_PLACE_PHOTOS.gandhinagar.hero,
   junagadh: { src: jndMaqbara, alt: "Mahabat Maqbara, Junagadh" },
   dwarka: CITY_PLACE_PHOTOS.dwarka.gallery[2],
 };

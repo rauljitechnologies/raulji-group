@@ -10,7 +10,7 @@ import { LeadForm } from "@/components/forms/lead-form";
 import { CITIES, getCity } from "@/lib/cities";
 import { CITY_INDEX } from "@/lib/city-index";
 import { CITY_SERVICE_SLUGS, CITIES_WITH_SERVICE_PAGES } from "@/lib/city-services";
-import { CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS } from "@/lib/city-photos";
+import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS } from "@/lib/city-photos";
 import { SERVICES } from "@/lib/services";
 import { STRUCTURE_META } from "@/lib/structure-meta";
 import { SITE, telHref, whatsappHref, TIMELINE_DISCLAIMER } from "@/lib/site";
@@ -644,22 +644,41 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               See full Gujarat coverage <span aria-hidden="true">&nbsp;→</span>
             </TrackedLink>
           </div>
-          <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-[repeat(auto-fill,minmax(11.875rem,1fr))]">
-            {others.map((c) => (
-              <li key={c.slug} className="flex">
-                <TrackedLink
-                  href={`/${c.slug}/`}
-                  event="city_page_click"
-                  params={{ city: c.name, label: `city_others_${city.slug}` }}
-                  className="flex flex-1 flex-col gap-[3px] rounded-md border border-[#e3e9ef] bg-white px-4 py-3.5 transition-colors hover:border-[#329fd2] hover:bg-[#f4f9fc]"
-                >
-                  <span className="text-[0.9375rem] font-bold text-[#122640]">{c.name}</span>
-                  <span className="text-xs text-[#5b6778]">
-                    {c.district === c.name ? "Gujarat" : `${c.district} district`}
-                  </span>
-                </TrackedLink>
-              </li>
-            ))}
+          <ul className="grid grid-cols-1 gap-2.5 min-[360px]:grid-cols-2 sm:grid-cols-[repeat(auto-fill,minmax(11.875rem,1fr))]">
+            {others.map((c) => {
+              const photo = CITY_CARD_PHOTOS[c.slug];
+              return (
+                <li key={c.slug} className="flex">
+                  <TrackedLink
+                    href={`/${c.slug}/`}
+                    event="city_page_click"
+                    params={{ city: c.name, label: `city_others_${city.slug}` }}
+                    className="group flex flex-1 overflow-hidden rounded-md border border-[#e3e9ef] bg-white transition-colors hover:border-[#329fd2] hover:bg-[#f4f9fc]"
+                  >
+                    {photo ? (
+                      <span className="relative w-10 flex-none overflow-hidden bg-[#e8f5fb] sm:w-14">
+                        <Image
+                          src={photo.src}
+                          alt=""
+                          fill
+                          sizes="56px"
+                          placeholder="blur"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </span>
+                    ) : null}
+                    <span className="flex min-w-0 flex-1 flex-col gap-[3px] px-3 py-3.5 sm:px-4">
+                      <span className="text-sm font-bold text-[#122640] [overflow-wrap:anywhere] sm:text-[0.9375rem]">
+                        {c.name}
+                      </span>
+                      <span className="text-xs text-[#5b6778]">
+                        {c.district === c.name ? "Gujarat" : `${c.district} district`}
+                      </span>
+                    </span>
+                  </TrackedLink>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
