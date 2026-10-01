@@ -116,7 +116,7 @@ export function ClientDirectory({ clients }: { clients: DirectoryClient[] }) {
                   src={client.logo}
                   alt={`${client.name} logo`}
                   sizes="(min-width: 1024px) 12rem, 45vw"
-                  className="max-h-full w-auto max-w-full object-contain transition-transform duration-[400ms] group-hover:scale-[1.06]"
+                  className="max-h-full w-auto max-w-full object-contain"
                 />
               </div>
               <p className="flex justify-between gap-2 border-t border-[#eef2f6] px-4 py-3 text-[0.8125rem] font-semibold text-[#122640]">

@@ -678,7 +678,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                           fill
                           sizes={`${coverWidth(photo.src, 88, 56)}px`}
                           placeholder="blur"
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-cover photo-zoom"
                         />
                       </span>
                     ) : null}

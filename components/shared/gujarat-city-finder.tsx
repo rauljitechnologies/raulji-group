@@ -137,7 +137,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
                       fill
                       sizes={`${coverWidth(city.photo, 130, 72)}px`}
                       placeholder="blur"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover photo-zoom"
                     />
                   </span>
                 ) : null}

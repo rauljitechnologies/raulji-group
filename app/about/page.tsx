@@ -519,7 +519,7 @@ export default function AboutPage() {
                 placeholder="blur"
                 fill
                 sizes="(min-width: 768px) 28rem, 90vw"
-                className="object-cover object-[center_20%] transition-transform duration-700 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.04]"
+                className="object-cover object-[center_20%] photo-zoom"
               />
             </div>
           </figure>
