@@ -208,8 +208,8 @@ const FAQS: FAQ[] = [
   },
 ];
 
-/** Slow zoom on hover, as in the design. The parent carries `group`. */
-const ZOOM = "object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.06]";
+/** Hover zoom, see `.photo-zoom` in globals.css. The parent carries `group`. */
+const ZOOM = "object-cover photo-zoom";
 
 /** A design photograph filling a fixed-ratio box, so nothing shifts as it loads. */
 function Photo({

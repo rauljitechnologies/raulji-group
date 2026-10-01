@@ -186,6 +186,19 @@
     @apply inline-flex min-h-[1.75rem] items-center;
   }
 
+  /* The one hover zoom for photographs, on a parent carrying `group`. Kept to
+     3% so it reads as a response rather than an effect, and so the photograph
+     stays sharp: a larger zoom stretches the file past the width it was sized
+     for. Not for blog artwork or logos, which carry text and would be cropped. */
+  .photo-zoom {
+    transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .group:hover .photo-zoom,
+  .group:focus-visible .photo-zoom {
+    transform: scale(1.03);
+  }
+
   /* Reserved gutter so the fixed mobile action bar never overlaps the last section. */
   .mobile-bar-gutter {
     @apply pb-24 lg:pb-0;
@@ -206,7 +219,9 @@
     scroll-behavior: auto !important;
   }
 
-  .hover-lift:hover {
+  .hover-lift:hover,
+  .group:hover .photo-zoom,
+  .group:focus-visible .photo-zoom {
     transform: none;
   }
 }

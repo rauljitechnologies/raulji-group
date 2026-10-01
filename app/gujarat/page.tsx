@@ -265,7 +265,7 @@ export default function GujaratPage() {
                   fill
                   sizes={scaleSizes("(min-width: 1024px) 300px, 50vw", coverScale(g.photo.src, 4 / 3))}
                   placeholder="blur"
-                  className={`${PHOTO} transition-transform duration-500 group-hover:scale-105`}
+                  className={`${PHOTO} photo-zoom`}
                 />
                 <span
                   aria-hidden="true"

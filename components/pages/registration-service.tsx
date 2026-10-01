@@ -185,8 +185,8 @@ const PHOTOS: Record<"benefits" | "process" | "enquiry" | "cta", { src: StaticIm
   cta: { src: ctaPhoto, alt: "A presenter speaking to a group seated around a boardroom table" },
 };
 
-/** Slow zoom on hover, as in the design. The parent carries `group`. */
-const ZOOM = "object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.06]";
+/** Hover zoom, see `.photo-zoom` in globals.css. The parent carries `group`. */
+const ZOOM = "object-cover photo-zoom";
 const CARD_LIFT =
   "transition duration-[400ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1.5 hover:border-[#329fd2] hover:shadow-[0_24px_48px_-26px_rgba(18,38,64,0.4)]";
 const CHECK = (

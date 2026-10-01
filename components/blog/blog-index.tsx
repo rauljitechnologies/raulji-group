@@ -237,7 +237,7 @@ export function BlogIndex({
                         priority
                         placeholder="blur"
                         sizes="(min-width: 1024px) 34rem, 100vw"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.06]"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   ) : null}
@@ -432,7 +432,7 @@ function ArticleCard({ article }: { article: BlogCard }) {
             alt=""
             placeholder="blur"
             sizes="(min-width: 1024px) 24rem, (min-width: 768px) 45vw, 100vw"
-            className="h-full w-full object-cover saturate-[.95] transition duration-700 ease-[cubic-bezier(.2,.7,.2,1)] group-hover:scale-[1.07] group-hover:saturate-[1.1]"
+            className="h-full w-full object-cover"
           />
         </Link>
       ) : null}
