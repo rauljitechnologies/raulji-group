@@ -89,8 +89,8 @@ const GUIDES = [
 /*
  * Photographs from the "Raulji Gujarat v2" design. All of them are already
  * self-hosted for the city pages (lib/city-photos.ts), so this page adds no
- * new files. Only four city finder cards carry a photo (CITY_CARD_PHOTOS):
- * the design's other per-city picks did not all show the city on the card.
+ * new files. The city finder's card photos come from CITY_CARD_PHOTOS; see
+ * the note there on which ones are confirmed as the named city.
  */
 const AHD = CITY_PLACE_PHOTOS.ahmedabad;
 const VAD = CITY_PLACE_PHOTOS.vadodara;
