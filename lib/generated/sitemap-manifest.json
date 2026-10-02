@@ -2,7 +2,7 @@
   "routes": [
     {
       "path": "/",
-      "lastModified": "2026-10-02T13:07:30.739Z"
+      "lastModified": "2026-10-02T18:41:58.567Z"
     },
     {
       "path": "/about/",
@@ -10,7 +10,7 @@
     },
     {
       "path": "/blog/",
-      "lastModified": "2026-10-02T13:07:30.739Z"
+      "lastModified": "2026-10-02T18:41:58.567Z"
     },
     {
       "path": "/compare/",
@@ -30,7 +30,7 @@
     },
     {
       "path": "/gujarat/",
-      "lastModified": "2026-10-02T13:07:30.739Z"
+      "lastModified": "2026-10-02T18:41:58.567Z"
     },
     {
       "path": "/our-clients/",
@@ -42,7 +42,7 @@
     },
     {
       "path": "/services/",
-      "lastModified": "2026-10-02T13:07:30.739Z"
+      "lastModified": "2026-10-02T13:17:35.000Z"
     },
     {
       "path": "/services/business-consulting/",
@@ -50,7 +50,7 @@
     },
     {
       "path": "/services/business-registration/",
-      "lastModified": "2026-10-02T13:07:30.739Z"
+      "lastModified": "2026-10-02T18:41:58.567Z"
     },
     {
       "path": "/team/",
@@ -63,7 +63,7 @@
   ],
   "files": {
     "lib/services.ts": "2026-10-02T11:19:28.000Z",
-    "lib/secondary-services.ts": "2026-10-02T13:07:30.739Z",
+    "lib/secondary-services.ts": "2026-10-02T13:17:35.000Z",
     "lib/cities.ts": "2026-10-01T05:49:40.000Z",
     "lib/city-services.ts": "2026-09-23T17:55:46.000Z"
   },
@@ -71,12 +71,16 @@
     "how-to-choose-business-structure-india-2026": "2026-09-23T17:55:46.000Z",
     "documents-required-company-registration-india": "2026-09-23T17:55:46.000Z",
     "starting-business-gujarat-registration-guide": "2026-09-23T17:55:46.000Z",
-    "health-insurance-godhra-gujarat": "2026-10-02T13:07:30.739Z",
-    "health-insurance-halol-gujarat": "2026-10-02T13:07:30.739Z",
-    "health-insurance-jambughoda-panchmahal": "2026-10-02T13:07:30.739Z",
-    "health-insurance-kalol-gujarat": "2026-10-02T13:07:30.739Z",
-    "health-insurance-panchmahal-gujarat": "2026-10-02T13:07:30.739Z",
-    "health-insurance-policy-guide-india": "2026-10-02T13:07:30.739Z",
+    "health-insurance-godhra-gujarat": "2026-10-02T18:41:58.567Z",
+    "health-insurance-halol-gujarat": "2026-10-02T13:17:35.000Z",
+    "health-insurance-jambughoda-panchmahal": "2026-10-02T13:17:35.000Z",
+    "health-insurance-kakanpur-panchmahal": "2026-10-02T18:41:58.567Z",
+    "health-insurance-kalol-gujarat": "2026-10-02T13:17:35.000Z",
+    "health-insurance-kantadi-panchmahal": "2026-10-02T18:41:58.567Z",
+    "health-insurance-panchmahal-gujarat": "2026-10-02T18:41:58.567Z",
+    "health-insurance-tuwa-panchmahal": "2026-10-02T18:41:58.567Z",
+    "health-insurance-villages-godhra-panchmahal": "2026-10-02T18:41:58.567Z",
+    "health-insurance-policy-guide-india": "2026-10-02T13:17:35.000Z",
     "mca-company-registration-process-india": "2026-09-23T17:55:46.000Z",
     "partnership-vs-proprietorship-india": "2026-09-23T17:55:46.000Z",
     "private-limited-company-vs-llp": "2026-09-23T17:55:46.000Z",

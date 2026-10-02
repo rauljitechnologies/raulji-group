@@ -152,34 +152,32 @@ export default async function BlogPage() {
       haystack: [post.title, post.excerpt ?? "", post.category ?? ""].join(" ").toLowerCase(),
     }));
 
-  const cards = [...guides, ...legacyCards];
+  /*
+   * Newest first. Several guides share a publication date, so ties go to the
+   * one added to lib/blog/index.ts later, which is the newer of the two.
+   */
+  const added = [...guides, ...legacyCards];
+  const position = new Map(added.map((card, i) => [card.slug, i]));
+  const cards = [...added].sort(
+    (a, b) => b.published.localeCompare(a.published) || position.get(b.slug)! - position.get(a.slug)!,
+  );
   const categories = [
     ...new Set([...activeCategories(), ...legacyCards.map((card) => card.category)]),
   ];
 
   /*
-   * The masthead strip. Every figure is counted from the article data rather
-   * than written down, so none of it can drift and none of it is a claim that
-   * needs verifying (master rule 13). The design's "33 Gujarat districts
-   * served" is not a count of anything on this page, so it is not here.
+   * The hero chips. Each is counted or dated from the data rather than
+   * written down, so none can drift and none is a claim that needs verifying
+   * (master rule 13). The design's "Updated monthly" is a promise, not a
+   * fact, so the chip carries the real date of the latest update instead.
    */
   const lastUpdated = ARTICLES.map((article) => article.updated).sort().at(-1);
-  const stats = [
-    { value: `${cards.length}`, label: "Guides published" },
-    { value: `${categories.length}`, label: "Subjects covered" },
-    {
-      value: `${ARTICLES.filter((article) => article.seriesMonth).length}`,
-      label: "Parts in the 2026 series",
-    },
+  const chips = [
+    `${cards.length} guides`,
+    `${categories.length} topics`,
     ...(lastUpdated
       ? [
-          {
-            value: new Date(lastUpdated).toLocaleDateString("en-IN", {
-              month: "short",
-              year: "numeric",
-            }),
-            label: "Last updated",
-          },
+          `Updated ${new Date(lastUpdated).toLocaleDateString("en-IN", { month: "long", year: "numeric" })}`,
         ]
       : []),
   ];
@@ -219,7 +217,7 @@ export default async function BlogPage() {
         articles={cards}
         categories={categories}
         crumbs={crumbs}
-        stats={stats}
+        chips={chips}
         featured={guides[0] ?? null}
       />
 

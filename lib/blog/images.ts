@@ -14,6 +14,10 @@ import hiGodhra from "@/public/blog/health-insurance-godhra-gujarat.webp";
 import hiHalol from "@/public/blog/health-insurance-halol-gujarat.webp";
 import hiKalol from "@/public/blog/health-insurance-kalol-gujarat.webp";
 import hiJambughoda from "@/public/blog/health-insurance-jambughoda-panchmahal.webp";
+import hiVillagesGodhra from "@/public/blog/health-insurance-villages-godhra-panchmahal.webp";
+import hiKakanpur from "@/public/blog/health-insurance-kakanpur-panchmahal.webp";
+import hiTuwa from "@/public/blog/health-insurance-tuwa-panchmahal.webp";
+import hiKantadi from "@/public/blog/health-insurance-kantadi-panchmahal.webp";
 
 /**
  * Featured images for the 2026 Business Guide Series.
@@ -93,6 +97,22 @@ export const BLOG_IMAGES = {
   "health-insurance-jambughoda": {
     src: hiJambughoda,
     alt: "Diagram of a route from a home in a forested area to a network hospital in a larger town, with a branch to a reimbursement claim backed by bills and reports",
+  },
+  "health-insurance-villages-godhra": {
+    src: hiVillagesGodhra,
+    alt: "Diagram of the steps to buy a health policy: choose, proposal form, KYC, payment and the policy document, followed by a 30-day free look window",
+  },
+  "health-insurance-kakanpur": {
+    src: hiKakanpur,
+    alt: "Diagram of a three-generation household split into a family floater for the couple and children and a separate policy for the grandparents",
+  },
+  "health-insurance-tuwa": {
+    src: hiTuwa,
+    alt: "Diagram of a hospital bill divided into the part a health policy pays and the part the family pays, such as co-payment and non-medical items",
+  },
+  "health-insurance-kantadi": {
+    src: hiKantadi,
+    alt: "Diagram of an older parent's policy showing a declared condition, its waiting period up to 36 months, and cover beginning after it",
   },
 } as const satisfies Record<string, BlogImage>;
 

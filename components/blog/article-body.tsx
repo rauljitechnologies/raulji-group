@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check, CircleAlert, Info, Lightbulb, Zap } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 import { HealthInsuranceCta } from "@/components/blog/health-insurance-cta";
 import { RichText } from "@/components/blog/rich-text";
@@ -7,7 +7,10 @@ import type { Block } from "@/lib/blog";
 import { cn } from "@/lib/utils";
 
 /**
- * Renders an article body from its blocks.
+ * Renders an article body from its blocks, in the "Raulji Blog Detail"
+ * design (claude.ai/design): 17px body copy at 1.8, navy headings, 8px
+ * radii, one blue accent, and callouts as a pale blue panel rather than a
+ * different colour per type.
  *
  * Every block type here earns its place by doing something a paragraph cannot:
  * a table stays a table on a phone inside its own scroll container, an answer
@@ -27,13 +30,18 @@ export function ArticleBody({
   healthCta?: { location: string; trackingLabel: string };
 }) {
   return (
-    <div className="mt-10">
+    <div className="flex flex-col gap-[1.375rem] text-[1.0625rem] leading-[1.8] text-[#3a4656]">
       {blocks.map((block, i) => (
         <BlockView key={i} block={block} healthCta={healthCta} />
       ))}
     </div>
   );
 }
+
+const H2 =
+  "mt-6 scroll-mt-32 text-balance text-[1.625rem] font-bold leading-[1.2] tracking-[-0.02em] text-[#122640] md:text-[2rem]";
+const PANEL = "rounded-lg border border-[#bcd9ea] bg-[#f4f9fc] px-5 py-5 sm:px-[1.625rem] sm:py-[1.375rem]";
+const EYEBROW = "text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]";
 
 function BlockView({
   block,
@@ -54,31 +62,29 @@ function BlockView({
 
     case "h2":
       return (
-        <h2
-          id={block.id}
-          className="mt-14 scroll-mt-28 border-t border-border pt-10 text-2xl leading-snug md:text-[1.75rem]"
-        >
+        <h2 id={block.id} className={H2}>
           {block.text}
         </h2>
       );
 
     case "h3":
-      return <h3 className="mt-9 text-lg md:text-xl">{block.text}</h3>;
+      return (
+        <h3 className="mt-2 text-lg font-bold leading-snug text-[#122640] md:text-xl">{block.text}</h3>
+      );
 
     case "p":
       return (
-        <p className="mt-5 leading-[1.75] text-muted-foreground">
+        <p className="text-pretty">
           <RichText text={block.text} />
         </p>
       );
 
     case "answer":
-      /* The direct answer to the heading above. Visually the loudest thing in
-         the body, because for most readers it is the whole reason they are
-         here, and it is what an answer engine should lift. */
+      /* The direct answer to the heading above, pulled out so a reader, and an
+         answer engine, can lift it without reading the section. */
       return (
-        <div className="mt-6 rounded-2xl border-l-4 border-primary bg-accent/60 p-5 sm:p-6">
-          <p className="text-[0.9375rem] font-medium leading-[1.7] text-secondary">
+        <div className="rounded-lg bg-[#f4f7fa] px-5 py-5 sm:px-7 sm:py-6">
+          <p className="text-base font-medium leading-[1.7] text-[#122640]">
             <RichText text={block.text} />
           </p>
         </div>
@@ -86,29 +92,18 @@ function BlockView({
 
     case "list":
       return block.ordered ? (
-        <ol className="mt-5 space-y-3">
+        <ol className="flex list-decimal flex-col gap-2.5 pl-[1.375rem] marker:font-semibold marker:text-[#1a7cb0]">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-3.5 leading-[1.75] text-muted-foreground">
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-xs font-bold text-accent-foreground">
-                {i + 1}
-              </span>
-              <span>
-                <RichText text={item} />
-              </span>
+            <li key={i} className="pl-1">
+              <RichText text={item} />
             </li>
           ))}
         </ol>
       ) : (
-        <ul className="mt-5 space-y-3">
+        <ul className="flex list-disc flex-col gap-2.5 pl-[1.375rem] marker:text-[#329fd2]">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-3.5 leading-[1.75] text-muted-foreground">
-              <span
-                aria-hidden="true"
-                className="mt-[0.6875rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"
-              />
-              <span>
-                <RichText text={item} />
-              </span>
+            <li key={i} className="pl-1">
+              <RichText text={item} />
             </li>
           ))}
         </ul>
@@ -119,18 +114,15 @@ function BlockView({
 
     case "steps":
       return (
-        <ol className="mt-6 space-y-4">
+        <ol className="flex flex-col border-t border-[#e3e9ef]">
           {block.items.map((step, i) => (
-            <li
-              key={step.title}
-              className="flex gap-4 rounded-2xl border border-border bg-card p-5"
-            >
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+            <li key={step.title} className="flex gap-4 border-b border-[#e3e9ef] py-5">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#122640] text-sm font-bold text-white">
                 {i + 1}
               </span>
-              <div>
-                <h3 className="text-base leading-snug">{step.title}</h3>
-                <p className="mt-1.5 leading-relaxed text-muted-foreground">
+              <div className="min-w-0">
+                <h3 className="text-base font-bold leading-snug text-[#122640]">{step.title}</h3>
+                <p className="mt-1.5 text-base leading-[1.7]">
                   <RichText text={step.body} />
                 </p>
               </div>
@@ -141,13 +133,18 @@ function BlockView({
 
     case "checklist":
       return (
-        <div className="mt-6 rounded-2xl border border-border bg-muted/60 p-5 sm:p-6">
-          <h3 className="text-base">{block.title}</h3>
-          <ul className="mt-4 space-y-2.5">
+        <div className="rounded-lg border border-[#e3e9ef] px-5 py-5 sm:px-[1.625rem] sm:py-6">
+          <p className="text-[0.9375rem] font-bold text-[#122640]">{block.title}</p>
+          <ul className="mt-4 flex flex-col gap-3">
             {block.items.map((item, i) => (
-              <li key={i} className="flex gap-3 text-[0.9375rem] leading-relaxed">
-                <Check className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
-                <span className="text-muted-foreground">
+              <li key={i} className="flex gap-3 text-base leading-[1.65]">
+                <span
+                  aria-hidden="true"
+                  className="mt-[0.1875rem] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e8f5fb]"
+                >
+                  <Check className="h-3 w-3 text-[#1a7cb0]" strokeWidth={3} />
+                </span>
+                <span>
                   <RichText text={item} />
                 </span>
               </li>
@@ -157,59 +154,33 @@ function BlockView({
       );
 
     case "example":
-      return (
-        <Callout
-          icon={<Lightbulb className="h-4 w-4" aria-hidden="true" />}
-          eyebrow="Example"
-          title={block.title}
-          text={block.text}
-          tone="example"
-        />
-      );
+      return <Callout eyebrow="Example" title={block.title} text={block.text} />;
 
     case "warning":
-      return (
-        <Callout
-          icon={<CircleAlert className="h-4 w-4" aria-hidden="true" />}
-          eyebrow="Watch out"
-          title={block.title}
-          text={block.text}
-          tone="warning"
-        />
-      );
+      return <Callout eyebrow="Watch out" title={block.title} text={block.text} />;
 
     case "note":
-      return (
-        <Callout
-          icon={<Info className="h-4 w-4" aria-hidden="true" />}
-          eyebrow="Note"
-          title={block.title}
-          text={block.text}
-          tone="note"
-        />
-      );
+      return <Callout eyebrow="Note" title={block.title} text={block.text} />;
 
     case "links":
       return (
-        <aside className="mt-8 rounded-2xl border border-border bg-card p-5 sm:p-6">
-          <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
-            <Zap className="h-3.5 w-3.5" aria-hidden="true" />
-            {block.title}
-          </p>
+        <aside className="rounded-lg border border-[#e3e9ef] px-5 py-5 sm:px-[1.625rem] sm:py-6">
+          <p className={EYEBROW}>{block.title}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {block.items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="flex h-full flex-col rounded-xl border border-border px-4 py-3.5 transition-colors hover:border-primary/50 hover:bg-accent/40"
+                  className="group flex h-full flex-col rounded-lg border border-[#e3e9ef] bg-white px-4 py-3.5 transition-colors duration-200 hover:border-[#329fd2]"
                 >
-                  <span className="flex items-center gap-1.5 font-semibold text-secondary">
+                  <span className="flex items-center gap-1.5 text-[0.9375rem] font-bold leading-snug text-[#122640]">
                     {item.label}
-                    <ArrowRight className="h-3.5 w-3.5 shrink-0 text-primary" aria-hidden="true" />
+                    <ArrowRight
+                      className="h-3.5 w-3.5 shrink-0 text-[#1a7cb0] transition-transform duration-200 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
                   </span>
-                  <span className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {item.blurb}
-                  </span>
+                  <span className="mt-1 text-sm leading-relaxed">{item.blurb}</span>
                 </Link>
               </li>
             ))}
@@ -219,39 +190,13 @@ function BlockView({
   }
 }
 
-function Callout({
-  icon,
-  eyebrow,
-  title,
-  text,
-  tone,
-}: {
-  icon: React.ReactNode;
-  eyebrow: string;
-  title: string;
-  text: string;
-  tone: "example" | "warning" | "note";
-}) {
+/** The design's one callout: a pale blue panel with a bold title. */
+function Callout({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
   return (
-    <aside
-      className={cn(
-        "mt-7 rounded-2xl border p-5 sm:p-6",
-        tone === "warning" && "border-destructive/25 bg-destructive/[0.04]",
-        tone === "example" && "border-border bg-muted/70",
-        tone === "note" && "border-primary/25 bg-accent/40",
-      )}
-    >
-      <p
-        className={cn(
-          "flex items-center gap-2 text-xs font-semibold uppercase tracking-wider",
-          tone === "warning" ? "text-destructive/80" : "text-primary",
-        )}
-      >
-        {icon}
-        {eyebrow}
-      </p>
-      <h3 className="mt-2.5 text-base leading-snug">{title}</h3>
-      <p className="mt-2 leading-relaxed text-muted-foreground">
+    <aside className={cn(PANEL, "flex flex-col gap-2")}>
+      <p className={EYEBROW}>{eyebrow}</p>
+      <p className="text-[0.9375rem] font-bold leading-snug text-[#122640]">{title}</p>
+      <p className="text-[0.9375rem] leading-[1.7]">
         <RichText text={text} />
       </p>
     </aside>
@@ -270,23 +215,23 @@ function Callout({
  */
 function TableBlock({ block }: { block: Extract<Block, { kind: "table" }> }) {
   return (
-    <figure className="mt-7">
+    <figure className="my-2">
       <div
         tabIndex={0}
         role="region"
         aria-label={block.caption ?? "Comparison table"}
-        className="overflow-x-auto rounded-2xl border border-border"
+        className="overflow-x-auto rounded-lg border border-[#e3e9ef]"
       >
-        <table className="w-full min-w-[42rem] border-collapse text-left text-sm">
+        <table className="w-full min-w-[38.75rem] border-collapse text-left text-sm leading-[1.55]">
           <thead>
-            <tr className="bg-secondary text-secondary-foreground">
+            <tr className="bg-[#122640] text-white">
               {block.columns.map((column, i) => (
                 <th
                   key={i}
                   scope="col"
                   className={cn(
-                    "px-4 py-3 align-bottom font-semibold",
-                    i === 0 && block.rowHeader && "sticky left-0 z-10 bg-secondary",
+                    "px-4 py-3.5 align-bottom font-semibold",
+                    i === 0 && block.rowHeader && "sticky left-0 z-10 bg-[#122640]",
                   )}
                 >
                   {column}
@@ -299,26 +244,20 @@ function TableBlock({ block }: { block: Extract<Block, { kind: "table" }> }) {
               /* The zebra stripe is computed rather than written as `even:`,
                  because the sticky first column paints its own opaque
                  background over the row's and the two have to agree. */
-              const zebra = r % 2 === 1 ? "bg-muted/50" : "bg-card";
+              const zebra = r % 2 === 1 ? "bg-[#f9fbfc]" : "bg-white";
               return (
-                <tr key={r} className={cn("border-t border-border", zebra)}>
+                <tr key={r} className={cn("border-t border-[#e3e9ef]", zebra)}>
                   {row.map((cell, c) =>
                     c === 0 && block.rowHeader ? (
                       <th
                         key={c}
                         scope="row"
-                        className={cn(
-                          "sticky left-0 z-10 px-4 py-3 align-top font-semibold text-secondary",
-                          zebra,
-                        )}
+                        className={cn("sticky left-0 z-10 px-4 py-3.5 align-top font-bold text-[#122640]", zebra)}
                       >
                         <RichText text={cell} />
                       </th>
                     ) : (
-                      <td
-                        key={c}
-                        className="px-4 py-3 align-top leading-relaxed text-muted-foreground"
-                      >
+                      <td key={c} className="px-4 py-3.5 align-top">
                         <RichText text={cell} />
                       </td>
                     ),
@@ -330,7 +269,7 @@ function TableBlock({ block }: { block: Extract<Block, { kind: "table" }> }) {
         </table>
       </div>
       {block.caption ? (
-        <figcaption className="mt-2.5 text-sm text-muted-foreground">{block.caption}</figcaption>
+        <figcaption className="mt-2.5 text-[0.8125rem] text-[#5b6778]">{block.caption}</figcaption>
       ) : null}
     </figure>
   );
