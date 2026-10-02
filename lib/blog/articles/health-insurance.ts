@@ -269,6 +269,22 @@ export const healthInsurance: Article = {
       kind: "p",
       text: "If an intermediary cannot answer those from the policy document, that tells you something about the advice you are receiving. Every one of them has a written answer.",
     },
+    {
+      kind: "links",
+      title: "Health insurance guides for Panchmahal",
+      items: [
+        {
+          href: "/blog/health-insurance-panchmahal-gujarat/",
+          label: "Health insurance in Panchmahal",
+          blurb: "How to compare policies across the district, town by town.",
+        },
+        {
+          href: "/blog/health-insurance-godhra-gujarat/",
+          label: "Health insurance in Godhra",
+          blurb: "Individual and family cover for households in the district headquarters.",
+        },
+      ],
+    },
   ],
   faqs: [
     {
@@ -300,7 +316,12 @@ export const healthInsurance: Article = {
       a: "Ask for the reason in writing, with the policy clause relied on. Insurers are required to have a grievance redressal process, and the Insurance Ombudsman is available where that does not resolve it. Keep every document you submitted and a record of the correspondence.",
     },
   ],
-  related: [],
+  related: [
+    "health-insurance-panchmahal-gujarat",
+    "health-insurance-godhra-gujarat",
+    "health-insurance-halol-gujarat",
+    "health-insurance-kalol-gujarat",
+  ],
   services: [
     {
       href: "/services/insurance/",
@@ -345,4 +366,5 @@ export const healthInsurance: Article = {
     title: "Want help reading a policy before you commit to it?",
     body: "Send us the Customer Information Sheet and we will go through the waiting periods, exclusions, co-payment and limits with you, so you know what you are buying.",
   },
+  healthCta: { location: "" },
 };

@@ -9,6 +9,11 @@ import gujarat from "@/public/blog/starting-a-business-in-gujarat.webp";
 import mcaProcess from "@/public/blog/mca-company-incorporation-process.webp";
 import structureGuide from "@/public/blog/business-structure-comparison-guide.webp";
 import healthInsurance from "@/public/blog/health-insurance-policy-india.webp";
+import hiPanchmahal from "@/public/blog/health-insurance-panchmahal-gujarat.webp";
+import hiGodhra from "@/public/blog/health-insurance-godhra-gujarat.webp";
+import hiHalol from "@/public/blog/health-insurance-halol-gujarat.webp";
+import hiKalol from "@/public/blog/health-insurance-kalol-gujarat.webp";
+import hiJambughoda from "@/public/blog/health-insurance-jambughoda-panchmahal.webp";
 
 /**
  * Featured images for the 2026 Business Guide Series.
@@ -64,7 +69,30 @@ export const BLOG_IMAGES = {
   },
   "health-insurance": {
     src: healthInsurance,
-    alt: "Diagram of a policy document beside a timeline marked at 30 days, 36 months and 60 months, the waiting period and moratorium milestones in a health insurance policy",
+    // The supplied artwork replaced the original timeline diagram, and the alt
+    // text had not followed it. It now describes what is actually shown.
+    alt: "Illustration of a man at a desk with a laptop beside the title Health Insurance Policy Guide in India, with icons for policy types, coverage, features to compare and the claim process",
+  },
+  // The Panchmahal health insurance cluster, drawn by scripts/gen-health-images.py.
+  "health-insurance-panchmahal": {
+    src: hiPanchmahal,
+    alt: "Diagram of a district hub labelled Panchmahal linked to four towns, Godhra, Halol, Kalol and Jambughoda, with a route onward to Vadodara",
+  },
+  "health-insurance-godhra": {
+    src: hiGodhra,
+    alt: "Diagram comparing a family floater, one shared sum insured across four family members, with individual policies giving each member a separate sum insured",
+  },
+  "health-insurance-halol": {
+    src: hiHalol,
+    alt: "Diagram of an employee covered by both an employer group policy that ends with the job and a personal policy that continues beyond it",
+  },
+  "health-insurance-kalol": {
+    src: hiKalol,
+    alt: "Timeline diagram of health insurance waiting periods marked at 30 days, the specific illness period, 36 months and the 60-month moratorium",
+  },
+  "health-insurance-jambughoda": {
+    src: hiJambughoda,
+    alt: "Diagram of a route from a home in a forested area to a network hospital in a larger town, with a branch to a reimbursement claim backed by bills and reports",
   },
 } as const satisfies Record<string, BlogImage>;
 

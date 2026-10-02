@@ -10,6 +10,11 @@ import { gujaratBusinessSetup } from "./articles/gujarat-business-setup";
 import { mcaProcess } from "./articles/mca-process";
 import { structureGuide } from "./articles/structure-guide";
 import { healthInsurance } from "./articles/health-insurance";
+import { healthInsurancePanchmahal } from "./articles/health-insurance-panchmahal";
+import { healthInsuranceGodhra } from "./articles/health-insurance-godhra";
+import { healthInsuranceHalol } from "./articles/health-insurance-halol";
+import { healthInsuranceKalol } from "./articles/health-insurance-kalol";
+import { healthInsuranceJambughoda } from "./articles/health-insurance-jambughoda";
 
 export type { Article, Block, Category, Source, ArticleAuthor } from "./types";
 export { CATEGORIES } from "./types";
@@ -37,6 +42,14 @@ export const ARTICLES: Article[] = [
   mcaProcess,
   structureGuide,
   healthInsurance,
+  // The Panchmahal health insurance cluster, outside the series. The India
+  // guide above is the topic pillar; the Panchmahal guide is the local pillar
+  // and the four town guides sit under it.
+  healthInsurancePanchmahal,
+  healthInsuranceGodhra,
+  healthInsuranceHalol,
+  healthInsuranceKalol,
+  healthInsuranceJambughoda,
 ];
 
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));

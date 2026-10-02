@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/gen-sitemap-manifest.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "check:blog": "node scripts/check-blog.mjs"
+    "check:blog": "node scripts/check-blog.mjs",
+    "sitemap:manifest": "node scripts/gen-sitemap-manifest.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
