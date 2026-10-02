@@ -148,7 +148,7 @@ export const healthInsurancePanchmahal: Article = {
     { kind: "h3", text: "Godhra" },
     {
       kind: "p",
-      text: "As the district headquarters, Godhra is where many families across Panchmahal go first for hospital treatment, with Vadodara for specialist care. The questions here are mostly household ones: individual or family floater cover, how much sum insured, and how to cover parents. See the practical guide to [health insurance in Godhra for families and individuals](/blog/health-insurance-godhra-gujarat/).",
+      text: "As the district headquarters, Godhra is where many families across Panchmahal go first for hospital treatment, with Vadodara for specialist care. The questions here are mostly household ones: individual or family floater cover, how much sum insured, and how to cover parents. See the practical guide to [health insurance in Godhra for families and individuals](/blog/health-insurance-godhra-gujarat/). For the villages of Godhra taluka, there is a separate [guide to buying health insurance in villages around Godhra](/blog/health-insurance-villages-godhra-panchmahal/).",
     },
     { kind: "h3", text: "Halol" },
     {

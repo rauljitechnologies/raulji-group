@@ -15,6 +15,10 @@ import { healthInsuranceGodhra } from "./articles/health-insurance-godhra";
 import { healthInsuranceHalol } from "./articles/health-insurance-halol";
 import { healthInsuranceKalol } from "./articles/health-insurance-kalol";
 import { healthInsuranceJambughoda } from "./articles/health-insurance-jambughoda";
+import { healthInsuranceVillagesGodhra } from "./articles/health-insurance-villages-godhra";
+import { healthInsuranceKakanpur } from "./articles/health-insurance-kakanpur";
+import { healthInsuranceTuwa } from "./articles/health-insurance-tuwa";
+import { healthInsuranceKantadi } from "./articles/health-insurance-kantadi";
 
 export type { Article, Block, Category, Source, ArticleAuthor } from "./types";
 export { CATEGORIES } from "./types";
@@ -50,6 +54,12 @@ export const ARTICLES: Article[] = [
   healthInsuranceHalol,
   healthInsuranceKalol,
   healthInsuranceJambughoda,
+  // Godhra taluka villages, phase 1: one grouped guide and three villages with
+  // a distinct angle each. More villages only where Search Console shows demand.
+  healthInsuranceVillagesGodhra,
+  healthInsuranceKakanpur,
+  healthInsuranceTuwa,
+  healthInsuranceKantadi,
 ];
 
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));

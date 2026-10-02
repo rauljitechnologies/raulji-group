@@ -125,6 +125,11 @@ const WORD_TARGETS = {
   "health-insurance-halol-gujarat": [2200, 2700],
   "health-insurance-kalol-gujarat": [2000, 2600],
   "health-insurance-jambughoda-panchmahal": [2200, 2700],
+  // Village guides: as long as is useful and no longer.
+  "health-insurance-villages-godhra-panchmahal": [1800, 2500],
+  "health-insurance-kakanpur-panchmahal": [900, 1500],
+  "health-insurance-tuwa-panchmahal": [900, 1500],
+  "health-insurance-kantadi-panchmahal": [900, 1500],
 };
 
 const paths = knownPaths();
@@ -230,6 +235,11 @@ for (const file of files) {
   const ctaCount = (src.match(/kind:\s*"insuranceCta"/g) ?? []).length;
   if (ctaCount > 2) fail(file, `${ctaCount} inline insurance CTAs; keep to two at most`);
 
+  // --- Cluster parent ----------------------------------------------------
+  const parentSlug = src.match(/\n\s*parent:\s*\{\s*slug:\s*"([^"]+)"/)?.[1];
+  if (parentSlug && !slugsInSeries.has(parentSlug)) fail(file, `parent slug does not exist: ${parentSlug}`);
+  if (parentSlug === slug) fail(file, "article is its own parent");
+
   // --- Internal links ----------------------------------------------------
   const internal = new Set();
   for (const m of src.matchAll(/\]\((\/[^)\s]*)\)/g)) internal.add(m[1]);
@@ -252,7 +262,11 @@ for (const file of files) {
 
   // --- Publication date --------------------------------------------------
   const published = src.match(/published:\s*"([^"]+)"/)?.[1];
-  if (published && new Date(published) > new Date()) {
+  // Compared as calendar dates in India time, where the site's dates are set.
+  // Comparing instants in UTC flagged an article dated today as "future"
+  // between midnight IST and 05:30 IST.
+  const todayIST = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Kolkata" });
+  if (published && published > todayIST) {
     fail(file, `published date is in the future: ${published}`);
   }
 

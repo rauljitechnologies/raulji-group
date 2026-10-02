@@ -249,7 +249,7 @@ export const healthInsuranceGodhra: Article = {
     },
     {
       kind: "p",
-      text: "For the district-wide picture, including how cover works for people in [Halol](/blog/health-insurance-halol-gujarat/) and in the forested areas around [Jambughoda](/blog/health-insurance-jambughoda-panchmahal/), see the guide to [health insurance in Panchmahal](/blog/health-insurance-panchmahal-gujarat/).",
+      text: "For the district-wide picture, including how cover works for people in [Halol](/blog/health-insurance-halol-gujarat/) and in the forested areas around [Jambughoda](/blog/health-insurance-jambughoda-panchmahal/), see the guide to [health insurance in Panchmahal](/blog/health-insurance-panchmahal-gujarat/). Families in the surrounding villages, from Kakanpur and Tuwa to Timba and Pandva, can follow the [step-by-step guide to buying health insurance in villages around Godhra](/blog/health-insurance-villages-godhra-panchmahal/).",
     },
     {
       kind: "p",

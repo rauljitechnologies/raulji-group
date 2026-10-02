@@ -148,6 +148,12 @@ export interface Article {
    * "Location:" line of the WhatsApp message.
    */
   healthCta?: { location: string };
+  /**
+   * The article this one sits under in a content cluster, shown as the middle
+   * breadcrumb (Home, Blog, parent, this article). Used by the village guides,
+   * which belong under the Panchmahal guide. `label` is the short crumb name.
+   */
+  parent?: { slug: string; label: string };
 }
 
 export const CATEGORIES = [

@@ -1,5 +1,5 @@
 """
-Featured images for the Panchmahal health insurance guides.
+Featured images for the Panchmahal health insurance guides and village guides.
 
 Same house style and helpers as scripts/gen-godhra-images.py: a navy field, a
 faint grid, brand line work, the Raulji mark and a line of type. Drawn
@@ -244,3 +244,80 @@ save(godhra(), "health-insurance-godhra-gujarat")
 save(halol(), "health-insurance-halol-gujarat")
 save(kalol(), "health-insurance-kalol-gujarat")
 save(jambughoda(), "health-insurance-jambughoda-panchmahal")
+
+
+# 6. Villages around Godhra: the buying steps in order, then the free look window.
+def villages():
+    im = base()
+    d = ImageDraw.Draw(im)
+    steps = ["Choose", "Proposal", "KYC", "Pay", "Policy"]
+    y, w, h = int(H * 0.16), 160, 84
+    x0 = int(W * 0.07)
+    gap = (int(W * 0.86) - len(steps) * w) // (len(steps) - 1)
+    for i, s in enumerate(steps):
+        x = x0 + i * (w + gap)
+        d.rounded_rectangle([x, y, x + w, y + h], radius=10, outline=blend(BLUE, 230 if i == 1 else 150), width=4 if i == 1 else 3)
+        d.text((x + 18, y + 28), s, font=font(21, True), fill=LABEL if i == 1 else SUB)
+        if i < len(steps) - 1:
+            arrow(d, (x + w + 6, y + h // 2), (x + w + gap - 6, y + h // 2), 170)
+    px = x0 + 4 * (w + gap)
+    fy = y + h + 40
+    d.rounded_rectangle([px - 190, fy, px + w, fy + 46], radius=23, fill=blend(BLUE, 160))
+    d.text((px - 172, fy + 11), "30-day free look", font=font(20, True), fill=WHITE)
+    return label(im, "Buying a policy, step by step", "From the proposal form to the free look period")
+
+
+# 7. Kakanpur: three generations, split into a floater and a separate policy.
+def kakanpur():
+    im = base()
+    d = ImageDraw.Draw(im)
+    top = int(H * 0.12)
+    lx = int(W * 0.07)
+    d.text((lx, top), "Family floater", font=font(21, True), fill=LABEL)
+    d.rounded_rectangle([lx, top + 38, lx + 520, top + 190], radius=14, outline=blend(BLUE, 225), width=4)
+    for k, r in enumerate([22, 22, 15, 15]):
+        dot(d, lx + 80 + k * 120, top + 100, r, 235)
+    rx = int(W * 0.62)
+    d.text((rx, top), "Parents' own policy", font=font(21, True), fill=SUB)
+    d.rounded_rectangle([rx, top + 38, rx + 300, top + 190], radius=14, outline=blend(BLUE, 160), width=3)
+    for k in range(2):
+        dot(d, rx + 90 + k * 120, top + 100, 22, 190)
+    return label(im, "One household, two policies", "A floater for the family, separate cover for parents")
+
+
+# 8. Tuwa: one bill, split into what the policy pays and what the family pays.
+def tuwa():
+    im = base()
+    d = ImageDraw.Draw(im)
+    x0, x1, y = int(W * 0.07), int(W * 0.93), int(H * 0.22)
+    split = int(x0 + (x1 - x0) * 0.76)
+    d.rounded_rectangle([x0, y, split, y + 70], radius=10, fill=blend(BLUE, 210))
+    d.rounded_rectangle([split + 8, y, x1, y + 70], radius=10, outline=blend(BLUE, 160), width=3)
+    d.text((x0 + 22, y + 22), "Paid by the policy", font=font(22, True), fill=WHITE)
+    d.text((split + 26, y + 22), "Paid by you", font=font(20, True), fill=LABEL)
+    for k, t in enumerate(["Co-payment", "Non-medical items", "Above a limit"]):
+        d.text((split + 26, y + 96 + k * 30), t, font=font(17), fill=SUB)
+    return label(im, "What a policy pays for", "And the share a family still pays at discharge")
+
+
+# 9. Kantadi: a parent's declared condition, its waiting period, then cover.
+def kantadi():
+    im = base()
+    d = ImageDraw.Draw(im)
+    x0, x1, y = int(W * 0.30), int(W * 0.92), int(H * 0.28)
+    lx = int(W * 0.07)
+    dot(d, lx + 60, y - 10, 30, 235)
+    d.text((lx, y + 40), "Parent, 60+", font=font(19, True), fill=LABEL)
+    d.text((lx, y + 68), "Condition declared", font=font(16), fill=SUB)
+    mid = int(x0 + (x1 - x0) * 0.55)
+    d.rounded_rectangle([x0, y - 22, mid, y + 4], radius=13, outline=blend(BLUE, 160), width=3)
+    d.rounded_rectangle([mid + 8, y - 22, x1, y + 4], radius=13, fill=blend(BLUE, 225))
+    d.text((x0, y + 24), "Waiting period, up to 36 months", font=font(17), fill=SUB)
+    d.text((mid + 8, y + 24), "Covered", font=font(18, True), fill=LABEL)
+    return label(im, "Cover for parents", "Declare every condition; cover follows the waiting period")
+
+
+save(villages(), "health-insurance-villages-godhra-panchmahal")
+save(kakanpur(), "health-insurance-kakanpur-panchmahal")
+save(tuwa(), "health-insurance-tuwa-panchmahal")
+save(kantadi(), "health-insurance-kantadi-panchmahal")
