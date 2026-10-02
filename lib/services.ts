@@ -9,6 +9,20 @@
  *    Indian Partnership Act 1932. Timelines are framed as estimates, never promises.
  */
 
+/**
+ * The two published professional fees, in one place.
+ *
+ * They were typed out separately in each service's meta description, cost
+ * table, package price and FAQ answer, and again in the general FAQs, so a fee
+ * change meant finding every copy. These are Raulji Group's own fee only:
+ * government filing fees, stamp duty and any tax are separate and are stated
+ * as such wherever these appear.
+ */
+export const PROFESSIONAL_FEE = {
+  pvt: "₹9,999",
+  llp: "₹7,999",
+} as const;
+
 export interface FAQ {
   q: string;
   a: string;
@@ -104,7 +118,7 @@ export const SERVICES: RegistrationService[] = [
     h1: "Private Limited Company Registration",
     title: "Private Limited Company Registration in India | Raulji Group",
     metaDescription:
-      "Private Limited Company registration in India: who it suits, documents, the SPICe+ process, costs and what follows incorporation. Professional fee from ₹9,999.",
+      `Private Limited Company registration in India: who it suits, documents, the SPICe+ process, costs and what follows incorporation. Professional fee from ${PROFESSIONAL_FEE.pvt}.`,
     eyebrow: "Business Registration",
     definition:
       "A Private Limited Company is a company incorporated under the Companies Act, 2013. It is a separate legal entity from its shareholders, who are liable only up to the amount unpaid on the shares they hold.",
@@ -168,7 +182,7 @@ export const SERVICES: RegistrationService[] = [
       {
         item: "Professional fee",
         setBy: "Raulji Group",
-        detail: "₹9,999, one time, for the work listed in the package.",
+        detail: `${PROFESSIONAL_FEE.pvt}, one time, for the work listed in the package.`,
       },
       {
         item: "Government filing fees",
@@ -293,7 +307,7 @@ export const SERVICES: RegistrationService[] = [
     governmentProcess:
       "Incorporation is processed by the Registrar of Companies under the Ministry of Corporate Affairs through the MCA portal. Applications are filed on the SPICe+ form and are examined by the Registrar, who may approve, raise a query or ask for resubmission. Government filing fees and stamp duty are charged separately by the MCA and vary with the state of the registered office and the authorised share capital.",
     pricing: {
-      amount: "₹9,999",
+      amount: PROFESSIONAL_FEE.pvt,
       note: "One-time professional fee. Government filing fees and stamp duty are charged separately and vary by state and authorised capital.",
       includes: [
         "Digital Signature Certificate for 2 directors",
@@ -334,7 +348,7 @@ export const SERVICES: RegistrationService[] = [
       },
       {
         q: "How much does registration cost?",
-        a: "Our professional fee for Private Limited Company registration is ₹9,999. Government filing fees and stamp duty are payable in addition and depend on the state of the registered office and the authorised share capital. We confirm the full expected figure in writing before any filing begins.",
+        a: `Our professional fee for Private Limited Company registration is ${PROFESSIONAL_FEE.pvt}. Government filing fees and stamp duty are payable in addition and depend on the state of the registered office and the authorised share capital. We confirm the full expected figure in writing before any filing begins.`,
       },
       {
         q: "Can a foreign national be a director?",
@@ -359,7 +373,7 @@ export const SERVICES: RegistrationService[] = [
     h1: "LLP Registration",
     title: "LLP Registration in India | Raulji Group",
     metaDescription:
-      "LLP registration in India: who it suits, documents, the FiLLiP process, the LLP Agreement, costs and annual filings. Professional fee from ₹7,999.",
+      `LLP registration in India: who it suits, documents, the FiLLiP process, the LLP Agreement, costs and annual filings. Professional fee from ${PROFESSIONAL_FEE.llp}.`,
     eyebrow: "Business Registration",
     definition:
       "A Limited Liability Partnership is a body corporate registered under the Limited Liability Partnership Act, 2008. It combines the internal flexibility of a partnership with limited liability for its partners.",
@@ -423,7 +437,7 @@ export const SERVICES: RegistrationService[] = [
       {
         item: "Professional fee",
         setBy: "Raulji Group",
-        detail: "₹7,999, one time, for the work listed in the package.",
+        detail: `${PROFESSIONAL_FEE.llp}, one time, for the work listed in the package.`,
       },
       {
         item: "Government filing fees",
@@ -548,7 +562,7 @@ export const SERVICES: RegistrationService[] = [
     governmentProcess:
       "LLP incorporation is handled by the Registrar of Companies under the Ministry of Corporate Affairs, through the MCA portal, under the Limited Liability Partnership Act, 2008. Name reservation is applied for via RUN-LLP and incorporation via the FiLLiP form. Government filing fees depend on the total capital contribution, and the stamp duty payable on the LLP Agreement is set by the state in which the LLP is registered.",
     pricing: {
-      amount: "₹7,999",
+      amount: PROFESSIONAL_FEE.llp,
       note: "One-time professional fee. Government filing fees and the stamp duty on the LLP Agreement are charged separately and vary by state and contribution.",
       includes: [
         "Digital Signature Certificate for 2 designated partners",
