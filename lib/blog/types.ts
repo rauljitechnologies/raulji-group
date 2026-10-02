@@ -102,8 +102,15 @@ export interface Article {
    * that a January slot must not be presented as a January publication date
    * when the article was written in September, so `published` below carries
    * the real date and this carries the series position.
+   *
+   * Absent on articles outside the series, such as the Godhra guides.
    */
-  seriesMonth: string;
+  seriesMonth?: string;
+  /**
+   * City slug for an article written for one local market. The city page
+   * lists the articles that name it, so the local cluster links itself.
+   */
+  city?: string;
   /** Real publication date, ISO. Never backdated. */
   published: string;
   updated: string;
@@ -136,6 +143,7 @@ export const CATEGORIES = [
   "Business Consulting",
   "Entrepreneurship",
   "Gujarat Business",
+  "Godhra Business Guides",
   "Insurance Awareness",
 ] as const;
 

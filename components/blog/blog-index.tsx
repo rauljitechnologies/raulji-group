@@ -9,6 +9,7 @@ import {
   Building2,
   Compass,
   FileText,
+  Landmark,
   MapPin,
   Search,
   ShieldCheck,
@@ -52,6 +53,7 @@ const TOPIC_ICONS: Record<string, LucideIcon> = {
   "Business Consulting": Compass,
   Entrepreneurship: TrendingUp,
   "Gujarat Business": MapPin,
+  "Godhra Business Guides": Landmark,
   "Insurance Awareness": ShieldCheck,
 };
 
@@ -292,7 +294,7 @@ export function BlogIndex({
           <div
             role="group"
             aria-label="Filter by subject"
-            className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6"
+            className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7"
           >
             {categories.map((label) => {
               const on = category === label;
@@ -349,7 +351,7 @@ export function BlogIndex({
           <div className="grid items-end gap-x-16 gap-y-5 lg:grid-cols-2">
             <div className="flex flex-col gap-3">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]">
-                2026 Business Guide Series
+                Business guides
               </p>
               <h2
                 id="all-h"
@@ -359,8 +361,9 @@ export function BlogIndex({
               </h2>
             </div>
             <p className="max-w-[32.5rem] text-pretty text-[0.9375rem] leading-[1.7] text-[#3a4656] lg:justify-self-end">
-              A nine-part series, January to September. The month on each guide is its place in the
-              series; every guide carries its real publication date.
+              The nine-part 2026 series runs January to September, and the month on those guides is
+              their place in it. Local guides for Godhra sit alongside. Every guide carries its real
+              publication date.
             </p>
           </div>
 
