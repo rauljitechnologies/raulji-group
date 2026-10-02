@@ -90,14 +90,18 @@ export function ArticlePage({ article }: { article: Article }) {
               <Link href="/blog/" className="hover:underline">
                 {article.category}
               </Link>
-              <span aria-hidden="true" className="text-border">
-                /
-              </span>
               {/* The series month is an editorial position, not a publication
                   date, and it is labelled as one. The real date is below. */}
-              <span className="font-medium text-muted-foreground">
-                2026 Business Guide Series: {article.seriesMonth}
-              </span>
+              {article.seriesMonth ? (
+                <>
+                  <span aria-hidden="true" className="text-border">
+                    /
+                  </span>
+                  <span className="font-medium text-muted-foreground">
+                    2026 Business Guide Series: {article.seriesMonth}
+                  </span>
+                </>
+              ) : null}
             </p>
 
             <h1 className={`mt-4 ${H1_LONG}`}>
@@ -349,7 +353,7 @@ export function ArticlePage({ article }: { article: Article }) {
         <Section>
           <SectionHeading
             eyebrow="Related reading"
-            title="More from the 2026 Business Guide Series"
+            title={article.seriesMonth ? "More from the 2026 Business Guide Series" : "Further reading"}
             align="left"
           />
           <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -112,7 +112,7 @@ export default async function BlogPage() {
       title: article.title,
       excerpt: article.excerpt,
       category: article.category,
-      seriesMonth: article.seriesMonth,
+      seriesMonth: article.seriesMonth ?? null,
       published: article.published,
       publishedLabel: formatArticleDate(article.published),
       readLabel: `${article.readMinutes} min read`,
@@ -167,7 +167,10 @@ export default async function BlogPage() {
   const stats = [
     { value: `${cards.length}`, label: "Guides published" },
     { value: `${categories.length}`, label: "Subjects covered" },
-    { value: `${ARTICLES.length}`, label: "Parts in the 2026 series" },
+    {
+      value: `${ARTICLES.filter((article) => article.seriesMonth).length}`,
+      label: "Parts in the 2026 series",
+    },
     ...(lastUpdated
       ? [
           {
@@ -187,7 +190,7 @@ export default async function BlogPage() {
         data={graph(
           breadcrumbSchema(crumbs),
           /* The series as a machine-readable list. Nothing is asserted here
-             beyond what the page shows: nine named guides, in order, each at
+             beyond what the page shows: the named guides, in order, each at
              its own URL. */
           {
             "@type": "Blog",

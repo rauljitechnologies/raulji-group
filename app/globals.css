@@ -199,6 +199,64 @@
     transform: scale(1.03);
   }
 
+  /* FAQ library motion (app/faqs). Deliberately small: a 12px rise and a fade,
+     ease-out, no bounce. Entrances run once on load with a short stagger set
+     through --d; the resource cards rise as they scroll in where the browser
+     supports scroll-driven animation and simply appear where it does not. */
+  .faq-rise {
+    animation: faq-rise 500ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--d, 0ms) both;
+  }
+
+  .faq-fade {
+    animation: faq-fade 400ms ease-out var(--d, 0ms) both;
+  }
+
+  @supports (animation-timeline: view()) {
+    .faq-reveal {
+      animation: faq-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+
+  /* Accordion panel. Grid rows animate from 0fr to 1fr, which gives a true
+     height transition without measuring in script. `visibility` flips at the
+     end of a close and the start of an open, so a closed answer is out of the
+     tab order and the accessibility tree but still in the HTML for crawlers. */
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      grid-template-rows 250ms ease-out,
+      opacity 200ms ease-out,
+      visibility 0s linear 250ms;
+  }
+
+  .faq-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      grid-template-rows 250ms ease-out,
+      opacity 250ms ease-out 50ms,
+      visibility 0s;
+  }
+
+  .faq-panel > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Reserved gutter so the fixed mobile action bar never overlaps the last section. */
   .mobile-bar-gutter {
     @apply pb-24 lg:pb-0;
@@ -219,9 +277,35 @@
     scroll-behavior: auto !important;
   }
 
+  .faq-rise,
+  .faq-fade,
+  .faq-reveal {
+    animation: none !important;
+  }
+
+  /* The rule above shortens durations but leaves delays, and the panel's
+     visibility and opacity are delayed. Open and close instantly instead. */
+  .faq-panel,
+  .faq-panel[data-open="true"] {
+    transition: none;
+  }
+
   .hover-lift:hover,
   .group:hover .photo-zoom,
   .group:focus-visible .photo-zoom {
     transform: none;
+  }
+}
+
+@keyframes faq-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes faq-fade {
+  from {
+    opacity: 0;
   }
 }
