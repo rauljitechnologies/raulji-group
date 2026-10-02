@@ -19,8 +19,10 @@
 
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+// fileURLToPath, not .pathname: the latter leaves spaces in the path as %20.
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const ARTICLE_DIR = join(ROOT, "lib/blog/articles");
 
 const errors = [];
@@ -105,9 +107,25 @@ const files = readdirSync(ARTICLE_DIR)
   .filter((f) => f.endsWith(".ts"))
   .sort();
 
-if (files.length !== 9) {
-  errors.push(`lib/blog/articles: expected 9 articles, found ${files.length}`);
+// Every article file must be registered in the index, or it is written but
+// never served. (This used to require exactly nine files, the original series.)
+const indexSrc = readFileSync(join(ROOT, "lib/blog/index.ts"), "utf8");
+for (const file of files) {
+  if (!indexSrc.includes(`./articles/${file.replace(/\.ts$/, "")}"`)) {
+    errors.push(`lib/blog/index.ts: ${file} is not imported, so it is never published`);
+  }
 }
+
+/* Word targets per article, [min, max]. The series default is 1500 to 2500;
+   the health insurance cluster carries the targets its brief set. */
+const WORD_TARGETS = {
+  "health-insurance-policy-guide-india": [1800, 2300],
+  "health-insurance-panchmahal-gujarat": [2500, 3200],
+  "health-insurance-godhra-gujarat": [2200, 2800],
+  "health-insurance-halol-gujarat": [2200, 2700],
+  "health-insurance-kalol-gujarat": [2000, 2600],
+  "health-insurance-jambughoda-panchmahal": [2200, 2700],
+};
 
 const paths = knownPaths();
 const seenTitles = new Map();
@@ -193,10 +211,24 @@ for (const file of files) {
     src.indexOf("\n  related:") === -1 ? src.length : src.indexOf("\n  related:"),
   );
   const words = literals(prose).join(" ").split(/\s+/).filter(Boolean).length;
-  const isInsurance = slug === "health-insurance-policy-guide-india";
-  const [min, max] = isInsurance ? [1800, 2300] : [1500, 2500];
+  const [min, max] = WORD_TARGETS[slug] ?? [1500, 2500];
   if (words < min) fail(file, `${words} words, below the ${min} target`);
   else if (words > max) warn(file, `${words} words, above the ${max} target`);
+
+  console.log(`info  ${file}: ${words} words`);
+
+  // --- Health insurance CTA ----------------------------------------------
+  /* The insurance enquiry panel routes to Dharmendrasinh Raulji's number. It
+     must never appear in an article about anything else. */
+  const hasHealthCta = /\n\s*healthCta:\s*\{/.test(src);
+  if (/kind:\s*"insuranceCta"/.test(src) && !hasHealthCta) {
+    fail(file, "insuranceCta block in an article without healthCta");
+  }
+  if (hasHealthCta && !/author:\s*INSURANCE_AUTHOR/.test(src)) {
+    fail(file, "healthCta on an article not bylined to INSURANCE_AUTHOR");
+  }
+  const ctaCount = (src.match(/kind:\s*"insuranceCta"/g) ?? []).length;
+  if (ctaCount > 2) fail(file, `${ctaCount} inline insurance CTAs; keep to two at most`);
 
   // --- Internal links ----------------------------------------------------
   const internal = new Set();

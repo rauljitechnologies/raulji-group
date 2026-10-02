@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, CircleAlert, Info, Lightbulb, Zap } from "lucide-react";
 
+import { HealthInsuranceCta } from "@/components/blog/health-insurance-cta";
 import { RichText } from "@/components/blog/rich-text";
 import type { Block } from "@/lib/blog";
 import { cn } from "@/lib/utils";
@@ -17,18 +18,40 @@ import { cn } from "@/lib/utils";
  * Headings carry scroll-mt so the fixed header never covers the one you jumped
  * to from the contents list.
  */
-export function ArticleBody({ blocks }: { blocks: Block[] }) {
+export function ArticleBody({
+  blocks,
+  healthCta,
+}: {
+  blocks: Block[];
+  /** The article's `healthCta`, passed through for `insuranceCta` blocks. */
+  healthCta?: { location: string; trackingLabel: string };
+}) {
   return (
     <div className="mt-10">
       {blocks.map((block, i) => (
-        <BlockView key={i} block={block} />
+        <BlockView key={i} block={block} healthCta={healthCta} />
       ))}
     </div>
   );
 }
 
-function BlockView({ block }: { block: Block }) {
+function BlockView({
+  block,
+  healthCta,
+}: {
+  block: Block;
+  healthCta?: { location: string; trackingLabel: string };
+}) {
   switch (block.kind) {
+    case "insuranceCta":
+      return healthCta ? (
+        <HealthInsuranceCta
+          variant="inline"
+          location={healthCta.location}
+          trackingLabel={healthCta.trackingLabel}
+        />
+      ) : null;
+
     case "h2":
       return (
         <h2

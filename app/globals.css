@@ -212,7 +212,8 @@
   }
 
   @supports (animation-timeline: view()) {
-    .faq-reveal {
+    .faq-reveal,
+    .cta-reveal {
       animation: faq-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% entry 45%;
@@ -279,7 +280,8 @@
 
   .faq-rise,
   .faq-fade,
-  .faq-reveal {
+  .faq-reveal,
+  .cta-reveal {
     animation: none !important;
   }
 

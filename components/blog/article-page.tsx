@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { ArticleBody } from "@/components/blog/article-body";
+import { HealthInsuranceCta } from "@/components/blog/health-insurance-cta";
 import { RichText } from "@/components/blog/rich-text";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { FaqAccordion } from "@/components/ui/faq-accordion";
@@ -56,6 +57,9 @@ export function ArticlePage({ article }: { article: Article }) {
   const contents = tableOfContents(article);
   const related = getRelated(article);
   const telHref = `tel:${article.author.phone.e164}`;
+  const healthCta = article.healthCta
+    ? { location: article.healthCta.location, trackingLabel: `health_insurance_${article.slug}` }
+    : undefined;
 
   return (
     <>
@@ -120,6 +124,13 @@ export function ArticlePage({ article }: { article: Article }) {
                 Published{" "}
                 <time dateTime={article.published}>{formatArticleDate(article.published)}</time>
               </span>
+              {article.updated !== article.published ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <CalendarDays className="h-4 w-4 text-primary" aria-hidden="true" />
+                  Updated{" "}
+                  <time dateTime={article.updated}>{formatArticleDate(article.updated)}</time>
+                </span>
+              ) : null}
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
                 {article.readMinutes} min read
@@ -193,7 +204,7 @@ export function ArticlePage({ article }: { article: Article }) {
               ) : null}
             </section>
 
-            <ArticleBody blocks={article.body} />
+            <ArticleBody blocks={article.body} healthCta={healthCta} />
 
             <section aria-labelledby="faqs" className="mt-14 border-t border-border pt-10">
               <h2 id="faqs" className="text-2xl md:text-[1.75rem]">
@@ -366,7 +377,16 @@ export function ArticlePage({ article }: { article: Article }) {
         </Section>
       ) : null}
 
-      {/* Article-specific CTA, carrying this article's own contact number. */}
+      {/* Article-specific CTA, carrying this article's own contact number.
+          Health insurance articles close on the health insurance route
+          instead; every other article keeps the group CTA unchanged. */}
+      {healthCta ? (
+        <HealthInsuranceCta
+          variant="final"
+          location={healthCta.location}
+          trackingLabel={healthCta.trackingLabel}
+        />
+      ) : (
       <section className="bg-background pb-16 pt-4 md:pb-20 md:pt-8">
         <div className="container-wide">
           <div className="rounded-3xl border border-primary/25 bg-accent/50 p-8 md:p-12">
@@ -410,6 +430,7 @@ export function ArticlePage({ article }: { article: Article }) {
           </div>
         </div>
       </section>
+      )}
     </>
   );
 }
