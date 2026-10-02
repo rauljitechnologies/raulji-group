@@ -11,7 +11,7 @@ import structureGuide from "@/public/blog/business-structure-comparison-guide.we
 import healthInsurance from "@/public/blog/health-insurance-policy-india.webp";
 import hiPanchmahal from "@/public/blog/health-insurance-panchmahal-gujarat.webp";
 import hiGodhra from "@/public/blog/health-insurance-godhra-gujarat.webp";
-import hiHalol from "@/public/blog/health-insurance-halol-gujarat.webp";
+import hiHalol from "@/public/blog/health-insurance-halol-gujarat.png";
 import hiKalol from "@/public/blog/health-insurance-kalol-gujarat.webp";
 import hiJambughoda from "@/public/blog/health-insurance-jambughoda-panchmahal.webp";
 import hiVillagesGodhra from "@/public/blog/health-insurance-villages-godhra-panchmahal.webp";
