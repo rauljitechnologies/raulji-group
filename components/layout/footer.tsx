@@ -76,6 +76,9 @@ const LEGAL_LINKS: FooterLink[] = [
   { name: "Privacy Policy", href: "/privacy/" },
   { name: "Terms of Service", href: "/terms/" },
   { name: "Disclaimer", href: "/disclaimer/" },
+  // Required by the CC BY-SA licence on the Rajkot photographs, not optional
+  // chrome: see lib/image-credits.ts.
+  { name: "Photograph Credits", href: "/image-credits/" },
 ];
 
 export function Footer() {

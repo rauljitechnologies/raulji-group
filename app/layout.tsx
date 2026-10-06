@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileActionBar } from "@/components/layout/mobile-action-bar";
 import { Analytics } from "@/components/layout/analytics";
+import { RouteProgress } from "@/components/layout/route-progress";
 import { LocationDrawerProvider } from "@/components/shared/location-drawer";
 import { JsonLd } from "@/components/ui/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
@@ -68,6 +69,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to main content
         </a>
+        {/* Feedback for the page switch, above the header and the in-page
+            scroll progress bars. Renders nothing until a navigation actually
+            takes long enough to need it. */}
+        <RouteProgress />
         {/* One location drawer for the whole site (spec section 44). */}
         <LocationDrawerProvider>
           <Header />

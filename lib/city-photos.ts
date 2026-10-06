@@ -45,6 +45,12 @@ import dwkGulls from "@/public/photos/cities/dwarka/boat-and-gulls.webp";
 
 import jndMaqbara from "@/public/photos/cities/junagadh/mahabat-maqbara.webp";
 
+import rjkAerial from "@/public/photos/cities/rajkot/city-aerial.webp";
+import rjkHighStreet from "@/public/photos/cities/rajkot/high-street-ring-road.webp";
+import rjkWatson from "@/public/photos/cities/rajkot/watson-museum.webp";
+import rjkAjiDam from "@/public/photos/cities/rajkot/aji-dam.webp";
+import rjkSkyline from "@/public/photos/cities/rajkot/skyline-dusk.webp";
+
 import cardAmreli from "@/public/photos/cities/cards/amreli.webp";
 import cardAnand from "@/public/photos/cities/cards/anand.webp";
 import cardAnkleshwar from "@/public/photos/cities/cards/ankleshwar.webp";
@@ -68,11 +74,23 @@ import cardNavsari from "@/public/photos/cities/cards/navsari.webp";
 import cardPalanpur from "@/public/photos/cities/cards/palanpur.webp";
 import cardPatan from "@/public/photos/cities/cards/patan.webp";
 import cardPorbandar from "@/public/photos/cities/cards/porbandar.webp";
-import cardRajkot from "@/public/photos/cities/cards/rajkot.webp";
 import cardSurat from "@/public/photos/cities/cards/surat.webp";
 import cardSurendranagar from "@/public/photos/cities/cards/surendranagar.webp";
 import cardValsad from "@/public/photos/cities/cards/valsad.webp";
 import cardVapi from "@/public/photos/cities/cards/vapi.webp";
+
+import csHero from "@/public/photos/city-services/hero-industry.webp";
+import csCta from "@/public/photos/city-services/cta-skyline.webp";
+import csMarket from "@/public/photos/city-services/market-fabrication.webp";
+import csSuits from "@/public/photos/city-services/suits-engineers.webp";
+import csDocuments from "@/public/photos/city-services/documents.webp";
+import csVendorForm from "@/public/photos/city-services/check-vendor-form.webp";
+import csAudit from "@/public/photos/city-services/check-audit.webp";
+import csIndustrialUnit from "@/public/photos/city-services/check-industrial-unit.webp";
+import csPartners from "@/public/photos/city-services/check-partners.webp";
+import csLlp from "@/public/photos/city-services/structure-llp.webp";
+import csPartnership from "@/public/photos/city-services/structure-partnership.webp";
+import csProprietorship from "@/public/photos/city-services/structure-proprietorship.webp";
 
 /**
  * Photographs for the city pages, taken from the "Raulji Ahmedabad" design
@@ -82,6 +100,13 @@ import cardVapi from "@/public/photos/cities/cards/vapi.webp";
  * self-hosted rather than hotlinked and the alt text describes the scene,
  * never "our office" or "our team". Master rule 1 prefers real photography;
  * swap a file under public/photos/cities/ when it exists.
+ *
+ * Rajkot is the exception to the sentence above. Unsplash has nothing of the
+ * city, so its five photographs come from Wikimedia Commons under CC BY-SA and
+ * were resized, cropped and converted to WebP here. That licence requires the
+ * photographer to be credited and the adaptation disclosed, which is what
+ * lib/image-credits.ts and /image-credits/ exist for. Add a Commons photograph
+ * to this file only together with its entry there.
  *
  * Two sets:
  * - CITY_PAGE_PHOTOS and OFFICE are generic office and meeting photography,
@@ -257,13 +282,57 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
       { kind: "District", photo: DWK_SETU },
     ],
   },
+  /*
+   * Rajkot. The aerial is the establishing shot, as the rooftops are for
+   * Ahmedabad: the city reads as the dense low-rise engineering town the page
+   * describes rather than as a skyline. The business areas are the industrial
+   * estates on the city's edge, which have no usable photography, so they take
+   * the generic office interiors the other cities use.
+   */
+  rajkot: {
+    hero: { src: rjkAerial, alt: "Aerial view across central Rajkot" },
+    gallery: [
+      { src: rjkAerial, alt: "Aerial view across central Rajkot", caption: "Saurashtra's engineering centre" },
+      {
+        src: rjkHighStreet,
+        alt: "Apartment and commercial towers on the 150 Feet Ring Road, Rajkot",
+        caption: "150 Feet Ring Road",
+      },
+      {
+        src: rjkWatson,
+        alt: "The stone facade of the Watson Museum, Rajkot",
+        caption: "Watson Museum, Jubilee Garden",
+      },
+      {
+        src: rjkAjiDam,
+        alt: "A wading bird on the water at Aji Dam at sunset",
+        caption: "Aji Dam, west of the city",
+      },
+    ],
+    environment: [
+      {
+        src: rjkHighStreet,
+        alt: "Apartment and commercial towers on the 150 Feet Ring Road, Rajkot",
+      },
+      { src: rjkWatson, alt: "The stone facade of the Watson Museum, Rajkot" },
+      OFFICE.desks,
+    ],
+    cta: rjkSkyline,
+    areas: [
+      { kind: "Industrial estate", photo: OFFICE.openPlan },
+      { kind: "Industrial estate", photo: OFFICE.cabin },
+      { kind: "Commercial", photo: OFFICE.desks },
+      { kind: "Commercial", photo: OFFICE.workstations },
+      { kind: "Manufacturing", photo: OFFICE.boardroom },
+    ],
+  },
 };
 
 /**
  * Photographs on the city cards: the Gujarat hub's city finder and the
  * "Other cities" list at the foot of every city page. Decorative (alt="").
  *
- * Ahmedabad, Vadodara, Gandhinagar, Junagadh and Dwarka use photographs
+ * Ahmedabad, Vadodara, Gandhinagar, Junagadh, Dwarka and Rajkot use photographs
  * checked as showing that city. Every other city uses the "Raulji Gujarat
  * v2" design's pick, at the owner's request (2026-10-01), knowing that some
  * of those do not show the named city (Surat, Godhra, Patan, Kalol and
@@ -276,6 +345,7 @@ export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   gandhinagar: CITY_PLACE_PHOTOS.gandhinagar.hero,
   junagadh: { src: jndMaqbara, alt: "Mahabat Maqbara, Junagadh" },
   dwarka: CITY_PLACE_PHOTOS.dwarka.gallery[2],
+  rajkot: CITY_PLACE_PHOTOS.rajkot.gallery[1],
   amreli: { src: cardAmreli, alt: "" },
   anand: { src: cardAnand, alt: "" },
   ankleshwar: { src: cardAnkleshwar, alt: "" },
@@ -299,9 +369,59 @@ export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   palanpur: { src: cardPalanpur, alt: "" },
   patan: { src: cardPatan, alt: "" },
   porbandar: { src: cardPorbandar, alt: "" },
-  rajkot: { src: cardRajkot, alt: "" },
   surat: { src: cardSurat, alt: "" },
   surendranagar: { src: cardSurendranagar, alt: "" },
   valsad: { src: cardValsad, alt: "" },
   vapi: { src: cardVapi, alt: "" },
+};
+
+/**
+ * Photographs for the city + service pages (/vadodara/private-limited-company-
+ * registration/ and the other nineteen), taken from the "Raulji Vadodara
+ * Private Limited" design (claude.ai/design).
+ *
+ * The design is one page, but the route that renders it is shared by all
+ * twenty pairings, so these are the slots the layout has rather than anything
+ * specific to Vadodara. `factors` is positional: every entry in
+ * lib/city-services.ts carries exactly four localFactors, and these sit
+ * alongside them in order.
+ *
+ * Unsplash again, so self-hosted rather than hotlinked, and the alt text
+ * describes the scene only. The design captioned two of these as Vadodara and
+ * one as "a Raulji Group advisor"; they are stock photographs of neither, and
+ * the same files are served on the Surat and Rajkot pages, so the claims are
+ * dropped here (master rule 1 and 13). The enquiry slot reuses the city
+ * pages' photograph rather than adding a near-duplicate of it.
+ */
+export const CITY_SERVICE_PHOTOS = {
+  /** Behind the hero and the closing call to action. Decorative. */
+  hero: csHero,
+  cta: csCta,
+  market: {
+    src: csMarket,
+    alt: "Fabrication work in progress at an engineering workshop",
+  },
+  suits: { src: csSuits, alt: "Engineers reviewing plant instrumentation" },
+  documents: {
+    src: csDocuments,
+    alt: "Identity and address documents laid out for a company filing",
+  },
+  enquiry: CITY_PAGE_PHOTOS.enquiry,
+  /** One per localFactors entry, in the order they are written. */
+  factors: [
+    { src: csVendorForm, alt: "A vendor registration form being read through" },
+    { src: csAudit, alt: "Annual accounts and audit papers on a desk" },
+    { src: csIndustrialUnit, alt: "An industrial unit on a manufacturing estate" },
+    { src: csPartners, alt: "Two business partners shaking hands" },
+  ] satisfies Photo[],
+  /** The "other structures" cards, by service slug. */
+  structures: {
+    "pvt-registration": CITY_PAGE_PHOTOS.structures["pvt-registration"],
+    "llp-registration": { src: csLlp, alt: "Business partners in a meeting" },
+    "partnership-registration": { src: csPartnership, alt: "A machining workshop" },
+    "proprietorship-registration": {
+      src: csProprietorship,
+      alt: "A one-person workspace with a desk and laptop",
+    },
+  } as Record<string, Photo>,
 };
