@@ -31,44 +31,74 @@ export const STRUCTURE_BY_SLUG: Record<string, StructureKind> = {
   "proprietorship-registration": "proprietorship",
 };
 
-const FIGURES: Record<
-  StructureKind,
-  {
-    /** Owner row: what the owners are called and how many are drawn. */
-    owners: { label: string; count: number };
-    /** The entity in the middle. */
-    entity: { label: string; sub: string };
-    /** Whether a liability shield is drawn between owners and the entity. */
-    shield: string | null;
-    /** The line under the figure. */
-    note: string;
-  }
-> = {
+export interface StructureFacts {
+  /** Owner row: what the owners are called and how many are drawn. */
+  owners: { label: string; count: number };
+  /** The entity in the middle. */
+  entity: { label: string; sub: string };
+  /** Whether a liability shield is drawn between owners and the entity. */
+  shield: string | null;
+  /** The line under the figure. */
+  note: string;
+  /**
+   * Who owns it and who runs it, as two cells. The SVG draws this as a row of
+   * owners above the entity; the city + service pages state it in words
+   * instead, so both read the same facts from here.
+   */
+  roles: { label: string; does: string }[];
+  /** The line under those cells, which the `note` above is too long to be. */
+  caption: string;
+}
+
+const FIGURES: Record<StructureKind, StructureFacts> = {
   pvt: {
     owners: { label: "Shareholders", count: 3 },
     entity: { label: "Private Limited Company", sub: "Separate legal entity" },
     shield: "Liability limited to unpaid share capital",
     note: "Directors run it. Shareholders own it. The two can be the same people.",
+    roles: [
+      { label: "Shareholders", does: "Own it" },
+      { label: "Directors", does: "Run it" },
+    ],
+    caption: "Directors and shareholders can be the same people.",
   },
   llp: {
     owners: { label: "Partners", count: 2 },
     entity: { label: "LLP", sub: "Separate legal entity" },
     shield: "Liability limited to agreed contribution",
     note: "Partners both own and run it, under the LLP agreement.",
+    roles: [
+      { label: "Partners", does: "Own and run it" },
+      { label: "Designated partners", does: "Answer for filings" },
+    ],
+    caption: "At least two designated partners, one of them resident in India.",
   },
   partnership: {
     owners: { label: "Partners", count: 2 },
     entity: { label: "Partnership Firm", sub: "Not a separate legal entity" },
     shield: null,
     note: "Partners are personally liable for the firm's debts, jointly and severally.",
+    roles: [
+      { label: "Partners", does: "Own and run it" },
+      { label: "The deed", does: "Sets the terms" },
+    ],
+    caption: "Partners are personally liable, jointly and severally.",
   },
   proprietorship: {
     owners: { label: "Proprietor", count: 1 },
     entity: { label: "The business", sub: "Same person in law" },
     shield: null,
     note: "The owner and the business are one. Personal assets are not separated.",
+    roles: [
+      { label: "Proprietor", does: "Owns and runs it" },
+      { label: "Personal assets", does: "Not separated" },
+    ],
+    caption: "The owner and the business are one. Personal assets are not separated.",
   },
 };
+
+/** The same facts the figure draws, for layouts that state them in words. */
+export const STRUCTURE_FACTS: Record<StructureKind, StructureFacts> = FIGURES;
 
 export function StructureDiagram({
   kind,

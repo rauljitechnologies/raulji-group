@@ -79,6 +79,19 @@ import cardSurendranagar from "@/public/photos/cities/cards/surendranagar.webp";
 import cardValsad from "@/public/photos/cities/cards/valsad.webp";
 import cardVapi from "@/public/photos/cities/cards/vapi.webp";
 
+import csHero from "@/public/photos/city-services/hero-industry.webp";
+import csCta from "@/public/photos/city-services/cta-skyline.webp";
+import csMarket from "@/public/photos/city-services/market-fabrication.webp";
+import csSuits from "@/public/photos/city-services/suits-engineers.webp";
+import csDocuments from "@/public/photos/city-services/documents.webp";
+import csVendorForm from "@/public/photos/city-services/check-vendor-form.webp";
+import csAudit from "@/public/photos/city-services/check-audit.webp";
+import csIndustrialUnit from "@/public/photos/city-services/check-industrial-unit.webp";
+import csPartners from "@/public/photos/city-services/check-partners.webp";
+import csLlp from "@/public/photos/city-services/structure-llp.webp";
+import csPartnership from "@/public/photos/city-services/structure-partnership.webp";
+import csProprietorship from "@/public/photos/city-services/structure-proprietorship.webp";
+
 /**
  * Photographs for the city pages, taken from the "Raulji Ahmedabad" design
  * (claude.ai/design) at the owner's request, 2026-10-01.
@@ -360,4 +373,55 @@ export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   surendranagar: { src: cardSurendranagar, alt: "" },
   valsad: { src: cardValsad, alt: "" },
   vapi: { src: cardVapi, alt: "" },
+};
+
+/**
+ * Photographs for the city + service pages (/vadodara/private-limited-company-
+ * registration/ and the other nineteen), taken from the "Raulji Vadodara
+ * Private Limited" design (claude.ai/design).
+ *
+ * The design is one page, but the route that renders it is shared by all
+ * twenty pairings, so these are the slots the layout has rather than anything
+ * specific to Vadodara. `factors` is positional: every entry in
+ * lib/city-services.ts carries exactly four localFactors, and these sit
+ * alongside them in order.
+ *
+ * Unsplash again, so self-hosted rather than hotlinked, and the alt text
+ * describes the scene only. The design captioned two of these as Vadodara and
+ * one as "a Raulji Group advisor"; they are stock photographs of neither, and
+ * the same files are served on the Surat and Rajkot pages, so the claims are
+ * dropped here (master rule 1 and 13). The enquiry slot reuses the city
+ * pages' photograph rather than adding a near-duplicate of it.
+ */
+export const CITY_SERVICE_PHOTOS = {
+  /** Behind the hero and the closing call to action. Decorative. */
+  hero: csHero,
+  cta: csCta,
+  market: {
+    src: csMarket,
+    alt: "Fabrication work in progress at an engineering workshop",
+  },
+  suits: { src: csSuits, alt: "Engineers reviewing plant instrumentation" },
+  documents: {
+    src: csDocuments,
+    alt: "Identity and address documents laid out for a company filing",
+  },
+  enquiry: CITY_PAGE_PHOTOS.enquiry,
+  /** One per localFactors entry, in the order they are written. */
+  factors: [
+    { src: csVendorForm, alt: "A vendor registration form being read through" },
+    { src: csAudit, alt: "Annual accounts and audit papers on a desk" },
+    { src: csIndustrialUnit, alt: "An industrial unit on a manufacturing estate" },
+    { src: csPartners, alt: "Two business partners shaking hands" },
+  ] satisfies Photo[],
+  /** The "other structures" cards, by service slug. */
+  structures: {
+    "pvt-registration": CITY_PAGE_PHOTOS.structures["pvt-registration"],
+    "llp-registration": { src: csLlp, alt: "Business partners in a meeting" },
+    "partnership-registration": { src: csPartnership, alt: "A machining workshop" },
+    "proprietorship-registration": {
+      src: csProprietorship,
+      alt: "A one-person workspace with a desk and laptop",
+    },
+  } as Record<string, Photo>,
 };

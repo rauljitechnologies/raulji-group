@@ -276,10 +276,10 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Private Limited Company Registration in Vadodara",
     title: "Private Limited Company Registration in Vadodara | Raulji Group",
     metaDescription:
-      "Register a Private Limited Company in Vadodara with Raulji Group, based in the city. Incorporation and MCA filing support for industrial businesses.",
+      "Private limited company registration in Vadodara by Raulji Group, based in the city. Incorporation support for engineering, fabrication and industrial vendors.",
     localContext: [
       "Vadodara is where Raulji Group works from, so this is the market we see most closely. Company registration here looks quite different from Ahmedabad. Very little of it is investor-driven. Most of it is customer-driven.",
-      "The city's economy sits around the Gujarat Refinery at Koyali, GSFC and the petrochemical complex, with a dense supply chain of engineering, fabrication, instrumentation and industrial services vendors in Makarpura, Savli and Nandesari. Procurement teams at those large buyers frequently want a vendor to be a registered entity on the MCA record before onboarding. That requirement, rather than any funding plan, is what puts a two-person engineering firm in front of an incorporation decision.",
+      "The city's economy sits around the Gujarat Refinery at Koyali, GSFC and the petrochemical complex, with a dense supply chain of engineering, fabrication, instrumentation and industrial services vendors in Makarpura, Savli and Nandesari. Procurement teams at those large buyers frequently want a vendor to be a registered entity on the official company register before onboarding. That requirement, rather than any funding plan, is what puts a two-person engineering firm in front of an incorporation decision.",
       "The other common pattern is the experienced plant engineer who leaves after fifteen or twenty years to set up a services or fabrication business, often with a former colleague. They have the technical credibility and the contacts; what they usually need is an entity their old employer's procurement system will accept.",
     ],
     whoLocally: [
@@ -287,16 +287,16 @@ export const CITY_SERVICES: CityServiceContent[] = [
       "Instrumentation, inspection and industrial services firms that need to pass vendor onboarding",
       "Former plant engineers setting up a technical services business with a partner",
       "Manufacturing units in Makarpura, Savli or Nandesari investing in plant on credit",
-      "Pharmaceutical and speciality manufacturers whose customers verify the MCA record",
+      "Pharmaceutical and speciality manufacturers whose customers verify the company record",
     ],
     localFactors: [
       {
         title: "Check the vendor form before you choose the structure",
-        body: "If the reason for incorporating is a specific buyer's onboarding requirement, read that buyer's vendor registration form first. Some accept any MCA-registered entity, which an LLP satisfies at much lower annual cost. Some specifically require a company, and a few require audited accounts for a stated number of years, which no newly formed entity can produce. This is the single most useful thing to check before spending money.",
+        body: "If the reason for incorporating is a specific buyer's onboarding requirement, read that buyer's vendor registration form first. Some accept any registered entity, which an LLP satisfies at much lower annual cost. Some specifically require a company, and a few require audited accounts for a stated number of years, which no newly formed entity can produce. This is the single most useful thing to check before spending money.",
       },
       {
         title: "Audit from year one is a real cost for a small vendor",
-        body: "A Private Limited Company needs statutory audit from its first financial year whatever it turns over, plus annual ROC filings, board meetings and minutes. For a two-person engineering firm with a handful of purchase orders, that is a meaningful annual overhead. It is worth carrying only if the structure is actually buying you something.",
+        body: "A Private Limited Company needs statutory audit from its first financial year whatever it turns over, plus annual filings, board meetings and minutes. For a two-person engineering firm with a handful of purchase orders, that is a meaningful annual overhead. It is worth carrying only if the structure is actually buying you something.",
       },
       {
         title: "A registered office in a GIDC estate needs proper papers",
@@ -318,7 +318,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
       },
       {
         q: "I am one person starting an engineering consultancy in Vadodara. Do I need a company?",
-        a: "Probably not. A Private Limited Company needs two directors and two shareholders, so a single founder cannot form one alone. If your clients are the large plants and they need an entity on the MCA record, an LLP needs two partners as well. If you are billing as an individual, a proprietorship with GST registration is often all the plants actually require to raise an invoice.",
+        a: "Probably not. A Private Limited Company needs two directors and two shareholders, so a single founder cannot form one alone. If your clients are the large plants and they need a registered entity, an LLP needs two partners as well. If you are billing as an individual, a proprietorship with GST registration is often all the plants actually require to raise an invoice.",
       },
     ],
   },
