@@ -51,6 +51,12 @@ import rjkWatson from "@/public/photos/cities/rajkot/watson-museum.webp";
 import rjkAjiDam from "@/public/photos/cities/rajkot/aji-dam.webp";
 import rjkSkyline from "@/public/photos/cities/rajkot/skyline-dusk.webp";
 
+import gdhLake from "@/public/photos/cities/godhra/ramsagar-lake.webp";
+import gdhRailway from "@/public/photos/cities/godhra/railway-junction.webp";
+import gdhBusStand from "@/public/photos/cities/godhra/bus-stand.webp";
+import gdhTemple from "@/public/photos/cities/godhra/jain-temple.webp";
+import gdhPark from "@/public/photos/cities/godhra/nehru-park.webp";
+
 import cardAmreli from "@/public/photos/cities/cards/amreli.webp";
 import cardAnand from "@/public/photos/cities/cards/anand.webp";
 import cardAnkleshwar from "@/public/photos/cities/cards/ankleshwar.webp";
@@ -60,7 +66,6 @@ import cardBhuj from "@/public/photos/cities/cards/bhuj.webp";
 import cardBotad from "@/public/photos/cities/cards/botad.webp";
 import cardDahod from "@/public/photos/cities/cards/dahod.webp";
 import cardGandhidham from "@/public/photos/cities/cards/gandhidham.webp";
-import cardGodhra from "@/public/photos/cities/cards/godhra.webp";
 import cardHalol from "@/public/photos/cities/cards/halol.webp";
 import cardHimmatnagar from "@/public/photos/cities/cards/himmatnagar.webp";
 import cardJamnagar from "@/public/photos/cities/cards/jamnagar.webp";
@@ -101,12 +106,12 @@ import csProprietorship from "@/public/photos/city-services/structure-proprietor
  * never "our office" or "our team". Master rule 1 prefers real photography;
  * swap a file under public/photos/cities/ when it exists.
  *
- * Rajkot is the exception to the sentence above. Unsplash has nothing of the
- * city, so its five photographs come from Wikimedia Commons under CC BY-SA and
- * were resized, cropped and converted to WebP here. That licence requires the
- * photographer to be credited and the adaptation disclosed, which is what
- * lib/image-credits.ts and /image-credits/ exist for. Add a Commons photograph
- * to this file only together with its entry there.
+ * Rajkot and Godhra are the exception to the sentence above. Unsplash has
+ * nothing of either, so their photographs come from Wikimedia Commons under
+ * CC BY-SA and were resized, cropped and converted to WebP here. That licence
+ * requires the photographer to be credited and the adaptation disclosed, which
+ * is what lib/image-credits.ts and /image-credits/ exist for. Add a Commons
+ * photograph to this file only together with its entry there.
  *
  * Two sets:
  * - CITY_PAGE_PHOTOS and OFFICE are generic office and meeting photography,
@@ -326,18 +331,61 @@ export const CITY_PLACE_PHOTOS: Record<string, CityPlacePhotos> = {
       { kind: "Manufacturing", photo: OFFICE.boardroom },
     ],
   },
+  /*
+   * Godhra. The lake is the establishing shot because it is the only one that
+   * shows the town itself rather than a single building, and its open water
+   * carries the hero's text. The junction and the bus stand are the two that
+   * matter commercially: the page's own copy leads on the rail junction and
+   * the distribution economy around it. The business areas are the market,
+   * Station Road, the GIDC and the Halol highway belt, none of which has
+   * usable photography, so they take the generic office interiors.
+   */
+  godhra: {
+    hero: { src: gdhLake, alt: "Ramsagar Lake, Godhra, with the town behind it" },
+    gallery: [
+      {
+        src: gdhLake,
+        alt: "Ramsagar Lake, Godhra, with the town behind it",
+        caption: "Ramsagar Lake",
+      },
+      {
+        src: gdhRailway,
+        alt: "A train at the platform at Godhra junction railway station",
+        caption: "A rail junction town",
+      },
+      {
+        src: gdhBusStand,
+        alt: "State transport buses lined up at Godhra bus stand",
+        caption: "Transport and distribution",
+      },
+      { ...OFFICE.desks, caption: "Trading and services" },
+    ],
+    environment: [
+      { src: gdhRailway, alt: "A train at the platform at Godhra junction railway station" },
+      { src: gdhTemple, alt: "The marble facade of the Vasupujya Jain temple, Godhra" },
+      OFFICE.desks,
+    ],
+    cta: gdhPark,
+    areas: [
+      { kind: "Commercial", photo: OFFICE.desks },
+      { kind: "Trade & distribution", photo: OFFICE.workstations },
+      { kind: "Industrial estate", photo: OFFICE.openPlan },
+      { kind: "Industrial corridor", photo: OFFICE.cabin },
+    ],
+  },
+
 };
 
 /**
  * Photographs on the city cards: the Gujarat hub's city finder and the
  * "Other cities" list at the foot of every city page. Decorative (alt="").
  *
- * Ahmedabad, Vadodara, Gandhinagar, Junagadh, Dwarka and Rajkot use photographs
- * checked as showing that city. Every other city uses the "Raulji Gujarat
- * v2" design's pick, at the owner's request (2026-10-01), knowing that some
- * of those do not show the named city (Surat, Godhra, Patan, Kalol and
- * Amreli among them). Replace a file under public/photos/cities/cards/ with
- * a real photograph of that city when one is available.
+ * Ahmedabad, Vadodara, Gandhinagar, Junagadh, Dwarka, Rajkot and Godhra use
+ * photographs checked as showing that city. Every other city uses the "Raulji
+ * Gujarat v2" design's pick, at the owner's request (2026-10-01), knowing that
+ * some of those do not show the named city (Surat, Patan, Kalol and Amreli
+ * among them). Replace a file under public/photos/cities/cards/ with a real
+ * photograph of that city when one is available.
  */
 export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   ahmedabad: CITY_PLACE_PHOTOS.ahmedabad.hero,
@@ -355,7 +403,7 @@ export const CITY_CARD_PHOTOS: Record<string, Photo> = {
   botad: { src: cardBotad, alt: "" },
   dahod: { src: cardDahod, alt: "" },
   gandhidham: { src: cardGandhidham, alt: "" },
-  godhra: { src: cardGodhra, alt: "" },
+  godhra: CITY_PLACE_PHOTOS.godhra.gallery[0],
   halol: { src: cardHalol, alt: "" },
   himmatnagar: { src: cardHimmatnagar, alt: "" },
   jamnagar: { src: cardJamnagar, alt: "" },

@@ -2,11 +2,11 @@
  * Attribution for the photographs on this site that require it.
  *
  * Most of the photography here is Unsplash, whose licence asks for no credit.
- * The Rajkot city photographs are the exception: Unsplash has nothing of the
- * city, so they come from Wikimedia Commons under Creative Commons BY-SA.
- * That licence does require credit, and it requires any adaptation to be
- * disclosed — each of these was resized, cropped to the layout and re-encoded
- * as WebP, so the note below says so.
+ * The Rajkot and Godhra city photographs are the exception: Unsplash has
+ * nothing of either, so they come from Wikimedia Commons under Creative
+ * Commons BY-SA. That licence does require credit, and it requires any
+ * adaptation to be disclosed — each of these was resized, cropped to the
+ * layout and re-encoded as WebP, so the note below says so.
  *
  * Keep this in step with lib/city-photos.ts: a Commons photograph added there
  * without an entry here is published without the attribution its licence
@@ -64,5 +64,45 @@ export const IMAGE_CREDITS: ImageCredit[] = [
     license: "CC BY-SA 4.0",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Beautiful_sky_of_Rajkot_city.jpg",
+  },
+  {
+    title: "Ramsagar Lake Godhra",
+    author: "Panchalsonasan",
+    usedOn: "Godhra \u2014 page hero, photograph strip and city card",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Ramsagar_Lake_Godhra.jpg",
+  },
+  {
+    title: "Godhra junction railway station",
+    author: "Arjuncm3",
+    usedOn: "Godhra \u2014 photograph strip and business environment",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Godhra_junction_railway_station.JPG",
+  },
+  {
+    title: "Godhra Bus Stand (adjusted)",
+    author: "Vanrajsinh9714",
+    usedOn: "Godhra \u2014 photograph strip",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Godhra_Bus_Stand_(adjusted).jpg",
+  },
+  {
+    title: "Vasupujya Jain temple, Godhra",
+    author: "Nizil Shah",
+    usedOn: "Godhra \u2014 business environment",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Vasupujya_Jain_temple,_Godhra.jpg",
+  },
+  {
+    title: "Nehru Park Godhra",
+    author: "Gazal world",
+    usedOn: "Godhra \u2014 closing call to action",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Nehru_Park_Godhra.jpg",
   },
 ];
