@@ -7,6 +7,9 @@ In Vercel → Project → Settings → Environment Variables:
 - `RAULJI_CRM_API_KEY` — **rotate this in the CRM first.** The old key was public.
 - `RAULJI_CRM_BASE` — optional
 - `SUPABASE_URL`, `SUPABASE_ANON_KEY` — optional, for blog and team
+- `NEXT_PUBLIC_GTM_ID` — Google Tag Manager container, `GTM-MSW79R28`.
+  Required for analytics on the live site: without it the app still pushes
+  its events onto `dataLayer`, but no container loads to route them.
 
 ## 2. Domain
 
