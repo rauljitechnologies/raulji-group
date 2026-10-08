@@ -65,6 +65,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en-IN" className={jakarta.variable}>
       <body>
+        {/* Google Tag Manager. Placed first, immediately after the opening
+            <body> tag, as GTM's own install instructions specify. The
+            container itself is loaded afterInteractive, so this position
+            costs nothing against LCP. */}
+        <Analytics />
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
         <a href="#main" className="skip-link">
           Skip to main content
@@ -82,7 +87,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <MobileActionBar />
         </LocationDrawerProvider>
-        <Analytics />
       </body>
     </html>
   );
