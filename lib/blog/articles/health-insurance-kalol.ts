@@ -17,10 +17,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceKalol: Article = {
   slug: "health-insurance-kalol-gujarat",
-  title: "Health Insurance in Kalol, Gujarat: Coverage, Waiting Periods and Claims Guide",
-  metaTitle: "Health Insurance in Kalol, Gujarat | Policy & Claims Guide",
+  title: "Health Insurance in Kalol (Panchmahal): Claims Guide",
+  metaTitle: "Health Insurance in Kalol (Panchmahal): Claims Guide",
   metaDescription:
-    "Health insurance in Kalol, Panchmahal: how waiting periods run in practice, cashless and reimbursement claims step by step, and what to do if a claim is refused.",
+    "Health insurance in Kalol, Panchmahal: how waiting periods work in practice, cashless and reimbursement claims step by step, and what to do if one is refused.",
   excerpt:
     "A practical guide for families in Kalol, Panchmahal, focused on the two things that decide whether a policy pays: how its waiting periods run, and how its claims work.",
   category: "Insurance Awareness",
@@ -50,7 +50,7 @@ export const healthInsuranceKalol: Article = {
     "What to do if a claim is refused, and how renewal and portability protect your credit",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: how do health insurance claims work in Kalol?",
     body: "**What decides whether a health insurance claim is paid?** Three things decide most outcomes: whether the condition is past its waiting period, whether it was disclosed when the policy was bought, and whether the claim follows the policy's procedure. A waiting period runs from the start of continuous cover, up to 36 months for pre-existing diseases under the IRDAI rules. A claim is cashless at a network hospital with the insurer's authorisation, or by reimbursement elsewhere, with documents submitted within the policy's time limit.",
     points: [
       "This guide is about Kalol in Panchmahal district, near Halol. The policy terms it explains apply in the same way anywhere in Gujarat.",

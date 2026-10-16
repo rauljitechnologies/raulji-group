@@ -3,10 +3,10 @@ import { GROUP_AUTHOR } from "../authors";
 
 export const documentsRequired: Article = {
   slug: "documents-required-company-registration-india",
-  title: "Documents Required for Company Registration in India: A Practical Guide",
-  metaTitle: "Documents Required for Company Registration in India | Raulji Group",
+  title: "Documents Required for Company Registration in India",
+  metaTitle: "Documents Required for Company Registration in India",
   metaDescription:
-    "The identity, address and registered office documents needed to incorporate a company in India, and the problems that cause most resubmissions.",
+    "The identity, address and registered office documents you need to incorporate a company in India, and the document problems that cause most resubmissions.",
   excerpt:
     "Most incorporation delays are document problems, not government problems. Here is what is asked for, why each item is asked for, and where applications usually come back.",
   category: "Company Registration",
@@ -34,7 +34,7 @@ export const documentsRequired: Article = {
     "The specific document problems that cause resubmission",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: which documents do you need?",
     body: "Company incorporation in India draws on four groups of documents: identity proof for each director and subscriber, address proof for each of them, proof of the registered office with the owner's consent where it is not owned, and the declarations and constitutional documents generated as part of the filing itself.",
     points: [
       "Every proposed director and subscriber needs PAN, Aadhaar, a recent address proof and a photograph. A Digital Signature Certificate is needed for everyone who signs.",

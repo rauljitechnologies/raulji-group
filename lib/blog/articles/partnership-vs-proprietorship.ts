@@ -3,10 +3,10 @@ import { GROUP_AUTHOR } from "../authors";
 
 export const partnershipVsProprietorship: Article = {
   slug: "partnership-vs-proprietorship-india",
-  title: "Partnership Firm vs Proprietorship: Understanding the Difference Before Starting a Business",
-  metaTitle: "Partnership Firm vs Proprietorship in India | Raulji Group",
+  title: "Partnership Firm vs Proprietorship: Key Differences",
+  metaTitle: "Partnership Firm vs Proprietorship: Key Differences | Raulji",
   metaDescription:
-    "How a partnership firm and a sole proprietorship differ on ownership, liability, registration, documentation and continuity, and when each fits.",
+    "How a partnership firm and a sole proprietorship differ on ownership, liability, registration, paperwork and continuity, and when each one is the better fit.",
   excerpt:
     "Neither is a separate legal entity, and in both the owners carry unlimited liability. The differences that matter are about how many people are involved and what is written down.",
   category: "Business Registration",
@@ -33,7 +33,7 @@ export const partnershipVsProprietorship: Article = {
     "The documents each one needs, and the one document that matters most",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: partnership firm or proprietorship?",
     body: "A proprietorship is one person trading in their own name in law. A partnership firm is two or more people trading under an agreement between them. Neither creates a separate legal entity, and in both the owners are personally liable for the business without limit.",
     points: [
       "**Proprietorship**: one owner, complete control, no incorporation filing, and full personal liability. The business and the owner are the same person in law.",
@@ -273,7 +273,7 @@ export const partnershipVsProprietorship: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "how-to-choose-business-structure-india",
     "common-business-registration-mistakes-india",
     "business-structure-guide-new-entrepreneurs-india",
   ],

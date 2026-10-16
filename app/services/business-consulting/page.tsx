@@ -58,9 +58,9 @@ import type { FAQ } from "@/lib/services";
 const PATH = "/services/business-consulting/";
 
 export const metadata = pageMeta({
-  title: "Business Consulting Services | Raulji Group",
+  title: "Business Consultant in Vadodara | Raulji Group",
   description:
-    "Business consulting from Raulji Group: structure, planning, growth and operational guidance for founders and business owners in Gujarat and across India.",
+    "Advice on business structure, restructuring, planning and growth for founders and family businesses in Gujarat. Fees quoted once scope is clear. Talk to us.",
   path: PATH,
   ogHeadline: "Business Consulting Services",
 });
@@ -203,7 +203,7 @@ const PANEL: Record<string, ImageSlot> = {
 };
 
 const GUIDES = [
-  "how-to-choose-business-structure-india-2026",
+  "how-to-choose-business-structure-india",
   "business-structure-guide-new-entrepreneurs-india",
   "common-business-registration-mistakes-india",
 ];

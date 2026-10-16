@@ -126,10 +126,13 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
               <Dash />
               Scope
             </p>
-            {/* On a technology page the list describes another brand's work,
-                so the heading has to say so (master rule 14). */}
+            {/* Page-specific, from the service data. A shared string here was
+                the same H2 on every secondary service page, which the audit
+                flagged as a generic duplicate (TF-16). On a technology page it
+                also has to name the other brand (master rule 14), which the
+                data now does. */}
             <h2 id="cov-h" className={H2}>
-              {isTechnology ? "What Raulji Technologies covers" : "What this covers"}
+              {service.coversHeading}
             </h2>
             {service.note ? (
               <p className="mt-2 flex gap-3 rounded-lg border border-[#e3e9ef] bg-[#f4f7fa] p-5 text-[0.9375rem] leading-[1.7]">
@@ -170,7 +173,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
           <SectionHead
             eyebrow="Business registration"
             id="reg-h"
-            title="Registering a business?"
+            title={service.registrationHeading}
             lead={
               <>
                 Each structure page covers who it suits, documents, process and cost. Not sure

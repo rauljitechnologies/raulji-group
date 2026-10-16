@@ -21,9 +21,9 @@ import { H1, H2 } from "@/lib/typography";
 import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
 
 export const metadata = pageMeta({
-  title: "Business Registration Services Across Gujarat | Raulji Group",
+  title: "Business Registration in Gujarat: All 33 Districts | Raulji",
   description:
-    "Private Limited, LLP, Partnership and Proprietorship registration support for businesses across all 33 districts of Gujarat. Raulji Group, Vadodara.",
+    "Register a Pvt Ltd company, LLP, partnership or proprietorship anywhere in Gujarat, from Bhuj to Vapi. Same process statewide. Find your district's page.",
   path: "/gujarat/",
   ogHeadline: "Business Registration Services Across Gujarat",
 });
@@ -81,7 +81,7 @@ const STATE_FACTS: { title: string; body: string; icon: LucideIcon }[] = [
 
 const GUIDES = [
   "starting-business-gujarat-registration-guide",
-  "how-to-choose-business-structure-india-2026",
+  "how-to-choose-business-structure-india",
   "common-business-registration-mistakes-india",
 ]
   .map((slug) => getArticle(slug))

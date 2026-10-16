@@ -18,9 +18,9 @@ import { INSURANCE_AUTHOR } from "../authors";
 export const healthInsuranceJambughoda: Article = {
   slug: "health-insurance-jambughoda-panchmahal",
   title: "Health Insurance in Jambughoda and Panchmahal: A Practical Guide",
-  metaTitle: "Health Insurance in Jambughoda & Panchmahal | Raulji Group",
+  metaTitle: "Health Insurance in Jambughoda & Rural Panchmahal | Raulji",
   metaDescription:
-    "Health insurance for families in Jambughoda and rural Panchmahal: making a policy work far from a network hospital, ambulance cover, reimbursement and PM-JAY.",
+    "Making health insurance work far from a network hospital in Jambughoda: ambulance cover, reimbursement claims and how PM-JAY fits for rural families.",
   excerpt:
     "When the nearest large hospital is a drive away, a health policy has to be chosen differently. This guide explains what to check, and how to be ready for a claim, from Jambughoda and the smaller towns of Panchmahal.",
   category: "Insurance Awareness",
@@ -49,7 +49,7 @@ export const healthInsuranceJambughoda: Article = {
     "Exploring options and arranging cover without travelling",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: does health insurance work far from a network hospital?",
     body: "**How should someone in Jambughoda choose health insurance?** Start from where you would actually be treated, which for serious illness is usually a larger town such as Halol, Godhra or Vadodara. Check that those hospitals are in the insurer's cashless network, that the policy covers ambulance charges, and how quickly an emergency admission must be reported. Because treatment may happen away from home and outside the network, also be ready to claim by reimbursement, which depends on keeping every bill and report.",
     points: [
       "Health insurance covers treatment wherever it happens in India, subject to the policy terms. It is not limited to hospitals near your home.",

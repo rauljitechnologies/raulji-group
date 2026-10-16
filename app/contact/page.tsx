@@ -25,9 +25,9 @@ import { H1, H2 } from "@/lib/typography";
  */
 
 export const metadata = pageMeta({
-  title: "Contact Raulji Group | Start Your Business Registration",
+  title: "Contact Raulji Group | Business Registration Help, Vadodara",
   description:
-    "Talk to Raulji Group about registering a Private Limited Company, LLP, Partnership Firm or Proprietorship. Call +91 8511187689 or email admin@raulji.com.",
+    "Call +91 8511187689 or email admin@raulji.com to discuss registering a Pvt Ltd company, LLP, partnership or proprietorship. Open Mon-Sat, 9 AM to 7 PM.",
   path: "/contact/",
   ogHeadline: "Start Your Business",
 });

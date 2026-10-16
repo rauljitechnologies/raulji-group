@@ -11,10 +11,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceTuwa: Article = {
   slug: "health-insurance-tuwa-panchmahal",
-  title: "Health Insurance in Tuwa, Panchmahal: What a Policy Covers and What It Does Not",
-  metaTitle: "Health Insurance in Tuwa, Panchmahal | Coverage & Claims Guide",
+  title: "Health Insurance in Tuwa: What Is Covered",
+  metaTitle: "Health Insurance in Tuwa: What Is and Isn't Covered",
   metaDescription:
-    "Health insurance for families in Tuwa, Panchmahal: what a policy pays for during a hospital stay, what it usually leaves out, and how claims are settled.",
+    "For families in Tuwa, Panchmahal: what a health policy pays for during a hospital stay, what it usually leaves out, and how claims are settled.",
   excerpt:
     "The most common disappointment with health insurance is finding out at discharge what the policy does not pay for. This guide sets out, item by item, what a typical policy covers.",
   category: "Insurance Awareness",
@@ -40,7 +40,7 @@ export const healthInsuranceTuwa: Article = {
     "How a claim is settled, cashless or by reimbursement",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: what does a health policy cover in Tuwa?",
     body: "**What does health insurance cover for a family in Tuwa?** A typical policy pays for hospital admissions: the room, doctors' fees, medicines, tests and procedures during the stay, plus expenses for a set number of days before and after, day care procedures and ambulance charges up to a limit. It usually does not pay for routine clinic visits, everyday medicines or non-medical items. Room rent limits, co-payment and sub-limits can reduce what is paid even on an accepted claim. The exact cover is in the policy's Customer Information Sheet.",
   },
   body: [

@@ -75,6 +75,18 @@ The hero must not look like a registration advertisement.
 
 Not Gujarat-only. Not registration-only.
 
+**Resolved 2026-10-16.** The client's metadata and keyword sheet of 15 Oct 2026
+recommended a different homepage title ("Raulji Group | Business Registration &
+Consulting, Gujarat") and a registration-led description, and also asked for the
+homepage H1 to be changed to something carrying a keyword. The client decided:
+keep this rule's title and description, and keep the H1 as
+"We Don't Just Build Businesses. We Build Futures." (rule 4). Every other page in
+that sheet was updated. Do not re-apply the sheet's homepage row.
+
+Noted for the record: the sheet's own rationale column says "business registration
+in Gujarat" belongs to `/gujarat/` and that the homepage should target the brand,
+which its recommended homepage title contradicted.
+
 ## 6. Homepage sections
 
 Header → Hero → The Raulji Group → Business Consulting → Our Business Solutions →
@@ -178,6 +190,21 @@ header navigation (section 29) and a different enquiry button label
 (section 11). The client chose to keep both as specified here: the navigation
 in rule 16, and "Get Business Guidance" in rule 23.
 
+**Redirect destinations revised 2026-10-16.** The client's technical SEO audit
+of 15 Oct 2026 (TF-02) reassigned three of the discontinued URLs, and that
+supersedes the 2026-09-16 instruction to send them to the homepage:
+
+| URL | Was | Now |
+| --- | --- | --- |
+| `/services/legal/` | 301 homepage | 301 `/services/business-registration/` |
+| `/services/finance/` | 301 homepage | 301 `/services/` |
+| `/services/land-investment/` | 301 `/services/` | **410 Gone** |
+
+`/services/gst-din-mca/` still 301s to the homepage: the audit does not list
+it, so the client's 2026-09-16 instruction stands for that one. `/rentals/`
+was already 410 and stays 410. The new destinations are what rules 15 and 37
+ask for, so the documented exception above no longer applies to these three.
+
 
 Audit for Land Investment, Rentals, Finance, Legal & Compliance and other
 discontinued services. If no longer part of current strategy, remove from main
@@ -225,6 +252,28 @@ priority cities only, with hand-written local content per page.
   structure. A page that would only differ by a substituted city name must not ship.
 - All other cities keep one page covering all four structures.
 - Do not extend this set without a further client decision.
+
+**Extended 2026-10-16, by client decision.** The client's Website SEO
+Implementation Prompt (15 Oct 2026) is that further decision. It permits, in
+addition to the twenty above:
+
+- Private Limited and LLP pages for eight tier-2 towns: Anand, Bharuch, Vapi,
+  Jamnagar, Bhavnagar, Mehsana, Gandhidham, Ankleshwar. Sixteen URLs.
+- GST registration pages for the five priority cities, **only if** Raulji Group
+  offers GST registration. Five URLs.
+- Four `/gujarat/{structure}/` pages, which are state-level, not city-level.
+
+The conditions are not relaxed: each page still needs hand-written local
+content, and the prompt adds a quality gate of its own (at least six of eight
+local fields filled) below which the page ships `noindex` and stays out of the
+sitemap and out of every automatic link module. The client's own technical
+audit also sets the release order: these ship in the last batch, and only for
+towns whose hub page is already indexed.
+
+Still forbidden, from the same prompt's Appendix C: structure pages for the
+other twenty towns, compliance x city, industry x city, industry x structure,
+add-on service x city other than GST in the five cities, locality pages inside
+cities, "near me" pages, and per-city cost pages.
 
 The original concern stands and is not weakened: do not create thousands of thin
 location pages, and do not mass-generate by template.

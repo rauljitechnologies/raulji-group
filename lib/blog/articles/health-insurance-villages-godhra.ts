@@ -23,10 +23,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceVillagesGodhra: Article = {
   slug: "health-insurance-villages-godhra-panchmahal",
-  title: "Health Insurance in the Villages Around Godhra: A Step-by-Step Buying Guide",
-  metaTitle: "Health Insurance in Godhra Taluka Villages | Buying Guide",
+  title: "Buying Health Insurance in Villages Around Godhra",
+  metaTitle: "Buying Health Insurance in Villages Around Godhra",
   metaDescription:
-    "How families in villages around Godhra, from Tuwa and Kakanpur to Timba and Pandva, can choose and buy health insurance without an office visit.",
+    "How families in villages around Godhra, from Tuwa and Kakanpur to Timba and Pandva, can choose and buy health insurance without visiting an office.",
   excerpt:
     "For families in the villages of Godhra taluka, buying health insurance is mostly paperwork and a few decisions. This guide walks through them in order, from the first question to the policy document.",
   category: "Insurance Awareness",
@@ -55,7 +55,7 @@ export const healthInsuranceVillagesGodhra: Article = {
     "Notes for Kakanpur, Tuwa, the Kantadi villages, Timba, Kabirpur, Lilesara and Pandva",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: can village families buy cover without an office visit?",
     body: "**How can a family in a village near Godhra buy health insurance?** Decide who needs cover and roughly how much, list the hospitals you would actually use in Godhra and Vadodara, then compare policies on waiting periods, room rent limits, co-payment and network hospitals. Buying itself is mostly paperwork: a proposal form with honest medical answers, identity and address documents for KYC, and payment. When the policy arrives, you have 30 days to read it and return it if it is not what you expected.",
     points: [
       "None of this requires an office visit. Proposal, documents and payment can be completed remotely.",

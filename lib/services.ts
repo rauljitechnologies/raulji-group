@@ -118,7 +118,7 @@ export const SERVICES: RegistrationService[] = [
     h1: "Private Limited Company Registration",
     title: "Private Limited Company Registration in India | Raulji Group",
     metaDescription:
-      `Private Limited Company registration in India: who it suits, documents, the SPICe+ process, costs and what follows incorporation. Professional fee from ${PROFESSIONAL_FEE.pvt}.`,
+      `Register a Private Limited Company through SPICe+: documents, steps, timeline and what follows incorporation. Professional fee from ${PROFESSIONAL_FEE.pvt}. Get started.`,
     eyebrow: "Business Registration",
     definition:
       "A Private Limited Company is a company incorporated under the Companies Act, 2013. It is a separate legal entity from its shareholders, who are liable only up to the amount unpaid on the shares they hold.",
@@ -371,9 +371,9 @@ export const SERVICES: RegistrationService[] = [
     name: "LLP Registration",
     shortName: "LLP",
     h1: "LLP Registration",
-    title: "LLP Registration in India | Raulji Group",
+    title: "LLP Registration in India: Documents & Fees | Raulji",
     metaDescription:
-      `LLP registration in India: who it suits, documents, the FiLLiP process, the LLP Agreement, costs and annual filings. Professional fee from ${PROFESSIONAL_FEE.llp}.`,
+      `Register a Limited Liability Partnership via FiLLiP with a drafted LLP Agreement. Who an LLP suits, documents and costs. Professional fee from ${PROFESSIONAL_FEE.llp}.`,
     eyebrow: "Business Registration",
     definition:
       "A Limited Liability Partnership is a body corporate registered under the Limited Liability Partnership Act, 2008. It combines the internal flexibility of a partnership with limited liability for its partners.",
@@ -464,7 +464,7 @@ export const SERVICES: RegistrationService[] = [
       "Both are run by partners. The difference is liability, legal identity and the annual filings that come with them.",
     guides: [
       "private-limited-company-vs-llp",
-      "how-to-choose-business-structure-india-2026",
+      "how-to-choose-business-structure-india",
       "common-business-registration-mistakes-india",
     ],
     cardBlurb: "For businesses structured around partners with limited liability.",
@@ -627,7 +627,7 @@ export const SERVICES: RegistrationService[] = [
     h1: "Partnership Firm Registration",
     title: "Partnership Firm Registration in India | Raulji Group",
     metaDescription:
-      "Partnership firm registration in India: the partnership deed, documents, Registrar of Firms registration, partner liability and what it costs.",
+      "Register a partnership firm the right way: partnership deed drafting, stamping, Registrar of Firms filing, partner liability and costs explained. Get a quote.",
     eyebrow: "Business Registration",
     definition:
       "A partnership firm is a business owned by two or more people who have agreed to share its profits, governed by the Indian Partnership Act, 1932. The firm is not a separate legal entity from its partners.",
@@ -867,7 +867,7 @@ export const SERVICES: RegistrationService[] = [
     h1: "Proprietorship Registration",
     title: "Proprietorship Registration in India | Raulji Group",
     metaDescription:
-      "Proprietorship registration in India: which registrations apply, Udyam, GST and shop licence, documents, the owner's responsibilities and costs.",
+      "A proprietorship has no single registration. See which apply to you, Udyam, GST and shop licence, the documents needed and costs. Set yours up with us.",
     eyebrow: "Business Registration",
     definition:
       "A proprietorship is a business owned and run by one individual. It is not a separate legal entity and is not incorporated: in law the proprietor and the business are the same person.",
@@ -957,7 +957,7 @@ export const SERVICES: RegistrationService[] = [
       "The simplest structure against the most formal. A Private Limited Company needs at least two people, so this comparison matters when a second director or shareholder is realistic.",
     guides: [
       "partnership-vs-proprietorship-india",
-      "how-to-choose-business-structure-india-2026",
+      "how-to-choose-business-structure-india",
       "starting-business-gujarat-registration-guide",
     ],
     cardBlurb: "For individuals starting and operating a business as a sole proprietor.",

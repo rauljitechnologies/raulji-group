@@ -54,9 +54,9 @@ import { H1, H2 } from "@/lib/typography";
  */
 
 export const metadata = pageMeta({
-  title: "About Raulji Group | Business Consulting & Solutions",
+  title: "About Raulji Group | Consulting-Led Business Group, Vadodara",
   description:
-    "Raulji Group is a consulting-focused business group in Vadodara, working with businesses on structure, registration and growth across Gujarat and India.",
+    "Raulji Group is a Vadodara-based, consulting-led business group helping founders choose, register and grow the right business structure across Gujarat.",
   path: "/about/",
   ogHeadline: "About Raulji Group",
 });

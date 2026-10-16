@@ -4,9 +4,9 @@ import { INSURANCE_AUTHOR } from "../authors";
 export const healthInsurance: Article = {
   slug: "health-insurance-policy-guide-india",
   title: "Health Insurance in India: What to Check Before Choosing a Policy",
-  metaTitle: "Health Insurance in India: What to Check Before Buying | Raulji Group",
+  metaTitle: "Health Insurance in India: What to Check Before Buying",
   metaDescription:
-    "Sum insured, waiting periods, exclusions, co-payment, sub-limits and the claim process, and what the current IRDAI rules say you are entitled to.",
+    "Sum insured, waiting periods, exclusions, co-payment, sub-limits and claims: what to check in a health policy and what current IRDAI rules entitle you to.",
   excerpt:
     "Most disappointment with a health policy comes from terms that were in the document all along. Here is what to read before you buy, and where to find it.",
   category: "Insurance Awareness",
@@ -35,7 +35,7 @@ export const healthInsurance: Article = {
     "The Customer Information Sheet, and how to read a policy in ten minutes using it",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: what to check before buying health insurance",
     body: "Read the Customer Information Sheet before you buy. Insurers are required to provide it, it is short, and it sets out the sum insured, waiting periods, exclusions, co-payment, sub-limits, the free look period, portability and how to claim. Almost every unpleasant surprise at claim time is described in that document.",
     points: [
       "Under the IRDAI rules, the maximum waiting period for pre-existing diseases in a health policy is 36 months.",

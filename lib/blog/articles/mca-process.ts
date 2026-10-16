@@ -3,10 +3,10 @@ import { GROUP_AUTHOR } from "../authors";
 
 export const mcaProcess: Article = {
   slug: "mca-company-registration-process-india",
-  title: "MCA Company Registration in India: Understanding the Incorporation Process",
-  metaTitle: "MCA Company Registration Process in India Explained | Raulji Group",
+  title: "MCA Company Registration Process, Step by Step",
+  metaTitle: "MCA Company Registration Process, Step by Step | Raulji",
   metaDescription:
-    "How company incorporation works on the MCA portal: name reservation, SPICe+ and its linked filings, and the Certificate of Incorporation.",
+    "What MCA registration is and how company incorporation works on the MCA portal: name reservation, SPICe+ and linked filings, and the incorporation certificate.",
   excerpt:
     "The Ministry of Corporate Affairs is the regulator and the platform. Understanding what it does, and what it expects from an application, is what makes the process predictable.",
   category: "Company Registration",
@@ -34,7 +34,7 @@ export const mcaProcess: Article = {
     "The specific reasons applications are sent back",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: what is MCA registration?",
     body: "Company incorporation in India is filed on the Ministry of Corporate Affairs portal using SPICe+, a single application in two parts: Part A reserves the name, Part B incorporates the company and carries linked filings for the constitutional documents, declarations and several other registrations. Approval results in a Certificate of Incorporation carrying the company's CIN, with PAN and TAN issued alongside.",
     points: [
       "The MCA is the government ministry that administers company law and runs the filing platform. It grants incorporation; no private firm can.",
@@ -283,7 +283,7 @@ export const mcaProcess: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "how-to-choose-business-structure-india",
     "private-limited-company-vs-llp",
     "documents-required-company-registration-india",
   ],

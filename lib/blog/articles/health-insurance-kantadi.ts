@@ -15,10 +15,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceKantadi: Article = {
   slug: "health-insurance-kantadi-panchmahal",
-  title: "Health Insurance in Moti Kantadi, Nani Kantadi and Ratanpur: A Guide to Cover for Parents",
-  metaTitle: "Health Insurance in Moti Katdi & Ratanpur | Cover for Parents",
+  title: "Health Insurance for Parents in Kantadi and Ratanpur",
+  metaTitle: "Health Insurance for Parents in Kantadi & Ratanpur | Raulji",
   metaDescription:
-    "Health insurance for parents and senior citizens in Moti Kantadi, Nani Kantadi and Ratanpur (Kantdi): age limits, co-payment, existing conditions and PM-JAY.",
+    "Health cover for parents and senior citizens in Moti Kantadi, Nani Kantadi and Ratanpur: age limits, co-payment, existing illnesses and where PM-JAY fits.",
   excerpt:
     "Parents are often the members of a household who need health cover most and have it least. This guide, for families in the Kantadi villages, explains what changes when the person to be covered is older.",
   category: "Insurance Awareness",
@@ -44,7 +44,7 @@ export const healthInsuranceKantadi: Article = {
     "How PM-JAY and a private policy can work together for people aged 70 and above",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: which health cover suits parents in Kantadi?",
     body: "**Can parents in Moti Kantadi or Ratanpur still get health insurance?** Yes. The IRDAI rules no longer set an upper age limit for buying health insurance. For an older parent, expect a higher premium, possibly a co-payment and a medical check-up, and a waiting period for any condition they already have. Declaring every condition honestly matters most. Families should also check eligibility for Ayushman Bharat PM-JAY, which has been extended to all citizens aged 70 and above.",
   },
   body: [

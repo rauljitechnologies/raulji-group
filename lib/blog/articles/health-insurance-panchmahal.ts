@@ -15,10 +15,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsurancePanchmahal: Article = {
   slug: "health-insurance-panchmahal-gujarat",
-  title: "Health Insurance in Panchmahal: How to Compare Coverage, Waiting Periods and Claims",
-  metaTitle: "Health Insurance in Panchmahal, Gujarat | Complete Guide",
+  title: "Health Insurance in Panchmahal: Compare Cover and Claims",
+  metaTitle: "Health Insurance in Panchmahal: Compare Cover & Claims",
   metaDescription:
-    "How to compare health insurance in Panchmahal: coverage, waiting periods, network hospitals and claims, with guides for Godhra, Halol, Kalol and Jambughoda.",
+    "How to compare health insurance in Panchmahal on coverage, waiting periods, network hospitals and claims, with local guides for Godhra, Halol and Kalol.",
   excerpt:
     "A district-wide guide to comparing health insurance policies in Panchmahal, from Godhra and Halol to the smaller talukas, with a clear method for weighing one policy against another.",
   category: "Insurance Awareness",
@@ -50,7 +50,7 @@ export const healthInsurancePanchmahal: Article = {
     "How government schemes, employer cover and a private policy fit together",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: how to compare health insurance in Panchmahal",
     body: "**How should you compare health insurance policies in Panchmahal?** Compare in this order: the network hospitals you would actually use in the district and in Vadodara; the waiting periods for any condition your family already has; room rent limits, co-payment and sub-limits; the sum insured and whether it is shared; exclusions; and only then the premium. Two policies at a similar price can pay very differently on the same claim. Every one of these terms is set out in the policy's Customer Information Sheet.",
     points: [
       "Panchmahal is a district in eastern Gujarat with its headquarters at Godhra. Its talukas include Godhra, Halol, Kalol, Jambughoda, Shehera, Ghoghamba and Morva Hadaf.",

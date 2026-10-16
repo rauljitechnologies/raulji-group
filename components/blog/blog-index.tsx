@@ -226,8 +226,19 @@ export function BlogIndex({
       </section>
 
       {/* Listing. */}
-      <section id="guides" aria-label="All guides" className="scroll-mt-28 pb-14 pt-10 md:pb-24 md:pt-16">
+      <section aria-labelledby="guides-h" id="guides" className="scroll-mt-28 pb-14 pt-10 md:pb-24 md:pt-16">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-8 px-5 sm:px-8">
+          {/*
+            A real section heading, so the card titles below can be H3.
+            They used to be H2s, which put two post titles over 70 characters
+            into the heading outline of this page (audit TF-16) and gave the
+            index a dozen sibling H2s with no section heading above them.
+            The label changes with the filter, so it also tells a reader what
+            the grid currently shows.
+          */}
+          <h2 id="guides-h" className="text-[1.5rem] font-bold leading-[1.2] text-[#122640] md:text-[1.75rem]">
+            {category === ALL ? "All guides" : category}
+          </h2>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div role="group" aria-label="Filter by topic" className="flex flex-wrap gap-2">
               {[ALL, ...categories].map((label) => {
@@ -343,7 +354,7 @@ function GuideCard({ card }: { card: BlogCard }) {
       </div>
       <div className="flex flex-1 flex-col gap-2.5 px-[1.375rem] pb-6 pt-5">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">{card.category}</p>
-        <h2 className="text-pretty text-[1.1875rem] font-bold leading-[1.35] text-[#122640]">{card.title}</h2>
+        <h3 className="text-pretty text-[1.1875rem] font-bold leading-[1.35] text-[#122640]">{card.title}</h3>
         <p className="line-clamp-3 text-[0.9375rem] leading-[1.65] text-[#3a4656]">{card.excerpt}</p>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-[#eef2f6] pt-3.5">
           <span className="text-[0.8125rem] text-[#5b6778]">

@@ -17,9 +17,9 @@ import { LEADERSHIP, SITE, telHref } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata = pageMeta({
-  title: "Business Guides and Insights | Raulji Group",
+  title: "Business Registration Guides for Gujarat | Raulji Group",
   description:
-    "Practical guides on choosing a business structure, company and LLP registration, documents, the MCA process, starting a business in Gujarat, and health insurance, from Raulji Group.",
+    "Practical guides on choosing a business structure, registering it, the MCA process and starting up in Gujarat, written for founders and small businesses.",
   path: "/blog/",
   ogHeadline: "Guides on registering and running a business in India",
 });
@@ -41,7 +41,7 @@ const QUICK_ANSWERS = [
   {
     q: "Which business structure should I choose in India?",
     a: "It is usually settled by liability and compliance rather than tax. A Private Limited Company suits businesses planning to raise investment; an LLP suits partner-run firms wanting limited liability with lighter compliance; a Partnership or Proprietorship is simplest but carries unlimited personal liability.",
-    slug: "how-to-choose-business-structure-india-2026",
+    slug: "how-to-choose-business-structure-india",
     link: "How to choose the right structure",
   },
   {
