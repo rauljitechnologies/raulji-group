@@ -15,10 +15,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceGodhra: Article = {
   slug: "health-insurance-godhra-gujarat",
-  title: "Health Insurance in Godhra: A Practical Guide for Families and Individuals",
-  metaTitle: "Health Insurance in Godhra, Gujarat | Raulji Group",
+  title: "Health Insurance in Godhra: A Family Guide",
+  metaTitle: "Health Insurance in Godhra: Guide for Families | Raulji",
   metaDescription:
-    "A practical guide to health insurance in Godhra: individual and family floater cover, sum insured, waiting periods, cashless hospitals, claims and renewal.",
+    "Choosing health insurance in Godhra: individual vs family floater cover, sum insured, waiting periods, cashless hospitals, claims and renewal explained.",
   excerpt:
     "How a household in Godhra can choose between individual and family cover, set a realistic sum insured, and avoid the policy terms that cause most claim-time disappointment.",
   category: "Insurance Awareness",
@@ -48,7 +48,7 @@ export const healthInsuranceGodhra: Article = {
     "Claims, renewal and portability, and the mistakes families most often make",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: how should a Godhra family choose health insurance?",
     body: "**What should a family in Godhra check before buying health insurance?** Check four things before the premium: whether the hospitals you would use in Godhra, and in Vadodara for specialist care, are in the insurer's cashless network; the waiting period for any condition someone in the family already has; whether the policy carries a room rent limit or co-payment; and whether the sum insured is realistic for one serious admission. All four are stated in the policy's Customer Information Sheet.",
     points: [
       "Health insurance pays for covered hospital treatment up to the sum insured, subject to waiting periods, exclusions and limits set out in the policy.",

@@ -128,7 +128,7 @@ export const FAQ_LINKS: Record<string, Record<string, { href: string; label: str
       label: "Contact Raulji Group",
     },
     "Can I change my business structure later?": {
-      href: "/blog/how-to-choose-business-structure-india-2026/",
+      href: "/blog/how-to-choose-business-structure-india/",
       label: "Read the guide to choosing a business structure",
     },
   },

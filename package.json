@@ -4,13 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/gen-sitemap-manifest.mjs",
+    "prebuild": "node scripts/check-reserved-slugs.mjs && node scripts/gen-sitemap-manifest.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "check:blog": "node scripts/check-blog.mjs",
-    "sitemap:manifest": "node scripts/gen-sitemap-manifest.mjs"
+    "sitemap:manifest": "node scripts/gen-sitemap-manifest.mjs",
+    "check:slugs": "node scripts/check-reserved-slugs.mjs",
+    "indexnow": "node scripts/indexnow-ping.mjs",
+    "images:optimise": "node scripts/optimise-images.mjs",
+    "seo:validate": "node scripts/seo-validate.mjs",
+    "postbuild": "node scripts/seo-validate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",

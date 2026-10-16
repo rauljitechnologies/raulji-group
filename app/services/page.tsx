@@ -60,9 +60,9 @@ const PATH = "/services/";
 const ROOT_ID = "services-hub";
 
 export const metadata = pageMeta({
-  title: "Our Services | Business Consulting & Registration | Raulji Group",
+  title: "Business Registration & Consulting Services | Raulji Group",
   description:
-    "Business consulting, business registration and the compliance support that follows, from Raulji Group in Vadodara. Working across Gujarat and India.",
+    "Consulting, registration of all four business structures, annual compliance and insurance advice, from one Vadodara team. See which service you need first.",
   path: PATH,
   ogHeadline: "Our Services",
 });

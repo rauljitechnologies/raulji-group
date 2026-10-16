@@ -50,7 +50,7 @@ const PATH = "/services/business-registration/";
 export const metadata = pageMeta({
   title: "Business Registration Services in India | Raulji Group",
   description:
-    "Compare and register the four Indian business structures with Raulji Group: Private Limited, LLP, Partnership Firm and Proprietorship. MCA filing support.",
+    "Register a Pvt Ltd company, LLP, partnership firm or proprietorship with advisers who first check which fits. Answer 3 questions to find your structure.",
   path: PATH,
   ogHeadline: "Business Registration Services",
 });
@@ -161,7 +161,7 @@ const STAGES: { key: string; title: string; body: string; icon: LucideIcon }[] =
 ];
 
 const GUIDES = [
-  "how-to-choose-business-structure-india-2026",
+  "how-to-choose-business-structure-india",
   "business-structure-guide-new-entrepreneurs-india",
   "documents-required-company-registration-india",
 ]

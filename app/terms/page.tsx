@@ -5,7 +5,7 @@ import type { Crumb } from "@/lib/schema";
 export const metadata = pageMeta({
   title: "Terms of Service | Raulji Group",
   description:
-    "The terms that apply to your use of the Raulji Group website and to the business registration and advisory services we provide.",
+    "The terms that apply to your use of the Raulji Group website and to the business registration, compliance and advisory services we provide.",
   path: "/terms/",
   ogHeadline: "Terms of Service",
 });

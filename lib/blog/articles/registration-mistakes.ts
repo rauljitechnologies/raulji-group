@@ -4,9 +4,9 @@ import { GROUP_AUTHOR } from "../authors";
 export const registrationMistakes: Article = {
   slug: "common-business-registration-mistakes-india",
   title: "Common Mistakes Entrepreneurs Make During Business Registration",
-  metaTitle: "Common Business Registration Mistakes in India | Raulji Group",
+  metaTitle: "9 Common Business Registration Mistakes in India | Raulji",
   metaDescription:
-    "Nine mistakes that cost founders time and money during business registration in India, from the wrong structure to the obligations after incorporation.",
+    "Nine mistakes that cost founders time and money when registering a business in India, from choosing the wrong structure to missing post-registration filings.",
   excerpt:
     "Registration errors are rarely dramatic. They are small, ordinary and expensive, and almost all of them are made in the week before anything is filed.",
   category: "Entrepreneurship",
@@ -34,7 +34,7 @@ export const registrationMistakes: Article = {
     "How to read a registration quote so the cheapest one is not the most expensive",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: the mistakes that cost founders most",
     body: "Most registration problems fall into three groups: a structure chosen for the wrong reason, paperwork that does not match itself, and an assumption that registration is the end of the process rather than the start of a set of annual obligations.",
     points: [
       "The expensive mistakes are made before filing, in the decisions. The annoying ones are made during filing, in the documents.",
@@ -278,7 +278,7 @@ export const registrationMistakes: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "how-to-choose-business-structure-india",
     "documents-required-company-registration-india",
     "starting-business-gujarat-registration-guide",
   ],

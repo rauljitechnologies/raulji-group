@@ -24,9 +24,18 @@ export const revalidate = 3600;
  *    `updated_at`. Nothing is stamped with the time the sitemap was built.
  *
  * Every URL here is a 200 with a self-referencing canonical and trailing slash.
- * Discontinued URLs are absent because their pages are gone: /rentals/ is a
- * route handler returning 410, not a page, and /services/land-investment/
- * 301s to /services/.
+ * Discontinued URLs are absent because their pages are gone: /rentals/ and
+ * /services/land-investment/ are route handlers returning 410, not pages.
+ *
+ * Split into named child sitemaps (technical audit TF-04) by
+ * `generateSitemaps()`, which publishes /sitemap/core.xml, /sitemap/locations.xml,
+ * /sitemap/services.xml and /sitemap/blog.xml, with Next building the index at
+ * /sitemap.xml. At 96 URLs the split is not about the 50,000-URL limit: it is
+ * so Search Console reports index coverage per group. "Discovered - currently
+ * not indexed" sitting at 37 told us nothing about which kind of page was
+ * being skipped; with locations in their own file, the same report would have
+ * said so immediately. Add a group here as the compliance, industries and
+ * glossary sections ship.
  */
 
 type Entry = MetadataRoute.Sitemap[number];
@@ -68,7 +77,23 @@ function latest(...dates: (string | Date | undefined | null)[]) {
   return times.length ? new Date(Math.max(...times)) : undefined;
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+/**
+ * The child sitemaps, in the order they appear in the index.
+ *
+ * Exported because app/sitemap.xml/route.ts builds the index from this list.
+ * Next 15 does not publish an index of its own for `generateSitemaps()`: the
+ * build produces /sitemap/core.xml and friends and nothing at /sitemap.xml,
+ * which is the URL already submitted in Search Console and referenced from
+ * robots.txt. The index route keeps that URL working.
+ */
+export const SITEMAP_GROUPS = ["core", "services", "locations", "blog"] as const;
+export type SitemapGroup = (typeof SITEMAP_GROUPS)[number];
+
+export function generateSitemaps() {
+  return SITEMAP_GROUPS.map((id) => ({ id }));
+}
+
+export default async function sitemap({ id }: { id: SitemapGroup }): Promise<MetadataRoute.Sitemap> {
   const url = (path: string) => `${SITE.url}${path}`;
 
   // The guides. An article's date is the later of its editorial `updated`
@@ -136,16 +161,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  // Static pages first, highest priority first, so the file reads in order of
-  // importance; a URL is never listed twice.
+  /*
+   * Which group each set of URLs belongs to. `core` keeps the static pages in
+   * priority order so the file reads in order of importance. Deduplication is
+   * per group, and the groups do not overlap, so no URL can appear twice in
+   * the index either.
+   */
+  const byGroup: Record<SitemapGroup, Entry[]> = {
+    core: pages.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0)),
+    services: [...registration, ...secondary],
+    locations: [...cities, ...cityServices],
+    blog: [...guides, ...blog],
+  };
+
   const seen = new Set<string>();
-  return [
-    ...pages.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0)),
-    ...registration,
-    ...secondary,
-    ...cities,
-    ...cityServices,
-    ...guides,
-    ...blog,
-  ].filter((entry) => !seen.has(entry.url) && seen.add(entry.url));
+  return byGroup[id].filter((entry) => !seen.has(entry.url) && seen.add(entry.url));
 }

@@ -36,9 +36,9 @@ import { H1 } from "@/lib/typography";
 const PATH = "/faqs/";
 
 export const metadata = pageMeta({
-  title: "Business Registration FAQs India | Raulji Group",
+  title: "Business Registration FAQs: Fees, Documents & Time | Raulji",
   description:
-    "Find clear answers to common business registration questions in India, including Private Limited Company, LLP, Partnership and Proprietorship registration, documents, costs and compliance.",
+    "Plain answers to common questions on registering a Pvt Ltd company, LLP, partnership or proprietorship in India: fees, documents, timelines and compliance.",
   path: PATH,
   ogHeadline: "Business Registration FAQs",
 });

@@ -118,6 +118,14 @@ const COMPLIANCE_PAGE: Record<string, { href: string; label: string }> = {
 const STRUCTURE_VIEW: Record<
   string,
   {
+    /**
+     * The section H2. It was the shared sentence "Who owns it, who runs it,
+     * and who carries the risk." on all four structure pages, which the crawl
+     * of 15 Oct 2026 counted among the generic duplicate H2s (audit TF-16):
+     * identical wording on four pages that each answer the question about a
+     * different structure. Appendix C names the structure in each.
+     */
+    heading: string;
     intro: string;
     tagline: string;
     owners: string;
@@ -129,6 +137,7 @@ const STRUCTURE_VIEW: Record<
   }
 > = {
   "pvt-registration": {
+    heading: "Who owns a Private Limited Company, who runs it, and who carries the risk",
     intro:
       "Registering a Private Limited settles three things at once: who owns the business, who is responsible for running it, and how far personal liability reaches if something goes wrong. Eligibility, documents and annual compliance all follow from that.",
     tagline: "Directors run it. Shareholders own it. The two can be the same people.",
@@ -140,6 +149,7 @@ const STRUCTURE_VIEW: Record<
     liability: "Liability limited to unpaid share capital",
   },
   "llp-registration": {
+    heading: "Who owns an LLP, who runs it, and who carries the risk",
     intro:
       "Registering an LLP settles who the partners are, which of them are designated partners answerable for its filings, and how far personal liability reaches. Eligibility, documents and annual compliance all follow from that.",
     tagline: "Partners own and run it. Designated partners answer for its compliance.",
@@ -151,6 +161,7 @@ const STRUCTURE_VIEW: Record<
     liability: "Liability limited to the agreed contribution",
   },
   "partnership-registration": {
+    heading: "Who owns a partnership firm, who runs it, and who carries the risk",
     intro:
       "A partnership firm is its partners, working together under a deed. The deed settles who contributes what, who shares the profit and who decides, but nothing separates the business from the people behind it.",
     tagline: "The partners own and run it, and carry its debts personally.",
@@ -162,6 +173,7 @@ const STRUCTURE_VIEW: Record<
     liability: "Partners’ liability is unlimited and joint",
   },
   "proprietorship-registration": {
+    heading: "Who owns a proprietorship, who runs it, and who carries the risk",
     intro:
       "A proprietorship is one person trading under a business name. Nothing separates the business from its owner, so registering one is about the tax and trade registrations the activity needs, not about creating an entity.",
     tagline: "One owner, one legal person, no separation between the two.",
@@ -453,7 +465,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                 How it is structured
               </p>
               <h2 id="st-h" className={H2}>
-                Who owns it, who runs it, and who carries the risk.
+                {view.heading}
               </h2>
               <p className="text-base leading-[1.75]">{view.intro}</p>
               <p className="border-t border-[#dde4ec] pt-4 text-[1.0625rem] font-bold text-[#122640]">

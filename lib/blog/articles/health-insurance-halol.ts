@@ -16,9 +16,9 @@ import { INSURANCE_AUTHOR } from "../authors";
 export const healthInsuranceHalol: Article = {
   slug: "health-insurance-halol-gujarat",
   title: "Health Insurance in Halol: What to Check Before Choosing a Policy",
-  metaTitle: "Health Insurance in Halol, Gujarat | Coverage & Claims Guide",
+  metaTitle: "Health Insurance in Halol: Group Cover vs Your Own Policy",
   metaDescription:
-    "Health insurance in Halol: how employer group cover, ESI and a personal policy fit together, plus family and senior cover, waiting periods and claims.",
+    "Working in Halol? See how employer group cover, ESI and a personal health policy fit together, plus family and senior cover, waiting periods and claims.",
   excerpt:
     "Many households in Halol have some health cover through work. This guide explains what that cover usually does and does not do, and what to check before relying on it or buying a policy of your own.",
   category: "Insurance Awareness",
@@ -48,7 +48,7 @@ export const healthInsuranceHalol: Article = {
     "The questions to ask before buying any policy",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: is employer group cover enough in Halol?",
     body: "**Is health cover from my employer in Halol enough?** Group cover from an employer is useful, but it is tied to the job and usually ends when employment ends, often without the waiting period credit a personal policy would have built. Many employees in Halol therefore hold a personal or family policy alongside group cover. Before relying on either, check the sum insured, which family members are included, the network hospitals near Halol and in Vadodara, and any room rent limit or co-payment.",
     points: [
       "Group health insurance is arranged by an employer for its employees and sometimes their dependants. Its terms are set by the employer's policy, not by you.",

@@ -257,7 +257,7 @@ const CONTACT_POINTS = [
  * stops resolving is dropped rather than rendered dead.
  */
 const HOME_GUIDES = [
-  "how-to-choose-business-structure-india-2026",
+  "how-to-choose-business-structure-india",
   "private-limited-company-vs-llp",
   "starting-business-gujarat-registration-guide",
 ]

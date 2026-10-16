@@ -28,7 +28,7 @@
  */
 
 import type { FAQ } from "./services";
-import { getService } from "./services";
+import { getService, PROFESSIONAL_FEE } from "./services";
 import { getCity } from "./cities";
 
 /** URL segments, exactly as specified in the client brief, section 16. */
@@ -64,9 +64,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "ahmedabad",
     service: "pvt-registration",
     h1: "Private Limited Company Registration in Ahmedabad",
-    title: "Private Limited Company Registration in Ahmedabad | Raulji Group",
+    title: "Private Limited Company Registration in Ahmedabad | Raulji",
     metaDescription:
-      "Register a Private Limited Company in Ahmedabad with Raulji Group. DSC, name approval, SPICe+ filing and MOA and AOA drafting. Call +91 8511187689.",
+      `Register a Private Limited Company in Ahmedabad: DSC, name approval, SPICe+ filing and MOA and AOA drafting handled for you. Professional fee from ${PROFESSIONAL_FEE.pvt}.`,
     localContext: [
       "Ahmedabad produces more Private Limited incorporations than any other city in Gujarat, and the reason is mostly about funding. The city holds the state's deepest concentration of founders who intend to raise external capital, clustered along the SG Highway corridor, Prahlad Nagar and Bodakdev, and equity investors will not put money into anything other than a company.",
       "There is a second, quieter pattern here that has nothing to do with startups. Established textile, chemical and trading families around Ashram Road, CG Road and the walled city often incorporate a company to hold a new venture, keeping it legally separate from the legacy partnership firm that carries the family's older business. The company is the vehicle for the new thing, not a replacement for the old one.",
@@ -118,7 +118,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "LLP Registration in Ahmedabad",
     title: "LLP Registration in Ahmedabad | Raulji Group",
     metaDescription:
-      "Register an LLP in Ahmedabad with Raulji Group. Name reservation, DPIN, incorporation and LLP Agreement drafting for professional firms and trading businesses.",
+      "Register an LLP in Ahmedabad for your professional firm or trading business: name reservation, DPIN, incorporation and LLP Agreement drafting.",
     localContext: [
       "The LLP does its best work in Ahmedabad among two groups. The first is the city's professional services cluster: chartered accountants, architects, designers, agencies and consultancies around Prahlad Nagar, Bodakdev and Navrangpura, where the business is partner-run, will never issue equity, and mainly wants personal assets kept clear of business claims.",
       "The second is the established trading firm. A great many textile and chemical trading businesses in Ahmedabad have operated as partnership firms for decades. In a partnership firm the partners carry unlimited personal liability, which in a credit-heavy trade is a real exposure. Converting to an LLP keeps the partner structure and the profit-sharing arrangement recognisable while capping that liability, and it costs far less to run annually than a company.",
@@ -168,9 +168,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "ahmedabad",
     service: "partnership-registration",
     h1: "Partnership Firm Registration in Ahmedabad",
-    title: "Partnership Firm Registration in Ahmedabad | Raulji Group",
+    title: "Partnership Firm Registration in Ahmedabad | Raulji",
     metaDescription:
-      "Partnership firm registration in Ahmedabad with Raulji Group: partnership deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+      "Partnership firm registration in Ahmedabad: deed drafting, stamping and registration with the Registrar of Firms, Gujarat. Get your firm registered.",
     localContext: [
       "The partnership firm is the traditional structure of Ahmedabad's trading economy, and it remains genuinely common in fabric and garment trading around the walled city, in chemical and dyestuff trading, and in wholesale and distribution businesses across the city. It is quick to form, cheap to run, and needs no filing with the Registrar of Companies at all.",
       "Its weakness is the one that matters most in a credit-based trade: there is no separation between the firm and the partners. Business debts reach personal assets, and in Ahmedabad's trading lines, where goods regularly move on credit and payment cycles run long, that exposure is not theoretical.",
@@ -222,7 +222,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Proprietorship Registration in Ahmedabad",
     title: "Proprietorship Registration in Ahmedabad | Raulji Group",
     metaDescription:
-      "Proprietorship registration support in Ahmedabad: GST, Udyam and Gujarat shop and establishment registration for one-person businesses. Raulji Group.",
+      "Set up a proprietorship in Ahmedabad with the registrations it needs: GST, Udyam and Gujarat shop and establishment. Ask what applies to you.",
     localContext: [
       "A proprietorship is the fastest and cheapest way for one person in Ahmedabad to start trading, and it suits a great deal of the city's small commerce: retail, local services, individual consultants, and the growing number of people selling online from home.",
       "The thing to understand first is that there is no such document as a proprietorship registration certificate in India. A proprietorship is not incorporated and is not a separate legal entity from you. What gives it a verifiable identity is a set of other registrations, and which ones you actually need depends entirely on what the business does.",
@@ -274,9 +274,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "vadodara",
     service: "pvt-registration",
     h1: "Private Limited Company Registration in Vadodara",
-    title: "Private Limited Company Registration in Vadodara | Raulji Group",
+    title: "Private Limited Company Registration in Vadodara | Raulji",
     metaDescription:
-      "Private limited company registration in Vadodara by Raulji Group, based in the city. Incorporation support for engineering, fabrication and industrial vendors.",
+      "Private limited company registration in Vadodara from a team based in the city. Incorporation for engineering, fabrication and industrial vendors.",
     localContext: [
       "Vadodara is where Raulji Group works from, so this is the market we see most closely. Company registration here looks quite different from Ahmedabad. Very little of it is investor-driven. Most of it is customer-driven.",
       "The city's economy sits around the Gujarat Refinery at Koyali, GSFC and the petrochemical complex, with a dense supply chain of engineering, fabrication, instrumentation and industrial services vendors in Makarpura, Savli and Nandesari. Procurement teams at those large buyers frequently want a vendor to be a registered entity on the official company register before onboarding. That requirement, rather than any funding plan, is what puts a two-person engineering firm in front of an incorporation decision.",
@@ -328,7 +328,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "LLP Registration in Vadodara",
     title: "LLP Registration in Vadodara | Raulji Group",
     metaDescription:
-      "Register an LLP in Vadodara with Raulji Group, based in the city. Incorporation and LLP Agreement drafting for engineering and technical firms.",
+      "Register an LLP in Vadodara with a local team: incorporation and LLP Agreement drafting for engineering and technical firms. Meet us in person.",
     localContext: [
       "In Vadodara the LLP is very often the right answer, and it is under-used relative to how well it fits the local economy. The city is full of small technical businesses, engineering consultancies, inspection and testing firms, instrumentation specialists, project services outfits, run by two or three people who will never raise equity and mainly need two things: liability kept away from personal assets, and a presence on the MCA register that a procurement team can verify.",
       "That is precisely what an LLP provides. It is a body corporate on the same public register a company appears on, with a registration number a vendor onboarding system can check, but it files two annual forms instead of carrying statutory audit from year one.",
@@ -378,9 +378,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "vadodara",
     service: "partnership-registration",
     h1: "Partnership Firm Registration in Vadodara",
-    title: "Partnership Firm Registration in Vadodara | Raulji Group",
+    title: "Partnership Firm Registration in Vadodara | Raulji",
     metaDescription:
-      "Partnership firm registration in Vadodara with Raulji Group, based in the city: deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+      "Partnership firm registration in Vadodara from a local team: deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
     localContext: [
       "Partnership firms are still common in Vadodara's smaller industrial economy, particularly among fabrication workshops, machining job shops and trading businesses in and around Makarpura and Nandesari. Two or three people, often related or long-standing colleagues, put in machinery and working capital and run the business together.",
       "It is a genuinely suitable structure for that, and it is cheap and quick to form. The two things worth thinking hard about are specific to this kind of business. First, the partners carry unlimited personal liability, and a workshop that buys machinery on credit or takes on fabrication work with penalty clauses is carrying real exposure.",
@@ -432,7 +432,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Proprietorship Registration in Vadodara",
     title: "Proprietorship Registration in Vadodara | Raulji Group",
     metaDescription:
-      "Proprietorship registration support in Vadodara: GST, Udyam and Gujarat shop and establishment registration for individual consultants and small businesses.",
+      "Proprietorship registration in Vadodara for consultants and small businesses: GST, Udyam and shop and establishment registration, from a local team.",
     localContext: [
       "In Vadodara the proprietorship is the natural structure for the individual technical consultant, and there are a lot of them. An instrumentation specialist, a welding inspector, a process engineer or a safety consultant working alone, billing a handful of plants and contractors, usually needs nothing more complicated.",
       "The important point is that a proprietorship is not incorporated. There is no proprietorship certificate in India, and the business is not legally separate from you. What gives it a workable identity is a set of other registrations, chosen according to what the business actually does.",
@@ -484,9 +484,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "surat",
     service: "pvt-registration",
     h1: "Private Limited Company Registration in Surat",
-    title: "Private Limited Company Registration in Surat | Raulji Group",
+    title: "Private Limited Company Registration in Surat | Raulji",
     metaDescription:
-      "Register a Private Limited Company in Surat with Raulji Group. Incorporation and MCA filing support for diamond, textile, export and manufacturing businesses.",
+      `Register a Private Limited Company in Surat for your diamond, textile, export or manufacturing business. MCA filing handled. Professional fee from ${PROFESSIONAL_FEE.pvt}.`,
     localContext: [
       "Surat's diamond and textile trades were built on partnership firms, so a Private Limited Company here is usually a deliberate step up rather than a starting point. When it happens, the reason is normally external: an export buyer, a lender, or a brand ambition that the old structure cannot support.",
       "Export is the clearest driver. Diamond exporters and textile businesses dealing with overseas buyers increasingly find that the counterparty wants to contract with a limited-liability entity, and a company is the structure international buyers and banks recognise most readily. Working capital is the other driver: banks lending against receivables tend to want cleaner, audited documentation than a family firm has historically kept.",
@@ -538,7 +538,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "LLP Registration in Surat",
     title: "LLP Registration in Surat | Raulji Group",
     metaDescription:
-      "Register an LLP in Surat with Raulji Group. The usual next step for diamond and textile partnership firms wanting limited liability without company compliance.",
+      "Turning a Surat diamond or textile partnership into an LLP? Get limited liability without company-level compliance. Register your LLP in Surat.",
     localContext: [
       "For most Surat firms thinking about changing structure, the LLP is the answer they should be looking at first, and often are not. The city's diamond and textile trades run on thousands of partnership firms with two, three or four working partners. What is increasingly uncomfortable about that is not the partner arrangement, which works, but the unlimited personal liability that comes with it.",
       "The LLP is designed for exactly this situation. Partners stay partners, the profit-sharing arrangement carries over into the LLP Agreement, and liability is capped at the agreed contribution. Compared with jumping to a company, it avoids statutory audit from year one and all the board-level formality, while still appearing on the MCA public register where a bank or a buyer can verify it.",
@@ -588,9 +588,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "surat",
     service: "partnership-registration",
     h1: "Partnership Firm Registration in Surat",
-    title: "Partnership Firm Registration in Surat | Raulji Group",
+    title: "Partnership Firm Registration in Surat | Raulji",
     metaDescription:
-      "Partnership firm registration in Surat with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms for diamond and textile businesses.",
+      "Partnership firm registration in Surat for diamond and textile businesses: deed drafting, stamping and Registrar of Firms filing. Register your firm.",
     localContext: [
       "The partnership firm is the structure Surat's economy was built on. Across the diamond belt at Varachha and Katargam and the textile markets along Ring Road, an enormous number of businesses operate as firms with two to four working partners, and for a great many of them that remains genuinely appropriate.",
       "It forms quickly, costs little, has no MCA filings at all, and fits a business where the partners are all actively working and know each other well. What it does not do is separate the business from the people. Every partner is liable for the whole of the firm's debts, not a proportionate share, and any partner can bind the firm.",
@@ -642,7 +642,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Proprietorship Registration in Surat",
     title: "Proprietorship Registration in Surat | Raulji Group",
     metaDescription:
-      "Proprietorship registration support in Surat: GST, Udyam and Gujarat shop and establishment registration for job-work units, traders and online sellers.",
+      "Proprietorship registration in Surat for job-work units, traders and online sellers: GST, Udyam and shop and establishment registration. Start yours.",
     localContext: [
       "A very large part of Surat's economy is single-owner businesses: embroidery and job-work units, small fabric traders, diamond job workers, and increasingly people selling textiles online from home. For all of these, a proprietorship is normally the right structure, at least to begin with.",
       "There is no such thing as a proprietorship registration certificate in India. The business is not incorporated and is not separate from you in law. What gives it a usable identity is a combination of other registrations, and which ones matter depends on what the business actually does.",
@@ -694,9 +694,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "rajkot",
     service: "pvt-registration",
     h1: "Private Limited Company Registration in Rajkot",
-    title: "Private Limited Company Registration in Rajkot | Raulji Group",
+    title: "Private Limited Company Registration in Rajkot | Raulji",
     metaDescription:
-      "Register a Private Limited Company in Rajkot with Raulji Group. Incorporation and MCA filing support for engineering, casting, forging and auto component businesses.",
+      "Register a Private Limited Company in Rajkot for your engineering, casting, forging or auto component business. Incorporation and MCA filing support.",
     localContext: [
       "Rajkot is an engineering town, and company registration here is driven by two things: who you sell to, and how much you are borrowing to buy machinery.",
       "The customer question comes first. A unit selling castings, machined parts or components locally or through traders has no structural reason to incorporate. A unit supplying OEM buyers outside Gujarat usually does, because vendor onboarding at those buyers generally requires an entity verifiable on the MCA register. What varies is whether the buyer will accept an LLP, which many will, or insists on a company.",
@@ -748,7 +748,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "LLP Registration in Rajkot",
     title: "LLP Registration in Rajkot | Raulji Group",
     metaDescription:
-      "Register an LLP in Rajkot with Raulji Group. The lowest-cost route onto the MCA register for engineering units supplying OEM buyers outside Gujarat.",
+      "An LLP is the lowest-cost way onto the MCA register for Rajkot engineering units supplying OEM buyers. Register your LLP in Rajkot with us.",
     localContext: [
       "For a large number of Rajkot engineering units, the LLP is the structure that actually fits, and it is frequently overlooked in favour of a company that costs more and does no more.",
       "The typical situation is a foundry, machining unit or component manufacturer with two or three working partners, often brothers or long-standing colleagues, which has been supplying local buyers and traders and now wants to sell directly to OEMs outside Gujarat. Vendor onboarding at those buyers generally requires an entity verifiable on the MCA register. An LLP appears on that register with an LLPIN, exactly as a company does.",
@@ -798,9 +798,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "rajkot",
     service: "partnership-registration",
     h1: "Partnership Firm Registration in Rajkot",
-    title: "Partnership Firm Registration in Rajkot | Raulji Group",
+    title: "Partnership Firm Registration in Rajkot | Raulji",
     metaDescription:
-      "Partnership firm registration in Rajkot with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms for engineering workshops.",
+      "Partnership firm registration in Rajkot for engineering workshops: deed drafting, stamping and Registrar of Firms filing. Get your firm registered.",
     localContext: [
       "The partnership firm is the default structure across Rajkot's engineering economy, and for a large share of the city's workshops it remains the right one. A foundry, a machining job shop or a components unit run by two or three brothers who all work in the business, selling locally or through traders, has no pressing structural reason to be anything else.",
       "It forms quickly, costs little, and carries no MCA filing obligation at all. The trade-offs are unlimited personal liability, which means business debts reach the partners' personal assets, and the fact that any partner can bind the firm.",
@@ -852,7 +852,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Proprietorship Registration in Rajkot",
     title: "Proprietorship Registration in Rajkot | Raulji Group",
     metaDescription:
-      "Proprietorship registration support in Rajkot: GST, Udyam and Gujarat shop and establishment registration for single-owner workshops and traders.",
+      "Proprietorship registration in Rajkot for single-owner workshops and traders: GST, Udyam and shop and establishment registration. Ask us what applies.",
     localContext: [
       "A great many Rajkot businesses are one person with a workshop: a machining job shop, a small fabrication unit, a trader in components or hardware. For these a proprietorship is normally correct, and it is the cheapest and quickest way to start operating.",
       "What needs to be clear from the start is that a proprietorship is not incorporated. There is no proprietorship certificate in India, and the business is not legally separate from you. Its identity comes from other registrations, chosen according to what the business does.",
@@ -904,9 +904,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "gandhinagar",
     service: "pvt-registration",
     h1: "Private Limited Company Registration in Gandhinagar",
-    title: "Private Limited Registration in Gandhinagar | Raulji Group",
+    title: "Private Limited Company Registration in Gandhinagar | Raulji",
     metaDescription:
-      "Register a Private Limited Company in Gandhinagar with Raulji Group. Incorporation support for government contractors and IT firms. Call +91 8511187689.",
+      `Register a Private Limited Company in Gandhinagar, a common choice for government contractors and IT firms. Professional fee from ${PROFESSIONAL_FEE.pvt}.`,
     localContext: [
       "Gandhinagar's registration profile is shaped by two very different forces, and which one applies to you changes the advice completely.",
       "The first is state government work. Gandhinagar has a substantial base of consultancies, IT vendors and contractors serving state departments, and for these the structure decision is often made by the tender documents rather than by the founder. Many tenders specify a registered company or LLP, and a good number require audited accounts for a stated number of past years. That last requirement is the one worth checking before you incorporate, because a newly formed company cannot satisfy it at all.",
@@ -958,7 +958,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "LLP Registration in Gandhinagar",
     title: "LLP Registration in Gandhinagar | Raulji Group",
     metaDescription:
-      "Register an LLP in Gandhinagar with Raulji Group. A common structure for consultancies and IT vendors serving Gujarat state departments.",
+      "Register an LLP in Gandhinagar, a common structure for consultancies and IT vendors serving Gujarat state departments. Start your LLP with us.",
     localContext: [
       "The LLP suits a large share of Gandhinagar's professional economy. The city's consultancies, IT vendors and technical advisory firms serving state departments are typically partner-run, will not issue equity, and need to be a recognisable registered entity that a government procurement process will accept.",
       "Where a tender permits either a company or an LLP, and many do, the LLP is generally the better economics: it appears on the MCA register with an LLPIN, carries limited liability, and files two annual forms rather than carrying statutory audit from its first year.",
@@ -1008,9 +1008,9 @@ export const CITY_SERVICES: CityServiceContent[] = [
     city: "gandhinagar",
     service: "partnership-registration",
     h1: "Partnership Firm Registration in Gandhinagar",
-    title: "Partnership Firm Registration in Gandhinagar | Raulji Group",
+    title: "Partnership Firm Registration in Gandhinagar | Raulji",
     metaDescription:
-      "Partnership firm registration in Gandhinagar with Raulji Group: deed drafting, stamping and registration with the Registrar of Firms, Gujarat.",
+      "Partnership firm registration in Gandhinagar: deed drafting, stamping and registration with the Registrar of Firms, Gujarat. Register your firm.",
     localContext: [
       "A partnership firm is a legitimate and inexpensive structure for a small joint business in Gandhinagar, and it suits local trade, retail and service businesses run by two or three working partners perfectly well.",
       "There is one caution that is specific to this city and that we would rather state plainly than leave you to discover. A large share of Gandhinagar's commercial opportunity is government work, and government tender eligibility clauses frequently require a registered company or LLP. A partnership firm is not on the MCA register, and in many tenders it simply does not qualify.",
@@ -1062,7 +1062,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
     h1: "Proprietorship Registration in Gandhinagar",
     title: "Proprietorship Registration in Gandhinagar | Raulji Group",
     metaDescription:
-      "Proprietorship registration support in Gandhinagar: GST, Udyam and Gujarat shop and establishment registration for individual consultants and small businesses.",
+      "Proprietorship registration in Gandhinagar for consultants and small businesses: GST, Udyam and shop and establishment registration. Get started.",
     localContext: [
       "In Gandhinagar the proprietorship is the common structure for the individual consultant, and the city has a lot of them: policy and technical advisers, IT contractors, trainers and specialists who work alone and bill a small number of clients.",
       "A proprietorship is not incorporated, and there is no proprietorship certificate in India. The business is not separate from you in law. What gives it a workable identity is a set of other registrations, chosen according to what the work actually involves.",

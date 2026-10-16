@@ -13,9 +13,9 @@ import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 
 export const metadata = pageMeta({
-  title: "Pvt Ltd vs LLP vs Partnership vs Proprietorship | Raulji Group",
+  title: "Compare Pvt Ltd, LLP, Partnership & Proprietorship | Raulji",
   description:
-    "Compare Private Limited Company, LLP, Partnership Firm and Proprietorship on liability, compliance, tax and funding before you register.",
+    "See all four Indian business structures side by side on liability, compliance cost, tax and funding, then pick the one that fits. Compare structures now.",
   path: "/compare/",
   ogHeadline: "Choose the Right Business Structure",
 });

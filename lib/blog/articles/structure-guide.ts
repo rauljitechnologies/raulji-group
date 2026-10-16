@@ -3,11 +3,10 @@ import { GROUP_AUTHOR } from "../authors";
 
 export const structureGuide: Article = {
   slug: "business-structure-guide-new-entrepreneurs-india",
-  title:
-    "Private Limited Company, LLP, Partnership or Proprietorship: A Practical Guide for New Entrepreneurs",
-  metaTitle: "Business Structure Guide for New Entrepreneurs in India | Raulji Group",
+  title: "Types of Business Structures in India",
+  metaTitle: "Types of Business Structures in India: A Founder's Guide",
   metaDescription:
-    "India's four business structures compared on ownership, liability, management, compliance and funding, with the points to verify before you register.",
+    "India's four business structures explained on ownership, liability, management, compliance and funding, with the points to check before you register.",
   excerpt:
     "A reference rather than an argument. Each of the four structures profiled on the same terms, one master comparison table, and the questions worth answering before you commit to any of them.",
   category: "Business Consulting",
@@ -50,7 +49,7 @@ export const structureGuide: Article = {
     },
     {
       kind: "p",
-      text: "If you want a decision framework rather than a reference, read the guide to [choosing a business structure](/blog/how-to-choose-business-structure-india-2026/). If you have already narrowed to two, the comparisons of [a company against an LLP](/blog/private-limited-company-vs-llp/) and [a partnership firm against a proprietorship](/blog/partnership-vs-proprietorship-india/) go deeper on those pairings.",
+      text: "If you want a decision framework rather than a reference, read the guide to [choosing a business structure](/blog/how-to-choose-business-structure-india/). If you have already narrowed to two, the comparisons of [a company against an LLP](/blog/private-limited-company-vs-llp/) and [a partnership firm against a proprietorship](/blog/partnership-vs-proprietorship-india/) go deeper on those pairings.",
     },
 
     { kind: "h2", id: "master-table", text: "The four structures in one table" },
@@ -375,7 +374,7 @@ export const structureGuide: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "how-to-choose-business-structure-india",
     "private-limited-company-vs-llp",
     "partnership-vs-proprietorship-india",
     "mca-company-registration-process-india",

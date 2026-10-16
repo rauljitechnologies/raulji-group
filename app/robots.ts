@@ -19,6 +19,12 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
+    /*
+     * The sitemap index. Next builds it at /sitemap.xml from the groups in
+     * app/sitemap.ts and it points at each child sitemap, so one line here
+     * covers them all (technical audit TF-04). /_next/ is deliberately not
+     * disallowed: Google needs the CSS and JS to render the page.
+     */
     sitemap: `${SITE.url}/sitemap.xml`,
     host: SITE.url,
   };

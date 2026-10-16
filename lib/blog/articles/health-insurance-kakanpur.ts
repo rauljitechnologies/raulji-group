@@ -12,10 +12,10 @@ import { INSURANCE_AUTHOR } from "../authors";
  */
 export const healthInsuranceKakanpur: Article = {
   slug: "health-insurance-kakanpur-panchmahal",
-  title: "Health Insurance in Kakanpur, Panchmahal: Family & Individual Coverage Guide",
-  metaTitle: "Health Insurance in Kakanpur, Panchmahal | Family & Individual Guide",
+  title: "Health Insurance in Kakanpur: Family vs Individual",
+  metaTitle: "Health Insurance in Kakanpur: Family vs Individual Cover",
   metaDescription:
-    "Health insurance in Kakanpur, Panchmahal: how to choose between a family floater and individual policies for your household, with worked examples.",
+    "Family floater or individual policies? Worked examples to help households in Kakanpur, Panchmahal choose the right health insurance cover.",
   excerpt:
     "Most households in Kakanpur face the same first decision: one shared family policy, or separate cover for each person. This guide works through it for four common kinds of household.",
   category: "Insurance Awareness",
@@ -42,7 +42,7 @@ export const healthInsuranceKakanpur: Article = {
     "What to check in any policy before buying",
   ],
   keyTakeaway: {
-    heading: "Quick answer",
+    heading: "Quick answer: family floater or individual policies in Kakanpur?",
     body: "**Should a family in Kakanpur buy one family floater or individual policies?** A family floater, one sum insured shared by everyone, usually suits a young couple with children. Individual policies suit members who are older or have an existing condition, because one large claim on a floater reduces the cover left for everyone else. Many households combine the two: a floater for the younger family and a separate policy for parents. The right choice depends on ages, health history and budget.",
   },
   body: [

@@ -22,10 +22,10 @@ import { H1, H2 } from "@/lib/typography";
 export const revalidate = 3600;
 
 export const metadata = pageMeta({
-  // 155 characters. The previous one ran past 250 and was truncated in the
-  // SERP halfway through the first company's name.
-  title: "Our Clients | Raulji Group",
-  description: `The ${CLIENT_COUNT} businesses Raulji Group works with, across both companies in the group: consulting and registration, and software, eCommerce and digital.`,
+  // 152 characters. The description the client's metadata sheet of 15 Oct 2026
+  // specifies, with the client count kept as a constant rather than hard coded.
+  title: `Our Clients: ${CLIENT_COUNT} Businesses We Work With | Raulji Group`,
+  description: `See the ${CLIENT_COUNT} businesses Raulji Group works with across consulting, registration, software and digital, from founders in Gujarat to companies across India.`,
   path: "/our-clients/",
   ogHeadline: "The businesses we work with",
 });
