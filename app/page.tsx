@@ -859,7 +859,15 @@ export default function HomePage() {
             </div>
           </div>
           <div className="mx-auto aspect-[600/640] w-full max-w-[35rem]">
-            {/* Static SVG, lazy-loaded: no map library or runtime fetch on the homepage. */}
+            {/* Static SVG, lazy-loaded: no map library or runtime fetch on the homepage.
+                Deliberately a plain <img> rather than next/image: the image
+                optimiser does not rasterise or re-encode SVG (serving it needs
+                `dangerouslyAllowSVG`, which we keep off), so routing a vector
+                through it adds a proxy hop and returns the same bytes. The
+                attributes the lint rule is protecting are already here:
+                intrinsic width and height, so the box cannot shift as it
+                loads, lazy loading, and real alt text. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/maps/india-headquarters.svg"
               alt={`Map of India marking the Raulji Group headquarters in ${SITE.locality}, ${SITE.region}`}
