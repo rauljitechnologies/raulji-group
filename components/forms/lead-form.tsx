@@ -153,10 +153,24 @@ export function LeadForm({
 
       if (result.success) {
         setStatus("success");
-        track("form_submit", {
-          registration_type: payload.registrationType || "Not specified",
-          city: payload.city || undefined,
-        });
+        /*
+         * `form_submit` is the primary conversion, so it must count real
+         * enquiries only.
+         *
+         * A honeypot-tripped submission is answered `{ success: true }` on
+         * purpose, so the bot cannot tell it was caught. That means a bot
+         * reaches this branch and would be recorded as a conversion. We know
+         * locally which case this is -- a human never fills a field that is
+         * positioned off-screen -- so the event is skipped here instead.
+         * The response is left exactly as it is: the bot learns nothing,
+         * and the conversion count stays clean.
+         */
+        if (!payload.hp_note) {
+          track("form_submit", {
+            registration_type: payload.registrationType || "Not specified",
+            city: payload.city || undefined,
+          });
+        }
       } else {
         setStatus("error");
         setError(result.error ?? "Something went wrong. Please try again.");

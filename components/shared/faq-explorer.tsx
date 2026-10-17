@@ -89,7 +89,6 @@ export function FaqExplorer({
   const [overrides, setOverrides] = useState<Record<string, boolean>>({});
   const listRef = useRef<HTMLDivElement>(null);
 
-  const total = groups.reduce((sum, g) => sum + g.faqs.length, 0);
   const firstKey = `${groups[0]?.id}-0`;
 
   /** Search text per question: its own words plus its topic's name and keywords. */

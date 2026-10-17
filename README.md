@@ -5,13 +5,29 @@ business registration for Gujarat.
 
 ## Running it
 
+Node 22 or newer (`.nvmrc` pins the major; `@supabase/supabase-js` requires
+`>=22` and warns on 20).
+
 ```bash
+nvm use                      # reads .nvmrc
 npm install
 cp .env.example .env.local   # fill in the values
 npm run dev                  # http://localhost:3000
 npm run build && npm start   # production build
-npm run typecheck
 ```
+
+The full verification pipeline, all of which must pass before a deploy:
+
+```bash
+npm run typecheck   # tsc --noEmit
+npm run lint        # eslint . (flat config in eslint.config.mjs)
+npm run build       # runs check:slugs + sitemap manifest, then seo:validate
+npm run check:blog  # blog front-matter and link checks
+```
+
+`npm run build` runs `scripts/seo-validate.mjs` as a postbuild step, which
+fails the build on a duplicate title, a duplicate description or a sitemap URL
+that does not correspond to a prerendered page.
 
 ## Environment
 
@@ -21,6 +37,7 @@ npm run typecheck
 | `RAULJI_CRM_BASE` | no | CRM base URL. Defaults to `https://api.raulji.com/api/v1`. |
 | `SUPABASE_URL` | no | Blog and team content. Unset renders the empty state. |
 | `SUPABASE_ANON_KEY` | no | Read-only anon key, used server-side only. |
+| `NEXT_PUBLIC_GTM_ID` | yes, in production | GTM container (`GTM-MSW79R28`). Not a secret. **Unset = no analytics at all, with nothing on the page to show it.** |
 
 > The previous build hard-coded a live CRM key in client-side JavaScript
 > (`src/lib/leadApi.ts`), so it was readable by anyone who opened the bundle.
@@ -78,8 +95,12 @@ town, do not add it.
 ## URL handling
 
 - Trailing slashes throughout, matching the existing live site.
-- `/services/land-investment/` → 301 → `/services/` (discontinued)
+- `/services/land-investment/` → **410 Gone** (discontinued; was a 301 to
+  `/services/` until the Oct 2026 technical audit reassigned it)
 - `/industries/` → 301 → `/services/`
+- `/services/legal/` → 301 → `/services/business-registration/`
+- `/services/finance/` → 301 → `/services/`
+- `/services/gst-din-mca/` → 301 → `/` (homepage, per the client's instruction)
 - `/rentals/` → **410 Gone** (discontinued, no equivalent)
 - Unknown paths → real 404. The previous site answered every unknown path with
   a 200 and the homepage, which search engines read as a soft 404.

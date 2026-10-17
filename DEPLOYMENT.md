@@ -21,10 +21,26 @@ trailing-slash handling is already done by the app.
 ## 3. Verify after the first deploy
 
 ```bash
-curl -sI https://www.raulji.com/services/land-investment/ | head -2   # 301 -> /services/
+# Discontinued services. land-investment became a 410 in the Oct 2026 audit
+# (TF-02); it is no longer a redirect.
+curl -sI https://www.raulji.com/services/land-investment/ | head -1   # 410
 curl -sI https://www.raulji.com/rentals/                  | head -1   # 410
 curl -sI https://www.raulji.com/no-such-page/             | head -1   # 404
-curl -s  https://www.raulji.com/sitemap.xml | grep -c '<loc>'         # 58
+
+# Reassigned, one hop each (not the homepage any more).
+curl -sI https://www.raulji.com/services/legal/   | grep -i location  # /services/business-registration/
+curl -sI https://www.raulji.com/services/finance/ | grep -i location  # /services/
+
+# /sitemap.xml is a sitemap *index*: 4 child sitemaps, 95 URLs between them.
+curl -s https://www.raulji.com/sitemap.xml | grep -c '<loc>'          # 4
+for s in core services locations blog; do
+  printf '%s: ' "$s"
+  curl -s "https://www.raulji.com/sitemap/$s.xml" | grep -c '<loc>'
+done                                            # 15, 9, 53, 18 = 95
+
+# Analytics. Empty output means NEXT_PUBLIC_GTM_ID is not set in Vercel and
+# nothing is being recorded, which the page gives no visible sign of.
+curl -s https://www.raulji.com/ | grep -c googletagmanager              # non-zero
 ```
 
 Then submit a test through the contact form and confirm the lead lands in the CRM.
@@ -42,14 +58,28 @@ Then submit a test through the contact form and confirm the lead lands in the CR
 ## 5. Analytics
 
 The site pushes events to `window.dataLayer`. Add a GTM container (or GA4 via
-GTM) and create triggers on these custom events:
+GTM) and create Custom Event triggers on the names in
+**[docs/analytics-events.md](docs/analytics-events.md)**, which is generated
+against the `EventName` union in `lib/analytics.ts` and is the only list that
+matches the code.
 
-`lead_form_submit` (primary conversion), `phone_click`, `email_click`,
-`whatsapp_click`, `start_business_click`, `service_card_click`,
-`city_page_click`, `form_view`, `form_start`, `lead_form_error`.
+> **This section previously listed three names the site has never pushed**:
+> `lead_form_submit`, `lead_form_error` and `start_business_click`. The real
+> names are `form_submit`, `form_error` and `primary_cta_click`. A container
+> configured from the old list would have recorded **zero conversions** on the
+> primary conversion trigger, with every other report looking healthy, so
+> check any container built before 17 Oct 2026 against the generated list.
 
-Each carries `registration_type`, `city`, `page`, `source` and `campaign` where
-applicable, so leads can be attributed to a service and a city.
+The primary conversion is **`form_submit`**. Note that `form_submit` fires when
+the API accepts the lead, not when the button is clicked, so it is a real
+submission rather than an intent signal.
+
+Each event carries `page`, `page_type`, `source` and `campaign`, plus
+`registration_type`, `service` and `city` where applicable, so a lead can be
+attributed to a service and a city.
+
+`page_view` is deliberately **not** pushed by the app: GTM emits it on
+container load, and pushing a second one would double-count every page.
 
 ## 6. Things to do before launch
 
