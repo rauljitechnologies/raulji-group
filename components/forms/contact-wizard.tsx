@@ -163,10 +163,16 @@ export function ContactWizard() {
       const result = (await response.json()) as { success: boolean; error?: string };
       if (result.success) {
         setStatus("success");
-        track("form_submit", {
-          registration_type: need || "Not specified",
-          city: fields.city || undefined,
-        });
+        // Skipped for a honeypot-tripped submission, which the API answers
+        // `{ success: true }` on purpose so the bot cannot tell it was
+        // caught. See the same guard in components/forms/lead-form.tsx:
+        // `form_submit` is the primary conversion and counts humans only.
+        if (!hpNote) {
+          track("form_submit", {
+            registration_type: need || "Not specified",
+            city: fields.city || undefined,
+          });
+        }
         scrollToTop();
       } else {
         setStatus("idle");

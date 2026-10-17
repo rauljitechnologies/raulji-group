@@ -13,11 +13,27 @@ export const runtime = "nodejs";
 
 const CRM_BASE = process.env.RAULJI_CRM_BASE ?? "https://api.raulji.com/api/v1";
 
+/**
+ * Messages for a field that is absent or the wrong type, rather than present
+ * and malformed. Without these Zod emits its own "Required", which the form
+ * shows to the visitor verbatim beside the field: every other message here is
+ * a sentence addressed to the person filling the form, so a bare "Required"
+ * was the one place the API leaked its validation library into the UI.
+ */
+const required = (message: string) => ({
+  required_error: message,
+  invalid_type_error: message,
+});
+
 const LeadSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name").max(100),
+  name: z
+    .string(required("Please enter your name"))
+    .trim()
+    .min(2, "Please enter your name")
+    .max(100),
   // Indian mobile numbers, with or without a +91 or 0 prefix.
   phone: z
-    .string()
+    .string(required("Please enter your mobile number"))
     .trim()
     .transform((v) => v.replace(/[\s()-]/g, ""))
     .refine((v) => /^(\+?91|0)?[6-9]\d{9}$/.test(v), "Please enter a valid 10-digit mobile number"),
