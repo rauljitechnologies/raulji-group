@@ -2,23 +2,23 @@
   "routes": [
     {
       "path": "/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-17T06:25:09.236Z"
     },
     {
       "path": "/about/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/blog/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/compare/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/contact/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/disclaimer/",
@@ -26,65 +26,65 @@
     },
     {
       "path": "/faqs/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/gujarat/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/our-clients/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/privacy/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/services/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/services/business-consulting/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/services/business-registration/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/team/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     },
     {
       "path": "/terms/",
-      "lastModified": "2026-10-16T15:49:44.310Z"
+      "lastModified": "2026-10-16T15:58:50.000Z"
     }
   ],
   "files": {
-    "lib/services.ts": "2026-10-16T15:49:44.310Z",
-    "lib/secondary-services.ts": "2026-10-16T15:49:44.310Z",
-    "lib/cities.ts": "2026-10-16T15:49:44.310Z",
-    "lib/city-services.ts": "2026-10-16T15:49:44.310Z"
+    "lib/services.ts": "2026-10-16T15:58:50.000Z",
+    "lib/secondary-services.ts": "2026-10-16T15:58:50.000Z",
+    "lib/cities.ts": "2026-10-16T15:58:50.000Z",
+    "lib/city-services.ts": "2026-10-16T15:58:50.000Z"
   },
   "articles": {
-    "how-to-choose-business-structure-india": "2026-10-16T15:49:44.310Z",
-    "documents-required-company-registration-india": "2026-10-16T15:49:44.310Z",
-    "starting-business-gujarat-registration-guide": "2026-10-16T15:49:44.310Z",
-    "health-insurance-godhra-gujarat": "2026-10-16T15:49:44.310Z",
-    "health-insurance-halol-gujarat": "2026-10-16T15:49:44.310Z",
-    "health-insurance-jambughoda-panchmahal": "2026-10-16T15:49:44.310Z",
-    "health-insurance-kakanpur-panchmahal": "2026-10-16T15:49:44.310Z",
-    "health-insurance-kalol-gujarat": "2026-10-16T15:49:44.310Z",
-    "health-insurance-kantadi-panchmahal": "2026-10-16T15:49:44.310Z",
-    "health-insurance-panchmahal-gujarat": "2026-10-16T15:49:44.310Z",
-    "health-insurance-tuwa-panchmahal": "2026-10-16T15:49:44.310Z",
-    "health-insurance-villages-godhra-panchmahal": "2026-10-16T15:49:44.310Z",
-    "health-insurance-policy-guide-india": "2026-10-16T15:49:44.310Z",
-    "mca-company-registration-process-india": "2026-10-16T15:49:44.310Z",
-    "partnership-vs-proprietorship-india": "2026-10-16T15:49:44.310Z",
-    "private-limited-company-vs-llp": "2026-10-16T15:49:44.310Z",
-    "common-business-registration-mistakes-india": "2026-10-16T15:49:44.310Z",
-    "business-structure-guide-new-entrepreneurs-india": "2026-10-16T15:49:44.310Z"
+    "how-to-choose-business-structure-india": "2026-10-16T15:58:50.000Z",
+    "documents-required-company-registration-india": "2026-10-16T15:58:50.000Z",
+    "starting-business-gujarat-registration-guide": "2026-10-16T15:58:50.000Z",
+    "health-insurance-godhra-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-halol-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-jambughoda-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kakanpur-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kalol-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kantadi-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-panchmahal-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-tuwa-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-villages-godhra-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-policy-guide-india": "2026-10-16T15:58:50.000Z",
+    "mca-company-registration-process-india": "2026-10-16T15:58:50.000Z",
+    "partnership-vs-proprietorship-india": "2026-10-16T15:58:50.000Z",
+    "private-limited-company-vs-llp": "2026-10-16T15:58:50.000Z",
+    "common-business-registration-mistakes-india": "2026-10-16T15:58:50.000Z",
+    "business-structure-guide-new-entrepreneurs-india": "2026-10-16T15:58:50.000Z"
   }
 }
