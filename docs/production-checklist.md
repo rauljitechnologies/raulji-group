@@ -3,11 +3,15 @@
 Run top to bottom. Every box has a command or a specific thing to look at —
 nothing here is "check it looks fine".
 
-`DEPLOYMENT.md` at the repo root holds the Vercel and DNS specifics and stays
-the single deployment runbook; this file is the gate in front of it. There is
-deliberately no `docs/deployment.md`: two runbooks drift apart, and a stale
-runbook is what caused the analytics problem recorded in
-[analytics-events.md](analytics-events.md).
+[deployment.md](deployment.md) holds the Vercel and DNS specifics and stays
+the single deployment runbook; this file is the gate in front of it.
+
+It lived at `DEPLOYMENT.md` in the repo root until 2026-10-18 and moved here
+so that every document the client's prompt asks for sits under `docs/`. It was
+**moved, not copied.** There is still exactly one deployment runbook: two of
+them drift apart, and a stale runbook is what caused the analytics problem
+recorded in [analytics-events.md](analytics-events.md). Audit entries dated
+before the move still refer to it by its old name.
 
 ## 1. Local verification — all four must pass
 
