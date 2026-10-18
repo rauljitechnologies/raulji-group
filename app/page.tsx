@@ -44,10 +44,22 @@ import { SERVICES } from "@/lib/services";
 import { SITE, LEADERSHIP, telHref, mailHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { faqSchema, graph, homeServiceListSchema } from "@/lib/schema";
-import { H1, H2 } from "@/lib/typography";
+import { H1_LONG, H2 } from "@/lib/typography";
 
 export const metadata = pageMeta({
-  title: "Raulji Group | Business Consulting & Solutions",
+  /*
+   * Changed 2026-10-18 on the client's explicit instruction, overriding
+   * master rule 5. That rule fixed the title as "Raulji Group | Business
+   * Consulting & Solutions" and its 2026-10-16 note had already rejected a
+   * registration-led, geography-qualified title once. The client was shown
+   * that conflict and chose this wording anyway, so the rule is amended
+   * rather than quietly broken -- see CLAUDE.md rule 5.
+   *
+   * The client's wording ran to 67 characters, past the ~60 where Google
+   * truncates and longer than any of the other 94 pages. "Services" is
+   * dropped to bring it to 58; nothing else changed.
+   */
+  title: "Business Consulting & Registration in India | Raulji Group",
   /*
    * Resolved 2026-10-18. The design brief's section 18 wording ran to 165
    * characters and master rule 5's to 187, both past the ~160 where Google
@@ -290,12 +302,35 @@ export default function HomePage() {
       >
         <div className="flex flex-col justify-center gap-7 px-5 py-12 sm:px-8 md:py-20 lg:py-24 lg:pl-[max(2rem,calc((100vw-1240px)/2+2rem))] lg:pr-14">
           <p className={EYEBROW}>Raulji Group</p>
-          <h1
-            id="hero-h"
-            className={`${H1} text-[#122640]`}
-          >
-            {SITE.taglineParts[0]} <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
-          </h1>
+          {/*
+           * The H1 describes the service; the tagline sits directly under it
+           * as the brand statement. Changed 2026-10-18 on the client's
+           * explicit instruction, overriding master rule 4, which fixed the
+           * H1 as the tagline. Both the client's brief and this change keep
+           * the tagline prominent -- it is the line under the H1, not a line
+           * that was removed.
+           *
+           * H1_LONG rather than H1: at 70 characters this headline would wrap
+           * to four or five lines at the 4rem hero size, which is exactly what
+           * H1_LONG exists for.
+           *
+           * The two are grouped in their own flex column so the brand line
+           * reads as part of the headline block rather than as another
+           * sibling at the hero's gap-7 rhythm.
+           */}
+          <div className="flex flex-col gap-3.5">
+            <h1
+              id="hero-h"
+              className={`${H1_LONG} text-[#122640]`}
+            >
+              Business Consulting & Registration Services{" "}
+              <span className="text-[#1a7cb0]">for Entrepreneurs in India</span>
+            </h1>
+            <p className="text-pretty text-lg font-bold leading-[1.35] tracking-[-0.01em] text-[#122640] sm:text-xl">
+              {SITE.taglineParts[0]}{" "}
+              <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
+            </p>
+          </div>
           <p className="max-w-[32.5rem] text-pretty text-base/[1.7] leading-[1.7] sm:text-lg/[1.7]">
             Raulji Group is a consulting-focused business group. We help entrepreneurs and business
             owners make informed decisions, set up the right structure, and move forward with

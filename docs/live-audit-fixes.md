@@ -87,12 +87,45 @@ problems matters as much as finding them.
 | Redirects | `/services/legal/`→301 registration pillar · `/services/finance/`→301 `/services/` · `/services/gst-din-mca/`→301 `/` · `/services/land-investment/`, `/rentals/`→410 · unknown→404. | **Matches master rule 15 exactly.** |
 | Security headers | All six present including HSTS and CSP report-only. | **Correct.** |
 
-## Declined, with reasons
+## Applied on client override — 2026-10-18
 
-| Proposal | Decision |
+These two were declined twice, because master rules 4 and 5 fixed the H1 and
+title and the client's own 2026-10-16 resolution had already rejected a
+registration-led, geography-qualified title. **The client was shown that
+conflict and instructed the change anyway**, so it is applied, and
+`CLAUDE.md` rules 4 and 5 are amended to record the decision rather than left
+to contradict the code. The superseded 2026-10-16 resolution is kept in place
+as the record of how the decision moved.
+
+| Change | Detail |
 | --- | --- |
-| Homepage title → "Business Consulting & Registration Services in India \| Raulji Group" | **Not applied.** Registration-led and geography-qualified — the shape master rule 5 records the client rejecting on 2026-10-16, whose own note says registration-in-Gujarat belongs to `/gujarat/` and the homepage should target the brand. Current title is 46 chars and matches rule 5. Applying it needs a deliberate client override, not a re-run prompt. |
-| Homepage H1 → "Business Consulting & Registration Services for Entrepreneurs in India" | **Not applied.** Master rule 4 fixes the H1 and the 2026-10-16 resolution kept it. The prompt itself says to use the wording only if it reflects the business and not to change the H1 blindly. |
+| Homepage H1 | Now "Business Consulting & Registration Services for Entrepreneurs in India". The tagline was **not** removed: it sits directly beneath the H1 as the brand statement, in its own styling, grouped with the H1 so it reads as part of the headline block. `SITE.taglineParts` remains its single source. Uses `H1_LONG` rather than `H1` — at 70 characters it would otherwise wrap to four or five lines at the 4rem hero size, which is what `H1_LONG` exists for. |
+| Homepage title | Now "Business Consulting & Registration in India \| Raulji Group". The wording as supplied was 67 characters, past the ~60 where Google truncates and longer than any of the other 94 pages; "Services" was dropped to reach 58. Nothing else changed. |
+| **Test** | Rendered HTML re-checked: title 58 chars, exactly one `<h1>`, the new H1 text present, the tagline still rendering in the hero. Full build, typecheck, lint and the 95-page crawl re-run after the change. |
+
+## P2 pass — images, performance, accessibility
+
+Requested as a sweep. It largely confirms the existing work; recorded so it is
+not repeated.
+
+| Check | Finding |
+| --- | --- |
+| `next.config.ts` image config | **Already correct and documented.** `deviceSizes` capped at 1920 (the 2048/3840 candidates were removed after the Oct 2026 crawl found every image fetched at w=3840), AVIF then WebP, `qualities: [70]` as a single-entry allow-list so 70 is the effective default and any explicit `quality` fails the build loudly. |
+| Homepage LCP image | **Correct.** `priority`, `placeholder="blur"`, and a measured `sizes` that accounts for the photo being drawn wider than its column. |
+| Blanket `unoptimized` | **Not present as a blanket.** One instance, below. |
+| Tables and horizontal overflow | **Correct.** Both wide tables sit in `overflow-x-auto` containers that are `tabIndex={0}` with `role="region"` and an `aria-label`, so the scroll region is keyboard-reachable. `ComparisonTable` additionally renders a separate per-structure two-column table below `md`, with only one in the accessibility tree at a time. |
+| Focus states | **Correct.** A global `:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible` rule gives a 3px ring with offset to every interactive element, not only the styled ones. |
+| Reduced motion | **Correct.** Durations collapsed, named animations disabled, `scroll-behavior` reset, and the FAQ panel's delayed visibility handled separately because shortening durations leaves delays intact. |
+| Image source resolutions | 187 raster images measured. The only under-resolution asset in use is the homepage hero photograph (see Open). `IMAGES.hero` at 1200×675 is defined in `lib/images.ts` but referenced by nothing, so its size has no effect. |
+
+### P2 — team member photos bypass the image optimiser
+
+| | |
+| --- | --- |
+| **Evidence** | `app/team/page.tsx:96` renders `member.photo_url` with `unoptimized`, because the Supabase host is not in `images.remotePatterns`. A full-resolution upload is therefore downloaded at full size and scaled to 96×96 in the browser. |
+| **Severity** | P2. Currently unobservable: `SUPABASE_URL` is unset, `members` is empty and the branch never renders. It becomes real the moment the team page has data. |
+| **Why not fixed here** | The fix is to derive the Supabase hostname in `next.config.ts` and drop `unoptimized`. **It cannot be tested from here** — there are no Supabase credentials, so the code path cannot be exercised, and the failure mode if `SUPABASE_URL` is present at runtime but not at build is broken images on a live page. Shipping an untestable change to a path that currently works is the wrong trade. |
+| **To fix** | Add `remotePatterns: [{ protocol: "https", hostname: <supabase host>, pathname: "/storage/v1/object/public/**" }]`, remove `unoptimized`, then load `/team/` with real data and confirm the photos render and are served as AVIF or WebP. |
 
 ## Open
 
