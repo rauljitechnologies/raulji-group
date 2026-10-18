@@ -172,7 +172,7 @@ export const registrationMistakes: Article = {
     },
     {
       kind: "p",
-      text: "These obligations do not wait for the business to start trading. A company that was incorporated and then put aside still accrues an audit requirement and annual filings, and an LLP that never opened a bank account still owes both annual forms, where the late fee runs per day with no ceiling.",
+      text: "These obligations do not wait for the business to start trading. A company that was incorporated and then put aside still accrues an audit requirement and annual filings, and an LLP that never opened a bank account still owes both annual forms, where the additional fee for filing late steps up the longer it is left.",
     },
     {
       kind: "p",
@@ -258,7 +258,7 @@ export const registrationMistakes: Article = {
     },
     {
       q: "What happens if I register a company and do not start the business?",
-      a: "The annual obligations still apply. A company must have its accounts audited every financial year from its first and file its annual returns with the Registrar, whether or not it traded. An LLP must file Form 11 and Form 8 each year, with late fees charged per day and no upper limit. A dormant entity is not a free entity.",
+      a: "The annual obligations still apply. A company must have its accounts audited every financial year from its first and file its annual returns with the Registrar, whether or not it traded. An LLP must file Form 11 and Form 8 each year, and the additional fee for filing them late rises the longer the delay runs. A dormant entity is not a free entity.",
     },
     {
       q: "How long does business registration take in India?",

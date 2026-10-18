@@ -2,7 +2,7 @@
   "routes": [
     {
       "path": "/",
-      "lastModified": "2026-10-17T06:28:34.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/about/",
@@ -14,7 +14,7 @@
     },
     {
       "path": "/compare/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/contact/",
@@ -26,11 +26,11 @@
     },
     {
       "path": "/faqs/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/gujarat/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/our-clients/",
@@ -42,15 +42,15 @@
     },
     {
       "path": "/services/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/services/business-consulting/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/services/business-registration/",
-      "lastModified": "2026-10-16T15:58:50.000Z"
+      "lastModified": "2026-10-18T06:04:06.588Z"
     },
     {
       "path": "/team/",
@@ -62,13 +62,13 @@
     }
   ],
   "files": {
-    "lib/services.ts": "2026-10-16T15:58:50.000Z",
-    "lib/secondary-services.ts": "2026-10-16T15:58:50.000Z",
+    "lib/services.ts": "2026-10-18T06:04:06.588Z",
+    "lib/secondary-services.ts": "2026-10-18T06:04:06.588Z",
     "lib/cities.ts": "2026-10-16T15:58:50.000Z",
-    "lib/city-services.ts": "2026-10-16T15:58:50.000Z"
+    "lib/city-services.ts": "2026-10-18T06:04:06.588Z"
   },
   "articles": {
-    "how-to-choose-business-structure-india": "2026-10-16T15:58:50.000Z",
+    "how-to-choose-business-structure-india": "2026-10-18T06:04:06.588Z",
     "documents-required-company-registration-india": "2026-10-16T15:58:50.000Z",
     "starting-business-gujarat-registration-guide": "2026-10-16T15:58:50.000Z",
     "health-insurance-godhra-gujarat": "2026-10-16T15:58:50.000Z",
@@ -83,8 +83,8 @@
     "health-insurance-policy-guide-india": "2026-10-16T15:58:50.000Z",
     "mca-company-registration-process-india": "2026-10-16T15:58:50.000Z",
     "partnership-vs-proprietorship-india": "2026-10-16T15:58:50.000Z",
-    "private-limited-company-vs-llp": "2026-10-16T15:58:50.000Z",
-    "common-business-registration-mistakes-india": "2026-10-16T15:58:50.000Z",
-    "business-structure-guide-new-entrepreneurs-india": "2026-10-16T15:58:50.000Z"
+    "private-limited-company-vs-llp": "2026-10-18T06:04:06.588Z",
+    "common-business-registration-mistakes-india": "2026-10-18T06:04:06.588Z",
+    "business-structure-guide-new-entrepreneurs-india": "2026-10-18T06:04:06.588Z"
   }
 }

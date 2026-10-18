@@ -316,3 +316,161 @@ Each is small enough to rebuild from its description:
 4. **Images** — walk `public/`, read real dimensions with `sharp`, group by
    directory, and flag anything whose source is narrower than its rendered
    width.
+
+---
+
+# Second round — 2026-10-18
+
+The client re-ran the deployment and audit prompt the day after the round
+above. This round did two things: re-measured the previous round's claims
+rather than trusting them, and closed the items that round left open.
+
+All measurements below come from `npm run build && npm start` against the
+local production server.
+
+## Re-verification of the 2026-10-17 round
+
+Everything claimed above still holds, re-measured today:
+
+| Check | Result |
+|---|---|
+| `npm run build` | passes; 97 prerendered pages |
+| `npm run typecheck` | passes, no output |
+| `npm run lint` | passes, no output |
+| `npm run check:blog` | 18 articles, 0 errors, 4 warnings (all pre-existing: two are in files untouched this round, two exceed the word-count target by over 100 words) |
+| `seo-validate` (postbuild) | 95 sitemap URLs, 95 unique titles, 95 unique descriptions |
+| Crawl of all 95 sitemap URLs | 95/95 HTTP 200, canonical present and self-referencing, exactly one `<h1>`, no duplicate titles or descriptions, every title ≤60 chars and every description ≤160 chars once entity-decoded |
+| Internal links | 103 distinct internal links, 0 non-200 |
+| Legacy redirects | `/services/legal/` → 301 `/services/business-registration/`; `/services/finance/` → 301 `/services/`; `/services/gst-din-mca/` → 301 `/`; `/services/land-investment/` and `/rentals/` → 410; unknown path → 404. Matches master rule 15 exactly. |
+| Security headers | all six present, including HSTS and CSP report-only |
+| Lead API rate limiting | 4 submissions accepted, then HTTP 429 |
+
+One correction to the record: the previous round reported local Node as
+20.12.0 and pinned `engines.node >=22`. The shell still runs **Node 20.12.0**,
+so the pin is not satisfied locally. The build passes anyway and Vercel reads
+`.nvmrc`, so this is a local-environment note, not a defect.
+
+## Findings closed this round
+
+### P1 — Legal content described a fee regime that ended in 2022
+
+**Finding.** Fifteen passages described the LLP late-filing fee as a per-day
+charge with no upper limit — "no ceiling", "uncapped daily late fees", "a
+per-day penalty that keeps accruing". That regime ended on 31 March 2022.
+
+**Business impact.** This is the most serious finding of this round. It is
+wrong information about money, stated as fact, on commercial pages that exist
+to win registration work — and it overstates the penalty, so it reads as
+scare-selling. Master rule 11 requires only legally accurate information on
+service pages; master rule 13 forbids unverified claims. It had been wrong for
+over four years and survived two previous audits because both read the content
+for tone and structure rather than checking it against the law.
+
+**Fixed.** All fifteen now say the fee increases with the length of the delay,
+which is accurate under the banded regime introduced by G.S.R. 173(E) and
+stays accurate if the bands change. No multiplier or rupee figure is stated,
+because the secondary sources disagree on the detail. Source and reasoning:
+[EXTERNAL-CITATIONS.md](EXTERNAL-CITATIONS.md#statutory-claims-and-their-sources).
+
+**Verified.** `grep` confirms no occurrence remains; the three surviving "no
+upper limit" strings all refer to the number of partners in an LLP, which is
+correct. The company-side claim that late ROC filing attracts a daily fee was
+checked separately and **kept** — s.403 of the Companies Act is unchanged.
+
+### P1 — The first auditor's appointment was attributed to Form ADT-1
+
+**Finding.** Two passages said the first auditor "must be appointed within 30
+days **through Form ADT-1**". The appointment is made by board resolution;
+ADT-1 is a notice to the Registrar. Separately, r.4(2) of the Companies (Audit
+and Auditors) Rules 2014 ties that notice to s.139(1) and does not refer to
+s.139(6), which is the first-auditor provision — so whether ADT-1 is even
+required for a first auditor is unsettled.
+
+**Fixed.** Both now state the statutory fact — the board appoints the first
+auditor within 30 days of incorporation — without asserting the filing duty.
+ADT-1 survives in one place, as a description of what Raulji Group files on a
+client's behalf.
+
+**The 30-day deadline was verified and kept.** This was specifically called
+out in the client's prompt.
+
+### P2 — The contact wizard showed two choices that read as duplicates
+
+**Finding.** The client's prompt asked whether "Business Consulting"/
+"Consulting" and "Something else"/"Other" were duplicated options. They were
+not duplicate *options*, but the report was correct about what a visitor sees.
+Each card on `/contact/` renders its label above a caption taken from its
+`group` field, and two cards were captioned with a restatement of their own
+label: "Business Consulting / Consulting" and "Something else / Other". The
+cards are a flat grid with no grouped sections, so there was no hierarchy to
+make the repetition look intentional.
+
+**Fixed.** The two captions now carry information: "Strategy and planning" and
+"Tell us in the next step" — the latter accurate, since step 2 asks "Anything
+else we should know?". The submitted `value` is unchanged on both, so CRM
+lead-source labels are unaffected.
+
+**Not a defect, deliberately left:** the homepage/service `LeadForm` uses a
+native `<select>` whose `<optgroup>` labels are "Consulting" and "Something
+else". An optgroup label is not selectable and the browser indents its
+children, so the hierarchy is self-evident there.
+
+### P2 — Homepage meta description (carried over, now resolved)
+
+The previous round flagged the 165-char description and could not resolve it,
+because both candidate texts exceeded the limit and trimming approved brand
+copy is the client's call. The client's prompt this round supplied its own
+candidate and asked for it to be validated before implementation.
+
+Validated: the supplied text is **163 characters**, still past the ~160 where
+Google truncates. Adjusted to **155** by substituting "business structuring"
+for "business structure selection" — the term already used in
+`SITE.description` and master rule 8. Consulting still leads and the scope
+stays India-wide. Now live and verified in the rendered HTML.
+
+## Candidates rejected, with reasons
+
+The prompt offered two further candidates. Both are declined, because
+`CLAUDE.md` is the master document and rule 5 records a client decision of
+2026-10-16 that these exact patterns were already considered and rejected.
+
+| Candidate | Decision |
+|---|---|
+| Homepage title → "Business Consulting & Registration Services in India \| Raulji Group" | **Not applied.** Registration-led and geography-qualified, which is the shape rule 5 rejected on 2026-10-16 ("Raulji Group \| Business Registration & Consulting, Gujarat"). Rule 5's own note records the client's reasoning: registration-in-Gujarat belongs to `/gujarat/`, and the homepage should target the brand. The current title is 46 chars and matches rule 5 exactly. |
+| Homepage H1 → "Business Consulting & Registration Services for Entrepreneurs in India" | **Not applied.** Rule 4 fixes the H1, and the 2026-10-16 resolution explicitly kept it. The prompt itself says not to change the H1 blindly. |
+
+Both can be applied in minutes if the client overrides those rules
+deliberately — but neither should be applied as a side effect of a
+re-run prompt, and applying them would contradict a written client decision
+two days old.
+
+## Still open
+
+| Item | Status | What it needs |
+|---|---|---|
+| Preview / production deployment | **BLOCKED** | `vercel whoami` returns "Logged out", and there is no `.vercel/` directory. The CLI is installed. Nothing was deployed. |
+| Production smoke test | **BLOCKED** | Depends on a deploy. |
+| End-to-end lead delivery | **NOT VERIFIED** | `RAULJI_CRM_API_KEY` is unset locally, so the route returns 500 before calling the CRM. That is the correct guard and it was verified — but it means delivery into the CRM is still unproven. It can only be tested with the key set, and should be tested against a non-production CRM target. |
+| GA4 / Search Console / CRM data | **BLOCKED** | No credentials. The funnel question remains unanswerable from here. |
+| Real-device responsive QA | **NOT VERIFIED** | No browser automation in this session. The 320–1920 px sweep still needs a browser. |
+| Core Web Vitals field data | **NOT VERIFIED** | Lab proxies only. Do not report a score without CrUX or a Lighthouse run. |
+| Hero image sharpness | **REQUIRES MANUAL ACTION** | `public/photos/home-hero.webp` is still 1600×1067 against a ~2360 px requirement at 2×. No higher-resolution source exists in the repo, and upscaling would invent detail rather than add it. Needs a ~2400 px re-export to the same path. |
+| LLP audit threshold reading | **REQUIRES PROFESSIONAL REVIEW** | r.24(8) is genuinely ambiguous. The conservative reading is in place. See EXTERNAL-CITATIONS.md. |
+| Statutory prices and fees | **NOT VERIFIED** | Government fee figures were not re-checked this round. Still a pre-launch item. |
+| Lead-loss fallback | **NEEDS A DECISION** | Unchanged: if the CRM is down the lead is lost. |
+
+## Files changed this round
+
+| File | Change |
+|---|---|
+| `lib/services.ts` | LLP late-fee wording ×3; first-auditor wording ×2; Form 3 late-fee wording |
+| `lib/city-services.ts` | LLP late-fee wording ×4 |
+| `lib/secondary-services.ts` | LLP late-fee wording; ADT-1 described as our filing, not the client's duty |
+| `lib/blog/articles/pvt-vs-llp.ts` | LLP late-fee wording ×3 |
+| `lib/blog/articles/structure-guide.ts` | LLP late-fee wording ×2 |
+| `lib/blog/articles/registration-mistakes.ts` | LLP late-fee wording ×2 |
+| `lib/blog/articles/choose-business-structure.ts` | LLP late-fee wording |
+| `app/page.tsx` | Homepage meta description 165 → 155 chars, with the decision recorded |
+| `components/forms/contact-wizard.tsx` | Two card captions that restated their own labels |
+| `docs/EXTERNAL-CITATIONS.md` | New section: statutory claims, sources, review date, two corrections and one flag |
+| `docs/site-audit.md` | This round |

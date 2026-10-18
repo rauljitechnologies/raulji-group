@@ -142,7 +142,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
       },
       {
         title: "Lower compliance, not no compliance",
-        body: "An LLP must file Form 11 by 30 May and Form 8 by 30 October every year, including in a year with no activity at all. Late filing carries a per-day penalty that keeps accruing until you file, and dormant Ahmedabad LLPs that were set up and forgotten are a common and expensive problem.",
+        body: "An LLP must file Form 11 by 30 May and Form 8 by 30 October every year, including in a year with no activity at all. Late filing carries an additional fee that steps up the longer the delay runs, and dormant Ahmedabad LLPs that were set up and forgotten are a common and expensive problem.",
       },
       {
         title: "No equity, so no investors",
@@ -352,7 +352,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
       },
       {
         title: "Two designated partners, and the filings do not stop",
-        body: "An LLP needs at least two partners and two designated partners, and must file Form 11 by 30 May and Form 8 by 30 October each year, including in a year with no work at all. Late filing carries a per-day penalty that keeps accruing. Dormant LLPs set up for one contract and then forgotten are an expensive and avoidable problem.",
+        body: "An LLP needs at least two partners and two designated partners, and must file Form 11 by 30 May and Form 8 by 30 October each year, including in a year with no work at all. Late filing carries an additional fee that grows with the delay. Dormant LLPs set up for one contract and then forgotten are an expensive and avoidable problem.",
       },
       {
         title: "No equity, and conversion later is not free",
@@ -562,7 +562,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
       },
       {
         title: "Audit only above thresholds, but filings always",
-        body: "An LLP requires audit only once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which many Surat firms will cross, so budget for it. Regardless of audit, Form 11 is due by 30 May and Form 8 by 30 October every year, including a year with no activity, and late filing carries a per-day penalty that keeps accruing.",
+        body: "An LLP requires audit only once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which many Surat firms will cross, so budget for it. Regardless of audit, Form 11 is due by 30 May and Form 8 by 30 October every year, including a year with no activity, and late filing carries an additional fee that steps up with the delay.",
       },
       {
         title: "No equity, which rules out investment",
@@ -776,7 +776,7 @@ export const CITY_SERVICES: CityServiceContent[] = [
       },
       {
         title: "Audit above thresholds, filings always",
-        body: "Audit is required once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which a growing unit will cross, so plan for it. Independently of audit, Form 11 is due by 30 May and Form 8 by 30 October each year, including a year with no work, and late filing carries a per-day penalty that accrues until you file.",
+        body: "Audit is required once turnover exceeds Rs 40 lakh or contribution exceeds Rs 25 lakh, which a growing unit will cross, so plan for it. Independently of audit, Form 11 is due by 30 May and Form 8 by 30 October each year, including a year with no work, and late filing carries an additional fee that climbs the longer it is left.",
       },
     ],
     faqs: [

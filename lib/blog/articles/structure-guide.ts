@@ -206,7 +206,7 @@ export const structureGuide: Article = {
     },
     {
       kind: "p",
-      text: "Its annual compliance is the middle ground of the four: Form 11 by 30 May and Form 8 by 30 October, with late fees per day and no upper limit. An audit is required only above Rs 40 lakh turnover or Rs 25 lakh contribution, which is the single largest difference in running cost between an LLP and a company.",
+      text: "Its annual compliance is the middle ground of the four: Form 11 by 30 May and Form 8 by 30 October, with an additional fee for late filing that steps up with the delay. An audit is required only above Rs 40 lakh turnover or Rs 25 lakh contribution, which is the single largest difference in running cost between an LLP and a company.",
     },
     { kind: "h3", text: "What it does well" },
     {
@@ -226,7 +226,7 @@ export const structureGuide: Article = {
         "Businesses planning an equity raise, because an LLP cannot issue shares and standard investment documentation assumes share capital",
         "Businesses wanting to offer employees options in the form a company can",
         "Owners who want ownership and management separated, since the LLP structure joins them",
-        "Anyone who will not keep up two annual filings, given the uncapped daily late fee",
+        "Anyone who will not keep up two annual filings, given the additional fee that builds the longer they are left",
       ],
     },
 

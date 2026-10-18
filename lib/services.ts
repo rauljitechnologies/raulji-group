@@ -291,7 +291,7 @@ export const SERVICES: RegistrationService[] = [
       },
       {
         title: "Post-incorporation steps",
-        body: "A current account is opened, the subscription money is brought in, Form INC-20A is filed to declare commencement of business within 180 days, and the first auditor is appointed within 30 days via Form ADT-1.",
+        body: "A current account is opened, the subscription money is brought in, Form INC-20A is filed to declare commencement of business within 180 days, and the board appoints the first auditor within 30 days of incorporation.",
       },
     ],
     whatWeHandle: [
@@ -360,7 +360,7 @@ export const SERVICES: RegistrationService[] = [
       },
       {
         q: "What happens after incorporation?",
-        a: "The company opens a current account and the subscribers pay in their subscription money. The first auditor must be appointed within 30 days through Form ADT-1, and Form INC-20A declaring commencement of business must be filed within 180 days. From there the company files its annual ROC returns and financial statements and has its accounts audited each year.",
+        a: "The company opens a current account and the subscribers pay in their subscription money. The board must appoint the first auditor within 30 days of incorporation, and Form INC-20A declaring commencement of business must be filed within 180 days. From there the company files its annual ROC returns and financial statements and has its accounts audited each year.",
       },
     ],
     related: ["llp-registration", "partnership-registration", "proprietorship-registration"],
@@ -400,7 +400,7 @@ export const SERVICES: RegistrationService[] = [
     afterRegistration: [
       {
         title: "File the LLP Agreement",
-        body: "The agreement is executed on stamp paper at the state's rate and filed in Form 3 within 30 days of incorporation. Late filing attracts additional fees for each day of delay.",
+        body: "The agreement is executed on stamp paper at the state's rate and filed in Form 3 within 30 days of incorporation. Late filing attracts an additional fee that increases with the length of the delay.",
       },
       {
         title: "PAN, TAN and a current account",
@@ -502,7 +502,7 @@ export const SERVICES: RegistrationService[] = [
       "Cannot issue equity shares, so it is not suitable if you plan to raise venture capital",
       "Any change in partners or in the LLP Agreement must be filed with the Registrar",
       "Form 8 and Form 11 must be filed annually even in a year with no business activity",
-      "Late ROC filing attracts a per-day penalty that continues to accrue until the filing is made",
+      "Late ROC filing attracts an additional fee that steps up with the length of the delay",
     ],
     eligibility: [
       "A minimum of two partners. There is no upper limit on the number of partners.",
@@ -614,7 +614,7 @@ export const SERVICES: RegistrationService[] = [
       },
       {
         q: "What annual filings does an LLP have?",
-        a: "Form 11, the annual return, is due by 30 May each year, and Form 8, the statement of account and solvency, by 30 October. Both are due even in a year with no business activity. Accounts must be audited if turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing attracts a per-day penalty that keeps accruing until the filing is made.",
+        a: "Form 11, the annual return, is due by 30 May each year, and Form 8, the statement of account and solvency, by 30 October. Both are due even in a year with no business activity. Accounts must be audited if turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing attracts an additional fee that steps up with the length of the delay.",
       },
     ],
     related: ["pvt-registration", "partnership-registration", "proprietorship-registration"],

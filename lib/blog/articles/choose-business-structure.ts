@@ -130,7 +130,7 @@ export const chooseBusinessStructure: Article = {
     },
     {
       kind: "p",
-      text: "This is the cost people underestimate, because it recurs whether or not the business trades. A company that earned nothing still needs its accounts audited, its board meetings minuted and its annual forms filed. A dormant LLP still files Form 11 by 30 May and Form 8 by 30 October, with late fees per day and no ceiling.",
+      text: "This is the cost people underestimate, because it recurs whether or not the business trades. A company that earned nothing still needs its accounts audited, its board meetings minuted and its annual forms filed. A dormant LLP still files Form 11 by 30 May and Form 8 by 30 October, and the additional fee for filing late grows with the delay.",
     },
     {
       kind: "p",

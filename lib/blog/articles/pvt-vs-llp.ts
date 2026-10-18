@@ -113,7 +113,7 @@ export const pvtVsLlp: Article = {
     {
       kind: "warning",
       title: "Dormant does not mean exempt",
-      text: "Both structures file whether or not they traded. An LLP that never opened a bank account still owes Form 11 by 30 May and Form 8 by 30 October, and the late fee is charged per day with no upper limit. A company that earned nothing still needs an audit. People who register early, go quiet, and come back a year later are usually surprised by what has accumulated.",
+      text: "Both structures file whether or not they traded. An LLP that never opened a bank account still owes Form 11 by 30 May and Form 8 by 30 October, and the additional fee for filing late climbs the longer the delay runs. A company that earned nothing still needs an audit. People who register early, go quiet, and come back a year later are usually surprised by what has accumulated.",
     },
     {
       kind: "links",
@@ -193,7 +193,7 @@ export const pvtVsLlp: Article = {
     {
       kind: "list",
       items: [
-        "**That an LLP has no compliance.** It has less, and the audit position is genuinely different, but Form 11 and Form 8 are annual obligations with uncapped daily late fees.",
+        "**That an LLP has no compliance.** It has less, and the audit position is genuinely different, but Form 11 and Form 8 are annual obligations whose late-filing fee climbs the longer they are left.",
         "**That a Private Limited Company protects you from everything.** It does not cover personal guarantees given to a lender, statutory dues, or the consequences of fraud. In small business lending, personal guarantees are common.",
         "**That you cannot convert.** You can. An LLP can convert into a company and the reverse is provided for as well. Conversion has cost and takes time, which is a reason to choose deliberately, not a reason to think the choice is permanent.",
         "**That a company looks more credible to customers.** Some buyers do check the register and some tender processes require it. Most customers care about the work, the references and the terms.",
@@ -242,7 +242,7 @@ export const pvtVsLlp: Article = {
     },
     {
       q: "What are the annual filings for an LLP?",
-      a: "An LLP files Form 11, the annual return, by 30 May, and Form 8, the statement of accounts and solvency, by 30 October. Form 11 must be filed before Form 8. Late filing attracts a fee charged per day with no upper limit, so a missed deadline grows rather than staying fixed.",
+      a: "An LLP files Form 11, the annual return, by 30 May, and Form 8, the statement of accounts and solvency, by 30 October. Form 11 must be filed before Form 8. Late filing attracts an additional fee that steps up with the length of the delay, so a missed deadline grows rather than staying fixed.",
     },
     {
       q: "Can an LLP be converted into a Private Limited Company?",
