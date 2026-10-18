@@ -45,7 +45,7 @@ const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[]
   { label: "LLP", value: "LLP", group: "Registration", icon: Link2 },
   { label: "Partnership", value: "Partnership", group: "Registration", icon: Users },
   { label: "Proprietorship", value: "Proprietorship", group: "Registration", icon: User },
-  { label: "Business Consulting", value: "Business Consulting", group: "Consulting", icon: Compass },
+  { label: "Business Consulting", value: "Business Consulting", group: "Strategy and planning", icon: Compass },
   {
     label: "Not sure yet, help me choose",
     value: "Not sure yet, help me choose",
@@ -58,8 +58,19 @@ const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[]
     group: "Raulji Technologies",
     icon: Code2,
   },
-  { label: "Something else", value: "Other", group: "Other", icon: Plus },
+  { label: "Something else", value: "Other", group: "Tell us in the next step", icon: Plus },
 ];
+
+/*
+ * `group` is the caption rendered under each card's label, so it has to add
+ * something the label does not already say. Two of them did not: "Business
+ * Consulting" was captioned "Consulting" and "Something else" was captioned
+ * "Other", which read as the same choice written twice and was reported as a
+ * duplicate option. The cards are a flat grid, not grouped sections, so there
+ * is no hierarchy to make the repetition look deliberate.
+ *
+ * `value` is unchanged on both: it is what reaches the CRM.
+ */
 
 const WHENS = ["This week", "Within a month", "In 1–3 months", "Just exploring"];
 

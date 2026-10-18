@@ -158,7 +158,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     includes: [
       "Annual financial statement filing in Form AOC-4",
       "Annual return filing in Form MGT-7A for small companies",
-      "First auditor appointment through Form ADT-1",
+      "First auditor appointment, with Form ADT-1 filed to notify the Registrar",
       "Commencement of business declaration in Form INC-20A",
       "Director KYC through Form DIR-3 KYC",
       "Board meeting and minute record-keeping",
@@ -186,7 +186,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
       "Form 4 filing for admission, retirement or change of partners",
       "Designated partner KYC",
     ],
-    note: "Audit is required where turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing of Form 8 or Form 11 attracts a per-day penalty that continues to accrue until the filing is made.",
+    note: "Audit is required where turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing of Form 8 or Form 11 attracts an additional fee that steps up the longer the delay runs.",
     image: "compliance",
   },
 ];

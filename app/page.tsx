@@ -48,9 +48,23 @@ import { H1, H2 } from "@/lib/typography";
 
 export const metadata = pageMeta({
   title: "Raulji Group | Business Consulting & Solutions",
-  /* The description the design brief specifies at its section 18, verbatim. */
+  /*
+   * Resolved 2026-10-18. The design brief's section 18 wording ran to 165
+   * characters and master rule 5's to 187, both past the ~160 where Google
+   * truncates; the 2026-10-17 audit flagged this and could not resolve it,
+   * because trimming approved brand copy is the client's call.
+   *
+   * The client's deployment prompt then supplied its own candidate and asked
+   * for it to be validated and adjusted before implementation. That candidate
+   * is 163 characters, so it is adjusted here to 155: "business structure
+   * selection" becomes "business structuring", which is the term already used
+   * in SITE.description and master rule 8, and nothing else changes.
+   *
+   * Consulting still leads, and the scope stays India-wide (master rule 5:
+   * not Gujarat-only, not registration-only).
+   */
   description:
-    "Raulji Group helps entrepreneurs and businesses with business consulting, registration, business structuring and related business solutions across Gujarat and India.",
+    "Raulji Group helps entrepreneurs and businesses with business consulting, business structuring, registration and related services across Gujarat and India.",
   path: "/",
   ogHeadline: "We Don't Just Build Businesses. We Build Futures.",
 });
