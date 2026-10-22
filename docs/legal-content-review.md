@@ -3,8 +3,9 @@
 Every statutory statement the site makes, the provision it rests on, and when
 it was last checked.
 
-**Reviewed: 2026-10-18.** Reviewer: engineering, against the provisions named
-below. **This is not professional sign-off.** Nothing here has been reviewed by
+**Reviewed: 2026-10-18. Re-checked 2026-10-22** (the first-auditor and ADT-1
+claims only, against sources — see the 2026-10-22 entry below). Reviewer:
+engineering, against the provisions named below. **This is not professional sign-off.** Nothing here has been reviewed by
 a practising CA or CS, and the two items marked *Needs professional review*
 specifically require one.
 
@@ -34,6 +35,7 @@ below for the pattern.
 | LLP Statement of Account and Solvency in Form 8, due 30 October | LLP Rules 2009, **r.24** — 30 days from the end of six months of the financial year | Six months from 31 March is 30 September, plus 30 days. |
 | Form 11 must be filed before Form 8 | MCA filing sequence | Correct as stated on `/services/llp-registration/`. |
 | LLP Agreement filed in Form 3 within 30 days of incorporation | LLP Act 2008, **s.23(2)** | Correct. |
+| Filing Form ADT-1 is not an express statutory duty for a first auditor appointed by the board | Companies (Audit and Auditors) Rules 2014, **r.4(2)**, read with the fourth proviso to **s.139(1)** | Upgraded from *unsettled* to *verified* on 2026-10-22 — see that entry below. The site does not assert the filing duty. |
 | Partnership registration with the Registrar of Firms is optional | Indian Partnership Act 1932, **s.58 / s.69** | Correct, and the site correctly explains the consequence under s.69 rather than just calling it optional. |
 | Udyam (MSME) registration is free | MSME / Udyam portal | Correct. Worth re-checking at each review; "free" is the kind of claim that changes. |
 
@@ -89,6 +91,66 @@ is. The filing duty is no longer asserted. ADT-1 survives in one place, in
 `lib/secondary-services.ts`, describing what Raulji Group files as part of its
 compliance service — a description of our own work, not of the client's legal
 obligation.
+
+## Re-checked 2026-10-22 — the ADT-1 question, with sources
+
+The brief for this round asked specifically for the Private Limited
+first-auditor and Form ADT-1 statements to be re-checked against current
+sources. They were, and the 2026-10-18 reading **holds and is now better
+supported than it was.**
+
+**First, the code was re-checked.** `grep` over `lib`, `app` and `components`:
+ADT-1 appears exactly once, in `lib/secondary-services.ts:161`, describing what
+Raulji Group files as part of its compliance service — not as the client's
+legal obligation. Every first-auditor statement (`lib/services.ts` lines 152,
+294, 363, and `lib/blog/articles/mca-process.ts:197`) says the **board**
+appoints within 30 days, with no filing duty attached. The 2026-10-18
+correction is intact.
+
+**What the sources now say.** Two things that were not known on 2026-10-18:
+
+1. **Form ADT-1 was revised on 14 July 2025** to add a "First auditor by Board
+   of directors/members/C&AG" option under *Nature of appointment*. Before
+   that, the form could not properly report a first-auditor appointment at all.
+   So the form now accommodates it — which is why the question has resurfaced.
+2. **Rule 4(2) was not amended alongside it.** It still refers only to the
+   fourth proviso to s.139(1), the AGM appointment, and not to s.139(6), which
+   governs the first auditor. **MCA's own FAQ No. 35** is reported as
+   acknowledging this — that the rule "only mentions Section 139(1)" — and as
+   *recommending* rather than mandating ADT-1 for a first auditor.
+
+That is the same gap the 2026-10-18 review identified from the provisions
+alone, now with the MCA's own FAQ on the same side of it. The status moves from
+*unsettled* to *verified*, and the row above records it.
+
+**One source disagrees.** A secondary source asserts that ADT-1 filing became
+mandatory for first auditors from 14 July 2025. It gives no amending
+instrument, and an amendment to a form cannot create a filing duty that the
+rule does not impose. Per the standing rule in this file, the disagreement is
+recorded rather than resolved in the site's copy — and it does not need to be,
+because **the site's wording is true under both readings.** It states the
+30-day board appointment, which is uncontested, and asserts no filing duty
+either way. If the stricter reading were right, the site would be guilty of an
+omission, not a false statement; it would then be worth adding the filing as a
+step, which is a one-line change.
+
+**Sources consulted 2026-10-22.** Both secondary (commentary), not the bare
+instrument:
+
+- taxguru.in — *Revised Form ADT-1 Covers First Auditor from 14 July 2025, but
+  Filing Not Mandatory*: "Rule 4(2) continues to refer to the appointment of
+  auditors under the fourth proviso to Section 139(1) and has not been amended
+  to expressly cover first-auditor appointments", concluding that filing "may
+  presently be treated as recommended or prudent compliance rather than an
+  express statutory mandate".
+- An ICSI representation seeking MCA clarification on ADT-1 applicability was
+  identified but **could not be retrieved** (the PDF returned 404). It is worth
+  finding: a professional body asking for clarification is itself evidence the
+  point is not settled on the face of the rules.
+
+**Still not professional sign-off.** This is engineering reading commentary and
+the text of a rule. It does not replace a CA or CS, and the item below on the
+LLP audit threshold still requires one.
 
 ## Needs professional review
 
@@ -154,3 +216,4 @@ a file listed here is edited. Record the date and what moved.
 | Date | Reviewer | Outcome |
 | --- | --- | --- |
 | 2026-10-18 | Engineering (not professional sign-off) | Two corrections, two items referred for professional review. First review of this kind; the claims had not previously been checked against their provisions. |
+| 2026-10-22 | Engineering (not professional sign-off) | Re-checked the first-auditor and ADT-1 claims against sources, as the Search Console round's brief required. Reading holds; status upgraded to verified on the back of the 14 July 2025 form revision leaving r.4(2) unamended and MCA FAQ No. 35. No site copy changed. Everything else carried forward unreviewed. |

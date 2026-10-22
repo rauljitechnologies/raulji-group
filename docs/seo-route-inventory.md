@@ -3,6 +3,19 @@
 Generated from a crawl of the production build (`npm run build && npm start`)
 on 2026-10-17, not hand-maintained. Regenerate after adding routes.
 
+**Amended 2026-10-22:** the `/gujarat/` row carries that day's changes --
+title (now 58 chars), `Desc len` (now 156), H1, `H2/H3` (now 12/18) and
+`Words`, all re-measured from the rendered page. The word count was the one
+cell where re-measuring risked changing the baseline method, so it was checked
+both ways: counting the added copy forward from the 2026-10-17 figure gives
+~3,013, and a direct re-count of the rendered page gives 3,043 -- the two
+methods agree inside 1%, so the direct figure is used. No other row changed;
+the page's schema set, image count and every other route are as the
+2026-10-17 crawl produced them. The crawl itself was re-run in full on
+2026-10-22 against the production build and all 95 URLs still returned 200
+with unique titles and descriptions, one `<h1>` each and self-referencing
+canonicals -- see [seo-improvement-audit.md](seo-improvement-audit.md).
+
 **Amended 2026-10-18:** the homepage row carries that day's changes -- title
 (now 58 chars), `Desc len` (now 155) and H1, all re-measured from the rendered
 page after the client instructed the headline change. Every other cell is left exactly as the
@@ -66,7 +79,7 @@ is correct: it is the breadcrumb root.
 | 44 | `/gandhinagar/private-limited-company-registration/` | City x service | Local commercial SEO | Local enquiry | Private Limited Company Registration in Gandhinagar \| Raulji (60) | 137 | Private Limited Company Registration in Gandhina | 11/19 | 2040 | 15 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, Service, City, Offer, FAQPage, Question, Answer |
 | 45 | `/gandhinagar/proprietorship-registration/` | City x service | Local commercial SEO | Local enquiry | Proprietorship Registration in Gandhinagar \| Raulji Group (57) | 145 | Proprietorship Registration in Gandhinagar | 11/18 | 1933 | 15 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, Service, City, FAQPage, Question, Answer |
 | 46 | `/godhra/` | City | Local SEO + discovery | Local enquiry | Company & Business Registration in Godhra \| Raulji Group (56) | 138 | Business registration services in Godhra. | 11/13 | 2068 | 53 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer, Service, City |
-| 47 | `/gujarat/` | Geographic hub | State-level SEO | City / service discovery | Business Registration in Gujarat: All 33 Districts \| Raulji (59) | 153 | Business registration across all 33 districts of | 11/13 | 2263 | 48 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer |
+| 47 | `/gujarat/` | Geographic hub | State-level SEO | City / service discovery | Company, LLP & Firm Registration in Gujarat \| Raulji Group (58) | 156 | Register a company, LLP or partnership firm anyw | 12/18 | 3043 | 48 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer |
 | 48 | `/halol/` | City | Local SEO + discovery | Local enquiry | Company & Business Registration in Halol \| Raulji Group (55) | 139 | Business registration services in Halol. | 11/12 | 1948 | 40 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer, Service, City |
 | 49 | `/himmatnagar/` | City | Local SEO + discovery | Local enquiry | Company & Business Registration in Himmatnagar \| Raulji (55) | 140 | Business registration services in Himmatnagar. | 11/12 | 1955 | 40 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer, Service, City |
 | 50 | `/jamnagar/` | City | Local SEO + discovery | Local enquiry | Company & Business Registration in Jamnagar \| Raulji Group (58) | 141 | Business registration services in Jamnagar. | 11/12 | 1966 | 40 | ImageObject, Brand, PostalAddress, AdministrativeArea, Country, ContactPoint, OpeningHoursSpecification, WebSite, BreadcrumbList, ListItem, FAQPage, Question, Answer, Service, City |
