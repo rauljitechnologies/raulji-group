@@ -21,7 +21,8 @@ import {
 
 import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref, whatsappHref } from "@/lib/site";
-import { track } from "@/lib/analytics";
+import { errorCategory, markLeadCounted, track } from "@/lib/analytics";
+import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
 /**
@@ -39,6 +40,10 @@ import { cn } from "@/lib/utils";
  * would record a consent nothing downstream stores or honours, and the
  * reply-time promises (master rule 23).
  */
+
+/** Form identity for the analytics events. See lead-form.tsx. */
+const FORM_ID = "contact_wizard";
+const FORM_NAME = "Contact wizard";
 
 const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[] = [
   { label: "Private Limited", value: "Private Limited", group: "Registration", icon: Briefcase },
@@ -87,6 +92,13 @@ export function ContactWizard() {
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewedRef = useRef(false);
+  /*
+   * Double-submit guard, same as LeadForm. The button is `disabled` while
+   * submitting, but that relies on a re-render beating the second click; this
+   * ref is set synchronously so a fast double-click cannot reach `fetch` twice.
+   * The CRM's own duplicate handling is unaffected and still wanted.
+   */
+  const inFlightRef = useRef(false);
   const startedRef = useRef(false);
 
   const [step, setStep] = useState(1);
@@ -149,7 +161,16 @@ export function ContactWizard() {
   }
 
   async function submit() {
+    if (inFlightRef.current) return;
+    inFlightRef.current = true;
     setStatus("submitting");
+    // Intent, not a conversion.
+    track("form_submit_attempt", {
+      form_id: FORM_ID,
+      form_name: FORM_NAME,
+      form_step: 3,
+      registration_type: need || undefined,
+    });
     setSubmitError(null);
     const message = [when ? `Timeline: ${when}` : "", fields.message.trim()]
       .filter(Boolean)
@@ -164,6 +185,9 @@ export function ContactWizard() {
       message,
       hp_note: hpNote,
       sourcePage: pathname,
+      // Same attribution as LeadForm, from the same source, so both forms land
+      // in the CRM with identical campaign fields.
+      ...currentAttribution(),
     };
     try {
       const response = await fetch("/api/lead/", {
@@ -171,7 +195,12 @@ export function ContactWizard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const result = (await response.json()) as { success: boolean; error?: string };
+      const result = (await response.json()) as {
+        success: boolean;
+        error?: string;
+        duplicate?: boolean;
+        requestId?: string;
+      };
       if (result.success) {
         setStatus("success");
         // Skipped for a honeypot-tripped submission, which the API answers
@@ -183,33 +212,100 @@ export function ContactWizard() {
             registration_type: need || "Not specified",
             city: fields.city || undefined,
           });
+          /*
+           * The conversion, on the same terms as lead-form.tsx: `success:
+           * true` from this route means the CRM confirmed capture, and the
+           * server's submission id deduplicates it so one enquiry cannot be
+           * counted twice by a re-render or a remount.
+           */
+          if (markLeadCounted(result.requestId ?? "")) {
+            track("generate_lead", {
+              form_id: FORM_ID,
+              form_name: FORM_NAME,
+              registration_type: need || "Not specified",
+              city: fields.city || undefined,
+              submission_id: result.requestId,
+              lead_duplicate: result.duplicate ?? false,
+              lead_source: `Website form (${pathname})`,
+            });
+          }
         }
         scrollToTop();
       } else {
+        inFlightRef.current = false;
         setStatus("idle");
         setSubmitError(result.error ?? "Something went wrong. Please try again.");
         track("form_error", { registration_type: need });
+        track("form_submission_error", {
+          form_id: FORM_ID,
+          form_name: FORM_NAME,
+          error_category: errorCategory(response.status),
+          registration_type: need || undefined,
+        });
       }
     } catch {
+      inFlightRef.current = false;
       setStatus("idle");
       setSubmitError(`Network problem while submitting. Please try again or call ${SITE.phone.display}.`);
       track("form_error", { registration_type: need });
+      track("form_submission_error", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        error_category: errorCategory(null),
+        registration_type: need || undefined,
+      });
     }
   }
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!validate(step)) {
+      /*
+       * Field names only, never the values. `validate` has just written the
+       * failures into state, but state is not readable yet in this tick, so the
+       * fields are recomputed rather than read back.
+       */
+      track("form_validation_error", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        form_step: step,
+        error_field: failingFields(step).join(","),
+        registration_type: need || undefined,
+      });
       // The button is at the foot of the form; bring the errors into view.
       scrollToTop();
       return;
     }
     if (step < 3) {
+      track("form_step_complete", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        form_step: step,
+        registration_type: need || undefined,
+      });
       setStep(step + 1);
       scrollToTop();
     } else {
       void submit();
     }
+  }
+
+  /**
+   * Which fields on a step are currently invalid, by name.
+   *
+   * Duplicates `validate`'s conditions rather than reading the state it just
+   * set, because a `setErrors` in the same tick is not yet visible here. Kept
+   * adjacent to `validate` so the two cannot drift apart unnoticed.
+   */
+  function failingFields(current: number): string[] {
+    const failing: string[] = [];
+    if (current === 1 && !need) failing.push("need");
+    if (current === 2) {
+      if (fields.name.trim().length < 2) failing.push("name");
+      if (!/^(\+?91|0)?[6-9]\d{9}$/.test(fields.phone.replace(/[\s()-]/g, ""))) failing.push("phone");
+      if (fields.email && !/^\S+@\S+\.\S+$/.test(fields.email)) failing.push("email");
+    }
+    return failing;
   }
 
   function reset() {
@@ -362,6 +458,13 @@ export function ContactWizard() {
                       started();
                       setNeed(item.value);
                       setErrors({});
+                      track("select_service", {
+                        form_id: FORM_ID,
+                        form_name: FORM_NAME,
+                        form_step: 1,
+                        service_name: item.value,
+                        registration_type: item.value,
+                      });
                     }}
                     className={cn(
                       "flex min-h-[4.75rem] items-center gap-3 rounded-md border-[1.5px] px-4 py-3.5 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#329fd2] hover:shadow-[0_10px_20px_-14px_rgba(18,38,64,0.4)]",

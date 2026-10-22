@@ -39,7 +39,53 @@ type EventName =
    * would silently zero an existing report, which is exactly what the note at
    * the top of this file warns about.
    */
-  | "finder_complete";
+  | "finder_complete"
+
+  /* ---------------------------------------------------------------------
+   * Added 2026-10-23 for the GA4 / GTM measurement plan.
+   *
+   * These are additions, not renames. The client's analytics brief proposed a
+   * full rename of the taxonomy above -- click_phone for phone_click,
+   * click_contact_cta for primary_cta_click, generate_lead in place of
+   * form_submit. **The client was shown that the existing container
+   * (GTM-MSW79R28) is wired to the current names and that renaming would read
+   * zero on every existing trigger from the moment it deployed, and chose to
+   * keep them.** So every name above is untouched and the brief's genuinely new
+   * events are added alongside. docs/gtm-event-map.md records which brief name
+   * maps to which existing event, so the container can be built from the brief
+   * without guessing.
+   * ------------------------------------------------------------------ */
+
+  /**
+   * The conversion. Fires once per enquiry the CRM has confirmed it stored,
+   * new or duplicate, and never on a click, a form start, a validation
+   * failure, a CRM failure or a page load.
+   *
+   * It does not replace `form_submit`, which the client's container already
+   * counts; both fire on the same confirmed submission. `generate_lead` is the
+   * GA4 recommended name and is the one to mark as the conversion in GA4,
+   * because it is deduplicated on the server's own submission id -- see
+   * `markLeadCounted`.
+   */
+  | "generate_lead"
+  /** A registration or consulting service page was viewed. */
+  | "view_service"
+  /** A city or city + service page was viewed. */
+  | "view_location_page"
+  /** A blog article was viewed. */
+  | "view_blog_article"
+  /** A service was chosen in an enquiry form's "what do you need help with". */
+  | "select_service"
+  /** A step of the multi-step contact wizard was completed. */
+  | "form_step_complete"
+  /** Client-side validation rejected the form. Carries the field, never its value. */
+  | "form_validation_error"
+  /** The visitor pressed submit and the request is going out. Not a conversion. */
+  | "form_submit_attempt"
+  /** The submission failed. Carries a safe category, never the error text. */
+  | "form_submission_error"
+  /** A link to another domain was followed. */
+  | "click_external_link";
 
 /**
  * Which template the event happened on, derived from the path rather than
@@ -121,12 +167,119 @@ export interface EventParams {
   source?: string;
   campaign?: string;
   label?: string;
+
+  /* --- Added 2026-10-23. Attribution and form context for the GA4 plan. --- */
+
+  /**
+   * Which form the event came from. `form_id` is the stable machine name
+   * ("lead_form", "contact_wizard"); `form_name` is what a report reads.
+   */
+  form_id?: string;
+  form_name?: string;
+  /** Wizard step number, 1-based, for `form_step_complete`. */
+  form_step?: number;
+  /**
+   * The field that failed validation, for `form_validation_error`. The field
+   * NAME only -- never the value the visitor typed, which is their own data.
+   */
+  error_field?: string;
+  /**
+   * A bounded category for `form_submission_error`, never the error message:
+   * message text can quote the payload back. See `errorCategory`.
+   */
+  error_category?: string;
+  /**
+   * The server's submission id, echoed from /api/lead/. Used to deduplicate
+   * `generate_lead`. Server-generated and carries nothing personal.
+   */
+  submission_id?: string;
+  /** Whether the CRM recorded this against an existing lead. */
+  lead_duplicate?: boolean;
+  /** Human-readable service name, for the new view_/select_ events. */
+  service_name?: string;
+  /** City display name, for view_location_page. */
+  city_name?: string;
+  /** An accurate internal form/campaign label. Never invented. */
+  lead_source?: string;
+  /** Destination host, for click_external_link. */
+  link_domain?: string;
 }
 
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[];
   }
+}
+
+/**
+ * URL query keys we are willing to copy into the dataLayer.
+ *
+ * An allow-list, not a filter. Copying the whole query string would forward
+ * whatever happens to be on the URL -- an email in a `?email=` parameter, a
+ * token, a referral code with someone's name in it -- straight into analytics.
+ * These eleven are the campaign and click identifiers and nothing else.
+ */
+const ALLOWED_QUERY_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+] as const;
+
+/**
+ * `generate_lead` must fire once per confirmed enquiry.
+ *
+ * React Strict Mode double-invokes effects, a re-render can re-run a handler,
+ * and a visitor who refreshes a success state should not be counted twice. So
+ * the conversion is keyed on the submission id the API returns -- which is
+ * server-generated, carries nothing personal, and is unique per accepted
+ * submission -- and the ids already counted are held in sessionStorage so they
+ * survive a remount within the tab.
+ *
+ * Returns true the first time an id is seen and false afterwards, so the call
+ * site reads `if (markLeadCounted(id)) track("generate_lead", ...)`.
+ *
+ * When storage is unavailable it falls back to an in-memory set, which still
+ * covers the re-render and double-invoke cases -- the ones that actually
+ * happen -- and simply cannot survive a reload.
+ */
+const countedLeads = new Set<string>();
+const COUNTED_KEY = "raulji.leads.counted.v1";
+
+export function markLeadCounted(submissionId: string): boolean {
+  if (!submissionId) return false;
+  if (countedLeads.has(submissionId)) return false;
+  countedLeads.add(submissionId);
+  try {
+    const raw = sessionStorage.getItem(COUNTED_KEY);
+    const seen = raw ? (JSON.parse(raw) as string[]) : [];
+    if (seen.includes(submissionId)) return false;
+    // Bounded: a tab will not legitimately produce many enquiries.
+    sessionStorage.setItem(COUNTED_KEY, JSON.stringify([...seen, submissionId].slice(-20)));
+  } catch {
+    /* in-memory set above is the fallback */
+  }
+  return true;
+}
+
+/**
+ * A bounded category for a failed submission.
+ *
+ * Never the server's message. Those sentences are written for the visitor and
+ * can include the phone number, and an error body from further upstream can
+ * quote the payload back. A fixed vocabulary also keeps the GA4 report
+ * groupable instead of producing one row per wording.
+ */
+export function errorCategory(status: number | null): string {
+  if (status === null) return "network";
+  if (status === 429) return "rate_limited";
+  if (status === 413) return "too_large";
+  if (status === 403) return "rejected_origin";
+  if (status === 400) return "validation";
+  if (status >= 500) return "server";
+  return "unknown";
 }
 
 export function track(event: EventName, params: EventParams = {}) {
@@ -144,12 +297,39 @@ export function track(event: EventName, params: EventParams = {}) {
     params.city ??
     CITY_INDEX.find((c) => c.slug === citySlugFor(path))?.name ??
     undefined;
+  /*
+   * Campaign parameters, from the allow-list only. Read from the current URL
+   * so they are genuinely present rather than remembered or inferred: an event
+   * on a page with no campaign on it carries no campaign fields at all, which
+   * is what the brief's "do not fabricate attribution" requires.
+   */
+  const campaignParams: Record<string, string> = {};
+  for (const key of ALLOWED_QUERY_KEYS) {
+    const value = url.searchParams.get(key);
+    if (value) campaignParams[key] = value.slice(0, 200);
+  }
+
   window.dataLayer.push({
     event,
     page: path,
     page_type: pageTypeFor(path),
-    source: params.source ?? url.searchParams.get("utm_source") ?? undefined,
-    campaign: params.campaign ?? url.searchParams.get("utm_campaign") ?? undefined,
+    /*
+     * GA4's own parameter names, alongside the site's existing `page`. The
+     * client's container reads `page`; GA4 reports read these. Both are sent
+     * rather than one renamed, for the same reason the event names were kept.
+     *
+     * page_location is the href with the query string stripped back to the
+     * allow-listed keys, so a stray `?email=` on a URL cannot ride along into
+     * analytics inside the page location itself.
+     */
+    page_location: `${url.origin}${path}${
+      Object.keys(campaignParams).length ? `?${new URLSearchParams(campaignParams)}` : ""
+    }`,
+    page_title: document.title || undefined,
+    page_referrer: document.referrer || undefined,
+    source: params.source ?? campaignParams.utm_source ?? undefined,
+    campaign: params.campaign ?? campaignParams.utm_campaign ?? undefined,
+    ...campaignParams,
     ...params,
     city,
   });

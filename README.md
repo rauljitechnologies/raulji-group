@@ -34,7 +34,11 @@ that does not correspond to a prerendered page.
 | Variable | Required | Purpose |
 |---|---|---|
 | `RAULJI_CRM_API_KEY` | yes, for the lead form | Server-only CRM key. **Never** prefix with `NEXT_PUBLIC_`. |
-| `RAULJI_CRM_BASE` | no | CRM base URL. Defaults to `https://api.raulji.com/api/v1`. |
+| `RAULJI_CRM_BASE` | no | CRM base URL. Defaults to `https://crm.raulji.com/api/v1`. |
+| `EMAIL_PROVIDER_API_KEY` | for email | Transactional email provider key (Resend). Server-only. |
+| `EMAIL_FROM_ADDRESS` | for email | Verified sender for both enquiry emails. |
+| `RAULJI_ADMIN_EMAILS` | for email | Comma-separated admin notification recipients. |
+| `EMAIL_PROVIDER_ENDPOINT` | no | Defaults to Resend. For provider migration and local mocks only. |
 | `SUPABASE_URL` | no | Blog and team content. Unset renders the empty state. |
 | `SUPABASE_ANON_KEY` | no | Read-only anon key, used server-side only. |
 | `NEXT_PUBLIC_GTM_ID` | yes, in production | GTM container (`GTM-MSW79R28`). Not a secret. **Unset = no analytics at all, with nothing on the page to show it.** |

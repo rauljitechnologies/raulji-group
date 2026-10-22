@@ -20,10 +20,13 @@ nvm use                 # Node 22+. @supabase/supabase-js requires >=22.
 npm ci
 npm run typecheck       # tsc --noEmit
 npm run lint            # eslint .
+npm test                # vitest run -- 79 tests, no network
 npm run build           # check:slugs + sitemap manifest, then seo:validate
 npm run check:blog      # 0 errors (word-count warnings are acceptable)
 ```
 
+- [ ] `test` exits 0 — the lead pipeline's CRM response handling, email
+      templates, escaping and secret-exposure checks
 - [ ] `typecheck` exits 0
 - [ ] `lint` exits 0 — if it asks "How would you like to configure ESLint?",
       `eslint.config.mjs` is missing and the step will hang in CI
@@ -61,6 +64,20 @@ npm start &   # or PORT=3100 npm start
       in the CRM. Use obviously-test details and delete the record afterwards.
 - [ ] Confirm the validation messages are sentences, not `Required`
 - [ ] Confirm a failed submission still shows the phone number as a fallback
+- [ ] `EMAIL_PROVIDER_API_KEY`, `EMAIL_FROM_ADDRESS` and `RAULJI_ADMIN_EMAILS`
+      are set in Vercel **Production**
+- [ ] **`admin@raulji.com` is verified with the email provider** — SPF and DKIM
+      published for `raulji.com`, domain showing verified. Without this both
+      enquiry emails fail while leads still capture, so the symptom is silence,
+      not an error the visitor sees.
+- [ ] Customer confirmation arrives at the submitted address
+- [ ] Admin notification arrives at **both** recipients, with the CRM lead id
+      and the created/updated line populated
+- [ ] The CRM's real lead-id field is one `extractLeadId` recognises — if the
+      admin email says "Not returned by the CRM" on a real lead, add it to
+      `lib/crm/lead-client.ts`
+- [ ] Function logs show `lead_crm_captured` and `lead_emails`, and contain no
+      name, phone, email or message
 
 > **Known gap, needs a decision.** If the CRM is down or the key is wrong, the
 > API returns 500 and the lead is **lost** — there is no fallback capture. The
@@ -69,8 +86,45 @@ npm start &   # or PORT=3100 npm start
 > `form_error` in GA4, (b) add an email fallback via a provider, (c) write
 > failed payloads to Supabase, which is already a dependency. Nothing here is
 > implemented yet.
+>
+> **Note on (b), now that email exists.** The provider added on 2026-10-22 is
+> only wired to fire *after* confirmed capture, which is deliberate: an email
+> sent on CRM failure would be a second place a lead can live, and the brief is
+> explicit that a pending-enquiry workflow must not claim capture. Turning it
+> into a fallback is a small change to `app/api/lead/route.ts` and a decision
+> about who owns the resulting inbox — it is not wired up by default.
 
 ## 4. Analytics — silent failure is the default
+
+See [analytics-implementation.md](analytics-implementation.md) for the full
+setup, [gtm-event-map.md](gtm-event-map.md) for the tags and triggers, and
+[analytics-testing.md](analytics-testing.md) for what to check in DebugView.
+
+- [ ] **GA4 is configured in exactly ONE place.** Either a GA4 Configuration
+      tag in `GTM-MSW79R28` (recommended) **or**
+      `NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-SK8N5N3WE2`. Both at once sends two
+      `page_view` events per visit and inflates sessions, users and engagement
+      rate, with no warning anywhere in GA4. Load the homepage in GTM Preview
+      and count: one.
+- [ ] **`generate_lead` is marked as the conversion in GA4**, not
+      `form_submit`. Both fire on the same confirmed submission; only
+      `generate_lead` is deduplicated on the server submission id.
+- [ ] `generate_lead` fires **once** per confirmed submission, with
+      `submission_id` populated. Submit twice with the same phone: the second
+      fires once with `lead_duplicate: true`.
+- [ ] A failed submission fires `form_submission_error` with an
+      `error_category` and **no** `generate_lead`
+- [ ] Consent: before accepting, `analytics_storage` reads `denied` in GTM
+      Preview. After "Analytics only", `analytics_storage` is `granted` while
+      `ad_storage`, `ad_user_data` and `ad_personalization` stay `denied`
+- [ ] No name, phone, email or message text in any DebugView payload
+- [ ] The consent banner at 320/375/414 px does not cover the mobile action bar
+      or the form submit button, and is dismissible by keyboard
+- [ ] Internal traffic filter set in GA4 → Admin → Data Streams → Tag settings,
+      so the team's own visits do not read as demand
+- [ ] The privacy policy has been reviewed against the banner's wording and the
+      DPDP position
+
 
 - [ ] `NEXT_PUBLIC_GTM_ID=GTM-MSW79R28` is set in Vercel **Production**
 - [ ] **It was set before the build that is currently live.** `NEXT_PUBLIC_*`
