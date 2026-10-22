@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { ga4MeasurementId } from "@/lib/tags";
 
 /**
  * Direct GA4 gtag.js — an opt-in escape hatch, OFF by default.
@@ -36,7 +37,7 @@ import Script from "next/script";
  * NEXT_PUBLIC_ is correct for it.
  */
 export function Ga4Direct() {
-  const measurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID;
+  const measurementId = ga4MeasurementId();
   if (!measurementId) return null;
 
   return (
