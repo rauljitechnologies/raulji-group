@@ -6,7 +6,7 @@ import { AlertCircle, CheckCircle2, ChevronDown, Loader2, Send } from "lucide-re
 import { SERVICES } from "@/lib/services";
 import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref } from "@/lib/site";
-import { track } from "@/lib/analytics";
+import { errorCategory, markLeadCounted, track } from "@/lib/analytics";
 import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
@@ -56,6 +56,15 @@ interface LeadFormProps {
 const fieldClass =
   "h-[3.25rem] w-full rounded-[4px] border bg-white px-4 text-[0.9375rem] font-normal text-[#122640] transition placeholder:text-[#8795a6] hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_4px_rgba(50,159,210,0.16)] focus:outline-none";
 const labelClass = "text-[0.8125rem] font-semibold text-[#122640]";
+
+/**
+ * Form identity for the analytics events. `form_id` is the stable machine name
+ * a GTM trigger matches on; `form_name` is what a report reads. Both are
+ * constants rather than derived, so a new call site cannot spell them
+ * differently and quietly split a funnel in two.
+ */
+const FORM_ID = "lead_form";
+const FORM_NAME = "Enquiry form";
 
 type FieldErrors = Partial<Record<"name" | "phone" | "email", string>>;
 
@@ -138,6 +147,17 @@ export function LeadForm({
     setFieldErrors(invalid);
     if (Object.keys(invalid).length) {
       const first = Object.keys(invalid)[0];
+      /*
+       * The field NAME only. Never the value the visitor typed -- that is their
+       * own data, and a validation event is exactly where a half-typed email
+       * would otherwise leak into analytics.
+       */
+      track("form_validation_error", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        error_field: first,
+        registration_type: registrationType,
+      });
       event.currentTarget.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
       return;
     }
@@ -146,6 +166,13 @@ export function LeadForm({
     inFlightRef.current = true;
     setStatus("submitting");
     setError(null);
+    // Intent, not a conversion. Counted before the request so a submission lost
+    // to a dropped connection still shows up as an attempt in the funnel.
+    track("form_submit_attempt", {
+      form_id: FORM_ID,
+      form_name: FORM_NAME,
+      registration_type: String(formData.get("registrationType") ?? "") || undefined,
+    });
     const payload = {
       name: String(formData.get("name") ?? ""),
       phone: String(formData.get("phone") ?? ""),
@@ -170,7 +197,12 @@ export function LeadForm({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const result = (await response.json()) as { success: boolean; error?: string };
+      const result = (await response.json()) as {
+        success: boolean;
+        error?: string;
+        duplicate?: boolean;
+        requestId?: string;
+      };
 
       if (result.success) {
         setStatus("success");
@@ -191,18 +223,54 @@ export function LeadForm({
             registration_type: payload.registrationType || "Not specified",
             city: payload.city || undefined,
           });
+          /*
+           * The conversion. `success: true` from this route means the CRM
+           * confirmed it stored the enquiry -- new or duplicate -- so this is
+           * the only place in the codebase it may fire.
+           *
+           * Deduplicated on the server's own submission id, so a re-render, a
+           * Strict Mode double-invoke or a remount cannot count one enquiry
+           * twice. A duplicate enquiry recorded against an existing lead is
+           * still a real enquiry, so it still converts; `lead_duplicate` is
+           * there to separate them in reporting.
+           */
+          if (markLeadCounted(result.requestId ?? "")) {
+            track("generate_lead", {
+              form_id: FORM_ID,
+              form_name: FORM_NAME,
+              registration_type: payload.registrationType || "Not specified",
+              city: payload.city || undefined,
+              submission_id: result.requestId,
+              lead_duplicate: result.duplicate ?? false,
+              lead_source: `Website form (${pathname})`,
+            });
+          }
         }
       } else {
         inFlightRef.current = false;
         setStatus("error");
         setError(result.error ?? "Something went wrong. Please try again.");
         track("form_error", { registration_type: payload.registrationType });
+        // A bounded category, never the server's sentence: those are written
+        // for the visitor and can quote the payload back.
+        track("form_submission_error", {
+          form_id: FORM_ID,
+          form_name: FORM_NAME,
+          error_category: errorCategory(response.status),
+          registration_type: payload.registrationType,
+        });
       }
     } catch {
       inFlightRef.current = false;
       setStatus("error");
       setError(`Network problem while submitting. Please try again or call ${SITE.phone.display}.`);
       track("form_error", { registration_type: payload.registrationType });
+      track("form_submission_error", {
+        form_id: FORM_ID,
+        form_name: FORM_NAME,
+        error_category: errorCategory(null),
+        registration_type: payload.registrationType,
+      });
     }
   }
 
@@ -253,6 +321,15 @@ export function LeadForm({
               id={`${id}-type`}
               name="registrationType"
               defaultValue={defaultRegistrationType ?? ""}
+              onChange={(e) => {
+                if (!e.target.value) return;
+                track("select_service", {
+                  form_id: FORM_ID,
+                  form_name: FORM_NAME,
+                  service_name: e.target.value,
+                  registration_type: e.target.value,
+                });
+              }}
               className={cn(fieldClass, "appearance-none border-[#cfd9e3] pr-11")}
             >
               <option value="">Select what you need help with</option>

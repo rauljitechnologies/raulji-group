@@ -3,6 +3,24 @@
 The authoritative list of the events this site pushes onto `window.dataLayer`.
 Checked against the `EventName` union in `lib/analytics.ts` on 2026-10-17.
 
+> **Superseded for the full list, 2026-10-23.** Ten events were added for the
+> GA4 measurement plan and are **not** in the table below:
+> `generate_lead`, `view_service`, `view_location_page`, `view_blog_article`,
+> `select_service`, `form_step_complete`, `form_validation_error`,
+> `form_submit_attempt`, `form_submission_error`, `click_external_link`, plus
+> `consent_update` from the consent banner.
+>
+> **[gtm-event-map.md](gtm-event-map.md) is now the complete list** and carries
+> the tags, triggers and variables to build. This file is kept because the
+> warning below still applies to any container built before 17 Oct 2026, and
+> because every event it names is still correct and still fires — nothing was
+> renamed or removed.
+>
+> One change that matters for reporting: **the conversion to mark in GA4 is now
+> `generate_lead`, not `form_submit`.** Both fire on the same CRM-confirmed
+> submission, but only `generate_lead` is deduplicated on the server's
+> submission id, so only it is safe to count.
+
 > **Why this file exists.** `DEPLOYMENT.md` used to list three event names the
 > site has never pushed — `lead_form_submit`, `lead_form_error` and
 > `start_business_click`. A GTM container configured from that list would have

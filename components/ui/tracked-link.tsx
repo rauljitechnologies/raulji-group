@@ -32,12 +32,33 @@ export function TrackedLink({
   const onClick = () => track(event, params);
 
   if (external) {
+    /*
+     * An external link fires its own named event AND click_external_link, so
+     * the brief's "which outbound links get followed" question is answerable
+     * from one event without having to know every bespoke name first. The
+     * named event is kept because the client's container already triggers on
+     * it (technology_click, whatsapp_click).
+     *
+     * `link_domain` is the host only -- never the full href, which on a
+     * wa.me link carries the prefilled message text in its query string.
+     */
+    const onExternalClick = () => {
+      onClick();
+      let linkDomain: string | undefined;
+      try {
+        linkDomain = new URL(href, window.location.origin).host;
+      } catch {
+        linkDomain = undefined;
+      }
+      track("click_external_link", { ...params, link_domain: linkDomain });
+    };
+
     return (
       <a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={onClick}
+        onClick={onExternalClick}
         className={className}
       >
         {children}

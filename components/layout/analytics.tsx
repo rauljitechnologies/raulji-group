@@ -17,9 +17,21 @@ import Script from "next/script";
  *
  * strategy="afterInteractive" keeps it off the critical path, so it does not
  * compete with the LCP element for bandwidth (master rule 32).
+ *
+ * The Consent Mode v2 defaults are NOT here. They have to run before this
+ * container loads, which means `beforeInteractive`, and in the App Router that
+ * strategy is only honoured from the root layout -- so they sit in
+ * app/layout.tsx, gated on the same environment variable. Changing one without
+ * the other opens exactly the window the defaults exist to close.
  */
 export function Analytics() {
   const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  /*
+   * No container configured: render nothing at all, consent script included.
+   * There is nothing to withhold consent from, and a consent banner on a build
+   * that measures nothing would be asking permission for something that is not
+   * happening. Both appear together or not at all.
+   */
   if (!gtmId) return null;
 
   return (

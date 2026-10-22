@@ -96,6 +96,36 @@ npm start &   # or PORT=3100 npm start
 
 ## 4. Analytics — silent failure is the default
 
+See [analytics-implementation.md](analytics-implementation.md) for the full
+setup, [gtm-event-map.md](gtm-event-map.md) for the tags and triggers, and
+[analytics-testing.md](analytics-testing.md) for what to check in DebugView.
+
+- [ ] **GA4 is configured in exactly ONE place.** Either a GA4 Configuration
+      tag in `GTM-MSW79R28` (recommended) **or**
+      `NEXT_PUBLIC_GA4_MEASUREMENT_ID=G-SK8N5N3WE2`. Both at once sends two
+      `page_view` events per visit and inflates sessions, users and engagement
+      rate, with no warning anywhere in GA4. Load the homepage in GTM Preview
+      and count: one.
+- [ ] **`generate_lead` is marked as the conversion in GA4**, not
+      `form_submit`. Both fire on the same confirmed submission; only
+      `generate_lead` is deduplicated on the server submission id.
+- [ ] `generate_lead` fires **once** per confirmed submission, with
+      `submission_id` populated. Submit twice with the same phone: the second
+      fires once with `lead_duplicate: true`.
+- [ ] A failed submission fires `form_submission_error` with an
+      `error_category` and **no** `generate_lead`
+- [ ] Consent: before accepting, `analytics_storage` reads `denied` in GTM
+      Preview. After "Analytics only", `analytics_storage` is `granted` while
+      `ad_storage`, `ad_user_data` and `ad_personalization` stay `denied`
+- [ ] No name, phone, email or message text in any DebugView payload
+- [ ] The consent banner at 320/375/414 px does not cover the mobile action bar
+      or the form submit button, and is dismissible by keyboard
+- [ ] Internal traffic filter set in GA4 → Admin → Data Streams → Tag settings,
+      so the team's own visits do not read as demand
+- [ ] The privacy policy has been reviewed against the banner's wording and the
+      DPDP position
+
+
 - [ ] `NEXT_PUBLIC_GTM_ID=GTM-MSW79R28` is set in Vercel **Production**
 - [ ] **It was set before the build that is currently live.** `NEXT_PUBLIC_*`
       is inlined by Next.js at build time, so setting it after a deploy changes
