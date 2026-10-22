@@ -21,9 +21,21 @@ import { H1, H2 } from "@/lib/typography";
 import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
 
 export const metadata = pageMeta({
-  title: "Business Registration in Gujarat: All 33 Districts | Raulji",
+  /*
+   * Retitled 2026-10-22 against the Search Console period 14-20 Oct 2026. The
+   * page took 76 impressions at an average position of 53.57 and no clicks,
+   * and the queries bringing it up were structure + state ones -- "partnership
+   * firm registration in Gujarat", "firm registration Gujarat", "LLP
+   * registration in Gujarat". The old title and description led with district
+   * coverage ("All 33 Districts", "Find your district's page"), which answers a
+   * navigational query, not those. The district coverage is still on the page,
+   * in the hero stat and the districts section; it is no longer what the title
+   * is about. Proprietorship drops out of the title at 60 characters and stays
+   * in the description.
+   */
+  title: "Company, LLP & Firm Registration in Gujarat | Raulji Group",
   description:
-    "Register a Pvt Ltd company, LLP, partnership or proprietorship anywhere in Gujarat, from Bhuj to Vapi. Same process statewide. Find your district's page.",
+    "Register a Pvt Ltd company, LLP, partnership firm or proprietorship in Gujarat. What is filed centrally, what is state-level, and how to choose a structure.",
   path: "/gujarat/",
   ogHeadline: "Business Registration Services Across Gujarat",
 });
@@ -37,6 +49,23 @@ const GUJARAT_FAQS: FAQ[] = [
   {
     q: "Does it matter which part of Gujarat I register my business from?",
     a: "Not for the process. Company and LLP incorporation is filed online with the Registrar of Companies, and all of Gujarat falls under the same Registrar and the same GST state. Your registered office address determines where statutory correspondence is sent, not what you are allowed to do or how long registration takes. Partnership firm registration is handled by the Registrar of Firms for the state.",
+  },
+  {
+    /*
+     * Added 2026-10-22. "Online registration of partnership firm in Gujarat"
+     * is one of the priority queries in the 14-20 Oct 2026 Search Console
+     * period. The honest answer distinguishes the MCA filings, which are fully
+     * online, from Registrar of Firms procedure, which is set by the state.
+     * It deliberately does NOT claim that Gujarat's Registrar of Firms accepts
+     * online applications: that has not been verified against a state source,
+     * and it is recorded as unverified in docs/seo-improvement-audit.md.
+     */
+    q: "Can a partnership firm be registered online in Gujarat?",
+    a: "Company and LLP incorporation is genuinely online end to end, filed with the Registrar of Companies through the MCA portal. Partnership firm registration is a different thing: the firm is created by the partners' deed, and registering it is done with the Registrar of Firms for Gujarat under state procedure rather than as an MCA filing. The parts we handle for you \u2014 drafting the deed, the stamp duty position, assembling the partners' documents and the firm's PAN application \u2014 are handled remotely wherever you are in the state. We confirm the Registrar of Firms' current procedure and the applicable stamp duty before anything is executed, rather than quoting a process that may have moved.",
+  },
+  {
+    q: "What is the difference between firm registration and company registration in Gujarat?",
+    a: "They are two separate systems. Registering a company, or an LLP, means incorporating a new legal entity under central law, filed with the Registrar of Companies, which issues a Certificate of Incorporation. Registering a firm means recording an existing partnership \u2014 one already created by the partners' deed \u2014 with the Registrar of Firms for the state. A company exists because it was incorporated. A firm exists because the partners agreed, and registration adds the ability to enforce contracts in court under section 69 of the Indian Partnership Act, 1932. The liability position differs too: a company's shareholders are liable only for what is unpaid on their shares, while a firm's partners are personally liable without limit.",
   },
   {
     q: "Do I need to travel to Vadodara or Ahmedabad to register?",
@@ -111,6 +140,58 @@ const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 const LIFT =
   "transition duration-[400ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1.5 hover:border-[#329fd2] hover:shadow-[0_24px_48px_-26px_rgba(18,38,64,0.4)]";
+
+/** Inline prose link, so contextual links read as links inside body copy. */
+const INLINE_LINK = "font-semibold text-[#1a7cb0] underline-offset-4 hover:underline";
+
+/*
+ * Who actually registers each structure. Added 2026-10-22: the Search Console
+ * period 14-20 Oct 2026 shows /gujarat/ surfacing for "partnership firm
+ * registration in Gujarat", "firm registration Gujarat" and "LLP registration
+ * in Gujarat" at an average position of 53.57 with no clicks, and the page had
+ * no state-level answer to any of them -- only a card link out to the service
+ * page. Partnership firm registration is the one genuinely state-level step of
+ * the four, so it belongs on the state page rather than only on the central
+ * service page.
+ *
+ * Facts: companies and LLPs are filed with the Registrar of Companies through
+ * the MCA portal, and the filing office for Gujarat is at Ahmedabad.
+ * Partnership firms register with the Registrar of Firms at state level under
+ * the Indian Partnership Act, 1932, where registration is optional (s.58) and
+ * non-registration carries the s.69 bar on suing to enforce a contract. All of
+ * these are recorded in docs/legal-content-review.md.
+ */
+const WHERE_REGISTERED: {
+  structure: string;
+  href: string;
+  authority: string;
+  level: string;
+}[] = [
+  {
+    structure: "Private Limited Company",
+    href: "/services/pvt-registration/",
+    authority: "Registrar of Companies, through the MCA portal",
+    level: "Central",
+  },
+  {
+    structure: "LLP",
+    href: "/services/llp-registration/",
+    authority: "Registrar of Companies, through the MCA portal",
+    level: "Central",
+  },
+  {
+    structure: "Partnership Firm",
+    href: "/services/partnership-registration/",
+    authority: "Registrar of Firms for Gujarat",
+    level: "State",
+  },
+  {
+    structure: "Proprietorship",
+    href: "/services/proprietorship-registration/",
+    authority: "No incorporation filing. GST or Udyam where they apply",
+    level: "Activity-based",
+  },
+];
 
 function Dash() {
   return <span className="h-0.5 w-7 bg-[#329fd2]" aria-hidden="true" />;
@@ -206,14 +287,16 @@ export default function GujaratPage() {
                 id="gj-h"
                 className={`${H1} text-white`}
               >
-                Business registration across{" "}
-                <span className="text-[#7cc8ec]">all 33 districts of Gujarat.</span>
+                Register a company, LLP or partnership firm{" "}
+                <span className="text-[#7cc8ec]">anywhere in Gujarat.</span>
               </h1>
               <p className="max-w-[36.25rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
                 Raulji Group supports entrepreneurs and businesses across Gujarat with Private
-                Limited Company, LLP, Partnership Firm and Proprietorship registration. We work from{" "}
-                {SITE.locality}, with dedicated pages for {CITY_SLUGS.length} of the state&rsquo;s main
-                business markets.
+                Limited Company, LLP, Partnership Firm and Proprietorship registration. Companies and
+                LLPs are incorporated centrally through the MCA; partnership firms are registered with
+                the Registrar of Firms for Gujarat, which is the one step that is genuinely state-level.
+                We work from {SITE.locality}, with dedicated pages for {CITY_SLUGS.length} of the
+                state&rsquo;s main business markets.
               </p>
               <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
@@ -359,10 +442,18 @@ export default function GujaratPage() {
               Same process in Bhuj as in Vapi.
             </h2>
             <p className="text-base/[1.75] leading-[1.75]">
-              Incorporation in India is a central, online process. Applications are filed with the
-              Registrar of Companies through the MCA portal, and digital signatures are issued
-              through video and Aadhaar-based verification. A business anywhere in Gujarat goes
-              through exactly the same steps on the same timeline.
+              Incorporating a company or an LLP is a central, online process. Applications are filed
+              with the Registrar of Companies through the MCA portal, and digital signatures are
+              issued through video and Aadhaar-based verification. A business anywhere in Gujarat
+              goes through exactly the same steps on the same timeline. Our{" "}
+              <Link href="/services/business-registration/" className={INLINE_LINK}>
+                business registration
+              </Link>{" "}
+              pillar sets out that process in full.
+            </p>
+            <p className="text-base/[1.75] leading-[1.75]">
+              Registering a partnership firm is the exception, and it is handled by the state rather
+              than the MCA. That is covered in the next section.
             </p>
             <p className="text-base/[1.75] leading-[1.75]">
               What is genuinely local is the context around the decision: what your customers expect,
@@ -394,6 +485,112 @@ export default function GujaratPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/*
+        * State-level registration. Added 2026-10-22 from the Search Console
+        * period 14-20 Oct 2026: three of the six priority queries are
+        * partnership/firm + Gujarat queries, and this page ranked ~53.57 for
+        * them with nothing on it that answered them. Every statement here is
+        * already carried elsewhere on the site and is recorded in
+        * docs/legal-content-review.md; none of it is new law.
+        */}
+      <section id="state-level" aria-labelledby="sl-h" className={`scroll-mt-28 ${SECTION}`}>
+        <div className={`${CONTAINER} flex flex-col gap-11`}>
+          <SectionHead
+            eyebrow="State-level registration"
+            id="sl-h"
+            title="Partnership firms are registered in Gujarat, not centrally."
+            lead="Company and LLP incorporation is central, and a proprietorship has no incorporation at all. Partnership firms are the exception, and they are why a state page has something of its own to say."
+          />
+          <div className="grid items-start gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
+            <div className="flex min-w-0 flex-col gap-[1.125rem]">
+              <p className="text-base/[1.75] leading-[1.75]">
+                A{" "}
+                <Link href="/services/pvt-registration/" className={INLINE_LINK}>
+                  Private Limited Company
+                </Link>{" "}
+                and an{" "}
+                <Link href="/services/llp-registration/" className={INLINE_LINK}>
+                  LLP
+                </Link>{" "}
+                are incorporated under central law and filed with the Registrar of Companies through
+                the MCA portal. The Registrar&rsquo;s office for this state sits in Ahmedabad, which
+                makes no difference to how the filing is processed, because it is done online. A{" "}
+                <Link href="/services/proprietorship-registration/" className={INLINE_LINK}>
+                  proprietorship
+                </Link>{" "}
+                has no incorporation filing at all; what it has instead are the activity-based
+                registrations that apply to it, such as GST or Udyam.
+              </p>
+              <p className="text-base/[1.75] leading-[1.75]">
+                A{" "}
+                <Link href="/services/partnership-registration/" className={INLINE_LINK}>
+                  partnership firm
+                </Link>{" "}
+                works differently. The firm is created by the partners&rsquo; deed under the Indian
+                Partnership Act, 1932, and registering it is done with the Registrar of Firms for
+                Gujarat &mdash; a state office under state procedure, not an MCA filing. That is why
+                a firm registers in the state where it carries on business, and why the step does not
+                look like incorporation.
+              </p>
+              <h3 className="mt-2 text-[1.1875rem] font-bold text-[#122640]">
+                Registration is optional. Section 69 is why firms do it anyway.
+              </h3>
+              <p className="text-base/[1.75] leading-[1.75]">
+                Under the Act, registering the firm is optional. What makes it worth doing is section
+                69: an unregistered firm cannot file a suit to enforce a right arising from a contract
+                against a third party, and a partner cannot sue the firm or the other partners on the
+                partnership contract. In plain terms, if a customer does not pay, an unregistered firm
+                has no contractual route to court. For a firm selling on credit &mdash; which covers a
+                great many trading firms in this state &mdash; that is a practical restriction rather
+                than a theoretical one.
+              </p>
+              <h3 className="mt-2 text-[1.1875rem] font-bold text-[#122640]">
+                Stamp duty on the deed is set by the state
+              </h3>
+              <p className="text-base/[1.75] leading-[1.75]">
+                The deed must be executed on stamp paper of the value prescribed in Gujarat, and the
+                amount varies with the capital or contribution involved. Because stamp duty is set at
+                state level it is the same in Bhuj as in Vapi, but it is not the same as in a
+                neighbouring state. The firm also applies for its own PAN, which a bank will ask for
+                before opening a current account.
+              </p>
+              <p className="text-[0.9375rem] leading-[1.7] text-[#5b6778]">
+                Registrar of Firms procedure and timelines are set by the state and are not the same
+                as an MCA filing, so we confirm the current procedure and the applicable stamp duty
+                before anything is executed. {TIMELINE_DISCLAIMER}
+              </p>
+            </div>
+            <div className="flex min-w-0 flex-col gap-4 rounded-lg border border-[#e3e9ef] bg-[#f4f7fa] p-6 sm:p-8">
+              <h3 className="text-[1.0625rem] font-bold text-[#122640]">
+                Who registers each structure
+              </h3>
+              <dl className="flex flex-col divide-y divide-[#dde4ec]">
+                {WHERE_REGISTERED.map((row) => (
+                  <div key={row.structure} className="flex flex-col gap-1.5 py-3.5 first:pt-0 last:pb-0">
+                    <dt className="flex flex-wrap items-center gap-2">
+                      <Link href={row.href} className={`text-[0.9375rem] ${INLINE_LINK}`}>
+                        {row.structure}
+                      </Link>
+                      <span className="rounded-[3px] bg-white px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[#1a7cb0]">
+                        {row.level}
+                      </span>
+                    </dt>
+                    <dd className="text-sm/[1.6] leading-[1.6]">{row.authority}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a
+                href="#enquiry"
+                className="mt-1 inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+              >
+                Not sure which one applies to you?
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

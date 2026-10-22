@@ -11,12 +11,65 @@ In Vercel → Project → Settings → Environment Variables:
   Required for analytics on the live site: without it the app still pushes
   its events onto `dataLayer`, but no container loads to route them.
 
+  > **It is a build-time variable, not a runtime one.** `NEXT_PUBLIC_*` values
+  > are inlined by Next.js when `npm run build` runs, so adding this variable
+  > to an already-built deployment does nothing until the project is **rebuilt
+  > and redeployed**. Setting it in Vercel and clicking through without a
+  > redeploy leaves analytics silently dead, and the page gives no visible sign
+  > of it. Verified 2026-10-22: a build with the variable set inlines
+  > `GTM-MSW79R28` into the prerendered HTML; a build without it emits no
+  > container at all. If you change it, redeploy.
+
 ## 2. Domain
 
 Point `www.raulji.com` at Vercel and redirect the apex to it, matching the
 current canonical host. Cloudflare currently fronts the domain: if it stays in
 front, set SSL to Full (strict) and avoid a second redirect layer, since
 trailing-slash handling is already done by the app.
+
+## 2b. Deploy order — preview before production
+
+Not yet exercised: this repository has never been deployed from here.
+`vercel whoami` reports logged out and there is no `.vercel/` directory, so
+every step below is written to be followed, not reported as done.
+
+```bash
+vercel login
+vercel link                 # once, to bind this directory to the project
+vercel                      # preview deployment, prints a URL
+```
+
+Against the **preview URL**, run the whole of section 3 below plus:
+
+```bash
+P=https://<preview-url>
+for u in / /gujarat/ /services/ /contact/ /ahmedabad/ /surat/ /vadodara/ /godhra/ \
+         /services/pvt-registration/ /services/llp-registration/; do
+  printf '%-42s %s\n' "$u" "$(curl -s -o /dev/null -w '%{http_code}' "$P$u")"
+done                                                    # all 200
+
+# The 2026-10-22 state-level section must be present and the title must be the
+# new one, not the district-directory wording it replaced.
+curl -s "$P/gujarat/" | grep -c 'Partnership firms are registered in Gujarat'  # 1
+curl -s "$P/gujarat/" | grep -o '<title>[^<]*'                                 # Company, LLP & Firm...
+```
+
+Check the Vercel build log and the function logs for the lead route before
+promoting. Then:
+
+```bash
+vercel --prod
+```
+
+Promote **only** when every check above passes on the preview. Rollback is
+Vercel → Deployments → the previous production deployment → *Promote*, so
+confirm there is a known-good deployment to roll back to before promoting the
+first time — on a first-ever deploy there is not, which is a reason to be
+unhurried about it.
+
+After promoting, re-run section 3 against `https://www.raulji.com` as the
+post-deployment smoke test, and submit one real enquiry through the live form
+to confirm it reaches the CRM.
 
 ## 3. Verify after the first deploy
 

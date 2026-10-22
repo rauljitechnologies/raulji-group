@@ -22,7 +22,7 @@ GTM is loaded by `components/layout/analytics.tsx`, gated on
 `NEXT_PUBLIC_GTM_ID`. **With that variable unset, no container loads and
 nothing is recorded**, while the page looks and behaves completely normally.
 That is the single most likely way for this site to go live with no analytics
-at all, so `DEPLOYMENT.md` carries a `curl` check for it.
+at all, so [deployment.md](deployment.md) carries a `curl` check for it.
 
 ## Events
 

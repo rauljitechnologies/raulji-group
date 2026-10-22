@@ -3,11 +3,15 @@
 Run top to bottom. Every box has a command or a specific thing to look at —
 nothing here is "check it looks fine".
 
-`DEPLOYMENT.md` at the repo root holds the Vercel and DNS specifics and stays
-the single deployment runbook; this file is the gate in front of it. There is
-deliberately no `docs/deployment.md`: two runbooks drift apart, and a stale
-runbook is what caused the analytics problem recorded in
-[analytics-events.md](analytics-events.md).
+[deployment.md](deployment.md) holds the Vercel and DNS specifics and stays
+the single deployment runbook; this file is the gate in front of it.
+
+It lived at `DEPLOYMENT.md` in the repo root until 2026-10-18 and moved here
+so that every document the client's prompt asks for sits under `docs/`. It was
+**moved, not copied.** There is still exactly one deployment runbook: two of
+them drift apart, and a stale runbook is what caused the analytics problem
+recorded in [analytics-events.md](analytics-events.md). Audit entries dated
+before the move still refer to it by its old name.
 
 ## 1. Local verification — all four must pass
 
@@ -69,6 +73,12 @@ npm start &   # or PORT=3100 npm start
 ## 4. Analytics — silent failure is the default
 
 - [ ] `NEXT_PUBLIC_GTM_ID=GTM-MSW79R28` is set in Vercel **Production**
+- [ ] **It was set before the build that is currently live.** `NEXT_PUBLIC_*`
+      is inlined by Next.js at build time, so setting it after a deploy changes
+      nothing until you **redeploy**. Verified 2026-10-22: a build with the
+      variable set inlines `GTM-MSW79R28` into the prerendered HTML; a build
+      without it emits no container at all. If you add or change this value,
+      trigger a fresh deployment.
 - [ ] `curl -s https://www.raulji.com/ | grep -c googletagmanager` → non-zero.
       **Zero means nothing is being recorded**, and the page gives no sign of it.
 - [ ] GTM triggers match [analytics-events.md](analytics-events.md) exactly.
@@ -98,6 +108,16 @@ npm start &   # or PORT=3100 npm start
       destination for insurance enquiries
 - [ ] No invented client counts, awards, ratings or office addresses have crept
       in. There were none as of 2026-10-17.
+- [ ] `/gujarat/` carries the 2026-10-22 state-level section and the new title:
+      `curl -s .../gujarat/ | grep -c 'Partnership firms are registered in Gujarat'`
+      → 1. That section states the Registrar of Firms position and s.69; if it
+      is ever reworded, check it against
+      [legal-content-review.md](legal-content-review.md) first.
+- [ ] `/gujarat/` still does **not** claim that the Gujarat Registrar of Firms
+      accepts online applications. That is unverified — see
+      [seo-improvement-audit.md](seo-improvement-audit.md). If someone sources
+      it, the FAQ "Can a partnership firm be registered online in Gujarat?" is
+      where it belongs.
 
 ## 7. Post-deploy
 
@@ -112,11 +132,17 @@ Vercel keeps every deployment. To roll back: **Deployments → the last known
 good one → Promote to Production**. No build is needed and it takes effect in
 seconds.
 
-There is no database migration in this project and no build-time state, so a
-rollback is a pure code revert. The two things that do **not** roll back with
-it are environment variables and the GTM container configuration — both are
-changed outside the repo, so if a deploy was accompanied by an env change,
-reverse that by hand as well.
+There is no database migration in this project, so a rollback is a pure code
+revert. Two things do **not** roll back with it: the GTM container
+configuration, and environment variables, both changed outside the repo. So if
+a deploy was accompanied by an env change, reverse that by hand as well.
+
+One subtlety, since it cuts the other way. `NEXT_PUBLIC_*` variables **are**
+build-time state: their values are inlined into each build. Promoting an older
+deployment therefore restores the value that was set when *that* build ran, not
+the value currently in Vercel's settings. If `NEXT_PUBLIC_GTM_ID` was added
+recently, rolling back past that point will also roll analytics back off, with
+no warning.
 
 ## Deferred, with reasons
 

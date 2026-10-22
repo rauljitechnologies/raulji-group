@@ -55,7 +55,9 @@ Keep it clean and corporate. Move users onward with: "Explore Service",
 ## 4. Homepage hero
 
 - **Eyebrow:** RAULJI GROUP
-- **H1:** We Don't Just Build Businesses. We Build Futures.
+- **H1:** Business Consulting & Registration Services for Entrepreneurs in India
+  — **changed 2026-10-18, see the note below.**
+- **Brand line under the H1:** We Don't Just Build Businesses. We Build Futures.
 - **Supporting copy:** positions Raulji Group as a consulting-focused business group
   helping entrepreneurs and businesses make informed decisions, solve business
   challenges and move forward with clarity.
@@ -66,16 +68,57 @@ Keep it clean and corporate. Move users onward with: "Explore Service",
 
 The hero must not look like a registration advertisement.
 
+**Changed 2026-10-18, by client instruction.** The H1 was
+"We Don't Just Build Businesses. We Build Futures." under this rule, and the
+2026-10-16 resolution in rule 5 had already declined once to replace it with a
+keyword-carrying headline. The client was shown that conflict, asked for the
+change anyway, and that instruction is recorded here rather than left to
+contradict the code.
+
+The tagline was **not** removed. It sits directly beneath the H1 as the brand
+statement, in its own styling, which is what both the client's brief and this
+rule require of it. `SITE.taglineParts` is still its single source.
+
+This changes only the homepage hero. The tagline remains the brand's line
+everywhere else it appears, and rule 2's "do not look like a registration
+advertisement" still governs the section: the H1 names consulting first, and
+the hero still leads with the group, not with a package.
+
 ## 5. Homepage meta
 
-- **Title:** Raulji Group | Business Consulting & Solutions
-- **Description:** Raulji Group is a business-focused group helping entrepreneurs and
-  businesses with consulting, business solutions, registration and specialized
-  services, with a focus on long-term growth.
+- **Title:** Business Consulting & Registration in India | Raulji Group
+  — **changed 2026-10-18, see the note below.**
+- **Description:** Raulji Group helps entrepreneurs and businesses with business
+  consulting, business structuring, registration and related services across
+  Gujarat and India. — **shortened 2026-10-18, see the note below.**
 
 Not Gujarat-only. Not registration-only.
 
-**Resolved 2026-10-16.** The client's metadata and keyword sheet of 15 Oct 2026
+**Changed 2026-10-18, by client instruction.** This rule previously fixed the
+title as "Raulji Group | Business Consulting & Solutions" and the description
+as a 187-character sentence, and the 2026-10-16 resolution below had already
+declined a registration-led, geography-qualified title once. The client was
+shown that conflict and chose the new wording anyway.
+
+Two adjustments were made to what the client supplied, both on length alone:
+
+- The title as given — "Business Consulting & Registration Services in India |
+  Raulji Group" — was 67 characters, past the ~60 where Google truncates and
+  longer than any of the other 94 pages. "Services" was dropped, giving 58.
+- The description as given was 163 characters. "business structure selection"
+  became "business structuring", the term already used in `SITE.description`
+  and rule 8, giving 155.
+
+Both still lead with consulting and stay India-wide, which is what the rest of
+this rule requires. Every page's title and description is checked against
+those limits by the crawl recorded in `docs/seo-route-inventory.md`.
+
+**Resolved 2026-10-16 — superseded 2026-10-18 for the homepage title, the
+homepage description and the H1, by the note above.** The rest of this
+resolution stands: the sheet's other rows were applied, and its homepage row
+is still not the wording in use. Kept as the record of how the decision moved.
+
+The client's metadata and keyword sheet of 15 Oct 2026
 recommended a different homepage title ("Raulji Group | Business Registration &
 Consulting, Gujarat") and a registration-led description, and also asked for the
 homepage H1 to be changed to something carrying a keyword. The client decided:
