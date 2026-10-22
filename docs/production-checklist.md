@@ -126,13 +126,17 @@ setup, [gtm-event-map.md](gtm-event-map.md) for the tags and triggers, and
       DPDP position
 
 
-- [ ] `NEXT_PUBLIC_GTM_ID=GTM-MSW79R28` is set in Vercel **Production**
-- [ ] **It was set before the build that is currently live.** `NEXT_PUBLIC_*`
-      is inlined by Next.js at build time, so setting it after a deploy changes
-      nothing until you **redeploy**. Verified 2026-10-22: a build with the
-      variable set inlines `GTM-MSW79R28` into the prerendered HTML; a build
-      without it emits no container at all. If you add or change this value,
-      trigger a fresh deployment.
+- [ ] `curl -s https://www.raulji.com/ | grep -c GTM-MSW79R28` → non-zero.
+      Since 2026-10-23 the container resolves automatically on a Vercel
+      **production** deployment (`lib/tags.ts`), so this should pass without
+      `NEXT_PUBLIC_GTM_ID` being set at all. Previews deliberately load
+      nothing — set `NEXT_PUBLIC_GTM_ID` explicitly if you need to test
+      tracking on one.
+- [ ] If you do set `NEXT_PUBLIC_GTM_ID`, remember it is inlined at **build**
+      time: setting it on an already-built deployment does nothing until you
+      **redeploy**.
+- [ ] The GA4 stream URL is `https://www.raulji.com`, not `http://`. It was
+      `http://` as of 2026-10-23 and only GA4 admin can fix it.
 - [ ] `curl -s https://www.raulji.com/ | grep -c googletagmanager` → non-zero.
       **Zero means nothing is being recorded**, and the page gives no sign of it.
 - [ ] GTM triggers match [analytics-events.md](analytics-events.md) exactly.

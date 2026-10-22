@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
@@ -16,6 +15,7 @@ import { JsonLd } from "@/components/ui/json-ld";
 import { graph, organizationSchema, websiteSchema } from "@/lib/schema";
 import { SITE } from "@/lib/site";
 import { consentBootstrapScript } from "@/lib/consent";
+import { gtmContainerId } from "@/lib/tags";
 
 /*
  * Plus Jakarta Sans, the typeface of the Raulji design files (claude.ai/design).
@@ -69,31 +69,88 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   /*
-   * The Consent Mode v2 defaults must be in dataLayer before the GTM container
-   * loads, or tags can fire in the window between page load and the first
-   * consent signal -- which is the whole failure the defaults exist to close.
-   * That means `beforeInteractive`, and in the App Router that strategy is only
-   * honoured from the root layout, which is why this lives here rather than
-   * beside the container in <Analytics />.
+   * Google Tag Manager, installed the way Google's own instructions specify:
+   * the container bootstrap in <head>, and the noscript iframe immediately
+   * after the opening <body> tag (that half is in <Analytics />, the first
+   * thing in the body).
    *
-   * Gated on the same variable as the container: no container, nothing
-   * measured, so nothing to withhold consent from and no banner shown.
-   * lib/consent.ts explains the denied-by-default posture.
+   * ## Why these are raw <script> tags in an explicit <head>
+   *
+   * `next/script` with `strategy="beforeInteractive"` was tried first and does
+   * not put anything in <head> in the App Router: it queues the script through
+   * `self.__next_s` and it lands early in <body>, run by Next's own bootstrap.
+   * That executes before hydration and would have been functionally fine, but
+   * it is not the placement Google documents, and GA4 was already reporting no
+   * data collection -- not a moment to deviate from the documented install and
+   * then have to argue about whether the deviation mattered.
+   *
+   * Rendering <head> explicitly in the root layout does work, and was checked
+   * for the thing that could plausibly break: Next still emits exactly one
+   * <head>, and the title, description, canonical, Open Graph, Twitter and all
+   * four JSON-LD blocks are all present and correct, with `seo-validate`
+   * passing on 95 pages.
+   *
+   * Order is load bearing and must not be swapped:
+   *
+   *   1. consent defaults   -- every signal denied
+   *   2. container bootstrap
+   *
+   * The Consent Mode v2 defaults have to be in `dataLayer` before the container
+   * initialises, or tags can fire in the window between page load and the first
+   * consent signal, which is the whole failure the defaults exist to close.
+   * Google documents the same ordering. lib/consent.ts explains the
+   * denied-by-default posture.
+   *
+   * Cost against LCP is small and was weighed, because <head> is the one place
+   * a bad script really hurts: both of these are inline, with no network
+   * request of their own, and the gtm.js the bootstrap injects is `async`, so
+   * nothing here blocks the parser or competes with the LCP image. That is what
+   * makes Google's documented placement affordable (master rule 27).
+   *
+   * Both are gated on there being a container at all: no container means
+   * nothing is measured, so there is nothing to withhold consent from and no
+   * banner is shown. lib/tags.ts explains when an ID resolves.
    */
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+  const gtmId = gtmContainerId();
 
   return (
     <html lang="en-IN" className={jakarta.variable}>
       {gtmId ? (
-        <Script id="consent-default" strategy="beforeInteractive">
-          {consentBootstrapScript()}
-        </Script>
+        <head>
+          <script id="consent-default" dangerouslySetInnerHTML={{ __html: consentBootstrapScript() }} />
+          {/*
+            eslint-disable-next-line @next/next/next-script-for-ga --
+            The rule wants `next/script` for an inline Google tag. That is the
+            right default and it was the first implementation here, but in the
+            App Router `beforeInteractive` queues the script into <body> via
+            `self.__next_s` rather than placing it in <head>, which is not the
+            install Google documents. The deviation is deliberate; see the
+            comment at the top of this component.
+          */}
+          <script
+            id="gtm-bootstrap"
+            dangerouslySetInnerHTML={{
+              /*
+               * Google's container snippet, with one addition: the
+               * `__rauljiGtm` guard. The snippet is not idempotent on its own,
+               * and an inline script in a React tree could in principle run a
+               * second time if the node were recreated rather than hydrated in
+               * place. gtm.js does detect a repeat load of the same container,
+               * so the practical damage would be limited to a duplicate
+               * `gtm.start` push -- but "limited" is not "none", and the guard
+               * costs one property. Everything after it is Google's snippet
+               * verbatim, including `j.async=true`, which is what keeps this
+               * off the critical path despite sitting in <head>.
+               */
+              __html: `(function(w,d,s,l,i){if(w.__rauljiGtm)return;w.__rauljiGtm=1;w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`,
+            }}
+          />
+        </head>
       ) : null}
       <body>
-        {/* Google Tag Manager. Placed first, immediately after the opening
-            <body> tag, as GTM's own install instructions specify. The
-            container itself is loaded afterInteractive, so this position
-            costs nothing against LCP. */}
+        {/* The GTM noscript iframe, immediately after the opening <body> tag as
+            Google's instructions specify. The container bootstrap itself is in
+            <head> above. */}
         <Analytics />
         {/*
           Direct GA4, opt-in and off unless NEXT_PUBLIC_GA4_MEASUREMENT_ID is

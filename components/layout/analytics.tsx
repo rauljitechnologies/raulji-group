@@ -1,60 +1,38 @@
-import Script from "next/script";
+import { gtmContainerId } from "@/lib/tags";
 
 /**
- * Google Tag Manager container, loaded only when one is configured.
+ * The Google Tag Manager `noscript` fallback, immediately after the opening
+ * `<body>` tag, exactly where Google's install instructions put it.
  *
- * The rest of the site already pushes the events master rule 29 asks for onto
- * window.dataLayer. Until a container is loaded, those pushes go nowhere, which
- * is why this exists. It is gated on an environment variable for two reasons:
+ * **The container bootstrap is not here.** It sits as high in `<head>` as
+ * possible, in `app/layout.tsx`, together with the Consent Mode v2 defaults
+ * that must precede it -- see the comment there for why the order matters and
+ * why both have to be declared from the root layout. This component is the
+ * second half of the same install, split only because the two halves belong in
+ * different places in the document.
  *
- *  - master rule 27 asks for minimal third-party scripts, and a container the
- *    client has not set up yet is pure cost with no benefit
- *  - it keeps development and preview builds free of production tracking
+ * Until 2026-10-23 this component carried the bootstrap too, loaded
+ * `afterInteractive` from the top of the body. That worked, but it was not the
+ * placement Google documents, and the client's GA4 property was reporting no
+ * data collection -- so the install was brought in line with the instructions
+ * while the real cause was fixed in lib/tags.ts.
  *
- * Set NEXT_PUBLIC_GTM_ID to the container ID (GTM-XXXXXXX) to switch it on. The
- * ID is public by nature: it appears in the page source on every site that uses
- * GTM, so NEXT_PUBLIC_ is correct here and is not a leak.
- *
- * strategy="afterInteractive" keeps it off the critical path, so it does not
- * compete with the LCP element for bandwidth (master rule 32).
- *
- * The Consent Mode v2 defaults are NOT here. They have to run before this
- * container loads, which means `beforeInteractive`, and in the App Router that
- * strategy is only honoured from the root layout -- so they sit in
- * app/layout.tsx, gated on the same environment variable. Changing one without
- * the other opens exactly the window the defaults exist to close.
+ * Renders nothing when no container is configured. The site still pushes its
+ * events onto `window.dataLayer`; they simply have nowhere to go.
  */
 export function Analytics() {
-  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
-  /*
-   * No container configured: render nothing at all, consent script included.
-   * There is nothing to withhold consent from, and a consent banner on a build
-   * that measures nothing would be asking permission for something that is not
-   * happening. Both appear together or not at all.
-   */
+  const gtmId = gtmContainerId();
   if (!gtmId) return null;
 
   return (
-    <>
-      {/* dataLayer has to exist before the container script runs, because the
-          site's own track() calls may fire before GTM finishes loading. */}
-      <Script id="gtm-datalayer" strategy="afterInteractive">
-        {`window.dataLayer = window.dataLayer || [];`}
-      </Script>
-      <Script id="gtm-loader" strategy="afterInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`}
-      </Script>
-      {/* The noscript iframe is part of GTM's documented install. It is inert for
-          anyone with JavaScript enabled. */}
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
-          height="0"
-          width="0"
-          style={{ display: "none", visibility: "hidden" }}
-          title="Google Tag Manager"
-        />
-      </noscript>
-    </>
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+        height="0"
+        width="0"
+        style={{ display: "none", visibility: "hidden" }}
+        title="Google Tag Manager"
+      />
+    </noscript>
   );
 }

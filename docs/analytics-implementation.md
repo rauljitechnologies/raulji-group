@@ -14,9 +14,81 @@ depends on.
 
 | | |
 | --- | --- |
-| GTM container | **`GTM-MSW79R28`** — supplied by the owner, already installed, env-gated on `NEXT_PUBLIC_GTM_ID` |
-| GA4 measurement ID | **`G-SK8N5N3WE2`** — raulji.com web data stream, supplied by the owner 2026-10-23 |
+| GTM container | **`GTM-MSW79R28`** — `lib/tags.ts`. Resolves automatically on a Vercel production deployment; see below |
+| GA4 measurement ID | **`G-SK8N5N3WE2`** — raulji.com web data stream, stream ID `16183950335` |
 | Google Ads | **none.** Not supplied, not guessed. No conversion ID or label anywhere in the repository |
+
+## Why GA4 said "Data collection isn't active" — fixed 2026-10-23
+
+The container was installed gated on `NEXT_PUBLIC_GTM_ID`, and **that variable
+was never set in Vercel**, so the live site loaded no container at all. Nothing
+on the page changes when a container is missing, so there was no visible
+symptom — the first indication was GA4's own caution banner.
+
+`lib/tags.ts` now resolves the ID instead of requiring the variable:
+
+| Environment | Container loaded |
+| --- | --- |
+| `NEXT_PUBLIC_GTM_ID` set | That value, always. Wins everywhere |
+| Vercel **production**, variable unset | `GTM-MSW79R28` |
+| Vercel **preview**, variable unset | none |
+| Local `npm run dev` / `npm start` | none |
+
+Production works without anyone remembering a setting; previews and local
+development still load nothing, because preview traffic in a real analytics
+property is worse than no traffic — it reads as demand.
+
+**The measurement ID deliberately has no such fallback.** A second Google tag
+is actively harmful: if the container also carries a GA4 Configuration tag,
+both send `page_view` and every session, user and engagement figure inflates
+with no warning anywhere in GA4. `NEXT_PUBLIC_GA4_MEASUREMENT_ID` only ever
+switches on when someone sets it on purpose.
+
+### Two other things to fix in GA4 itself, which code cannot
+
+- **The stream URL is `http://www.raulji.com`.** The site canonicalises to
+  **https**. Correct it in GA4 → Admin → Data Streams, or cross-domain and
+  referral handling can misbehave.
+- **"If you installed tags more than 48 hours ago"** does not apply: the
+  container has never been live on this build, because nothing from this
+  repository has been deployed. Expect no data until a deploy happens *and* a
+  GA4 tag exists inside the container.
+
+## Install placement — Google's instructions, verified
+
+The container snippet is in `<head>`; the `noscript` iframe is immediately
+after the opening `<body>` tag. Verified on a production build:
+
+```
+consent defaults   offset 6386   HEAD
+container snippet  offset 7510   HEAD
+<body> opens       offset 7655
+noscript iframe    offset 7749   BODY
+```
+
+`next/script` with `strategy="beforeInteractive"` was the first implementation
+and does **not** put anything in `<head>` in the App Router — it queues the
+script through `self.__next_s`, landing early in `<body>`. That runs before
+hydration and would have been functionally fine, but it is not the documented
+install, and with GA4 already reporting nothing it was the wrong moment to
+deviate and then have to argue about whether the deviation mattered. So both
+are raw `<script>` tags in an explicit `<head>`, with the
+`@next/next/next-script-for-ga` lint rule suppressed on that line with the
+reason.
+
+What that risked breaking was Next's own `<head>`, so it was checked: exactly
+**one** `<head>` element, and title, description, canonical, Open Graph,
+Twitter and all four JSON-LD blocks present, with `seo-validate` passing on 95
+pages.
+
+Cost against LCP: both scripts are inline with no network request of their own,
+and the `gtm.js` the bootstrap injects keeps Google's `j.async=true`, so nothing
+in `<head>` blocks the parser or competes with the LCP image.
+
+The bootstrap carries one addition to Google's snippet — a `__rauljiGtm` guard,
+so a hydration re-run cannot load the container twice. Verified: **zero**
+executing `<script src=".../gtm.js">` tags in the HTML, because the inline
+bootstrap injects it, and exactly one container.
 
 Neither ID is a secret: both appear in the page source of every site that uses
 them, which is why `NEXT_PUBLIC_` is correct for both and is not a leak.
@@ -182,9 +254,12 @@ access, no GA4 API access, no authorised browser session. In order:
 
 1. **Decide the GA4 path** — a GA4 Configuration tag in GTM (recommended), or
    `NEXT_PUBLIC_GA4_MEASUREMENT_ID`. Not both.
-2. **Set `NEXT_PUBLIC_GTM_ID=GTM-MSW79R28` in Vercel Production.** It is
-   inlined at **build** time, so it needs a redeploy to take effect — setting it
-   on a built deployment changes nothing and leaves analytics silently dead.
+2. **Deploy.** Nothing from this repository has ever been deployed, which is
+   the root reason GA4 has no data. On a Vercel production deployment the
+   container now resolves on its own; `NEXT_PUBLIC_GTM_ID` is only needed to
+   override it, or to switch tracking on for a preview. Note that
+   `NEXT_PUBLIC_*` values are inlined at **build** time, so setting one on an
+   already-built deployment does nothing until a redeploy.
 3. **Build the variables, triggers and tags** in
    [gtm-event-map.md](gtm-event-map.md).
 4. **Mark `generate_lead` as a conversion** in GA4 → Admin → Events. Not
@@ -203,7 +278,8 @@ access, no GA4 API access, no authorised browser session. In order:
 
 | Item | Status | Needs |
 | --- | --- | --- |
-| GTM container configured and published | **BLOCKED** | GTM account access. Nothing created. |
+| GTM container configured and published | **BLOCKED** | GTM account access. Nothing created. The container now *loads* in production, but an empty container collects nothing — the tags in gtm-event-map.md still have to be built. |
+| GA4 stream URL is `http://`, should be `https://` | **NOT FIXED** | GA4 admin. Not something code can change. |
 | GA4 receiving events, DebugView confirmation | **BLOCKED** | A published container and GA4 access. No event has ever reached `G-SK8N5N3WE2` from this work. |
 | `generate_lead` marked as a conversion | **BLOCKED** | GA4 access. |
 | Consent banner rendered and clicked in a browser | **NOT VERIFIED** | A browser. The decision logic is unit-tested and the defaults are verified in the HTML, but the banner is `useEffect`-gated so it is absent from server HTML by design and nothing has rendered it. |
