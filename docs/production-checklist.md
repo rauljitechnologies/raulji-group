@@ -20,10 +20,13 @@ nvm use                 # Node 22+. @supabase/supabase-js requires >=22.
 npm ci
 npm run typecheck       # tsc --noEmit
 npm run lint            # eslint .
+npm test                # vitest run -- 79 tests, no network
 npm run build           # check:slugs + sitemap manifest, then seo:validate
 npm run check:blog      # 0 errors (word-count warnings are acceptable)
 ```
 
+- [ ] `test` exits 0 — the lead pipeline's CRM response handling, email
+      templates, escaping and secret-exposure checks
 - [ ] `typecheck` exits 0
 - [ ] `lint` exits 0 — if it asks "How would you like to configure ESLint?",
       `eslint.config.mjs` is missing and the step will hang in CI
@@ -61,6 +64,20 @@ npm start &   # or PORT=3100 npm start
       in the CRM. Use obviously-test details and delete the record afterwards.
 - [ ] Confirm the validation messages are sentences, not `Required`
 - [ ] Confirm a failed submission still shows the phone number as a fallback
+- [ ] `EMAIL_PROVIDER_API_KEY`, `EMAIL_FROM_ADDRESS` and `RAULJI_ADMIN_EMAILS`
+      are set in Vercel **Production**
+- [ ] **`admin@raulji.com` is verified with the email provider** — SPF and DKIM
+      published for `raulji.com`, domain showing verified. Without this both
+      enquiry emails fail while leads still capture, so the symptom is silence,
+      not an error the visitor sees.
+- [ ] Customer confirmation arrives at the submitted address
+- [ ] Admin notification arrives at **both** recipients, with the CRM lead id
+      and the created/updated line populated
+- [ ] The CRM's real lead-id field is one `extractLeadId` recognises — if the
+      admin email says "Not returned by the CRM" on a real lead, add it to
+      `lib/crm/lead-client.ts`
+- [ ] Function logs show `lead_crm_captured` and `lead_emails`, and contain no
+      name, phone, email or message
 
 > **Known gap, needs a decision.** If the CRM is down or the key is wrong, the
 > API returns 500 and the lead is **lost** — there is no fallback capture. The
@@ -69,6 +86,13 @@ npm start &   # or PORT=3100 npm start
 > `form_error` in GA4, (b) add an email fallback via a provider, (c) write
 > failed payloads to Supabase, which is already a dependency. Nothing here is
 > implemented yet.
+>
+> **Note on (b), now that email exists.** The provider added on 2026-10-22 is
+> only wired to fire *after* confirmed capture, which is deliberate: an email
+> sent on CRM failure would be a second place a lead can live, and the brief is
+> explicit that a pending-enquiry workflow must not claim capture. Turning it
+> into a fallback is a small change to `app/api/lead/route.ts` and a decision
+> about who owns the resulting inbox — it is not wired up by default.
 
 ## 4. Analytics — silent failure is the default
 

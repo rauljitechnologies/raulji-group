@@ -5,7 +5,15 @@
 In Vercel → Project → Settings → Environment Variables:
 
 - `RAULJI_CRM_API_KEY` — **rotate this in the CRM first.** The old key was public.
-- `RAULJI_CRM_BASE` — optional
+- `RAULJI_CRM_BASE` — optional. Defaults to `https://crm.raulji.com/api/v1`.
+- `EMAIL_PROVIDER_API_KEY` — transactional email (Resend). Server-only.
+- `EMAIL_FROM_ADDRESS` — `admin@raulji.com`. **Must be verified with the
+  provider first**: publish SPF and DKIM for `raulji.com` and wait for the
+  domain to show as verified, or the provider rejects the sender and both
+  enquiry emails fail. Leads are still captured if it does — the emails sit
+  downstream of the CRM — but nobody is notified, so do this before launch.
+- `RAULJI_ADMIN_EMAILS` — `admin@raulji.com,toyuvrajraulji@gmail.com`
+- `EMAIL_PROVIDER_ENDPOINT` — leave unset in production
 - `SUPABASE_URL`, `SUPABASE_ANON_KEY` — optional, for blog and team
 - `NEXT_PUBLIC_GTM_ID` — Google Tag Manager container, `GTM-MSW79R28`.
   Required for analytics on the live site: without it the app still pushes
@@ -96,7 +104,23 @@ done                                            # 15, 9, 53, 18 = 95
 curl -s https://www.raulji.com/ | grep -c googletagmanager              # non-zero
 ```
 
-Then submit a test through the contact form and confirm the lead lands in the CRM.
+Then submit a test through the contact form and confirm, in order:
+
+1. The form shows the success panel (which means the CRM answered `success: true`).
+2. The lead appears in the CRM, and whether it was created or matched an existing
+   contact.
+3. **The CRM's lead-id field name.** `extractLeadId` reads several plausible
+   shapes and returns `null` if none matches, which makes the admin email say
+   "Not returned by the CRM". If it says that on a real lead, add the actual
+   field to `lib/crm/lead-client.ts`.
+4. The customer confirmation arrives at the submitted address.
+5. The admin notification arrives at **both** configured recipients, with the
+   CRM lead id and the created/updated line filled in.
+6. The function logs show `lead_crm_captured` then `lead_emails` with both
+   statuses `sent`, and contain no name, phone, email or message.
+
+Use obviously-test details and delete the CRM record afterwards. See
+[lead-pipeline.md](lead-pipeline.md) for what each failure mode looks like.
 
 ## 4. Search Console
 

@@ -22,6 +22,7 @@ import {
 import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref, whatsappHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
 /**
@@ -87,6 +88,13 @@ export function ContactWizard() {
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewedRef = useRef(false);
+  /*
+   * Double-submit guard, same as LeadForm. The button is `disabled` while
+   * submitting, but that relies on a re-render beating the second click; this
+   * ref is set synchronously so a fast double-click cannot reach `fetch` twice.
+   * The CRM's own duplicate handling is unaffected and still wanted.
+   */
+  const inFlightRef = useRef(false);
   const startedRef = useRef(false);
 
   const [step, setStep] = useState(1);
@@ -149,6 +157,8 @@ export function ContactWizard() {
   }
 
   async function submit() {
+    if (inFlightRef.current) return;
+    inFlightRef.current = true;
     setStatus("submitting");
     setSubmitError(null);
     const message = [when ? `Timeline: ${when}` : "", fields.message.trim()]
@@ -164,6 +174,9 @@ export function ContactWizard() {
       message,
       hp_note: hpNote,
       sourcePage: pathname,
+      // Same attribution as LeadForm, from the same source, so both forms land
+      // in the CRM with identical campaign fields.
+      ...currentAttribution(),
     };
     try {
       const response = await fetch("/api/lead/", {
@@ -186,11 +199,13 @@ export function ContactWizard() {
         }
         scrollToTop();
       } else {
+        inFlightRef.current = false;
         setStatus("idle");
         setSubmitError(result.error ?? "Something went wrong. Please try again.");
         track("form_error", { registration_type: need });
       }
     } catch {
+      inFlightRef.current = false;
       setStatus("idle");
       setSubmitError(`Network problem while submitting. Please try again or call ${SITE.phone.display}.`);
       track("form_error", { registration_type: need });

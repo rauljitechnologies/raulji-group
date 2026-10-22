@@ -7,6 +7,7 @@ import { SERVICES } from "@/lib/services";
 import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
+import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
 /**
@@ -85,6 +86,18 @@ export function LeadForm({
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const startedRef = useRef(false);
   const viewedRef = useRef(false);
+  /*
+   * Double-submit guard. The button is already `disabled` while submitting, but
+   * that depends on a React re-render landing before the second click: a fast
+   * double-click, or Enter held down in a text field, can fire the handler twice
+   * in the same tick. A ref is checked and set synchronously, so the second call
+   * returns before it can reach `fetch`.
+   *
+   * It guards the request, not the CRM's duplicate handling, which is separate
+   * and still wanted -- a visitor who genuinely enquires twice should still be
+   * recorded against their existing lead.
+   */
+  const inFlightRef = useRef(false);
 
   const registrationType = defaultRegistrationType;
 
@@ -129,6 +142,8 @@ export function LeadForm({
       return;
     }
 
+    if (inFlightRef.current) return;
+    inFlightRef.current = true;
     setStatus("submitting");
     setError(null);
     const payload = {
@@ -141,6 +156,12 @@ export function LeadForm({
       businessName: String(formData.get("businessName") ?? ""),
       hp_note: String(formData.get("hp_note") ?? ""),
       sourcePage: pathname,
+      /*
+       * Campaign and GA identifiers, spread last so they only ever add keys
+       * that were genuinely present on the visit. Nothing is defaulted: see
+       * lib/attribution.ts.
+       */
+      ...currentAttribution(),
     };
 
     try {
@@ -172,11 +193,13 @@ export function LeadForm({
           });
         }
       } else {
+        inFlightRef.current = false;
         setStatus("error");
         setError(result.error ?? "Something went wrong. Please try again.");
         track("form_error", { registration_type: payload.registrationType });
       }
     } catch {
+      inFlightRef.current = false;
       setStatus("error");
       setError(`Network problem while submitting. Please try again or call ${SITE.phone.display}.`);
       track("form_error", { registration_type: payload.registrationType });

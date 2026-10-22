@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MobileActionBar } from "@/components/layout/mobile-action-bar";
 import { Analytics } from "@/components/layout/analytics";
+import { AttributionCapture } from "@/components/layout/attribution-capture";
 import { RouteProgress } from "@/components/layout/route-progress";
 import { LocationDrawerProvider } from "@/components/shared/location-drawer";
 import { JsonLd } from "@/components/ui/json-ld";
@@ -70,6 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             container itself is loaded afterInteractive, so this position
             costs nothing against LCP. */}
         <Analytics />
+        {/* Records campaign parameters from the landing URL for the enquiry
+            forms. Renders nothing. */}
+        <AttributionCapture />
         <JsonLd data={graph(organizationSchema(), websiteSchema())} />
         <a href="#main" className="skip-link">
           Skip to main content
