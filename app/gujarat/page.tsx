@@ -9,16 +9,15 @@ import { HighlightComparison } from "@/components/shared/registration-tools";
 import { GujaratCityFinder, RegionCards } from "@/components/shared/gujarat-city-finder";
 import { DISTRICT_REGION, regionSummary } from "@/lib/gujarat-regions";
 import { getArticle } from "@/lib/blog";
-import { coverScale, scaleSizes } from "@/lib/image-sizes";
 import { CITIES, CITY_SLUGS, GUJARAT_DISTRICTS } from "@/lib/cities";
 import { SERVICES } from "@/lib/services";
 import { STRUCTURE_META } from "@/lib/structure-meta";
-import { SITE, TIMELINE_DISCLAIMER, telHref, whatsappHref } from "@/lib/site";
+import { SITE, telHref, whatsappHref } from "@/lib/site";
 import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 import type { FAQ } from "@/lib/services";
 import { H1, H2 } from "@/lib/typography";
-import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS, type Photo } from "@/lib/city-photos";
+import { CITY_CARD_PHOTOS, CITY_PAGE_PHOTOS, CITY_PLACE_PHOTOS } from "@/lib/city-photos";
 
 export const metadata = pageMeta({
   /*
@@ -48,7 +47,7 @@ const crumbs: Crumb[] = [
 const GUJARAT_FAQS: FAQ[] = [
   {
     q: "Does it matter which part of Gujarat I register my business from?",
-    a: "Not for the process. Company and LLP incorporation is filed online with the Registrar of Companies, and all of Gujarat falls under the same Registrar and the same GST state. Your registered office address determines where statutory correspondence is sent, not what you are allowed to do or how long registration takes. Partnership firm registration is handled by the Registrar of Firms for the state.",
+    a: "Not for the process. Company and LLP incorporation is filed online, and all of Gujarat falls under the same company registry and the same GST state. Your registered office address determines where statutory correspondence is sent, not what you are allowed to do or how long registration takes. Partnership firm registration is handled by the Registrar of Firms for the state.",
   },
   {
     /*
@@ -61,44 +60,44 @@ const GUJARAT_FAQS: FAQ[] = [
      * and it is recorded as unverified in docs/seo-improvement-audit.md.
      */
     q: "Can a partnership firm be registered online in Gujarat?",
-    a: "Company and LLP incorporation is genuinely online end to end, filed with the Registrar of Companies through the MCA portal. Partnership firm registration is a different thing: the firm is created by the partners' deed, and registering it is done with the Registrar of Firms for Gujarat under state procedure rather than as an MCA filing. The parts we handle for you \u2014 drafting the deed, the stamp duty position, assembling the partners' documents and the firm's PAN application \u2014 are handled remotely wherever you are in the state. We confirm the Registrar of Firms' current procedure and the applicable stamp duty before anything is executed, rather than quoting a process that may have moved.",
+    a: "Company and LLP incorporation is genuinely online end to end. A partnership firm is created by the partners' deed and registered with the Registrar of Firms for Gujarat under state procedure. The parts we handle \u2014 drafting the deed, the stamp duty position, the partners' documents and the firm's PAN \u2014 are done remotely wherever you are in the state. We confirm the current procedure and stamp duty before anything is executed.",
   },
   {
     q: "What is the difference between firm registration and company registration in Gujarat?",
-    a: "They are two separate systems. Registering a company, or an LLP, means incorporating a new legal entity under central law, filed with the Registrar of Companies, which issues a Certificate of Incorporation. Registering a firm means recording an existing partnership \u2014 one already created by the partners' deed \u2014 with the Registrar of Firms for the state. A company exists because it was incorporated. A firm exists because the partners agreed, and registration adds the ability to enforce contracts in court under section 69 of the Indian Partnership Act, 1932. The liability position differs too: a company's shareholders are liable only for what is unpaid on their shares, while a firm's partners are personally liable without limit.",
+    a: "Registering a company or LLP incorporates a new legal entity under central law, and you receive a Certificate of Incorporation. Registering a firm records an existing partnership, already created by the deed, with the Registrar of Firms. Registration adds the ability to enforce contracts in court under section 69 of the Indian Partnership Act, 1932. A company's shareholders are liable only for what is unpaid on their shares; a firm's partners are personally liable without limit.",
   },
   {
     q: "Do I need to travel to Vadodara or Ahmedabad to register?",
-    a: "No. Digital signatures are issued through video and Aadhaar-based verification, incorporation forms are filed online, and documents can be exchanged digitally. We work with businesses across the state from our base in Vadodara without requiring you to travel. You are welcome to meet us in person if you prefer.",
+    a: "No. Digital signatures are issued through video and Aadhaar-based verification, incorporation forms are filed online, and documents can be exchanged digitally. You are welcome to meet us in person in Vadodara if you prefer.",
   },
   {
     q: "Does Raulji Group have offices in every city in Gujarat?",
-    a: "No. We operate from Vadodara and serve the rest of Gujarat remotely. We would rather say that plainly than list offices we do not have. Because the registration process is filed online, working remotely makes no practical difference to the service or the timeline.",
+    a: "No. We operate from Vadodara and serve the rest of Gujarat remotely. We would rather say that plainly than list offices we do not have. Because registration is filed online, working remotely makes no practical difference to the service or the timeline.",
   },
   {
     q: "Is stamp duty the same across Gujarat?",
-    a: "Stamp duty is set at state level, so it is the same across Gujarat, but it differs from other states. It applies to incorporation documents, to the LLP Agreement and to a partnership deed, and the amount varies with the capital or contribution involved. We confirm the applicable figure before anything is executed.",
+    a: "Stamp duty is set at state level, so it is the same across Gujarat but differs from other states. It applies to incorporation documents, the LLP Agreement and a partnership deed, and varies with the capital or contribution involved. We confirm the figure before anything is executed.",
   },
   {
     q: "Which structure is most common among Gujarat businesses?",
-    a: "It varies sharply by market rather than by the state as a whole. Partnership firms remain very common in trading centres such as Surat and the Saurashtra agricultural belt, LLPs are widespread among professional and partner-run firms, and Private Limited Companies dominate where founders intend to raise investment, particularly in Ahmedabad and the GIFT City corridor. Which is common matters much less than which is right for your business.",
+    a: "It varies by market rather than by the state. Partnership firms remain common in trading centres such as Surat and the Saurashtra agricultural belt, LLPs are widespread among professional and partner-run firms, and Private Limited Companies dominate where founders plan to raise investment, particularly in Ahmedabad and the GIFT City corridor.",
   },
 ];
 
 const STATE_FACTS: { title: string; body: string; icon: LucideIcon }[] = [
   {
     title: "Filed online, statewide",
-    body: "Company and LLP incorporation goes through the MCA portal, so your location in Gujarat does not affect the process or the timeline.",
+    body: "Company and LLP incorporation is filed online, so your location in Gujarat does not affect the process or the timeline.",
     icon: Globe,
   },
   {
     title: "One state for GST",
-    body: "All of Gujarat is a single GST state, so one registration covers multiple locations within it, with additional places of business declared.",
+    body: "All of Gujarat is a single GST state, so one registration covers multiple locations, with additional places of business declared.",
     icon: FileText,
   },
   {
     title: "Partnership firms are state-level",
-    body: "Partnership firm registration is with the Registrar of Firms for Gujarat, and stamp duty on the deed is set by the state.",
+    body: "Firm registration is with the Registrar of Firms for Gujarat, and stamp duty on the deed is set by the state.",
     icon: Users,
   },
   {
@@ -117,19 +116,15 @@ const GUIDES = [
   .filter((article): article is NonNullable<typeof article> => article !== null);
 
 /*
- * Photographs from the "Raulji Gujarat v2" design. All of them are already
- * self-hosted for the city pages (lib/city-photos.ts), so this page adds no
- * new files. The city finder's card photos come from CITY_CARD_PHOTOS; see
+ * Photographs are the self-hosted ones from lib/city-photos.ts, so the page
+ * adds no new files. The "Raulji Gujarat v3" design dropped the photo gallery
+ * that sat under the hero, and uses stock photography on the structure cards;
+ * the cards keep the site's own photos instead (master rules 1 and 24), which
+ * the CSP also requires. The city finder's card photos come from CITY_CARD_PHOTOS; see
  * the note there on which ones are confirmed as the named city.
  */
 const AHD = CITY_PLACE_PHOTOS.ahmedabad;
-const VAD = CITY_PLACE_PHOTOS.vadodara;
-const GALLERY: { city: string; slug: string; caption: string; photo: Photo }[] = [
-  { city: "Ahmedabad", slug: "ahmedabad", caption: "Gujarat\u2019s largest commercial centre", photo: AHD.hero },
-  { city: "Vadodara", slug: "vadodara", caption: "Where Raulji Group is based", photo: VAD.hero },
-  { city: "Ahmedabad", slug: "ahmedabad", caption: "Startups to trading families", photo: AHD.gallery[3] },
-  { city: "Vadodara", slug: "vadodara", caption: "Engineering and process industry", photo: VAD.environment[1] },
-];
+
 const PHOTO = "object-cover";
 
 const EYEBROW =
@@ -170,13 +165,13 @@ const WHERE_REGISTERED: {
   {
     structure: "Private Limited Company",
     href: "/services/pvt-registration/",
-    authority: "Registrar of Companies, through the MCA portal",
+    authority: "Company registry, filed online",
     level: "Central",
   },
   {
     structure: "LLP",
     href: "/services/llp-registration/",
-    authority: "Registrar of Companies, through the MCA portal",
+    authority: "Company registry, filed online",
     level: "Central",
   },
   {
@@ -281,7 +276,7 @@ export default function GujaratPage() {
             <div className="flex min-w-0 flex-col gap-[1.375rem]">
               <p className={EYEBROW_DARK}>
                 <Dash />
-                Gujarat
+                Business registration in Gujarat
               </p>
               <h1
                 id="gj-h"
@@ -291,10 +286,10 @@ export default function GujaratPage() {
                 <span className="text-[#7cc8ec]">anywhere in Gujarat.</span>
               </h1>
               <p className="max-w-[36.25rem] text-pretty text-base/[1.75] leading-[1.75] text-[#c9d6e3] sm:text-lg/[1.75]">
-                Raulji Group supports entrepreneurs and businesses across Gujarat with Private
-                Limited Company, LLP, Partnership Firm and Proprietorship registration. Companies and
-                LLPs are incorporated centrally through the MCA; partnership firms are registered with
-                the Registrar of Firms for Gujarat, which is the one step that is genuinely state-level.
+                Raulji Group supports entrepreneurs across Gujarat with Private Limited Company, LLP,
+                Partnership Firm and Proprietorship registration. Companies and LLPs are incorporated
+                centrally online; partnership firms are registered with the Registrar of Firms for
+                Gujarat, the one step that is genuinely state-level.
                 We work from {SITE.locality}, with dedicated pages for {CITY_SLUGS.length} of the
                 state&rsquo;s main business markets.
               </p>
@@ -331,40 +326,6 @@ export default function GujaratPage() {
         </div>
       </section>
 
-      {/* Gujarat in pictures. */}
-      <section aria-label="Gujarat in pictures" className="pt-5 md:pt-8">
-        <ul className={`${CONTAINER} grid grid-cols-2 gap-3 lg:grid-cols-4`}>
-          {GALLERY.map((g) => (
-            <li key={g.caption}>
-              <TrackedLink
-                href={`/${g.slug}/`}
-                event="city_page_click"
-                params={{ city: g.city, label: "gujarat_gallery" }}
-                className="group relative block aspect-[4/3] overflow-hidden rounded-lg bg-[#1b3350] outline-offset-2 hover:outline hover:outline-2 hover:outline-[#329fd2]"
-              >
-                <Image
-                  src={g.photo.src}
-                  alt={g.photo.alt}
-                  fill
-                  sizes={scaleSizes("(min-width: 1024px) 300px, 50vw", coverScale(g.photo.src, 4 / 3))}
-                  placeholder="blur"
-                  className={`${PHOTO} photo-zoom`}
-                />
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(12,26,45,0)_40%,rgba(12,26,45,.88)_100%)]"
-                />
-                <span className="absolute inset-x-4 bottom-3.5 flex flex-col gap-0.5 text-white">
-                  <span className="text-[0.9375rem] font-extrabold sm:text-base">
-                    {g.city} <span aria-hidden="true">→</span>
-                  </span>
-                  <span className="hidden text-[0.8125rem] text-[#d5e0ea] sm:block">{g.caption}</span>
-                </span>
-              </TrackedLink>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       {/* The four structures. */}
       <section aria-labelledby="four-h" className={SECTION}>
@@ -425,7 +386,8 @@ export default function GujaratPage() {
             })}
           </ul>
           <p className="text-[0.8125rem] text-[#5b6778]">
-            Setup times are typical estimates with complete documents. {TIMELINE_DISCLAIMER}
+            Setup times are typical estimates with complete documents and can vary with
+            documentation, government processing and other factors outside our control.
           </p>
         </div>
       </section>
@@ -443,22 +405,19 @@ export default function GujaratPage() {
             </h2>
             <p className="text-base/[1.75] leading-[1.75]">
               Incorporating a company or an LLP is a central, online process. Applications are filed
-              with the Registrar of Companies through the MCA portal, and digital signatures are
-              issued through video and Aadhaar-based verification. A business anywhere in Gujarat
-              goes through exactly the same steps on the same timeline. Our{" "}
+              with the company registry online, and digital signatures are issued through video and
+              Aadhaar-based verification. A business anywhere in Gujarat goes through exactly the
+              same steps on the same timeline. Our{" "}
               <Link href="/services/business-registration/" className={INLINE_LINK}>
-                business registration
+                business registration guide
               </Link>{" "}
-              pillar sets out that process in full.
+              sets out that process in full.
             </p>
             <p className="text-base/[1.75] leading-[1.75]">
-              Registering a partnership firm is the exception, and it is handled by the state rather
-              than the MCA. That is covered in the next section.
-            </p>
-            <p className="text-base/[1.75] leading-[1.75]">
-              What is genuinely local is the context around the decision: what your customers expect,
-              what a lender will ask for, and how much liability the business carries. That is what
-              our city pages cover.
+              Registering a partnership firm is the exception, handled by the state. What is
+              genuinely local is the context around the decision: what your customers expect, what a
+              lender will ask for, and how much liability the business carries. That is what our city
+              pages cover.
             </p>
             <div className="relative mt-2 aspect-[16/10] overflow-hidden rounded-lg bg-[#e8f5fb]">
               <Image
@@ -501,8 +460,7 @@ export default function GujaratPage() {
           <SectionHead
             eyebrow="State-level registration"
             id="sl-h"
-            title="Partnership firms are registered in Gujarat, not centrally."
-            lead="Company and LLP incorporation is central, and a proprietorship has no incorporation at all. Partnership firms are the exception, and they are why a state page has something of its own to say."
+            title="Partnership firm registration in Gujarat is state-level, not central."
           />
           <div className="grid items-start gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16">
             <div className="flex min-w-0 flex-col gap-[1.125rem]">
@@ -515,52 +473,45 @@ export default function GujaratPage() {
                 <Link href="/services/llp-registration/" className={INLINE_LINK}>
                   LLP
                 </Link>{" "}
-                are incorporated under central law and filed with the Registrar of Companies through
-                the MCA portal. The Registrar&rsquo;s office for this state sits in Ahmedabad, which
-                makes no difference to how the filing is processed, because it is done online. A{" "}
+                are incorporated under central law and filed online. The company registry office for
+                Gujarat sits in Ahmedabad, which makes no difference to processing. A{" "}
                 <Link href="/services/proprietorship-registration/" className={INLINE_LINK}>
                   proprietorship
                 </Link>{" "}
-                has no incorporation filing at all; what it has instead are the activity-based
-                registrations that apply to it, such as GST or Udyam.
+                has no incorporation filing at all; it relies on activity-based registrations such as
+                GST or Udyam.
               </p>
               <p className="text-base/[1.75] leading-[1.75]">
                 A{" "}
                 <Link href="/services/partnership-registration/" className={INLINE_LINK}>
                   partnership firm
                 </Link>{" "}
-                works differently. The firm is created by the partners&rsquo; deed under the Indian
-                Partnership Act, 1932, and registering it is done with the Registrar of Firms for
-                Gujarat &mdash; a state office under state procedure, not an MCA filing. That is why
-                a firm registers in the state where it carries on business, and why the step does not
-                look like incorporation.
+                works differently. It is created by the partners&rsquo; deed under the Indian
+                Partnership Act, 1932, and registered with the Registrar of Firms for Gujarat under
+                state procedure. That is why a firm registers in the state where it carries on
+                business.
               </p>
               <h3 className="mt-2 text-[1.1875rem] font-bold text-[#122640]">
                 Registration is optional. Section 69 is why firms do it anyway.
               </h3>
               <p className="text-base/[1.75] leading-[1.75]">
-                Under the Act, registering the firm is optional. What makes it worth doing is section
-                69: an unregistered firm cannot file a suit to enforce a right arising from a contract
-                against a third party, and a partner cannot sue the firm or the other partners on the
-                partnership contract. In plain terms, if a customer does not pay, an unregistered firm
-                has no contractual route to court. For a firm selling on credit &mdash; which covers a
-                great many trading firms in this state &mdash; that is a practical restriction rather
-                than a theoretical one.
+                An unregistered firm cannot sue a third party to enforce a contract, and a partner
+                cannot sue the firm or other partners on the partnership contract. If a customer does
+                not pay, an unregistered firm has no contractual route to court &mdash; a real
+                restriction for firms selling on credit.
               </p>
               <h3 className="mt-2 text-[1.1875rem] font-bold text-[#122640]">
                 Stamp duty on the deed is set by the state
               </h3>
               <p className="text-base/[1.75] leading-[1.75]">
-                The deed must be executed on stamp paper of the value prescribed in Gujarat, and the
-                amount varies with the capital or contribution involved. Because stamp duty is set at
-                state level it is the same in Bhuj as in Vapi, but it is not the same as in a
-                neighbouring state. The firm also applies for its own PAN, which a bank will ask for
-                before opening a current account.
+                The deed is executed on stamp paper of the value prescribed in Gujarat, varying with
+                capital involved. It is the same in Bhuj as in Vapi, but differs from neighbouring
+                states. The firm also applies for its own PAN, which a bank needs before opening a
+                current account.
               </p>
               <p className="text-[0.9375rem] leading-[1.7] text-[#5b6778]">
-                Registrar of Firms procedure and timelines are set by the state and are not the same
-                as an MCA filing, so we confirm the current procedure and the applicable stamp duty
-                before anything is executed. {TIMELINE_DISCLAIMER}
+                We confirm the current Registrar of Firms procedure and applicable stamp duty before
+                anything is executed.
               </p>
             </div>
             <div className="flex min-w-0 flex-col gap-4 rounded-lg border border-[#e3e9ef] bg-[#f4f7fa] p-6 sm:p-8">
@@ -586,7 +537,7 @@ export default function GujaratPage() {
                 href="#enquiry"
                 className="mt-1 inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
               >
-                Not sure which one applies to you?
+                Not sure which applies to you?
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
@@ -595,56 +546,76 @@ export default function GujaratPage() {
       </section>
 
       {/* Local markets. */}
-      <section id="cities" aria-labelledby="ct-h" className={`scroll-mt-28 ${SECTION}`}>
+      <section id="cities" aria-labelledby="ct-h" className={`scroll-mt-28 bg-[#f4f7fa] ${SECTION}`}>
         <div className={`${CONTAINER} flex flex-col gap-7`}>
           <SectionHead
             eyebrow="Local markets"
             id="ct-h"
-            title="Find your city."
-            lead="Each page covers all four registration structures alongside the local business context that tends to shape the decision."
+            title="Find your city in Gujarat."
+            lead="Each page covers all four registration structures alongside the local business context that shapes the decision."
           />
           <GujaratCityFinder cities={finderCities} />
         </div>
       </section>
 
-      {/* All 33 districts. */}
-      <section aria-labelledby="ds-h" className={`relative overflow-hidden bg-[#0c1a2d] text-white ${SECTION}`}>
-        <Image src={AHD.cta} alt="" fill sizes="100vw" placeholder="blur" className={PHOTO} />
-        <div aria-hidden="true" className="absolute inset-0 bg-[rgba(12,26,45,.9)]" />
-        <div className={`${CONTAINER} relative flex flex-col gap-8`}>
-          <SectionHead
-            dark
-            eyebrow="All 33 districts"
-            id="ds-h"
-            title="Every district, served on the same terms."
-            lead="Linked districts have one or more dedicated city pages. If yours is not linked, it does not mean we cannot help; call and we will answer directly."
-          />
-          <ul className="flex flex-wrap gap-2.5">
+      {/* All 33 districts. Light two-column layout from the "Raulji Gujarat v3" design. */}
+      <section aria-labelledby="ds-h" className={SECTION}>
+        <div className={`${CONTAINER} grid items-start gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16`}>
+          <div className="flex min-w-0 flex-col gap-[1.125rem]">
+            <p className={EYEBROW}>
+              <Dash />
+              All 33 districts
+            </p>
+            <h2 id="ds-h" className={H2}>
+              Every district, served on the same terms.
+            </h2>
+            <p className="text-base/[1.75] leading-[1.75]">
+              Linked districts have one or more dedicated city pages. If yours is not linked, we can
+              still help: call{" "}
+              <TrackedLink
+                href={telHref}
+                event="phone_click"
+                params={{ label: "gujarat_districts_intro" }}
+                className={INLINE_LINK}
+              >
+                {SITE.phone.display}
+              </TrackedLink>{" "}
+              and we will answer directly.
+            </p>
+            <div className="relative mt-2 aspect-[16/10] overflow-hidden rounded-lg bg-[#1b3350]">
+              <Image
+                src={AHD.cta}
+                alt="Atal Foot Over Bridge lit up at night over the Sabarmati, Ahmedabad"
+                fill
+                sizes="(min-width: 1024px) 460px, 100vw"
+                placeholder="blur"
+                className={PHOTO}
+              />
+            </div>
+          </div>
+          <ul className="grid min-w-0 grid-cols-1 gap-x-6 border-t border-[#dde4ec] min-[420px]:grid-cols-2 md:grid-cols-3">
             {GUJARAT_DISTRICTS.map((district) => {
               const city = CITIES.find((c) => c.district === district);
-              const pill =
-                "flex min-h-[2.75rem] items-center gap-2 rounded-full border px-4 text-sm font-semibold transition duration-200 hover:-translate-y-0.5 hover:border-[#329fd2] hover:bg-[#329fd2] hover:text-[#0c1a2d]";
               return (
-                <li key={district}>
+                <li key={district} className="border-b border-[#eef2f6] text-[0.9375rem]">
                   {city ? (
                     <TrackedLink
                       href={`/${city.slug}/`}
                       event="city_page_click"
                       params={{ city: city.name, label: "gujarat_districts" }}
-                      className={`${pill} border-white/[0.28] text-white`}
+                      className="flex min-h-[2.875rem] items-center font-semibold text-[#122640] hover:text-[#1872a3] hover:underline"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#329fd2]" aria-hidden="true" />
-                      {district}
+                      {district} <span aria-hidden="true">&nbsp;→</span>
                     </TrackedLink>
                   ) : (
                     <TrackedLink
                       href={telHref}
                       event="phone_click"
                       params={{ label: `gujarat_district_${district}` }}
-                      className={`${pill} border-white/[0.12] text-[#9fb3c8]`}
+                      className="flex min-h-[2.875rem] items-center text-[#5b6778] hover:text-[#1872a3]"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/25" aria-hidden="true" />
                       {district}
+                      <span className="ml-1 text-xs">&middot; call us</span>
                       <span className="sr-only">: no city page yet, call {SITE.phone.display}</span>
                     </TrackedLink>
                   )}
@@ -652,10 +623,6 @@ export default function GujaratPage() {
               );
             })}
           </ul>
-          <p className="max-w-3xl text-sm/[1.625] leading-relaxed text-[#9fb3c8]">
-            We publish a city page only where there is something genuinely local to say about doing
-            business there. Unlinked districts call {SITE.phone.display}.
-          </p>
         </div>
       </section>
 
@@ -722,6 +689,7 @@ export default function GujaratPage() {
           </div>
           <LeadForm
             heading="Gujarat business registration enquiry"
+            headingLevel="h3"
             className="rounded-lg border-0 shadow-[0_40px_90px_-40px_rgba(12,26,45,0.45),0_0_0_1px_rgba(18,38,64,0.06)]"
           />
         </div>
@@ -736,7 +704,7 @@ export default function GujaratPage() {
               FAQs
             </p>
             <h2 id="faq-h" className={H2}>
-              Registering a business in Gujarat.
+              Registering a business in Gujarat: common questions.
             </h2>
             <a
               href="#enquiry"
@@ -810,19 +778,18 @@ export default function GujaratPage() {
       </section>
 
       {/* Closing CTA. */}
-      <section aria-labelledby="cta-h" className="px-5 pb-16 sm:px-8 md:pb-24">
-        <div className="mx-auto flex max-w-[1240px] flex-col overflow-hidden rounded-lg bg-[#122640] text-white md:flex-row">
-          <div className="relative min-h-[16.25rem] bg-[#1b3350] md:w-[42%] md:flex-none">
-            <Image
-              src={CITY_PAGE_PHOTOS.structures["partnership-registration"].src}
-              alt={CITY_PAGE_PHOTOS.structures["partnership-registration"].alt}
-              fill
-              sizes="(min-width: 768px) 520px, 100vw"
-              placeholder="blur"
-              className={PHOTO}
-            />
-          </div>
-          <div className="flex min-w-0 flex-1 flex-col justify-center gap-3.5 p-8 sm:p-12 lg:p-14">
+      <section aria-labelledby="cta-h" className="relative overflow-hidden bg-[#0c1a2d] text-white">
+        <Image
+          src={CITY_PAGE_PHOTOS.structures["partnership-registration"].src}
+          alt=""
+          fill
+          sizes="100vw"
+          placeholder="blur"
+          className={PHOTO}
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-[rgba(12,26,45,.88)]" />
+        <div className={`${CONTAINER} relative flex flex-wrap items-center justify-between gap-x-12 gap-y-7 py-14 md:py-[5.5rem]`}>
+          <div className="flex min-w-0 flex-[1_1_32.5rem] flex-col gap-3.5">
             <h2
               id="cta-h"
               className="text-balance text-[1.75rem] font-bold leading-[1.1] tracking-[-0.02em] text-white sm:text-[2.5rem]"
@@ -833,7 +800,8 @@ export default function GujaratPage() {
               Tell us what the business does, who is involved and whether outside investment is
               likely. That is usually enough to narrow it to one option.
             </p>
-            <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <TrackedLink
                 href="/contact/"
                 event="primary_cta_click"
@@ -854,7 +822,6 @@ export default function GujaratPage() {
               >
                 WhatsApp an Expert
               </TrackedLink>
-            </div>
           </div>
         </div>
       </section>
