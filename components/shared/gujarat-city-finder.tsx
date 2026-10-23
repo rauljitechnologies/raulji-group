@@ -111,7 +111,9 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
 
       {shown.length === 0 ? (
         <div className="flex flex-col items-center gap-2.5 rounded-lg border border-dashed border-[#cfd9e3] p-8 text-center">
-          <p className="text-base font-semibold text-[#122640]">No city page yet, but we can still help.</p>
+          <p className="text-base font-semibold text-[#122640]">
+            No city page matches that search. Call us and we will answer directly.
+          </p>
           <a
             href={telHref}
             onClick={() => track("phone_click", { label: "gujarat_city_finder_empty" })}

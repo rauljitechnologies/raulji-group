@@ -45,6 +45,12 @@ interface LeadFormProps {
   /** Pre-fills the city on a city page. */
   defaultCity?: string;
   heading?: string;
+  /**
+   * The form title's heading level. h2 by default, for pages where the form is
+   * its own section. A page that already introduces the enquiry with an h2,
+   * such as /gujarat/, passes h3 so the outline stays nested.
+   */
+  headingLevel?: "h2" | "h3";
   lead?: string;
   className?: string;
 }
@@ -92,6 +98,7 @@ export function LeadForm({
   defaultRegistrationType,
   defaultCity,
   heading = "Start your business",
+  headingLevel: HeadingTag = "h2",
   lead = "Tell us what you need and a member of the Raulji Group team will get back to you.",
   className,
 }: LeadFormProps) {
@@ -311,9 +318,9 @@ export function LeadForm({
 
   return (
     <div className={cn("rounded-lg border border-[#e3e9ef] bg-white p-6 sm:p-9", className)}>
-      <h2 className="text-[1.375rem] font-extrabold tracking-[-0.01em] text-[#122640] sm:text-[1.625rem]">
+      <HeadingTag className="text-[1.375rem] font-extrabold tracking-[-0.01em] text-[#122640] sm:text-[1.625rem]">
         {heading}
-      </h2>
+      </HeadingTag>
       <p className="mt-2 text-sm leading-[1.6] text-[#5b6778]">{lead}</p>
 
       <form
