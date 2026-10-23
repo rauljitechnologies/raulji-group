@@ -950,7 +950,7 @@ export const SERVICES: RegistrationService[] = [
     ],
     timeline: {
       ours: "Working out which registrations apply to your activity and preparing each application.",
-      authority: "Udyam is usually issued the same day. GST commonly takes around 7 to 15 working days and can include a physical verification of the premises.",
+      authority: "Udyam registration is usually issued online the same day. GST registration is generally granted within 7 working days of a complete application, or up to 30 days where the premises are physically verified (Rule 9, CGST Rules).",
     },
     compareWith: "pvt-registration",
     compareNote:
@@ -1055,7 +1055,7 @@ export const SERVICES: RegistrationService[] = [
       "There is no single authority that registers proprietorships and no central proprietorship certificate, because a proprietorship is not an incorporated entity. A proprietorship is instead recognised through the registrations it holds: Udyam registration through the Ministry of Micro, Small and Medium Enterprises, GST registration through the GST portal where applicable, and shop and establishment registration through the relevant state or local authority. Any business that tells you it will obtain a government proprietorship registration certificate is describing something that does not exist.",
     pricing: null,
     timelineEstimate:
-      "Udyam registration is usually same-day. GST registration commonly takes around 7 to 15 working days and may include physical verification of the premises",
+      "A proprietorship has no incorporation step, so the timeline is that of the registrations it needs. Udyam registration is usually issued online the same day. GST registration is generally granted within 7 working days of a complete application, or up to 30 days where the premises are physically verified (Rule 9, CGST Rules)",
     faqs: [
       {
         q: "What is a proprietorship?",

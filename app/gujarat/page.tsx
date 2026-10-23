@@ -227,6 +227,14 @@ function SectionHead({
   );
 }
 
+/*
+ * Service coverage and city-page coverage are different numbers and the page
+ * keeps them apart: every district is served (filed online), but only the
+ * districts with at least one city page have a dedicated landing page.
+ * Computed, so a new city page updates the copy on its own.
+ */
+const DISTRICTS_WITH_CITY_PAGE = GUJARAT_DISTRICTS.filter((d) => CITIES.some((c) => c.district === d)).length;
+
 export default function GujaratPage() {
   const finderCities = [...CITIES]
     .map((c) => ({
@@ -290,8 +298,9 @@ export default function GujaratPage() {
                 Partnership Firm and Proprietorship registration. Companies and LLPs are incorporated
                 centrally online; partnership firms are registered with the Registrar of Firms for
                 Gujarat, the one step that is genuinely state-level.
-                We work from {SITE.locality}, with dedicated pages for {CITY_SLUGS.length} of the
-                state&rsquo;s main business markets.
+                We work from {SITE.locality} and serve every district. {CITY_SLUGS.length} cities and
+                towns, covering {DISTRICTS_WITH_CITY_PAGE} of the {GUJARAT_DISTRICTS.length}{" "}
+                districts, also have a dedicated city page.
               </p>
               <div className="mt-1.5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <a
@@ -570,8 +579,9 @@ export default function GujaratPage() {
               Every district, served on the same terms.
             </h2>
             <p className="text-base/[1.75] leading-[1.75]">
-              Linked districts have one or more dedicated city pages. If yours is not linked, we can
-              still help: call{" "}
+              We serve all {GUJARAT_DISTRICTS.length} districts on the same terms; a dedicated city
+              page is a separate thing. {DISTRICTS_WITH_CITY_PAGE} districts have one or more, and
+              they are linked below. If yours is not linked, we can still help: call{" "}
               <TrackedLink
                 href={telHref}
                 event="phone_click"

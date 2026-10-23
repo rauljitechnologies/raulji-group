@@ -25,7 +25,7 @@ export const afterIncorporationChecklist: Article = {
     "The certificate of incorporation starts several clocks at once. This checklist sorts what is due in the first 30 days, the first 180 days, what depends on your business, and what recurs every year, for companies and LLPs.",
   category: "Company Registration",
   published: "2026-10-23",
-  updated: "2026-10-23",
+  updated: "2026-10-24",
   readMinutes: 11,
   primaryKeyword: "compliance after company incorporation",
   secondaryKeywords: [
@@ -119,7 +119,7 @@ export const afterIncorporationChecklist: Article = {
     {
       kind: "note",
       title: "Filing ADT-1 for the first auditor",
-      text: "Whether Form ADT-1 must be filed for the first auditor has been debated. The Ministry of Corporate Affairs has indicated that the rule requiring ADT-1 refers to appointments under section 139(1), not to the first auditor under section 139(6), while recommending that companies file it anyway. Filing it avoids difficulties later, including when the first financial statements are filed.",
+      text: "Whether Form ADT-1 must be filed for the first auditor is unsettled. Rule 4(2) of the Companies (Audit and Auditors) Rules, 2014, which requires the notice, refers to appointments under section 139(1), not to the first auditor under section 139(6). The revised Form ADT-1 in use from 14 July 2025 includes an option for reporting a first auditor, and professional bodies have asked the Ministry of Corporate Affairs to clarify the position. Many companies file it as a precaution. Filing it avoids difficulties later, including when the first financial statements are filed.",
     },
 
     { kind: "h2", id: "shares", text: "What needs to happen with the share capital?" },

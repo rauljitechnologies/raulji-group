@@ -74,7 +74,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
     pvt: "Commonly 7 to 12 working days with complete documents",
     llp: "Commonly 7 to 10 working days with complete documents",
     partnership: "Deed can be executed within a few days; Registrar of Firms timelines vary by state",
-    proprietorship: "Udyam is usually same-day; GST commonly 7 to 15 working days where applicable",
+    proprietorship: "No incorporation; depends on the registrations needed. Udyam is usually issued online the same day; GST is generally granted within 7 working days, up to 30 if the premises are verified",
   },
   {
     feature: "Suitable for",

@@ -67,7 +67,7 @@ const COMPARE_FAQS: FAQ[] = [
   },
   {
     q: "Which structure is fastest to set up?",
-    a: "A proprietorship, because there is nothing to incorporate. Udyam registration is usually same-day, and you can trade as soon as the applicable registrations and a current account are in place. A partnership deed can be executed within a few days. An LLP commonly takes around 7 to 10 working days and a Private Limited Company around 7 to 12, subject to government processing.",
+    a: "A proprietorship, because there is nothing to incorporate. It can trade once the registrations that apply to it and a current account are in place; Udyam registration, for example, is usually issued online the same day. A partnership deed can be executed within a few days. An LLP commonly takes around 7 to 10 working days and a Private Limited Company around 7 to 12, subject to government processing.",
   },
 ];
 
