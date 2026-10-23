@@ -174,6 +174,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     ],
     note: "Statutory audit is required for a Private Limited Company from its first financial year regardless of turnover. Late ROC filing attracts additional fees that accrue over time.",
     image: "compliance",
+    guides: ["after-company-incorporation-compliance-checklist"],
   },
   {
     slug: "llp-compliance",
@@ -197,6 +198,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     ],
     note: "Audit is required where turnover exceeds ₹40 lakh or contribution exceeds ₹25 lakh. Late filing of Form 8 or Form 11 attracts an additional fee that steps up the longer the delay runs.",
     image: "compliance",
+    guides: ["after-company-incorporation-compliance-checklist"],
   },
 ];
 

@@ -18,6 +18,12 @@ import hiVillagesGodhra from "@/public/blog/health-insurance-villages-godhra-pan
 import hiKakanpur from "@/public/blog/health-insurance-kakanpur-panchmahal.webp";
 import hiTuwa from "@/public/blog/health-insurance-tuwa-panchmahal.webp";
 import hiKantadi from "@/public/blog/health-insurance-kantadi-panchmahal.webp";
+// Second batch of business guides, 23 Oct 2026 (scripts/gen-blog-images-batch2.py).
+import gstGujarat from "@/public/blog/gst-registration-gujarat.webp";
+import udyamMsme from "@/public/blog/udyam-registration-msme.webp";
+import gujaratShops from "@/public/blog/gujarat-shops-establishments-registration.webp";
+import partnershipDeed from "@/public/blog/partnership-deed-checklist.webp";
+import afterIncorporation from "@/public/blog/after-company-incorporation-checklist.webp";
 
 /**
  * Featured images for the 2026 Business Guide Series.
@@ -113,6 +119,26 @@ export const BLOG_IMAGES = {
   "health-insurance-kantadi": {
     src: hiKantadi,
     alt: "Diagram: a parent's declared condition, its waiting period up to 36 months, then cover",
+  },
+  "gst-gujarat": {
+    src: gstGujarat,
+    alt: "Diagram: GST thresholds, 40 lakh for goods and 20 lakh with services, and the state line",
+  },
+  "udyam-msme": {
+    src: udyamMsme,
+    alt: "Diagram: micro, small and medium categories nested on investment and turnover axes",
+  },
+  "gujarat-shops": {
+    src: gujaratShops,
+    alt: "Diagram: intimation below ten workers, registration from ten, both within 60 days",
+  },
+  "partnership-deed": {
+    src: partnershipDeed,
+    alt: "Diagram: two partners either side of a deed with twelve clause rows, ten agreed and two still open",
+  },
+  "after-incorporation": {
+    src: afterIncorporation,
+    alt: "Timeline: board and auditor by 30 days, share certificates by 2 months, INC-20A by 180 days",
   },
 } as const satisfies Record<string, BlogImage>;
 

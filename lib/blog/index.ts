@@ -19,6 +19,11 @@ import { healthInsuranceVillagesGodhra } from "./articles/health-insurance-villa
 import { healthInsuranceKakanpur } from "./articles/health-insurance-kakanpur";
 import { healthInsuranceTuwa } from "./articles/health-insurance-tuwa";
 import { healthInsuranceKantadi } from "./articles/health-insurance-kantadi";
+import { gstRegistrationGujarat } from "./articles/gst-registration-gujarat";
+import { udyamRegistration } from "./articles/udyam-registration";
+import { gujaratShopsEstablishments } from "./articles/gujarat-shops-establishments";
+import { partnershipDeedChecklist } from "./articles/partnership-deed-checklist";
+import { afterIncorporationChecklist } from "./articles/after-incorporation-checklist";
 
 export type { Article, Block, Category, Source, ArticleAuthor } from "./types";
 export { CATEGORIES } from "./types";
@@ -60,6 +65,16 @@ export const ARTICLES: Article[] = [
   healthInsuranceKakanpur,
   healthInsuranceTuwa,
   healthInsuranceKantadi,
+  // Second batch of business guides, 23 Oct 2026, outside the series: the
+  // registrations that follow a structure decision (GST, Udyam, Gujarat shops
+  // and establishments), the partnership deed, and the first year after
+  // incorporation. docs/blog-content-audit.md records why each is not a
+  // duplicate of an existing page.
+  gstRegistrationGujarat,
+  udyamRegistration,
+  gujaratShopsEstablishments,
+  partnershipDeedChecklist,
+  afterIncorporationChecklist,
 ];
 
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));

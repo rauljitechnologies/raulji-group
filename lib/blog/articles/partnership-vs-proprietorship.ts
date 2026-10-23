@@ -273,6 +273,7 @@ export const partnershipVsProprietorship: Article = {
     },
   ],
   related: [
+    "partnership-deed-checklist-india",
     "how-to-choose-business-structure-india",
     "common-business-registration-mistakes-india",
     "business-structure-guide-new-entrepreneurs-india",

@@ -12,7 +12,7 @@ export const gujaratBusinessSetup: Article = {
   category: "Gujarat Business",
   seriesMonth: "June",
   published: "2026-09-22",
-  updated: "2026-09-22",
+  updated: "2026-10-23",
   readMinutes: 10,
   primaryKeyword: "starting a business in Gujarat",
   secondaryKeywords: [
@@ -29,7 +29,7 @@ export const gujaratBusinessSetup: Article = {
   covers: [
     "Which parts of business registration are national and which are genuinely state-level",
     "How the four structures apply to the kinds of business Gujarat actually runs",
-    "The Gujarat registrations that follow incorporation, including the 30-day Shops and Establishments deadline",
+    "The Gujarat registrations that follow incorporation, including the 60-day Shops and Establishments deadline",
     "Where stamp duty and the Registrar of Firms make the state matter",
   ],
   keyTakeaway: {
@@ -37,7 +37,7 @@ export const gujaratBusinessSetup: Article = {
     body: "Company and LLP incorporation is a central process handled through the Ministry of Corporate Affairs, so it is the same from anywhere in Gujarat. What is specific to the state is the layer around it: stamp duty on deeds and agreements, partnership registration with the Gujarat Registrar of Firms, professional tax, and registration under the Gujarat Shops and Establishments Act, 2019.",
     points: [
       "Companies registered in Gujarat fall under the Registrar of Companies at Ahmedabad, but filing is online and the office you fall under does not change the process.",
-      "Every establishment in Gujarat is required to register or give intimation under the Shops and Establishments Act, 2019 within 30 days of commencing operations.",
+      "Every establishment in Gujarat is required to register or give intimation under the Shops and Establishments Act, 2019 within 60 days of commencing operations.",
       "The structure decision is the same one entrepreneurs face anywhere. Being in Gujarat does not make a particular structure the right one.",
     ],
   },
@@ -117,11 +117,11 @@ export const gujaratBusinessSetup: Article = {
     { kind: "h3", text: "Registration under the Shops and Establishments Act, 2019" },
     {
       kind: "answer",
-      text: "The Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2019 requires every establishment to register or give intimation within 30 days of commencing operations. Establishments with fewer than ten employees file an intimation; those with ten or more obtain a registration certificate.",
+      text: "The Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2019 requires every establishment to register or give intimation within 60 days of commencing business (sections 6 and 7). Establishments with fewer than ten employees file an intimation; those with ten or more obtain a registration certificate.",
     },
     {
       kind: "p",
-      text: "This applies broadly, to shops, offices, warehouses, showrooms and service establishments alike, and it applies whether or not you employ anyone. The certificate stays in force until there is a change in ownership or in the nature of the business, at which point a fresh registration is required. The 30-day window is easy to miss when the business is focused on getting the doors open.",
+      text: "The [full guide to Gujarat shops and establishments registration](/blog/gujarat-shops-establishments-registration/) covers the forms, the portal and what changes when you reach ten workers. This applies broadly, to shops, offices, warehouses, showrooms and service establishments alike, and it applies whether or not you employ anyone. The certificate stays in force until there is a change in ownership or in the nature of the business, at which point a fresh registration is required. The 60-day window is easy to miss when the business is focused on getting the doors open.",
     },
     { kind: "h3", text: "Professional tax" },
     {
@@ -141,7 +141,7 @@ export const gujaratBusinessSetup: Article = {
     {
       kind: "warning",
       title: "The one deadline people miss",
-      text: "Thirty days from commencing operations for the Shops and Establishments filing, and separately, thirty days from incorporation for an LLP to file its LLP agreement in Form 3 with the MCA. Both are short, both start running while you are busy with something else, and neither provides for an extension as a matter of course.",
+      text: "Sixty days from commencing business for the Shops and Establishments filing, and separately, thirty days from incorporation for an LLP to file its LLP agreement in Form 3 with the MCA. Both start running while you are busy with something else, and neither provides for an extension as a matter of course.",
     },
 
     { kind: "h2", id: "sequence", text: "A workable sequence for a new business in Gujarat" },
@@ -162,7 +162,7 @@ export const gujaratBusinessSetup: Article = {
         },
         {
           title: "Complete the filing that follows immediately",
-          body: "An LLP files its agreement in Form 3 within 30 days. Every establishment files its Shops and Establishments registration or intimation within 30 days of starting operations.",
+          body: "An LLP files its agreement in Form 3 within 30 days. Every establishment files its Shops and Establishments registration or intimation within 60 days of starting business.",
         },
         {
           title: "Open the bank account and take the activity registrations",
@@ -182,7 +182,7 @@ export const gujaratBusinessSetup: Article = {
     },
     {
       kind: "p",
-      text: "All four structures can register. It is worth doing early rather than when a specific scheme or tender asks for it, because the registration is straightforward and the certificate is often requested at short notice.",
+      text: "All four structures can register. It is worth doing early rather than when a specific scheme or tender asks for it, because the registration is straightforward and the certificate is often requested at short notice. Our [Udyam registration guide](/blog/udyam-registration-msme-india/) sets out the process and the conditions each benefit carries.",
     },
     {
       kind: "links",
@@ -221,11 +221,11 @@ export const gujaratBusinessSetup: Article = {
     },
     {
       q: "What registrations does a new business in Gujarat need after incorporation?",
-      a: "Commonly: registration or intimation under the Gujarat Shops and Establishments Act, 2019 within 30 days of commencing operations, professional tax enrolment, a current account in the entity's name, GST where the turnover threshold or the nature of supply requires it, Udyam registration where the business qualifies as an MSME, and any licence specific to the activity.",
+      a: "Commonly: registration or intimation under the Gujarat Shops and Establishments Act, 2019 within 60 days of commencing business, professional tax enrolment, a current account in the entity's name, GST where the turnover threshold or the nature of supply requires it, Udyam registration where the business qualifies as an MSME, and any licence specific to the activity.",
     },
     {
       q: "Do I need to register under the Gujarat Shops and Establishments Act if I have no employees?",
-      a: "The Act requires establishments to register or give intimation within 30 days of commencing operations, and it applies broadly to shops, offices, warehouses and service establishments. Establishments with fewer than ten employees file an intimation rather than obtaining a registration certificate. Confirm what applies to your specific premises and activity before assuming an exemption.",
+      a: "The Act requires establishments to register or give intimation within 60 days of commencing business, and it applies broadly to shops, offices, warehouses and service establishments. Establishments with fewer than ten employees file an intimation rather than obtaining a registration certificate. Confirm what applies to your specific premises and activity before assuming an exemption.",
     },
     {
       q: "Where do I register a partnership firm in Gujarat?",
@@ -245,9 +245,10 @@ export const gujaratBusinessSetup: Article = {
     },
   ],
   related: [
+    "gujarat-shops-establishments-registration",
+    "gst-registration-gujarat-guide",
     "how-to-choose-business-structure-india",
     "partnership-vs-proprietorship-india",
-    "business-structure-guide-new-entrepreneurs-india",
   ],
   services: [
     {
@@ -280,7 +281,7 @@ export const gujaratBusinessSetup: Article = {
     {
       label: "Gujarat Shops and Establishments (Regulation of Employment and Conditions of Service) Act, 2019",
       url: "https://www.indiacode.nic.in/handle/123456789/15202",
-      supports: "Registration and intimation requirement and the 30-day period from commencement.",
+      supports: "Registration (section 6, ten or more workers) and intimation (section 7, fewer than ten), each within 60 days of commencing business.",
     },
     {
       label: "Ministry of Corporate Affairs",

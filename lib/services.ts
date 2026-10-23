@@ -210,7 +210,7 @@ export const SERVICES: RegistrationService[] = [
     guides: [
       "private-limited-company-vs-llp",
       "mca-company-registration-process-india",
-      "documents-required-company-registration-india",
+      "after-company-incorporation-compliance-checklist",
     ],
     cardBlurb: "For businesses seeking a scalable corporate structure.",
     cardCta: "Explore Private Limited Registration",
@@ -465,7 +465,7 @@ export const SERVICES: RegistrationService[] = [
     guides: [
       "private-limited-company-vs-llp",
       "how-to-choose-business-structure-india",
-      "common-business-registration-mistakes-india",
+      "after-company-incorporation-compliance-checklist",
     ],
     cardBlurb: "For businesses structured around partners with limited liability.",
     cardCta: "Explore LLP Registration",
@@ -718,7 +718,7 @@ export const SERVICES: RegistrationService[] = [
       "The two unincorporated structures. The difference is how many owners there are and who shares the liability.",
     guides: [
       "partnership-vs-proprietorship-india",
-      "business-structure-guide-new-entrepreneurs-india",
+      "partnership-deed-checklist-india",
       "starting-business-gujarat-registration-guide",
     ],
     cardBlurb: "For businesses formed by partners under a partnership structure.",
@@ -957,8 +957,8 @@ export const SERVICES: RegistrationService[] = [
       "The simplest structure against the most formal. A Private Limited Company needs at least two people, so this comparison matters when a second director or shareholder is realistic.",
     guides: [
       "partnership-vs-proprietorship-india",
-      "how-to-choose-business-structure-india",
-      "starting-business-gujarat-registration-guide",
+      "gst-registration-gujarat-guide",
+      "udyam-registration-msme-india",
     ],
     cardBlurb: "For individuals starting and operating a business as a sole proprietor.",
     cardCta: "Explore Proprietorship Registration",
