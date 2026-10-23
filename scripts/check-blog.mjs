@@ -130,6 +130,13 @@ const WORD_TARGETS = {
   "health-insurance-kakanpur-panchmahal": [900, 1500],
   "health-insurance-tuwa-panchmahal": [900, 1500],
   "health-insurance-kantadi-panchmahal": [900, 1500],
+  // Business guides briefed at roughly 1,800 to 2,500 words "when the subject
+  // supports that depth" (23 Oct 2026). The GST guide carries the two extra
+  // sections that brief asked for, so the band allows for them.
+  "gst-registration-gujarat-guide": [1800, 2800],
+  "trademark-registration-india-guide": [1800, 2800],
+  "fssai-registration-food-licence-india": [1800, 2800],
+  "import-export-code-iec-guide": [1800, 2800],
 };
 
 const paths = knownPaths();

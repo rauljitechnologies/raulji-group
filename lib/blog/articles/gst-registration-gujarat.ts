@@ -118,7 +118,7 @@ export const gstRegistrationGujarat: Article = {
     },
     {
       kind: "p",
-      text: "Whether a sale is intra-state or inter-state decides which tax is charged. A sale from Vadodara to a customer in Surat attracts CGST and SGST. A sale to a customer in Mumbai attracts IGST. The location of the supplier and the place of supply decide this, under the place-of-supply rules in the IGST Act. For goods it is usually where the goods are delivered. For services the rules differ by type of service.",
+      text: "Whether a sale is intra-state or inter-state decides which tax is charged. A sale from Vadodara to a customer in Surat attracts CGST and SGST. A sale to a customer in Mumbai attracts IGST. The location of the supplier and the place of supply decide this, under the place-of-supply rules in the IGST Act. For goods it is usually where the goods are delivered. For services the rules differ by type of service. A business that will export or import goods also needs an [Import Export Code](/blog/import-export-code-iec-guide/), which is separate from GST.",
     },
 
     { kind: "h2", id: "documents", text: "What documents and information does the application need?" },
@@ -216,6 +216,31 @@ export const gstRegistrationGujarat: Article = {
         "It does **not** create a company, an LLP or a firm, or change the owner's personal liability.",
         "It does **not** replace registration under the [Gujarat Shops and Establishments Act](/blog/gujarat-shops-establishments-registration/), Udyam registration, professional tax or any licence your trade needs.",
         "It **does** create obligations from the date of registration: issuing GST invoices, filing returns on time even with no sales, and keeping records.",
+      ],
+    },
+
+    { kind: "h2", id: "after", text: "What happens after GST registration?" },
+    {
+      kind: "list",
+      items: [
+        "**Display it.** Rule 18 of the CGST Rules requires the registration certificate to be displayed at the principal place of business and each additional place, and the GSTIN on the name board at the entry of each.",
+        "**Invoice correctly.** Tax invoices carry your GSTIN, the customer's GSTIN where they are registered, HSN or SAC codes and the tax charged.",
+        "**File returns on time, including nil returns.** Most regular taxpayers file GSTR-1 for outward supplies and GSTR-3B for the tax payable. A business with aggregate turnover up to ₹5 crore can choose quarterly filing with monthly payment under the QRMP scheme. Composition taxpayers follow a separate quarterly and annual cycle.",
+        "**Keep the registration current.** Changes to details such as the business name, address or partners are applied for as an amendment within 15 days of the change (Rule 19).",
+        "**Cancel it properly** if the business closes or no longer needs it, by applying in Form GST REG-16 (Rule 20), rather than simply stopping returns.",
+      ],
+    },
+
+    { kind: "h2", id: "misconceptions", text: "Common misconceptions about GST registration" },
+    {
+      kind: "list",
+      items: [
+        "**\"Below ₹20 lakh I never need it.\"** Section 24 can require registration from the first sale, for example for inter-state supplies of goods.",
+        "**\"A GSTIN registers my business.\"** It is a tax registration. It does not create a company, LLP or firm.",
+        "**\"One GSTIN covers all of India.\"** Registration is state-wise; a place of business in another state needs its own.",
+        "**\"Once registered, everything I sell attracts GST.\"** Exempt supplies stay exempt; registration changes your obligations, not the tax rate on each item.",
+        "**\"No sales means no returns.\"** Returns are due for every period, including periods with nothing to report.",
+        "**\"Composition is always cheaper.\"** A composition taxpayer cannot claim input tax credit or make inter-state supplies of goods, which can make it the more expensive choice.",
       ],
     },
     {

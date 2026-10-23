@@ -46,7 +46,8 @@ describe("the five new guides are integrated", () => {
 
   it("each new guide is linked back from at least one existing article or service page", () => {
     const fromArticles = ARTICLES.filter((a) => !NEW_SLUGS.includes(a.slug)).flatMap((a) => [
-      ...a.related,
+      // Only the first three related guides render (article-page.tsx).
+      ...a.related.slice(0, 3),
       ...[...text(a).matchAll(/\/blog\/([a-z0-9-]+)\//g)].map((m) => m[1]),
     ]);
     const fromServices = [...SERVICES.flatMap((s) => s.guides), ...SECONDARY_SERVICES.flatMap((s) => s.guides ?? [])];
@@ -65,8 +66,10 @@ describe("rich text renders as intended", () => {
     // one field and end in another.
     const strings = (value: unknown): string[] =>
       typeof value === "string" ? [value] : value && typeof value === "object" ? Object.values(value).flatMap(strings) : [];
-    const nested = /\*\*[^*]*\]\([^)]*\)[^*]*\*\*/;
-    const offenders = ARTICLES.filter((a) => strings([a.keyTakeaway, a.body, a.faqs]).some((t) => nested.test(t))).map(
+    // Pair the bold markers left to right, as the renderer does, and look for
+    // a link inside a span. A link between two separate bold spans is fine.
+    const linkInsideBold = (t: string) => [...t.matchAll(/\*\*(.+?)\*\*/g)].some((m) => /\]\(/.test(m[1]));
+    const offenders = ARTICLES.filter((a) => strings([a.keyTakeaway, a.body, a.faqs]).some(linkInsideBold)).map(
       (a) => a.slug,
     );
     expect(offenders).toEqual([]);

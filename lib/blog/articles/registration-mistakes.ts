@@ -101,7 +101,7 @@ export const registrationMistakes: Article = {
     { kind: "h2", id: "documents", text: "3. Documents that do not agree with each other" },
     {
       kind: "p",
-      text: "The Registrar reads the file as a whole. A name spelled one way on PAN and another on Aadhaar, an address typed into the form that does not match the bill supporting it, a utility bill that aged past the acceptable window while the rest of the papers were being collected: each of these is small, and each of them sends the application back.",
+      text: "The Registrar reads the file as a whole. A name spelled one way on PAN and another on Aadhaar, an address typed into the form that does not match the bill supporting it, a utility bill that aged past the acceptable window while the rest of the papers were being collected: each of these is small, and each of them sends the application back. Clearing the Registrar is not the same as owning the brand; our [trademark guide](/blog/trademark-registration-india-guide/) explains the difference.",
     },
     {
       kind: "list",
