@@ -2,7 +2,7 @@
   "routes": [
     {
       "path": "/",
-      "lastModified": "2026-10-23T17:18:23.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/about/",
@@ -14,7 +14,7 @@
     },
     {
       "path": "/compare/",
-      "lastModified": "2026-10-23T13:00:00.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/contact/",
@@ -26,11 +26,11 @@
     },
     {
       "path": "/faqs/",
-      "lastModified": "2026-10-23T13:00:00.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/gujarat/",
-      "lastModified": "2026-10-23T18:23:48.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/our-clients/",
@@ -42,15 +42,15 @@
     },
     {
       "path": "/services/",
-      "lastModified": "2026-10-23T13:00:00.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/services/business-consulting/",
-      "lastModified": "2026-10-23T13:00:00.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/services/business-registration/",
-      "lastModified": "2026-10-23T17:18:23.000Z"
+      "lastModified": "2026-10-23T19:54:10.000Z"
     },
     {
       "path": "/team/",
@@ -62,13 +62,13 @@
     }
   ],
   "files": {
-    "lib/services.ts": "2026-10-23T13:00:00.000Z",
+    "lib/services.ts": "2026-10-23T19:54:10.000Z",
     "lib/secondary-services.ts": "2026-10-23T13:00:00.000Z",
     "lib/cities.ts": "2026-10-16T15:58:50.000Z",
     "lib/city-services.ts": "2026-10-18T06:12:43.000Z"
   },
   "articles": {
-    "after-company-incorporation-compliance-checklist": "2026-10-23T17:18:23.000Z",
+    "after-company-incorporation-compliance-checklist": "2026-10-23T19:54:10.000Z",
     "how-to-choose-business-structure-india": "2026-10-18T06:12:43.000Z",
     "documents-required-company-registration-india": "2026-10-23T13:00:00.000Z",
     "fssai-registration-food-licence-india": "2026-10-23T17:18:23.000Z",
