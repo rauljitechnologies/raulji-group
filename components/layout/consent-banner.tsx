@@ -2,7 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { readConsent, updateConsent, writeConsent, type ConsentChoice } from "@/lib/consent";
+import {
+  CONSENT_BANNER_ID,
+  consentBannerRevealScript,
+  readConsent,
+  updateConsent,
+  writeConsent,
+  type ConsentChoice,
+} from "@/lib/consent";
 
 /**
  * Consent banner for Google Consent Mode v2.
@@ -31,14 +38,25 @@ import { readConsent, updateConsent, writeConsent, type ConsentChoice } from "@/
  *    header and the page content before this -- nobody is made to hear a
  *    cookie notice before they reach the page.
  *  - No layout shift: it is `position: fixed` and outside document flow.
+ *
+ * Rendering (audit SAI-04 and SAI-15, 23 Oct 2026):
+ *  - It is always in the server HTML, with `hidden`, and the inline script
+ *    after it unhides it during parsing when there is no stored choice. It
+ *    used to mount only after hydration, about three seconds into a throttled
+ *    phone load, which made it the page's LCP element on most templates.
+ *    `hidden` keeps it out of the accessibility tree and off screen for
+ *    anyone who has already answered.
+ *  - Below `sm` the three buttons share one row, and the padding is tighter.
+ *    Stacked, they made the banner 55% of a 375x667 screen and 68% of a
+ *    320x568 one, covering the whole hero heading. The wording is unchanged.
  */
 export function ConsentBanner() {
   const [visible, setVisible] = useState(false);
   const headingRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    // Read on mount only: during SSR there is no localStorage, and rendering
-    // the banner on the server would flash it to visitors who already decided.
+    // The reveal script has already unhidden the server markup when there is
+    // no stored choice; this brings React's state into line with it.
     if (readConsent() === null) setVisible(true);
   }, []);
 
@@ -57,56 +75,62 @@ export function ConsentBanner() {
     setVisible(false);
   }
 
-  if (!visible) return null;
-
   return (
-    <div
-      role="dialog"
-      aria-modal={false}
-      aria-labelledby="consent-heading"
-      aria-describedby="consent-body"
-      className="fixed inset-x-0 bottom-0 z-[60] border-t border-[#2a3f5c] bg-[#0c1a2d] text-white shadow-[0_-12px_40px_-16px_rgba(0,0,0,0.5)]"
-    >
-      <div className="mx-auto flex max-w-[1240px] flex-col gap-5 px-5 py-5 sm:px-8 lg:flex-row lg:items-center lg:gap-10 lg:py-6">
-        <div className="flex min-w-0 flex-col gap-1.5">
-          <p id="consent-heading" ref={headingRef} className="text-[0.9375rem] font-bold">
-            Cookies and measurement
-          </p>
-          <p id="consent-body" className="max-w-[58rem] text-[0.8125rem]/[1.6] leading-[1.6] text-[#c9d6e3]">
-            We would like to measure how people find and use this site, so we can
-            tell which pages genuinely help. Nothing is measured until you
-            choose. We never send your name, phone number, email or enquiry
-            message to any analytics service. Read our{" "}
-            <Link href="/privacy/" className="font-semibold text-white underline underline-offset-2">
-              privacy policy
-            </Link>
-            . Pressing Escape declines.
-          </p>
-        </div>
-        <div className="flex flex-col gap-2.5 sm:flex-row lg:flex-none">
-          <button
-            type="button"
-            onClick={() => decide("denied")}
-            className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#5b6f88] px-5 text-[0.875rem] font-semibold text-white transition duration-200 hover:border-white hover:bg-white/10"
-          >
-            Decline
-          </button>
-          <button
-            type="button"
-            onClick={() => decide("analytics_only")}
-            className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-5 text-[0.875rem] font-semibold text-white transition duration-200 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
-          >
-            Analytics only
-          </button>
-          <button
-            type="button"
-            onClick={() => decide("granted")}
-            className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] bg-white px-5 text-[0.875rem] font-bold text-[#122640] transition duration-200 hover:bg-[#e8f5fb]"
-          >
-            Accept all
-          </button>
+    <>
+      <div
+        id={CONSENT_BANNER_ID}
+        hidden={!visible}
+        // The reveal script may remove `hidden` before hydration; the effect
+        // above then sets the same value, so the difference is expected.
+        suppressHydrationWarning
+        role="dialog"
+        aria-modal={false}
+        aria-labelledby="consent-heading"
+        aria-describedby="consent-body"
+        className="fixed inset-x-0 bottom-0 z-[60] border-t border-[#2a3f5c] bg-[#0c1a2d] text-white shadow-[0_-12px_40px_-16px_rgba(0,0,0,0.5)]"
+      >
+        <div className="mx-auto flex max-w-[1240px] flex-col gap-4 px-5 py-4 sm:gap-5 sm:px-8 sm:py-5 lg:flex-row lg:items-center lg:gap-10 lg:py-6">
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <p id="consent-heading" ref={headingRef} className="text-[0.9375rem] font-bold">
+              Cookies and measurement
+            </p>
+            <p id="consent-body" className="max-w-[58rem] text-[0.8125rem]/[1.6] leading-[1.6] text-[#c9d6e3]">
+              We would like to measure how people find and use this site, so we can
+              tell which pages genuinely help. Nothing is measured until you
+              choose. We never send your name, phone number, email or enquiry
+              message to any analytics service. Read our{" "}
+              <Link href="/privacy/" className="font-semibold text-white underline underline-offset-2">
+                privacy policy
+              </Link>
+              . Pressing Escape declines.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-row sm:gap-2.5 lg:flex-none">
+            <button
+              type="button"
+              onClick={() => decide("denied")}
+              className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#5b6f88] px-2 text-center text-[0.8125rem] leading-tight font-semibold text-white sm:px-5 sm:text-[0.875rem] transition duration-200 hover:border-white hover:bg-white/10"
+            >
+              Decline
+            </button>
+            <button
+              type="button"
+              onClick={() => decide("analytics_only")}
+              className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] border-[1.5px] border-[#329fd2] px-2 text-center text-[0.8125rem] leading-tight font-semibold text-white sm:px-5 sm:text-[0.875rem] transition duration-200 hover:bg-[#329fd2] hover:text-[#0c1a2d]"
+            >
+              Analytics only
+            </button>
+            <button
+              type="button"
+              onClick={() => decide("granted")}
+              className="inline-flex min-h-[2.75rem] items-center justify-center rounded-[4px] bg-white px-2 text-center text-[0.8125rem] leading-tight font-bold text-[#122640] sm:px-5 sm:text-[0.875rem] transition duration-200 hover:bg-[#e8f5fb]"
+            >
+              Accept all
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      <script dangerouslySetInnerHTML={{ __html: consentBannerRevealScript() }} />
+    </>
   );
 }

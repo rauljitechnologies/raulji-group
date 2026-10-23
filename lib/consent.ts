@@ -136,6 +136,28 @@ export function updateConsent(choice: ConsentChoice): void {
  * visitor who already accepted is not measured as denied for the first moments
  * of every page view.
  */
+/** The banner's element id, shared by the component and the reveal script. */
+export const CONSENT_BANNER_ID = "consent-banner";
+
+/**
+ * Unhides the server-rendered consent banner during HTML parsing, before
+ * first paint, when the visitor has not answered.
+ *
+ * The banner used to mount after hydration. On a throttled phone that was
+ * about three seconds after first paint, and as the largest text block on
+ * screen it became the page's LCP element (audit SAI-04: mobile LCP 3.8-3.9s,
+ * render delay 81-84%). Rendered hidden on the server and revealed here, it
+ * paints with the page instead.
+ *
+ * Mirrors readConsent() exactly: a stored, valid choice keeps it hidden;
+ * anything else -- nothing stored, unreadable JSON, an unknown choice, or
+ * storage blocked -- shows it. The component's own effect then reaches the
+ * same answer, so React's state agrees with what is on screen.
+ */
+export function consentBannerRevealScript(): string {
+  return `(function(){var b=document.getElementById(${JSON.stringify(CONSENT_BANNER_ID)});if(!b)return;try{var r=localStorage.getItem(${JSON.stringify(CONSENT_KEY)});if(r){var c=JSON.parse(r);c=c&&c.choice;if(c==='granted'||c==='analytics_only'||c==='denied')return;}}catch(e){}b.hidden=false;})();`;
+}
+
 export function consentBootstrapScript(): string {
   return `
 (function(){

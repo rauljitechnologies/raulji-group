@@ -29,4 +29,8 @@ export default defineConfig({
   resolve: {
     alias: { "@": fileURLToPath(new URL("./", import.meta.url)) },
   },
+  // tsconfig keeps `jsx: "preserve"` for Next, which leaves esbuild on the
+  // classic runtime and every component import failing with "React is not
+  // defined". The automatic runtime is what Next itself compiles with.
+  esbuild: { jsx: "automatic" },
 });

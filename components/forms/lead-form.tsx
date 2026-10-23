@@ -56,8 +56,13 @@ interface LeadFormProps {
  * good answer looks like. Labels stay visible above each field; a placeholder
  * is an example, never a replacement for the label.
  */
+/*
+ * text-base below `sm`: iOS Safari zooms the whole page when a field under
+ * 16px takes focus, and the visitor then has to pinch back out mid-form
+ * (mobile check of 23 Oct 2026). 15px from `sm` up, as designed.
+ */
 const fieldClass =
-  "h-[3.25rem] w-full rounded-[4px] border bg-white px-4 text-[0.9375rem] font-normal text-[#122640] transition placeholder:text-[#8795a6] hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_4px_rgba(50,159,210,0.16)] focus:outline-none";
+  "h-[3.25rem] w-full rounded-[4px] border bg-white px-4 text-base sm:text-[0.9375rem] font-normal text-[#122640] transition placeholder:text-[#8795a6] hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_4px_rgba(50,159,210,0.16)] focus:outline-none";
 const labelClass = "text-[0.8125rem] font-semibold text-[#122640]";
 
 /**

@@ -79,7 +79,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search city or district"
-            className="h-12 w-full rounded-[4px] border border-[#cfd9e3] bg-white pl-[2.625rem] pr-3.5 text-[0.9375rem] text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_3px_rgba(50,159,210,0.18)] focus:outline-none"
+            className="h-12 w-full rounded-[4px] border border-[#cfd9e3] bg-white pl-[2.625rem] pr-3.5 text-base sm:text-[0.9375rem] text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_3px_rgba(50,159,210,0.18)] focus:outline-none"
           />
         </div>
         <div role="group" aria-label="Filter by region" className="flex flex-wrap gap-2">

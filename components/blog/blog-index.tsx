@@ -272,7 +272,7 @@ export function BlogIndex({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search guides"
-                className="h-full min-w-0 flex-1 border-0 bg-transparent text-sm text-[#122640] outline-none placeholder:text-[#6b7a8c] [&::-webkit-search-cancel-button]:appearance-none"
+                className="h-full min-w-0 flex-1 border-0 bg-transparent text-base sm:text-sm text-[#122640] outline-none placeholder:text-[#6b7a8c] [&::-webkit-search-cancel-button]:appearance-none"
               />
               {query ? (
                 <button
