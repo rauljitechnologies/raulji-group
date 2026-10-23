@@ -88,8 +88,9 @@ const STEP_LABELS = ["Your need", "Your details", "Confirm"];
 type Fields = { name: string; phone: string; email: string; businessName: string; city: string; message: string };
 type Errors = Partial<Record<"need" | "name" | "phone" | "email", string>>;
 
+/** text-base below `sm` so iOS does not zoom on focus; see lead-form.tsx. */
 const inputClass =
-  "h-[3.25rem] w-full rounded-[4px] border bg-white px-4 text-[0.9375rem] font-normal text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_4px_rgba(50,159,210,0.16)] focus:outline-none";
+  "h-[3.25rem] w-full rounded-[4px] border bg-white px-4 text-base sm:text-[0.9375rem] font-normal text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_4px_rgba(50,159,210,0.16)] focus:outline-none";
 
 export function ContactWizard() {
   const pathname = usePathname();
