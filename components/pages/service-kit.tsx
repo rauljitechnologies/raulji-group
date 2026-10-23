@@ -24,7 +24,7 @@ import { H1, H2, H2_DARK } from "@/lib/typography";
 export const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 export const SECTION = "py-16 md:py-24";
 export const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 export const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 export { H2, H2_DARK };
@@ -39,7 +39,7 @@ export const BTN_LIGHT = `${BTN} bg-white font-bold text-[#122640] hover:bg-[#e8
 /** Secondary on a dark band. */
 export const BTN_GHOST_DARK = `${BTN} border-[1.5px] border-[#329fd2] font-semibold text-white hover:bg-[#329fd2] hover:text-[#0c1a2d]`;
 /** Primary on a light band. */
-export const BTN_NAVY = `${BTN} bg-[#122640] font-semibold text-white hover:bg-[#1a7cb0]`;
+export const BTN_NAVY = `${BTN} bg-[#122640] font-semibold text-white hover:bg-[#1872a3]`;
 /** Secondary on a light band. */
 export const BTN_OUTLINE = `${BTN} border-[1.5px] border-[#122640] font-semibold text-[#122640] hover:bg-[#122640] hover:text-white`;
 
@@ -167,7 +167,7 @@ export function FaqList({ faqs }: { faqs: FAQ[] }) {
             <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640]">{item.q}</h3>
             <span
               aria-hidden="true"
-              className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+              className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
             >
               <Plus className="h-4 w-4" />
             </span>
@@ -211,7 +211,7 @@ export function GuideCards({ slugs }: { slugs: string[] }) {
                 />
               ) : null}
               <span className="flex flex-1 flex-col gap-2.5 p-6">
-                <span className="text-xs font-bold uppercase tracking-[0.06em] text-[#1a7cb0]">
+                <span className="text-xs font-bold uppercase tracking-[0.06em] text-[#1872a3]">
                   {article.category}
                 </span>
                 <span className="text-lg font-bold leading-[1.35] text-[#122640]">
@@ -220,7 +220,7 @@ export function GuideCards({ slugs }: { slugs: string[] }) {
                 <span className="flex-1 text-sm leading-[1.6] text-[#4a5668]">
                   {article.excerpt}
                 </span>
-                <span className="text-sm font-bold text-[#1a7cb0]">
+                <span className="text-sm font-bold text-[#1872a3]">
                   Read the guide <span aria-hidden="true">→</span>
                 </span>
               </span>

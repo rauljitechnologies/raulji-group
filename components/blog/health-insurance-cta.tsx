@@ -37,7 +37,7 @@ export function HealthInsuranceCta({
         aria-label="Health insurance guidance"
         className="cta-reveal my-2 flex flex-col gap-2 rounded-lg border border-[#bcd9ea] bg-[#f4f9fc] px-5 py-6 sm:px-7"
       >
-        <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">Health insurance guidance</p>
+        <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">Health insurance guidance</p>
         <p className="text-lg font-bold leading-snug text-[#122640]">Need help understanding health insurance?</p>
         <p className="text-[0.9375rem] leading-[1.7]">
           Speak directly with {name} about your health insurance requirement.
@@ -48,7 +48,7 @@ export function HealthInsuranceCta({
             web={links.web}
             label={`WhatsApp ${name}`}
             trackingLabel={trackingLabel}
-            className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-4 py-2 text-center text-[0.9375rem] font-semibold leading-snug text-white transition-colors duration-200 hover:bg-[#1a7cb0] sm:px-6"
+            className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-4 py-2 text-center text-[0.9375rem] font-semibold leading-snug text-white transition-colors duration-200 hover:bg-[#1872a3] sm:px-6"
           />
           <a
             href={`tel:${phone.e164}`}

@@ -144,14 +144,14 @@ export default function FaqsPage() {
                     className={`${CARD} group flex h-full flex-col gap-4 p-6 transition duration-300 ease-out hover:-translate-y-0.5 hover:border-[#329fd2] hover:shadow-[0_18px_36px_-28px_rgba(18,38,64,0.45)] sm:p-7`}
                   >
                     <span className="flex h-11 w-11 items-center justify-center rounded-md bg-[#e8f5fb]">
-                      <Icon className="h-5 w-5 text-[#1a7cb0]" strokeWidth={1.8} aria-hidden="true" />
+                      <Icon className="h-5 w-5 text-[#1872a3]" strokeWidth={1.8} aria-hidden="true" />
                     </span>
                     <span className="flex flex-1 flex-col gap-2">
                       <span className="text-lg font-bold text-[#122640]">{r.title}</span>
                       <span className="text-[0.9375rem] leading-[1.65] text-[#4a5668]">{r.body}</span>
                     </span>
                     <ArrowRight
-                      className="h-5 w-5 text-[#1a7cb0] transition-transform duration-200 group-hover:translate-x-1"
+                      className="h-5 w-5 text-[#1872a3] transition-transform duration-200 group-hover:translate-x-1"
                       aria-hidden="true"
                     />
                   </Link>

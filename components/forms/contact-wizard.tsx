@@ -12,6 +12,7 @@ import {
   Code2,
   Compass,
   Link2,
+  ShieldCheck,
   Loader2,
   Plus,
   User,
@@ -45,7 +46,7 @@ import { cn } from "@/lib/utils";
 const FORM_ID = "contact_wizard";
 const FORM_NAME = "Contact wizard";
 
-const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[] = [
+export const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[] = [
   { label: "Private Limited", value: "Private Limited", group: "Registration", icon: Briefcase },
   { label: "LLP", value: "LLP", group: "Registration", icon: Link2 },
   { label: "Partnership", value: "Partnership", group: "Registration", icon: Users },
@@ -57,6 +58,9 @@ const NEEDS: { label: string; value: string; group: string; icon: LucideIcon }[]
     group: "Guidance",
     icon: CircleHelp,
   },
+  // Master rule 23. Same value as the LeadForm option, so both forms label
+  // an insurance lead identically in the CRM.
+  { label: "Insurance", value: "Insurance", group: "Business and health cover", icon: ShieldCheck },
   {
     label: "Technology or digital work",
     value: "Technology or digital work",
@@ -330,7 +334,7 @@ export function ContactWizard() {
         className="flex scroll-mt-28 flex-col gap-[1.375rem] rounded-lg bg-white p-7 shadow-[0_40px_90px_-40px_rgba(12,26,45,0.55),0_0_0_1px_rgba(18,38,64,0.06)] sm:p-[3.25rem]"
       >
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f5fb]">
-          <Check className="h-[1.875rem] w-[1.875rem] text-[#1a7cb0]" strokeWidth={2.2} aria-hidden="true" />
+          <Check className="h-[1.875rem] w-[1.875rem] text-[#1872a3]" strokeWidth={2.2} aria-hidden="true" />
         </span>
         <h2 className="text-2xl font-extrabold tracking-[-0.01em] text-[#122640] sm:text-[2rem]">
           Thank you, {firstName}. Your enquiry has been received.
@@ -369,7 +373,7 @@ export function ContactWizard() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => track("whatsapp_click", { label: "contact_wizard_success" })}
-            className="inline-flex min-h-[3.375rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0]"
+            className="inline-flex min-h-[3.375rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
           >
             Continue on WhatsApp
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -412,7 +416,7 @@ export function ContactWizard() {
               Three short steps. Nothing is filed until you say so.
             </p>
           </div>
-          <p className="text-[0.8125rem] font-bold text-[#1a7cb0]">Step {step} of 3</p>
+          <p className="text-[0.8125rem] font-bold text-[#1872a3]">Step {step} of 3</p>
         </div>
         <ol aria-label="Progress" className="grid grid-cols-3 gap-2">
           {STEP_LABELS.map((label, k) => (
@@ -427,7 +431,9 @@ export function ContactWizard() {
                   style={{ width: step > k ? "100%" : "0%" }}
                 />
               </span>
-              <span className={cn("text-xs font-semibold", step > k ? "text-[#122640]" : "text-[#9aa7b5]")}>
+              {/* Upcoming steps in the site's secondary text colour (5.9:1 on
+                  white); #9aa7b5 measured 2.45:1 (audit of 23 Oct 2026). */}
+              <span className={cn("text-xs font-semibold", step > k ? "text-[#122640]" : "text-[#5b6778]")}>
                 {label}
               </span>
             </li>
@@ -446,8 +452,11 @@ export function ContactWizard() {
               What do you need help with?
             </legend>
             <div className="grid gap-2.5 sm:grid-cols-2">
-              {NEEDS.map((item) => {
+              {NEEDS.map((item, index) => {
                 const on = need === item.value;
+                // An odd count leaves the last card alone in the two-column
+                // grid; let it take the full row instead of half of one.
+                const spanLast = NEEDS.length % 2 === 1 && index === NEEDS.length - 1;
                 const Icon = item.icon;
                 return (
                   <button
@@ -469,6 +478,7 @@ export function ContactWizard() {
                     className={cn(
                       "flex min-h-[4.75rem] items-center gap-3 rounded-md border-[1.5px] px-4 py-3.5 text-left transition duration-200 hover:-translate-y-0.5 hover:border-[#329fd2] hover:shadow-[0_10px_20px_-14px_rgba(18,38,64,0.4)]",
                       on ? "border-[#122640] bg-[#f4fafd]" : "border-[#e3e9ef] bg-white",
+                      spanLast && "sm:col-span-2",
                     )}
                   >
                     <span
@@ -478,7 +488,7 @@ export function ContactWizard() {
                       )}
                     >
                       <Icon
-                        className={cn("h-[1.125rem] w-[1.125rem]", on ? "text-white" : "text-[#1a7cb0]")}
+                        className={cn("h-[1.125rem] w-[1.125rem]", on ? "text-white" : "text-[#1872a3]")}
                         strokeWidth={1.8}
                         aria-hidden="true"
                       />
@@ -643,7 +653,7 @@ export function ContactWizard() {
                   <button
                     type="button"
                     onClick={() => setStep(target)}
-                    className="min-h-[2.25rem] text-[0.8125rem] font-semibold text-[#1a7cb0] hover:underline"
+                    className="min-h-[2.25rem] text-[0.8125rem] font-semibold text-[#1872a3] hover:underline"
                   >
                     Edit<span className="sr-only"> {term.toLowerCase()}</span>
                   </button>
@@ -680,7 +690,7 @@ export function ContactWizard() {
             <a
               href={telHref}
               onClick={() => track("phone_click", { label: "contact_wizard" })}
-              className="text-sm font-semibold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+              className="text-sm font-semibold text-[#122640] hover:text-[#1872a3] hover:underline"
             >
               Prefer to talk? Call {SITE.phone.display}
             </a>
@@ -688,7 +698,7 @@ export function ContactWizard() {
           <button
             type="submit"
             disabled={status === "submitting"}
-            className="ml-auto inline-flex h-[3.375rem] items-center gap-2.5 rounded-[4px] bg-[#122640] px-7 text-base font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_12px_24px_-12px_rgba(26,124,176,0.7)] disabled:opacity-60"
+            className="ml-auto inline-flex h-[3.375rem] items-center gap-2.5 rounded-[4px] bg-[#122640] px-7 text-base font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_12px_24px_-12px_rgba(26,124,176,0.7)] disabled:opacity-60"
           >
             {status === "submitting" ? (
               <>

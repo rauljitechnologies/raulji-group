@@ -136,7 +136,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
             </h2>
             {service.note ? (
               <p className="mt-2 flex gap-3 rounded-lg border border-[#e3e9ef] bg-[#f4f7fa] p-5 text-[0.9375rem] leading-[1.7]">
-                <Info className="mt-0.5 h-5 w-5 flex-none text-[#1a7cb0]" aria-hidden="true" />
+                <Info className="mt-0.5 h-5 w-5 flex-none text-[#1872a3]" aria-hidden="true" />
                 <span>{service.note}</span>
               </p>
             ) : null}
@@ -144,7 +144,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
           <ul className="grid gap-3 sm:grid-cols-2">
             {service.includes.map((item) => (
               <li key={item} className={`${CARD} flex gap-3 p-5`}>
-                <CircleCheck className="mt-0.5 h-5 w-5 flex-none text-[#1a7cb0]" aria-hidden="true" />
+                <CircleCheck className="mt-0.5 h-5 w-5 flex-none text-[#1872a3]" aria-hidden="true" />
                 <span className="leading-[1.6] text-[#26354a]">{item}</span>
               </li>
             ))}
@@ -178,7 +178,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
               <>
                 Each structure page covers who it suits, documents, process and cost. Not sure
                 which applies?{" "}
-                <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+                <Link href="/compare/" className="font-semibold text-[#1872a3] hover:underline">
                   Compare all four
                 </Link>
                 .
@@ -198,7 +198,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
                   <span className="flex-1 text-sm leading-[1.6]">
                     {STRUCTURE_META[item.slug]?.body ?? item.cardBlurb}
                   </span>
-                  <span className="mt-2 text-sm font-bold text-[#1a7cb0]">
+                  <span className="mt-2 text-sm font-bold text-[#1872a3]">
                     Explore Service <span aria-hidden="true">→</span>
                   </span>
                 </TrackedLink>
@@ -259,6 +259,7 @@ export function SecondaryServicePage({ service }: { service: SecondaryService })
             <div className="text-[#3a4656]">
               <LeadForm
                 heading={`${service.name} enquiry`}
+                defaultRegistrationType={service.formOption}
                 lead="Tell us what you need and we will come back to you."
                 className="rounded-lg border-0"
               />

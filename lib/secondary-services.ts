@@ -60,6 +60,14 @@ export interface SecondaryService {
    * the same ground, so the block is a recommendation rather than filler.
    */
   guides?: string[];
+  /**
+   * The enquiry form option this page preselects, from the "What do you need
+   * help with?" list in components/forms/lead-form.tsx. Only set where an
+   * option genuinely matches the page and the page carries the form: the
+   * compliance pages have no matching option, and the two technology pages
+   * hand off to Raulji Technologies instead of showing a form.
+   */
+  formOption?: string;
 }
 
 /*
@@ -95,6 +103,7 @@ export const SECONDARY_SERVICES: SecondaryService[] = [
     note: "Policy terms, premiums and claim outcomes are set by the insurer, not by us. We help you understand and arrange cover; we do not underwrite it.",
     image: "insurance",
     guides: ["health-insurance-policy-guide-india", "health-insurance-panchmahal-gujarat"],
+    formOption: "Insurance",
   },
   {
     slug: "it",

@@ -420,11 +420,11 @@ export default function BusinessConsultingPage() {
             lead={
               <>
                 Most engagements end in one of these structures. See the{" "}
-                <Link href="/services/business-registration/" className="font-semibold text-[#1a7cb0] hover:underline">
+                <Link href="/services/business-registration/" className="font-semibold text-[#1872a3] hover:underline">
                   business registration overview
                 </Link>{" "}
                 or{" "}
-                <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+                <Link href="/compare/" className="font-semibold text-[#1872a3] hover:underline">
                   compare all four
                 </Link>
                 .
@@ -458,7 +458,7 @@ export default function BusinessConsultingPage() {
                   <span className="flex flex-1 flex-col gap-2 p-6">
                     <span className="text-lg font-bold leading-[1.3] text-[#122640]">{service.name}</span>
                     <span className="flex-1 text-sm leading-[1.6]">{service.cardBlurb}</span>
-                    <span className="mt-2 text-sm font-bold text-[#1a7cb0]">
+                    <span className="mt-2 text-sm font-bold text-[#1872a3]">
                       Explore Service <span aria-hidden="true">→</span>
                     </span>
                   </span>
@@ -467,13 +467,13 @@ export default function BusinessConsultingPage() {
             ))}
           </ul>
           <p className="text-[0.9375rem]">
-            <CircleCheck className="mr-2 inline h-4 w-4 text-[#1a7cb0]" aria-hidden="true" />
+            <CircleCheck className="mr-2 inline h-4 w-4 text-[#1872a3]" aria-hidden="true" />
             Consulting work across Gujarat:{" "}
             <TrackedLink
               href="/gujarat/"
               event="gujarat_page_click"
               params={{ label: "consulting_related" }}
-              className="font-semibold text-[#1a7cb0] hover:underline"
+              className="font-semibold text-[#1872a3] hover:underline"
             >
               business registration support in Gujarat
             </TrackedLink>

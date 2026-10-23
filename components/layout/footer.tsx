@@ -184,7 +184,7 @@ export function Footer() {
         </div>
 
         {/* Kept: we must not be mistaken for a government body (spec section 36). */}
-        <p className="mt-4 text-xs leading-relaxed text-secondary-foreground/45">
+        <p className="mt-4 text-xs leading-relaxed text-secondary-foreground/60">
           {AUTHORITY_DISCLAIMER}
         </p>
       </div>

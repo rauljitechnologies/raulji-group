@@ -207,12 +207,12 @@ export function BlogIndex({
                   />
                 ) : null}
                 <div className="flex flex-col gap-2.5 px-[1.375rem] pb-[1.375rem] pt-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">
+                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1872a3]">
                     Start here{featured.seriesMonth ? " · Part 1" : ""}
                   </p>
                   <p className="text-pretty text-xl font-bold leading-[1.3]">{featured.title}</p>
                   <p className="line-clamp-2 text-sm leading-[1.6] text-[#3a4656]">{featured.excerpt}</p>
-                  <p className="mt-1 text-sm font-bold text-[#1a7cb0]">
+                  <p className="mt-1 text-sm font-bold text-[#1872a3]">
                     Read the guide{" "}
                     <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">
                       →
@@ -262,7 +262,7 @@ export function BlogIndex({
               })}
             </div>
             <div className="flex h-11 w-full items-center gap-2 rounded-full border border-[#cfd9e3] bg-white pl-4 pr-1.5 focus-within:border-[#329fd2] lg:max-w-[17.5rem]">
-              <Search className="h-4 w-4 flex-none text-[#1a7cb0]" aria-hidden="true" />
+              <Search className="h-4 w-4 flex-none text-[#1872a3]" aria-hidden="true" />
               <label htmlFor="guide-search" className="sr-only">
                 Search the guides
               </label>
@@ -292,7 +292,7 @@ export function BlogIndex({
               Showing {countLabel}
             </p>
             {filtered ? (
-              <button type="button" onClick={viewAll} className="text-sm font-bold text-[#1a7cb0] hover:text-[#122640]">
+              <button type="button" onClick={viewAll} className="text-sm font-bold text-[#1872a3] hover:text-[#122640]">
                 View all guides <span aria-hidden="true">→</span>
               </button>
             ) : null}
@@ -324,7 +324,7 @@ export function BlogIndex({
           ) : (
             <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed border-[#cfd9e3] px-6 py-14 text-center">
               <p className="text-lg font-bold text-[#122640]">No guide matches that yet.</p>
-              <button type="button" onClick={viewAll} className="text-sm font-bold text-[#1a7cb0] hover:underline">
+              <button type="button" onClick={viewAll} className="text-sm font-bold text-[#1872a3] hover:underline">
                 View all guides →
               </button>
             </div>
@@ -353,14 +353,14 @@ function GuideCard({ card }: { card: BlogCard }) {
         ) : null}
       </div>
       <div className="flex flex-1 flex-col gap-2.5 px-[1.375rem] pb-6 pt-5">
-        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">{card.category}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1872a3]">{card.category}</p>
         <h3 className="text-pretty text-[1.1875rem] font-bold leading-[1.35] text-[#122640]">{card.title}</h3>
         <p className="line-clamp-3 text-[0.9375rem] leading-[1.65] text-[#3a4656]">{card.excerpt}</p>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-[#eef2f6] pt-3.5">
           <span className="text-[0.8125rem] text-[#5b6778]">
             <time dateTime={card.published}>{card.publishedLabel}</time> · {card.readLabel}
           </span>
-          <span className="text-sm font-bold text-[#1a7cb0]">
+          <span className="text-sm font-bold text-[#1872a3]">
             Read guide{" "}
             <span aria-hidden="true" className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">
               →

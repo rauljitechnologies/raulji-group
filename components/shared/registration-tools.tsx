@@ -128,7 +128,7 @@ export function StructureFinder({ structures }: { structures: StructureLink[] })
           structure ? "border-[#329fd2] bg-[#e8f5fb]" : "border-[#e3e9ef] bg-[#f4f7fa]",
         )}
       >
-        <p className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">YOUR LIKELY STRUCTURE</p>
+        <p className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">YOUR LIKELY STRUCTURE</p>
         <p className="text-2xl font-extrabold text-[#122640]">
           {structure ? structure.name : "Answer the questions above"}
         </p>
@@ -144,7 +144,7 @@ export function StructureFinder({ structures }: { structures: StructureLink[] })
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => track("whatsapp_click", { label: "structure_finder", registration_type: structure.name })}
-              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
+              className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
             >
               Confirm with an Expert
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -216,7 +216,7 @@ export function HighlightComparison({ structures }: { structures: StructureLink[
                   scope="col"
                   className={cn(
                     "px-5 py-[1.125rem] text-left text-[0.9375rem] text-white transition-colors duration-300",
-                    col === k ? "bg-[#1a7cb0]" : "bg-[#122640]",
+                    col === k ? "bg-[#1872a3]" : "bg-[#122640]",
                   )}
                 >
                   <Link href={s.href} className="text-white hover:underline">

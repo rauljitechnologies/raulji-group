@@ -100,7 +100,7 @@ export function StagePicker({ stages }: { stages: Stage[] }) {
         aria-live="polite"
         className="flex flex-col gap-3.5 rounded-md border-[1.5px] border-[#329fd2] bg-[#f4fafd] px-6 py-[1.375rem]"
       >
-        <p className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">USUALLY RELEVANT</p>
+        <p className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">USUALLY RELEVANT</p>
         <ol className="flex flex-col">
           {stage.services.map((service, n) => (
             <li key={service.name} className="border-t border-[#dcebf3]">
@@ -109,7 +109,7 @@ export function StagePicker({ stages }: { stages: Stage[] }) {
                 onClick={() =>
                   track("service_card_click", { label: "services_stage", service: service.name })
                 }
-                className="flex items-center gap-3.5 py-3.5 text-[#122640] transition-[padding,color] duration-300 hover:pl-2 hover:text-[#1a7cb0]"
+                className="flex items-center gap-3.5 py-3.5 text-[#122640] transition-[padding,color] duration-300 hover:pl-2 hover:text-[#1872a3]"
               >
                 <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#122640] text-xs font-bold text-white">
                   {n + 1}
@@ -130,7 +130,7 @@ export function StagePicker({ stages }: { stages: Stage[] }) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track("whatsapp_click", { label: `services_stage_${stage.label.toLowerCase().replace(/\s+/g, "_")}` })}
-          className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
+          className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
         >
           Confirm with an Expert
           <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -18,10 +18,13 @@ import { cn } from "@/lib/utils";
  * look like a fifth registration type. Values are sent to the CRM verbatim, so
  * they double as the lead-source label the team reads.
  *
- * Insurance is deliberately absent: it is not a Phase 1 service and offering it
- * here would generate enquiries for something we are not leading with.
+ * Insurance is listed because master rule 23 lists it, and because
+ * /services/insurance/ carries this form: without the option, someone enquiring
+ * from the insurance page had to file their enquiry under "Other" (audit of
+ * 23 Oct 2026). It sits with the other non-registration answers, after
+ * consulting and the four structures, so the form still leads with those.
  */
-const SERVICE_OPTION_GROUPS: { label: string; options: string[] }[] = [
+export const SERVICE_OPTION_GROUPS: { label: string; options: string[] }[] = [
   {
     label: "Consulting",
     options: ["Business Consulting"],
@@ -32,7 +35,7 @@ const SERVICE_OPTION_GROUPS: { label: string; options: string[] }[] = [
   },
   {
     label: "Something else",
-    options: ["Not sure yet, help me choose", "Technology or digital work", "Other"],
+    options: ["Not sure yet, help me choose", "Insurance", "Technology or digital work", "Other"],
   },
 ];
 
@@ -282,7 +285,7 @@ export function LeadForm({
         aria-live="polite"
       >
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f5fb]">
-          <CheckCircle2 className="h-8 w-8 text-[#1a7cb0]" aria-hidden="true" />
+          <CheckCircle2 className="h-8 w-8 text-[#1872a3]" aria-hidden="true" />
         </span>
         <h2 className="text-xl font-extrabold tracking-[-0.01em] text-[#122640] sm:text-2xl">
           Thank you. Your enquiry has been received.
@@ -290,7 +293,7 @@ export function LeadForm({
         <p className="max-w-[28rem] text-[0.9375rem] leading-[1.7] text-[#3a4656]">
           A Raulji Group representative will contact you using the details provided. If your matter
           is urgent, call{" "}
-          <a href={telHref} className="font-semibold text-[#1a7cb0] hover:underline">
+          <a href={telHref} className="font-semibold text-[#1872a3] hover:underline">
             {SITE.phone.display}
           </a>
           .
@@ -344,7 +347,7 @@ export function LeadForm({
               ))}
             </select>
             <ChevronDown
-              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#1a7cb0]"
+              className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#1872a3]"
               aria-hidden="true"
             />
           </div>
@@ -455,7 +458,7 @@ export function LeadForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="mt-1 inline-flex h-[3.375rem] w-full items-center justify-center gap-2.5 rounded-[4px] bg-[#122640] px-7 text-base font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_12px_24px_-12px_rgba(26,124,176,0.7)] disabled:translate-y-0 disabled:opacity-60"
+          className="mt-1 inline-flex h-[3.375rem] w-full items-center justify-center gap-2.5 rounded-[4px] bg-[#122640] px-7 text-base font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_12px_24px_-12px_rgba(26,124,176,0.7)] disabled:translate-y-0 disabled:opacity-60"
         >
           {status === "submitting" ? (
             <>
@@ -472,7 +475,7 @@ export function LeadForm({
 
         <p className="text-center text-xs leading-[1.6] text-[#5b6778]">
           We use your details only to respond to this enquiry. Prefer to talk?{" "}
-          <a href={telHref} className="font-semibold text-[#1a7cb0] hover:underline">
+          <a href={telHref} className="font-semibold text-[#1872a3] hover:underline">
             Call {SITE.phone.display}
           </a>
         </p>

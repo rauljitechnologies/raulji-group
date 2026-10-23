@@ -27,7 +27,7 @@ export function DocChecklist({ docs, structure }: { docs: string[]; structure: s
     <div className="flex min-w-0 flex-col gap-5 rounded-lg bg-white p-6 text-[#3a4656] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.6)] sm:p-9">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <p className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">DOCUMENT CHECKLIST</p>
+          <p className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">DOCUMENT CHECKLIST</p>
           <h3 className="text-xl font-extrabold text-[#122640]">Tick what you already have</h3>
         </div>
         <p aria-live="polite" className="text-sm font-bold text-[#122640]">
@@ -36,7 +36,7 @@ export function DocChecklist({ docs, structure }: { docs: string[]; structure: s
       </div>
       <div aria-hidden="true" className="h-1.5 overflow-hidden rounded-full bg-[#eef2f6]">
         <div
-          className="h-full rounded-full bg-[linear-gradient(90deg,#1a7cb0,#329fd2)] transition-[width] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
+          className="h-full rounded-full bg-[linear-gradient(90deg,#1872a3,#329fd2)] transition-[width] duration-500 ease-[cubic-bezier(.2,.7,.2,1)]"
           style={{ width: `${Math.round((ready / docs.length) * 100)}%` }}
         />
       </div>
@@ -59,7 +59,7 @@ export function DocChecklist({ docs, structure }: { docs: string[]; structure: s
                   aria-hidden="true"
                   className={cn(
                     "mt-0.5 flex h-5 w-5 flex-none items-center justify-center rounded-[4px] border-[1.5px] text-xs font-bold text-white transition-colors duration-200",
-                    on ? "border-[#1a7cb0] bg-[#1a7cb0]" : "border-[#cfd9e3] bg-white",
+                    on ? "border-[#1872a3] bg-[#1872a3]" : "border-[#cfd9e3] bg-white",
                   )}
                 >
                   {on ? "✓" : ""}
@@ -75,7 +75,7 @@ export function DocChecklist({ docs, structure }: { docs: string[]; structure: s
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => track("whatsapp_click", { label: "doc_checklist", registration_type: structure })}
-        className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0]"
+        className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
       >
         Send my checklist on WhatsApp <span aria-hidden="true">→</span>
       </a>
@@ -140,7 +140,7 @@ export function ProcessTabs({
                 <span
                   className={cn(
                     "flex h-8 w-8 flex-none items-center justify-center rounded-full text-[0.8125rem] font-bold",
-                    on ? "bg-[#329fd2] text-white" : "bg-[#e8f5fb] text-[#1a7cb0]",
+                    on ? "bg-[#329fd2] text-white" : "bg-[#e8f5fb] text-[#1872a3]",
                   )}
                 >
                   {k + 1}
@@ -168,7 +168,7 @@ export function ProcessTabs({
             hidden={k !== current}
             className="flex flex-col gap-3.5 p-6 sm:p-9 [&[hidden]]:!hidden"
           >
-            <p className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">
+            <p className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">
               STEP {k + 1} OF {steps.length}
               {s.actor ? ` · ${s.actor.toUpperCase()}` : ""}
             </p>
@@ -189,7 +189,7 @@ export function ProcessTabs({
             type="button"
             onClick={() => setCurrent((k) => Math.min(last, k + 1))}
             disabled={current === last}
-            className="min-h-12 rounded-[4px] bg-[#122640] px-[1.125rem] text-sm font-semibold text-white transition duration-200 hover:bg-[#1a7cb0] disabled:cursor-not-allowed disabled:opacity-35"
+            className="min-h-12 rounded-[4px] bg-[#122640] px-[1.125rem] text-sm font-semibold text-white transition duration-200 hover:bg-[#1872a3] disabled:cursor-not-allowed disabled:opacity-35"
           >
             Next step →
           </button>

@@ -41,7 +41,7 @@ export function ArticleBody({
 const H2 =
   "mt-6 scroll-mt-32 text-balance text-[1.625rem] font-bold leading-[1.2] tracking-[-0.02em] text-[#122640] md:text-[2rem]";
 const PANEL = "rounded-lg border border-[#bcd9ea] bg-[#f4f9fc] px-5 py-5 sm:px-[1.625rem] sm:py-[1.375rem]";
-const EYEBROW = "text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]";
+const EYEBROW = "text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]";
 
 function BlockView({
   block,
@@ -92,7 +92,7 @@ function BlockView({
 
     case "list":
       return block.ordered ? (
-        <ol className="flex list-decimal flex-col gap-2.5 pl-[1.375rem] marker:font-semibold marker:text-[#1a7cb0]">
+        <ol className="flex list-decimal flex-col gap-2.5 pl-[1.375rem] marker:font-semibold marker:text-[#1872a3]">
           {block.items.map((item, i) => (
             <li key={i} className="pl-1">
               <RichText text={item} />
@@ -142,7 +142,7 @@ function BlockView({
                   aria-hidden="true"
                   className="mt-[0.1875rem] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e8f5fb]"
                 >
-                  <Check className="h-3 w-3 text-[#1a7cb0]" strokeWidth={3} />
+                  <Check className="h-3 w-3 text-[#1872a3]" strokeWidth={3} />
                 </span>
                 <span>
                   <RichText text={item} />
@@ -176,7 +176,7 @@ function BlockView({
                   <span className="flex items-center gap-1.5 text-[0.9375rem] font-bold leading-snug text-[#122640]">
                     {item.label}
                     <ArrowRight
-                      className="h-3.5 w-3.5 shrink-0 text-[#1a7cb0] transition-transform duration-200 group-hover:translate-x-0.5"
+                      className="h-3.5 w-3.5 shrink-0 text-[#1872a3] transition-transform duration-200 group-hover:translate-x-0.5"
                       aria-hidden="true"
                     />
                   </span>

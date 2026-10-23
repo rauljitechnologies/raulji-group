@@ -82,7 +82,7 @@ export async function generateMetadata({
 
 /* The design language, shared with app/[city]/page.tsx. */
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -394,7 +394,7 @@ export default async function CityServicePage({
                 >
                   <span
                     aria-hidden="true"
-                    className="mt-px flex h-[1.625rem] w-[1.625rem] flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[0.8125rem] font-extrabold text-[#1a7cb0]"
+                    className="mt-px flex h-[1.625rem] w-[1.625rem] flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[0.8125rem] font-extrabold text-[#1872a3]"
                   >
                     ✓
                   </span>
@@ -601,7 +601,7 @@ export default async function CityServicePage({
               More general questions are answered in the{" "}
               <Link
                 href="/faqs/"
-                className="font-bold text-[#1a7cb0] hover:text-[#122640] hover:underline"
+                className="font-bold text-[#1872a3] hover:text-[#122640] hover:underline"
               >
                 full FAQ library
               </Link>
@@ -617,7 +617,7 @@ export default async function CityServicePage({
                   </h3>
                   <span
                     aria-hidden="true"
-                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
                   >
                     <Plus className="h-4 w-4" />
                   </span>
@@ -673,7 +673,7 @@ export default async function CityServicePage({
                       <p className="text-[0.9375rem]/[1.6]">
                         {sibling.localContext[0].split(". ")[0]}.
                       </p>
-                      <p className="mt-auto border-t border-[#eef2f6] pt-3.5 text-sm font-bold text-[#1a7cb0]">
+                      <p className="mt-auto border-t border-[#eef2f6] pt-3.5 text-sm font-bold text-[#1872a3]">
                         Read more <span aria-hidden="true">→</span>
                       </p>
                     </div>
@@ -757,7 +757,7 @@ export default async function CityServicePage({
                   href={telHref}
                   event="phone_click"
                   params={{ label: track }}
-                  className="font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                  className="font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
                 >
                   Call {SITE.phone.display}
                 </TrackedLink>
@@ -768,7 +768,7 @@ export default async function CityServicePage({
                   external
                   event="whatsapp_click"
                   params={{ label: track }}
-                  className="font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                  className="font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
                 >
                   WhatsApp us
                 </TrackedLink>
@@ -778,7 +778,7 @@ export default async function CityServicePage({
                   href={mailHref}
                   event="email_click"
                   params={{ label: track }}
-                  className="font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                  className="font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
                 >
                   {SITE.email}
                 </TrackedLink>

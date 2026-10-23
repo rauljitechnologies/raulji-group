@@ -275,7 +275,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
       <div
         data-progress
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[3px] origin-left scale-x-0 bg-[linear-gradient(90deg,#1a7cb0,#329fd2)]"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[3px] origin-left scale-x-0 bg-[linear-gradient(90deg,#1872a3,#329fd2)]"
       />
 
       {/* 1. Hero, with the package card. */}
@@ -362,7 +362,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
               className="min-w-0 overflow-hidden rounded-lg bg-white text-[#3a4656] shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)]"
             >
               <div className="flex flex-col gap-2 border-b border-[#eef2f6] px-7 pb-[1.375rem] pt-[1.625rem]">
-                <p id="pk-h" className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">
+                <p id="pk-h" className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">
                   {service.shortName.toUpperCase()} PACKAGE
                 </p>
                 {service.pricing ? (
@@ -403,7 +403,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                   href="#enquiry"
                   event="primary_cta_click"
                   params={{ label: "service_package", ...trackParams }}
-                  className="flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
+                  className="flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
                 >
                   {service.pricing ? "Get started" : "Ask for a quote"}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -431,7 +431,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
               <ul className="mt-4 space-y-3">
                 {service.takeaways.map((item) => (
                   <li key={item} className="flex gap-3 leading-[1.6]">
-                    <CircleCheck className="mt-0.5 h-5 w-5 flex-none text-[#1a7cb0]" aria-hidden="true" />
+                    <CircleCheck className="mt-0.5 h-5 w-5 flex-none text-[#1872a3]" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -498,7 +498,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                 ))}
               </div>
               {view.shield ? (
-                <div className="rounded-md bg-[linear-gradient(90deg,#329fd2,#1a7cb0)] p-3 text-center text-xs font-extrabold tracking-[0.16em] text-white shadow-[0_12px_24px_-14px_rgba(26,124,176,0.8)]">
+                <div className="rounded-md bg-[linear-gradient(90deg,#329fd2,#1872a3)] p-3 text-center text-xs font-extrabold tracking-[0.16em] text-white shadow-[0_12px_24px_-14px_rgba(26,124,176,0.8)]">
                   LIABILITY SHIELD
                 </div>
               ) : (
@@ -529,7 +529,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
             <article data-spot="light" className={`${CARD} flex flex-col gap-5 p-7 sm:p-9`}>
               <p className="flex items-center gap-3 text-lg font-bold text-[#122640]">
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#e8f5fb]">
-                  <CircleCheck className="h-[1.125rem] w-[1.125rem] text-[#1a7cb0]" aria-hidden="true" />
+                  <CircleCheck className="h-[1.125rem] w-[1.125rem] text-[#1872a3]" aria-hidden="true" />
                 </span>
                 A good fit for
               </p>
@@ -560,7 +560,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                   </li>
                 ))}
               </ul>
-              <Link href="/compare/" className="self-start text-sm font-bold text-[#1a7cb0] hover:underline">
+              <Link href="/compare/" className="self-start text-sm font-bold text-[#1872a3] hover:underline">
                 Compare with the other structures <span aria-hidden="true">→</span>
               </Link>
             </article>
@@ -678,7 +678,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             <div data-spot="light" className={`${CARD} p-6`}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">Our part</h3>
+              <h3 className="text-xs font-bold uppercase tracking-[0.1em] text-[#1872a3]">Our part</h3>
               <p className="mt-3 leading-[1.7]">{service.timeline.ours}</p>
             </div>
             <div data-spot="light" className={`${CARD} p-6`}>
@@ -775,7 +775,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
           <ol className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {service.afterRegistration.map((step, i) => (
               <li key={step.title} data-spot="light" className={`${CARD} ${CARD_LIFT} flex flex-col gap-3 p-6`}>
-                <span className="text-xs font-bold tracking-[0.08em] text-[#1a7cb0]">STEP {i + 1}</span>
+                <span className="text-xs font-bold tracking-[0.08em] text-[#1872a3]">STEP {i + 1}</span>
                 <h3 className="text-[1.0625rem] font-bold leading-[1.35] text-[#122640]">{step.title}</h3>
                 <p className="text-sm leading-[1.7]">{step.body}</p>
               </li>
@@ -784,7 +784,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
           {compliance ? (
             <Link
               href={compliance.href}
-              className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start font-semibold text-[#1a7cb0] hover:underline"
+              className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start font-semibold text-[#1872a3] hover:underline"
             >
               See {compliance.label} support
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -862,7 +862,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                   href={telHref}
                   event="phone_click"
                   params={{ label: "service_enquiry", ...trackParams }}
-                  className="font-semibold text-[#1a7cb0] hover:underline"
+                  className="font-semibold text-[#1872a3] hover:underline"
                 >
                   {SITE.phone.display}
                 </TrackedLink>
@@ -873,7 +873,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                   href={mailHref}
                   event="email_click"
                   params={{ label: "service_enquiry", ...trackParams }}
-                  className="font-semibold text-[#1a7cb0] hover:underline"
+                  className="font-semibold text-[#1872a3] hover:underline"
                 >
                   {SITE.email}
                 </TrackedLink>
@@ -913,7 +913,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
             <h2 id="faq-h" className={H2}>
               {service.shortName} questions, answered.
             </h2>
-            <Link href="/faqs/" className="self-start text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/faqs/" className="self-start text-[0.9375rem] font-semibold text-[#1872a3] hover:underline">
               All FAQs <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -940,7 +940,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                     href="/gujarat/"
                     event="gujarat_page_click"
                     params={{ label: "service_local", ...trackParams }}
-                    className="font-semibold text-[#1a7cb0] hover:underline"
+                    className="font-semibold text-[#1872a3] hover:underline"
                   >
                     We work across Gujarat
                   </TrackedLink>
@@ -960,7 +960,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                         <span className="font-bold text-[#122640]">{page.name}</span>
                         <span className="text-xs text-[#5b6778]">{page.name} district</span>
                       </span>
-                      <span aria-hidden="true" className="text-[#1a7cb0]">
+                      <span aria-hidden="true" className="text-[#1872a3]">
                         →
                       </span>
                     </TrackedLink>
@@ -981,13 +981,13 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                 <p className="leading-[1.7]">
                   If this one does not look like the right fit, these are the alternatives. For a
                   decision that is still open, start with{" "}
-                  <Link href="/services/business-consulting/" className="font-semibold text-[#1a7cb0] hover:underline">
+                  <Link href="/services/business-consulting/" className="font-semibold text-[#1872a3] hover:underline">
                     business consulting
                   </Link>
                   .
                 </p>
               </div>
-              <Link href="/compare/" className="text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline">
+              <Link href="/compare/" className="text-[0.9375rem] font-semibold text-[#1872a3] hover:underline">
                 Compare all four side by side <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -1008,7 +1008,7 @@ export function RegistrationServicePage({ service }: { service: RegistrationServ
                       </span>
                       <span className="text-lg font-bold text-[#122640]">{item.shortName}</span>
                       <span className="flex-1 text-sm leading-[1.6]">{m?.body ?? item.cardBlurb}</span>
-                      <span className="text-sm font-bold text-[#1a7cb0]">
+                      <span className="text-sm font-bold text-[#1872a3]">
                         Explore {item.shortName} Registration <span aria-hidden="true">→</span>
                       </span>
                     </TrackedLink>

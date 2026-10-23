@@ -74,7 +74,7 @@ const FAQS = [
 ];
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
 const SECTION = "py-16 md:py-24 lg:py-28";
 
@@ -216,7 +216,7 @@ export default function ContactPage() {
                   <Icon className="h-[1.375rem] w-[1.375rem] text-white" strokeWidth={1.7} aria-hidden="true" />
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-0.5">
-                  <span className="text-xs font-bold uppercase tracking-[0.08em] text-[#1a7cb0]">{key}</span>
+                  <span className="text-xs font-bold uppercase tracking-[0.08em] text-[#1872a3]">{key}</span>
                   <span className="text-base font-bold text-[#122640] [overflow-wrap:anywhere]">{value}</span>
                   <span className="text-[0.8125rem] text-[#5b6778]">{note}</span>
                 </span>
@@ -259,7 +259,7 @@ export default function ContactPage() {
                   <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#122640] text-[0.9375rem] font-extrabold text-white">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-xs font-bold text-[#1a7cb0]">{item.label}</span>
+                  <span className="text-xs font-bold text-[#1872a3]">{item.label}</span>
                 </div>
                 <h3 className="text-lg font-bold text-[#122640]">{item.title}</h3>
                 <p className="text-sm/[1.65] leading-[1.65]">{item.body}</p>
@@ -286,7 +286,7 @@ export default function ContactPage() {
             </p>
             <dl className="mt-2 grid gap-3 sm:grid-cols-2">
               <div className="rounded-md border border-[#e3e9ef] px-5 py-[1.125rem]">
-                <dt className="text-xs font-bold uppercase tracking-[0.08em] text-[#1a7cb0]">Business hours</dt>
+                <dt className="text-xs font-bold uppercase tracking-[0.08em] text-[#1872a3]">Business hours</dt>
                 <dd className="mt-1.5 text-[0.9375rem] font-semibold leading-normal text-[#122640]">
                   {SITE.hours.display}
                   <br />
@@ -294,7 +294,7 @@ export default function ContactPage() {
                 </dd>
               </div>
               <div className="rounded-md border border-[#e3e9ef] px-5 py-[1.125rem]">
-                <dt className="text-xs font-bold uppercase tracking-[0.08em] text-[#1a7cb0]">Based in</dt>
+                <dt className="text-xs font-bold uppercase tracking-[0.08em] text-[#1872a3]">Based in</dt>
                 <dd className="mt-1.5 text-[0.9375rem] font-semibold leading-normal text-[#122640]">
                   <address className="not-italic">
                     {SITE.locality}, {SITE.region}, India
@@ -329,7 +329,7 @@ export default function ContactPage() {
               href="/gujarat/"
               event="gujarat_page_click"
               params={{ label: "contact_where" }}
-              className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-sm font-semibold text-[#1a7cb0] hover:underline"
+              className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-sm font-semibold text-[#1872a3] hover:underline"
             >
               All 33 districts
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
