@@ -47,7 +47,21 @@ export function Header() {
     !!href && (href === "/" ? pathname === "/" : pathname.startsWith(href.replace(/\/$/, "")));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-card/95 backdrop-blur-lg">
+    /*
+      Sticky, not fixed.
+
+      Fixed took the header out of the flow, so every page had to reserve its
+      height by hand -- `pt-28 md:pt-32` scattered across the hero, the page
+      header, the breadcrumbs and the article template. The header measures
+      109px, `pt-28` is 112px, so below `md` the first line of every page sat
+      3px under the header: touching it, and covering it outright the moment
+      the contact bar wrapped or a heading shifted.
+
+      Sticky keeps the pinned-on-scroll behaviour and the frosted backdrop,
+      but the header occupies its own height in the layout, so it cannot cover
+      the content beneath it and no page has to know how tall it is.
+    */
+    <header className="sticky top-0 z-50 border-b border-border/60 bg-card/95 backdrop-blur-lg">
       {/* Contact bar */}
       <div className="bg-secondary text-secondary-foreground">
         <div className="container-wide flex items-center justify-between gap-4 py-1.5 text-xs">

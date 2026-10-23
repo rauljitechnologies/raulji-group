@@ -12,15 +12,15 @@ export function Breadcrumbs({
 }: {
   crumbs: Crumb[];
   /**
-   * Render just the trail, with no container or fixed-header offset, for
-   * placements that already provide both (see PageHeader).
+   * Render just the trail, with no container or top spacing, for placements
+   * that already provide both (see PageHeader).
    */
   inline?: boolean;
 }) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={inline ? undefined : "container-wide pt-28 md:pt-32"}
+      className={inline ? undefined : "container-wide pt-6 md:pt-8"}
     >
       <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
         {crumbs.map((crumb, i) => {
