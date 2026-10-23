@@ -24,6 +24,10 @@ import udyamMsme from "@/public/blog/udyam-registration-msme.webp";
 import gujaratShops from "@/public/blog/gujarat-shops-establishments-registration.webp";
 import partnershipDeed from "@/public/blog/partnership-deed-checklist.webp";
 import afterIncorporation from "@/public/blog/after-company-incorporation-checklist.webp";
+// Third batch, 23 Oct 2026 (scripts/gen-blog-images-batch3.py).
+import trademark from "@/public/blog/trademark-registration-india.webp";
+import fssai from "@/public/blog/fssai-registration-food-licence.webp";
+import iec from "@/public/blog/import-export-code-iec.webp";
 
 /**
  * Featured images for the 2026 Business Guide Series.
@@ -139,6 +143,18 @@ export const BLOG_IMAGES = {
   "after-incorporation": {
     src: afterIncorporation,
     alt: "Timeline: board and auditor by 30 days, share certificates by 2 months, INC-20A by 180 days",
+  },
+  trademark: {
+    src: trademark,
+    alt: "Timeline from filing to registration, with a four-month opposition window after advertisement",
+  },
+  fssai: {
+    src: fssai,
+    alt: "Diagram: FSSAI registration up to 1.5 crore, state licence to 50 crore, central licence above",
+  },
+  iec: {
+    src: iec,
+    alt: "Diagram: trade between India and the world, with IEC equal to PAN and the April to June update",
   },
 } as const satisfies Record<string, BlogImage>;
 

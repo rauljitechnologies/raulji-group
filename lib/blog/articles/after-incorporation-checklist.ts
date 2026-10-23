@@ -176,7 +176,7 @@ export const afterIncorporationChecklist: Article = {
         "**Professional tax**, where the state levies it. Gujarat does.",
         "**Shops and establishments**, for each office or shop the company opens. In Gujarat, within 60 days of starting business there; see [the Gujarat guide](/blog/gujarat-shops-establishments-registration/).",
         "**Udyam**, optional, if the company qualifies as an MSME and wants access to MSME benefits; see [Udyam registration](/blog/udyam-registration-msme-india/).",
-        "**Activity licences**, such as FSSAI for food or an Import Export Code for foreign trade.",
+        "**Activity licences**, such as [FSSAI registration or a food licence](/blog/fssai-registration-food-licence-india/) for food, or an [Import Export Code](/blog/import-export-code-iec-guide/) for foreign trade.",
       ],
     },
 

@@ -24,6 +24,9 @@ import { udyamRegistration } from "./articles/udyam-registration";
 import { gujaratShopsEstablishments } from "./articles/gujarat-shops-establishments";
 import { partnershipDeedChecklist } from "./articles/partnership-deed-checklist";
 import { afterIncorporationChecklist } from "./articles/after-incorporation-checklist";
+import { trademarkRegistration } from "./articles/trademark-registration";
+import { fssaiRegistrationLicence } from "./articles/fssai-registration-licence";
+import { importExportCode } from "./articles/import-export-code";
 
 export type { Article, Block, Category, Source, ArticleAuthor } from "./types";
 export { CATEGORIES } from "./types";
@@ -75,6 +78,13 @@ export const ARTICLES: Article[] = [
   gujaratShopsEstablishments,
   partnershipDeedChecklist,
   afterIncorporationChecklist,
+  // Third batch, 23 Oct 2026: activity registrations a new business meets
+  // after its structure and state registrations. docs/five-blog-content-audit.md
+  // records the overlap check, including why GST and Udyam were improved in
+  // place rather than written again.
+  trademarkRegistration,
+  fssaiRegistrationLicence,
+  importExportCode,
 ];
 
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));

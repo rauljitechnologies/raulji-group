@@ -176,7 +176,7 @@ export const gujaratShopsEstablishments: Article = {
     },
     {
       kind: "p",
-      text: "None of these replaces another. A newly incorporated company that opens an office in Ahmedabad still files under the Shops and Establishments Act for that office. A proprietor with a GSTIN still files for the shop. Professional tax enrolment under Gujarat's professional tax law is separate again, and is often needed at around the same time.",
+      text: "None of these replaces another. A newly incorporated company that opens an office in Ahmedabad still files under the Shops and Establishments Act for that office. A proprietor with a GSTIN still files for the shop. Professional tax enrolment under Gujarat's professional tax law is separate again, and is often needed at around the same time. A restaurant, sweet shop or other food business also needs [FSSAI registration or a food licence](/blog/fssai-registration-food-licence-india/).",
     },
 
     { kind: "h2", id: "mistakes", text: "Common mistakes" },
