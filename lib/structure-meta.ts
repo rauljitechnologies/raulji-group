@@ -42,7 +42,10 @@ export const STRUCTURE_META: Record<
     body: "For one person starting and operating a business on their own.",
     liability: "Unlimited",
     owners: "1",
-    time: "Udyam often same day",
+    // Not Udyam's processing time, which is the time for one registration a
+    // proprietorship may take, not the time to set one up. A proprietorship has
+    // no incorporation, so its setup time is whatever its registrations take.
+    time: "Varies by registration",
     load: 1,
     icon: User,
   },

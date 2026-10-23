@@ -32,7 +32,7 @@ export const GENERAL_FAQS: FAQ[] = [
   },
   {
     q: "How long does business registration take in India?",
-    a: "With complete documents, a Private Limited Company commonly takes around 7 to 12 working days and an LLP around 7 to 10. A partnership deed can be executed within a few days, with Registrar of Firms timelines varying by state. Proprietorship registrations such as Udyam are often same-day, while GST commonly takes 7 to 15 working days. These are estimates: government processing times vary.",
+    a: "With complete documents, a Private Limited Company commonly takes around 7 to 12 working days and an LLP around 7 to 10. A partnership deed can be executed within a few days, with Registrar of Firms timelines varying by state. A proprietorship has no incorporation step, so its setup time is whatever its registrations take: Udyam is usually issued online the same day, and GST is generally granted within 7 working days, or up to 30 if the premises are physically verified. These are estimates: government processing times vary.",
   },
   {
     q: "What does registration cost?",
