@@ -35,7 +35,7 @@ export function PageHeader({
 }) {
   return (
     <header className="border-b border-border bg-muted">
-      <div className="container-wide py-10 md:py-14">
+      <div className="container-wide pb-10 pt-28 md:pb-14 md:pt-32">
         <Breadcrumbs crumbs={crumbs} inline />
 
         <div className="mt-6 max-w-3xl">

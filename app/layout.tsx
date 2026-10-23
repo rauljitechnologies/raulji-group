@@ -177,7 +177,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* One location drawer for the whole site (spec section 44). */}
         <LocationDrawerProvider>
           <Header />
-          <main id="main">{children}</main>
+          <main id="main" className="mobile-bar-gutter">
+            {children}
+          </main>
           <Footer />
           <MobileActionBar />
         </LocationDrawerProvider>

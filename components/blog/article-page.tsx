@@ -92,9 +92,13 @@ export function ArticlePage({ article }: { article: Article }) {
         )}
       />
 
-      <header className="border-b border-border bg-muted">
-        <div className="container-wide py-10 md:py-14">
-          <Breadcrumbs crumbs={crumbs} inline />
+      <article className="bg-white text-[#3a4656]">
+        {/* Header band. */}
+        <header className="border-b border-[#e3e9ef] bg-[#f4f7fa] pt-[5.5rem] sm:pt-24">
+          <div className="mx-auto flex max-w-[55rem] flex-col gap-6 px-5 pb-10 pt-6 sm:px-8 md:pb-16 md:pt-8">
+            <div className="text-[0.8125rem] [&_a]:text-[#5b6778] [&_span[aria-current]]:font-semibold [&_span[aria-current]]:text-[#122640]">
+              <Breadcrumbs crumbs={crumbs} inline />
+            </div>
 
             <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold uppercase tracking-[0.12em]">
               <Link
@@ -282,63 +286,15 @@ export function ArticlePage({ article }: { article: Article }) {
               aria-labelledby="author"
               className="mt-4 flex flex-wrap items-start gap-5 rounded-lg border border-[#e3e9ef] p-6"
             >
-              <h2 id="author" className="text-sm font-semibold uppercase tracking-wider text-primary">
-                Written by
-              </h2>
-              <p className="mt-2 text-lg font-bold text-secondary">{article.author.name}</p>
-              <p className="mt-2 leading-relaxed text-muted-foreground">{article.author.context}</p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-                <a
-                  href={telHref}
-                  className="link-target inline-flex items-center gap-2 font-semibold text-primary hover:underline"
-                >
-                  <Phone className="h-4 w-4" aria-hidden="true" />
-                  {article.author.phone.display}
-                </a>
-                <Link
-                  href="/contact/"
-                  className="link-target inline-flex items-center gap-1.5 font-semibold text-secondary hover:text-primary"
-                >
-                  Contact Raulji Group
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </Link>
-              </div>
-            </section>
-          </article>
-
-          {/* Contents rail. Hidden below lg, where it would sit between the
-              reader and the first paragraph without earning the space. */}
-          {contents.length ? (
-            <aside className="hidden lg:block">
-              {/* top-32 matches the 8rem `scroll-padding-top` in globals.css:
-                  both clear the 109px sticky header with room to spare, where
-                  the old top-28 left the rail 3px under it. */}
-              <nav aria-label="On this page" className="sticky top-32">
-                <p className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
-                  <ListChecks className="h-4 w-4" aria-hidden="true" />
-                  On this page
-                </p>
-                <ol className="mt-4 space-y-1 border-l border-border">
-                  {contents.map((entry) => (
-                    <li key={entry.id}>
-                      <a
-                        href={`#${entry.id}`}
-                        className="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm leading-snug text-muted-foreground transition-colors hover:border-primary hover:text-primary"
-                      >
-                        {entry.text}
-                      </a>
-                    </li>
-                  ))}
-                </ol>
-
-                <div className="mt-8 rounded-2xl border border-primary/25 bg-accent/50 p-5">
-                  <p className="text-sm font-semibold leading-snug text-secondary">
-                    Have a question about your own situation?
-                  </p>
-                  <a
-                    href={telHref}
-                    className="mt-3 flex min-h-[2.75rem] items-center justify-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                  >
+              <AuthorMark isPerson={isPerson} size={64} />
+              <div className="flex min-w-0 flex-[1_1_18rem] flex-col gap-1.5">
+                <h2 id="author" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">
+                  Written by
+                </h2>
+                <p className="text-[1.0625rem] font-bold text-[#122640]">{article.author.name}</p>
+                <p className="text-[0.9375rem] leading-[1.65]">{article.author.context}</p>
+                <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                  <a href={telHref} className="link-target gap-2 font-semibold text-[#1872a3] hover:underline">
                     <Phone className="h-4 w-4" aria-hidden="true" />
                     {article.author.phone.display}
                   </a>
