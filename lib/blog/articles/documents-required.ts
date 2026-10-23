@@ -12,7 +12,7 @@ export const documentsRequired: Article = {
   category: "Company Registration",
   seriesMonth: "April",
   published: "2026-09-22",
-  updated: "2026-09-22",
+  updated: "2026-10-23",
   readMinutes: 10,
   primaryKeyword: "documents required for company registration",
   secondaryKeywords: [
@@ -147,7 +147,7 @@ export const documentsRequired: Article = {
     },
     {
       kind: "p",
-      text: "Anyone who already holds a DIN should supply it rather than seeking a new one. Directors are also required to keep their DIN details current through the annual KYC filing, and a DIN that has been deactivated for a missed KYC will hold up a filing until it is restored.",
+      text: "Anyone who already holds a DIN should supply it rather than seeking a new one. Directors are also required to keep their DIN details current through Form DIR-3 KYC. Since 31 March 2026 that filing is due once every three financial years rather than every year, and a changed mobile number, email or address has to be updated within 30 days. A DIN deactivated for a missed KYC will hold up a filing until it is restored.",
     },
 
     { kind: "h2", id: "name", text: "What do you need before choosing a name?" },
@@ -247,7 +247,7 @@ export const documentsRequired: Article = {
     },
     {
       kind: "p",
-      text: "The registered office is where legal notice is served, so an address you do not actually monitor becomes a problem the first time something is sent there. Director details feed the KYC obligation that follows every year. The email and mobile entered are where the Registrar and the tax authorities will contact the company. Share capital and the division between subscribers is the starting point of the cap table, and correcting it later means a further filing.",
+      text: "The registered office is where legal notice is served, so an address you do not actually monitor becomes a problem the first time something is sent there. Director details feed the DIR-3 KYC obligation that follows, now once every three financial years. The email and mobile entered are where the Registrar and the tax authorities will contact the company. Share capital and the division between subscribers is the starting point of the cap table, and correcting it later means a further filing.",
     },
     {
       kind: "p",
@@ -273,7 +273,7 @@ export const documentsRequired: Article = {
     },
     {
       q: "Do I need a DIN before applying to incorporate a company?",
-      a: "Not necessarily. Proposed directors who do not already hold a Director Identification Number can be allotted one through the incorporation application itself, within the limit the form allows. Anyone who already holds a DIN should use it, and should make sure it is active and that their annual KYC filing is up to date.",
+      a: "Not necessarily. Proposed directors who do not already hold a Director Identification Number can be allotted one through the incorporation application itself, within the limit the form allows. Anyone who already holds a DIN should use it, and should make sure it is active and that their DIR-3 KYC filing, now due once every three financial years, is up to date.",
     },
     {
       q: "What is a no-objection certificate for the registered office?",
@@ -310,6 +310,12 @@ export const documentsRequired: Article = {
     },
   ],
   sources: [
+    {
+      label: "Companies (Appointment and Qualification of Directors) Amendment Rules, 2025, G.S.R. 943(E)",
+      url: "https://www.mca.gov.in/content/mca/global/en/acts-rules/ebooks/rules.html",
+      supports:
+        "Director KYC (Form DIR-3 KYC) once every three financial years from 31 March 2026, due by 30 June, with changed contact details updated within 30 days.",
+    },
     {
       label: "Ministry of Corporate Affairs",
       url: "https://www.mca.gov.in/",

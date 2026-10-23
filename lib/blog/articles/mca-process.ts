@@ -12,7 +12,7 @@ export const mcaProcess: Article = {
   category: "Company Registration",
   seriesMonth: "July",
   published: "2026-09-22",
-  updated: "2026-09-22",
+  updated: "2026-10-23",
   readMinutes: 11,
   primaryKeyword: "MCA company registration",
   secondaryKeywords: [
@@ -201,7 +201,7 @@ export const mcaProcess: Article = {
     },
     {
       kind: "p",
-      text: "From then on the annual cycle runs: an audit every financial year from the first, regardless of turnover, and annual filings with the Registrar. Directors also have an annual KYC obligation attached to their DIN, and a deactivated DIN will block filings until it is restored.",
+      text: "Our [post-incorporation compliance checklist](/blog/after-company-incorporation-compliance-checklist/) sets out each of these with its deadline. From then on the annual cycle runs: an audit every financial year from the first, regardless of turnover, and annual filings with the Registrar. Directors also have a KYC obligation attached to their DIN, Form DIR-3 KYC, which since 31 March 2026 falls due once every three financial years instead of annually. A deactivated DIN will block filings until it is restored.",
     },
     {
       kind: "links",
@@ -239,7 +239,7 @@ export const mcaProcess: Article = {
         "**Identity mismatches**: a name spelled differently across PAN, Aadhaar and the address proof.",
         "**Address entered differently from the supporting document**, including unit numbers and pin codes.",
         "**Digital signature problems**: a certificate not registered on the portal, expired, or belonging to the wrong person.",
-        "**A DIN that is deactivated** because the director's annual KYC was not filed.",
+        "**A DIN that is deactivated** because the director's DIR-3 KYC was not filed when due.",
         "**Objects drafted loosely**, so that what the company says it will do does not match the name or the activity described elsewhere in the filing.",
       ],
     },
@@ -283,6 +283,7 @@ export const mcaProcess: Article = {
     },
   ],
   related: [
+    "after-company-incorporation-compliance-checklist",
     "how-to-choose-business-structure-india",
     "private-limited-company-vs-llp",
     "documents-required-company-registration-india",
@@ -305,6 +306,12 @@ export const mcaProcess: Article = {
     },
   ],
   sources: [
+    {
+      label: "Companies (Appointment and Qualification of Directors) Amendment Rules, 2025, G.S.R. 943(E)",
+      url: "https://www.mca.gov.in/content/mca/global/en/acts-rules/ebooks/rules.html",
+      supports:
+        "Director KYC (Form DIR-3 KYC) once every three financial years from 31 March 2026, due by 30 June, with changed contact details updated within 30 days.",
+    },
     {
       label: "Ministry of Corporate Affairs",
       url: "https://mca.gov.in/",

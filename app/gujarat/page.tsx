@@ -110,7 +110,7 @@ const STATE_FACTS: { title: string; body: string; icon: LucideIcon }[] = [
 
 const GUIDES = [
   "starting-business-gujarat-registration-guide",
-  "how-to-choose-business-structure-india",
+  "gujarat-shops-establishments-registration",
   "common-business-registration-mistakes-india",
 ]
   .map((slug) => getArticle(slug))

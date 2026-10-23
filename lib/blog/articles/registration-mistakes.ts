@@ -278,6 +278,7 @@ export const registrationMistakes: Article = {
     },
   ],
   related: [
+    "after-company-incorporation-compliance-checklist",
     "how-to-choose-business-structure-india",
     "documents-required-company-registration-india",
     "starting-business-gujarat-registration-guide",
