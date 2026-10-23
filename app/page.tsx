@@ -393,32 +393,32 @@ export default function HomePage() {
         </div>
       </section>
 
-        No phone number here (master rule 8, brief section 15): the hero's job
-        is positioning and one clear next step, and a phone number in it turns
-        the page into an advertisement. Contact details sit in the header, the
-        lead section and the footer, where people look for them.
-      */}
-      <section className="relative border-b border-border bg-muted py-14 md:py-20">
-        <div className="container-wide">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div>
-              <p className="mb-5 text-sm font-semibold uppercase tracking-wider text-primary">
-                The Raulji Group
-              </p>
-              {/* Two-tone headline: the promise in navy, the payoff in brand
-                  blue. The wording is fixed by master rule 4, and these are two
-                  flat brand colours rather than a gradient, which the design
-                  rules rule out. The second sentence is display-size, so the
-                  blue clears the WCAG contrast bar for large text. */}
-              <h1 className="text-[2.5rem] leading-[1.12] sm:text-5xl sm:leading-[1.1] lg:text-6xl lg:leading-[1.05]">
-                <span className="block text-balance">{SITE.taglineParts[0]}</span>
-                <span className="block text-balance text-primary">{SITE.taglineParts[1]}</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground md:text-xl">
-                Raulji Group is a consulting-focused business group. We help entrepreneurs and
-                business owners make informed decisions, set up the right structure, and deal with
-                the practical problems that come with running a business.
-              </p>
+      {/* 2. Key facts. The design's figures band, holding verified facts only. */}
+      <section aria-label="Key facts" className="bg-[#122640] text-white">
+        <dl className={`${CONTAINER} grid gap-6 py-8 sm:grid-cols-2 md:py-10 lg:grid-cols-4`}>
+          {/*
+           * Each group is a <div> holding exactly one <dt> and one <dd>, the
+           * only shape a <dl> allows. The icon used to sit beside a second,
+           * inner <div>, which made the list invalid (Lighthouse
+           * "definition-list" and "dlitem", audit of 23 Oct 2026). It now
+           * lives inside the <dd>, positioned against the group, so the
+           * layout is unchanged: icon on the left, value above label.
+           */}
+          {KEY_FACTS.map(({ value, label, icon: Icon }) => (
+            <div key={label} className="relative flex min-h-8 flex-col-reverse justify-center pl-12">
+              <dt className="mt-0.5 text-sm text-[#c9d6e3]">{label}</dt>
+              <dd className="text-xl font-bold tracking-[-0.01em] sm:text-[1.375rem]">
+                <Icon
+                  className="absolute left-0 top-1/2 h-8 w-8 -translate-y-1/2 text-[#329fd2]"
+                  strokeWidth={1.4}
+                  aria-hidden="true"
+                />
+                {value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
 
       {/* 3. One group, end to end. */}
       <section aria-labelledby="e2e-h" className="pt-16 md:pt-24 lg:pt-28">

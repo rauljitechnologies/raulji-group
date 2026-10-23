@@ -10,7 +10,7 @@ import { track } from "@/lib/analytics";
 
 /**
  * Fixed mobile action bar (spec section 25). Rendered once, in the root layout.
- * The footer carries `.mobile-bar-gutter` so the bar never covers content.
+ * Pages carry `.mobile-bar-gutter` so it never covers content.
  */
 export function MobileActionBar() {
   const pathname = usePathname() ?? "/";
