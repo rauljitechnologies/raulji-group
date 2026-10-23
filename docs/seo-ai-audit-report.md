@@ -9,11 +9,11 @@
 
 ## Executive summary
 
-**Verified issues: 25 unique root causes.** That is 0 P0, 7 P1, 8 P2 and 10 P3.
+**Verified issues: 26 unique root causes.** That is 0 P0, 7 P1, 9 P2 and 10 P3. The 26th (SAI-26) was found on re-verification later the same day.
 A template defect is counted once, with its affected-page count recorded
 separately.
 
-**Fixed: 9.** They are on branch `seo/ai-search-audit`, each with a regression
+**Fixed: 10.** They are on branch `seo/ai-search-audit`, each with a regression
 test that fails on the old code. After the fixes, lint, typecheck, 125/125
 tests and the production build with its SEO validator all pass. **Nothing is
 deployed**, and no external account (GTM, GA4, Search Console, GBP) was touched.
@@ -74,6 +74,7 @@ audits hold up under measurement:
 | SAI-12 | ESLint ignores old build directories |
 | SAI-13 | Homepage `<dl>` made valid, with the layout unchanged |
 | SAI-14 | `/compare/` question headings read cleanly, at the right level |
+| SAI-26 | `/gujarat/` region cards count districts, matching the "33 districts served" headline, and show the city pages each one opens |
 
 ### Remaining risks
 
@@ -119,7 +120,7 @@ was not available, and it is **not** counted as passed.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | A | Technical SEO | 19 | 15 | 0 | 2 | 0 | 2 | §1 crawl of 96 URLs, robots, sitemap, variants, redirect hops | SAI-19, SAI-23 | P3 | No |
 | B | On-page SEO | 15 | 12 | 2 | 1 | 0 | 0 | §1 metadata and headings; §2 similarity | SAI-10, SAI-14, SAI-22 | P2 | SAI-10, SAI-22 |
-| C | Local SEO | 10 | 5 | 2 | 1 | 0 | 2 | §1 NAP; §2 city uniqueness; §4 hours and address | SAI-10, SAI-16, SAI-20 | P2 | Yes |
+| C | Local SEO | 11 | 5 | 3 | 1 | 0 | 2 | §1 NAP; §2 city uniqueness; §4 hours and address; §12 Gujarat claims | SAI-10, SAI-16, SAI-20, SAI-26 | P2 | Yes |
 | D | AEO | 8 | 7 | 1 | 0 | 0 | 0 | Headings and FAQ coverage on the 4 structure pages, consulting, `/gujarat/`, `/compare/` | SAI-14 | P3 | No |
 | E | GEO / LLM | 10 | 5 | 4 | 0 | 1 | 0 | §3 13-UA fetch, `llms.txt`; §9 authorship | SAI-02, SAI-09, SAI-16, SAI-18 | P1 | SAI-02, SAI-16, SAI-18 |
 | F | Schema | 11 | 8 | 0 | 2 | 0 | 1 | §4 validator (9 pages), visible-content match | SAI-16, SAI-17 | P3 | Yes |
@@ -129,7 +130,7 @@ was not available, and it is **not** counted as passed.
 | J | Content trust / legal | 9 | 5 | 2 | 1 | 0 | 1 | §9 claim scan, bylines, legal spot-read | SAI-02, SAI-18 | P1 | Yes |
 | K | AI visibility | 6 | 1 | 1 | 0 | 0 | 4 | §10 search-index check; question set below | SAI-16 | P2 | Yes |
 | — | Repository / ops | 6 | 3 | 3 | 0 | 0 | 0 | §0 baseline | SAI-11, SAI-12, SAI-25 | P1 | SAI-25 |
-| | **Total** | **129** | **77** | **26** | **9** | **1** | **16** | | **25 unique** | | **12 open** |
+| | **Total** | **130** | **77** | **27** | **9** | **1** | **16** | | **26 unique** | | **12 open** |
 
 ### What each check was
 
@@ -175,7 +176,7 @@ Pass:
 
 Fail: city pages are ~75% template (SAI-10); `/compare/` heading text (SAI-14). Warn: two thin technology pages (SAI-22).
 
-**C — Local (10 checks)**
+**C — Local (11 checks)**
 
 Pass:
 
@@ -185,7 +186,7 @@ Pass:
 - service area wording consistent ("Gujarat and India")
 - no misleading street address
 
-Fail: no verified external profiles (SAI-16); location pages templated (SAI-10). Warn: 6 towns outside rule 17 (SAI-20). Blocked: GBP exists and is verified; GBP NAP match.
+Fail: no verified external profiles (SAI-16); location pages templated (SAI-10); `/gujarat/` region cards counted city pages under a districts headline (SAI-26, fixed). Warn: 6 towns outside rule 17 (SAI-20). Blocked: GBP exists and is verified; GBP NAP match.
 
 **D — AEO (8 checks)**
 
@@ -318,7 +319,7 @@ All of it holds except SAI-14 and SAI-09, both now fixed on the branch.
 |---|---|---|
 | **P0** | Security, broken lead capture, accidental noindex, severe indexing block | **None found** |
 | **P1** | High-impact crawl/indexing, conversion, mobile, core technical | SAI-01, 02, 04, 05✓, 06✓, 15, 25 |
-| **P2** | Content, local, structured data, AEO/GEO | SAI-03, 08✓, 09✓, 10, 11✓, 16, 18, 21 |
+| **P2** | Content, local, structured data, AEO/GEO | SAI-03, 08✓, 09✓, 10, 11✓, 16, 18, 21, 26✓ |
 | **P3** | Optional, weak or unproven impact | SAI-07✓, 12✓, 13✓, 14✓, 17, 19, 20, 22, 23, 24 |
 
 ✓ = fixed on branch.

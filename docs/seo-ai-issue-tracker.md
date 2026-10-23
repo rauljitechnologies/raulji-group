@@ -14,8 +14,8 @@ regression test and a clean build, **not deployed**. *Open* = not changed.
 
 | | P0 | P1 | P2 | P3 | Total |
 |---|---|---|---|---|---|
-| Unique issues found | 0 | 7 | 8 | 10 | **25** |
-| Fixed on branch | 0 | 2 | 3 | 4 | **9** |
+| Unique issues found | 0 | 7 | 9 | 10 | **26** |
+| Fixed on branch | 0 | 2 | 4 | 4 | **10** |
 | Open | 0 | 5 | 5 | 6 | **16** |
 | Open, owner action needed | 0 | 4 | 4 | 4 | **12** |
 
@@ -54,6 +54,7 @@ submission.
 | SAI-23 | P3 | Technical | The 404 page emits two robots meta tags (`noindex` from Next, plus `noindex, follow`). Harmless; Google applies the most restrictive. | `/404` | Open | Optional | 15 min | No |
 | SAI-24 | P3 | Security / trust | No `/.well-known/security.txt`. | Sitewide | Open | Add one with a real contact | 15 min | **Yes** — contact |
 | SAI-25 | P1 | Repository / operations | In the local working copy, 625 of 950 files and 179 `.git/objects` directories are owned by root, apparently from a `sudo` run. `npm run build` fails with EACCES, and commits fail whenever an object hashes into a root-owned directory. `node_modules` was also stale (ESLint 6.4, no vitest) until `npm ci`. Not a production defect, but it blocks building and committing from this machine. | Local checkout | Open | `sudo chown -R office:office "/media/office/Rtech240GB SSD/github/raulji-group"`, then `npm ci` | 5 min | **Yes** — needs sudo |
+| SAI-26 | P2 | Content accuracy / Local | Found on re-verification. The `/gujarat/` hero says "33 districts served", and the five region cards under it read as its breakdown, but they counted **city pages**: 10 / 6 / 10 / 2 / 5. Kutch, a single district, showed "2". The district list on the same page gives 27 of the 33 districts a city page. | `/gujarat/` | **Fixed (branch)** | Cards now count districts (9 / 7 / 11 / 1 / 5, totalling 33), with the city-page count the finder shows on click on a second line. The counting is in `regionSummary()` in `lib/gujarat-regions.ts` | Done | No |
 
 ## Checked and found sound (not issues)
 

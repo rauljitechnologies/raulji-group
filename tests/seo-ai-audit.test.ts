@@ -6,6 +6,8 @@ import { ARTICLE_SLUGS } from "@/lib/blog";
 import { SECONDARY_SERVICES } from "@/lib/secondary-services";
 import { SERVICE_OPTION_GROUPS } from "@/components/forms/lead-form";
 import { NEEDS } from "@/components/forms/contact-wizard";
+import { CITIES, GUJARAT_DISTRICTS } from "@/lib/cities";
+import { DISTRICT_REGION, regionSummary } from "@/lib/gujarat-regions";
 
 /**
  * Regression tests for the fixes made in the SEO / AI search audit of
@@ -101,5 +103,28 @@ describe("SAI-11: the post-build validator checks the build it follows", () => {
     });
     expect(run.status).toBe(1);
     expect(run.stderr).toContain(".next-does-not-exist/server/app");
+  });
+});
+
+describe("SAI-26: the Gujarat region cards break down the districts headline", () => {
+  const summary = regionSummary(GUJARAT_DISTRICTS, CITIES.map((c) => c.district));
+
+  it("maps every Gujarat district, and only those, to a region", () => {
+    expect(Object.keys(DISTRICT_REGION).sort()).toEqual([...GUJARAT_DISTRICTS].sort());
+  });
+
+  it("places every city page in a known district", () => {
+    expect(CITIES.filter((c) => !GUJARAT_DISTRICTS.includes(c.district)).map((c) => c.slug)).toEqual([]);
+  });
+
+  it("counts districts, so the cards add up to the headline", () => {
+    expect(summary.reduce((n, r) => n + r.districts, 0)).toBe(GUJARAT_DISTRICTS.length);
+    // Kutch is one district with two city pages (Bhuj, Gandhidham); the old
+    // cards showed it as 2.
+    expect(summary.find((r) => r.region === "Kutch")).toMatchObject({ districts: 1, cityPages: 2 });
+  });
+
+  it("still carries the city-page count the finder shows on click", () => {
+    expect(summary.reduce((n, r) => n + r.cityPages, 0)).toBe(CITIES.length);
   });
 });

@@ -7,7 +7,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { LeadForm } from "@/components/forms/lead-form";
 import { HighlightComparison } from "@/components/shared/registration-tools";
 import { GujaratCityFinder, RegionCards } from "@/components/shared/gujarat-city-finder";
-import { DISTRICT_REGION, REGIONS } from "@/lib/gujarat-regions";
+import { DISTRICT_REGION, regionSummary } from "@/lib/gujarat-regions";
 import { getArticle } from "@/lib/blog";
 import { coverScale, scaleSizes } from "@/lib/image-sizes";
 import { CITIES, CITY_SLUGS, GUJARAT_DISTRICTS } from "@/lib/cities";
@@ -241,10 +241,10 @@ export default function GujaratPage() {
       region: DISTRICT_REGION[c.district] ?? "Central",
       photo: CITY_CARD_PHOTOS[c.slug]?.src,
     }));
-  const regionCounts = REGIONS.map((region) => ({
-    region,
-    count: finderCities.filter((c) => c.region === region).length,
-  }));
+  const regionCounts = regionSummary(
+    GUJARAT_DISTRICTS,
+    CITIES.map((c) => c.district),
+  );
   const structures = SERVICES.map((service) => ({
     slug: service.slug,
     name: service.shortName,

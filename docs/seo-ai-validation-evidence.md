@@ -428,3 +428,48 @@ text) are checked here rather than in a unit test.
 Raw outputs (`crawl.json`, Lighthouse JSON, the Playwright scripts) were kept in
 the session scratch directory and are not committed. The scripts are small
 enough to re-create from the descriptions above.
+
+## 12. Gujarat hub claims, re-verification (SAI-26)
+
+**Production** (`/gujarat/`, fetched and parsed later on 23 Oct 2026):
+
+- All 33 root-level city links on the page return 200.
+- The hero says "33 districts served, one online process". The five region
+  cards under it read 10 Central, 6 South, 10 Saurashtra, 2 Kutch, 5 North.
+  `app/gujarat/page.tsx` computed those from `CITIES`, so they were city-page
+  counts. Kutch is one district.
+- The district list on the same page links 27 of the 33 districts to a city
+  page. Chhota Udaipur, Dang, Gir Somnath, Mahisagar, Narmada and Tapi read
+  "no city page yet, call +91 8511187689".
+
+**After the fix** (Playwright, local production build of the branch, at 375 px
+and 1280 px). Each card was clicked, and the city-page links visible in the
+finder were counted:
+
+| Card | Finder shows |
+|---|---|
+| 9 districts in Central Gujarat · 10 city pages | 10 |
+| 7 districts in South Gujarat · 6 city pages | 6 |
+| 11 districts in Saurashtra · 10 city pages | 10 |
+| 1 district in Kutch · 2 city pages | 2 |
+| 5 districts in North Gujarat · 5 city pages | 5 |
+
+- Districts total 33 and match the headline. City pages total 33.
+- No overflow, and 0 console errors.
+- The "districts in" wording is screen-reader-only text, so the visible design
+  is unchanged apart from the new city-page line.
+
+**Tests:** 4 in `tests/seo-ai-audit.test.ts` (SAI-26). They check:
+
+- every district is mapped to a region, and no unknown one is;
+- every city page sits in a known district;
+- the district counts total 33, with Kutch at 1 district and 2 city pages;
+- the city-page counts total `CITIES.length`.
+
+**Verification run:**
+
+| Command | Result |
+|---|---|
+| `npm test` | 129/129 |
+| `npm run lint`, `npm run typecheck` | exit 0 |
+| `npm run build` | passes, including `seo-validate` |
