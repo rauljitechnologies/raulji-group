@@ -1,6 +1,7 @@
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import type { Crumb } from "@/lib/schema";
 import { cn } from "@/lib/utils";
+import { H1 } from "@/lib/typography";
 
 /**
  * The masthead every inner page starts with: breadcrumb trail, optional
@@ -43,7 +44,7 @@ export function PageHeader({
           ) : null}
           <h1
             className={cn(
-              "text-[1.875rem] leading-[1.2] md:text-4xl md:leading-[1.15] lg:text-5xl lg:leading-[1.1]",
+              H1,
               eyebrow && "mt-4",
             )}
           >

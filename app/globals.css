@@ -88,7 +88,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -211,6 +211,15 @@
       padding-bottom: 0;
     }
   }
+
+  /* The page switch (app/template.tsx). A single short fade as the new route
+     mounts, so navigation reads as a change of page rather than a redraw.
+     No `both`: the fill would leave `opacity` applied for the life of the
+     page, keeping this wrapper a stacking context and dropping the in-page
+     fixed and sticky layers behind the header. */
+  .page-enter {
+    animation: page-enter 220ms ease-out;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -227,7 +236,46 @@
     scroll-behavior: auto !important;
   }
 
-  .hover-lift:hover {
+  .faq-rise,
+  .faq-fade,
+  .faq-reveal,
+  .cta-reveal,
+  .page-enter {
+    animation: none !important;
+  }
+
+  /* The rule above shortens durations but leaves delays, and the panel's
+     visibility and opacity are delayed. Open and close instantly instead. */
+  .faq-panel,
+  .faq-panel[data-open="true"] {
+    transition: none;
+  }
+
+  .hover-lift:hover,
+  .group:hover .photo-zoom,
+  .group:focus-visible .photo-zoom {
     transform: none;
+  }
+}
+
+@keyframes faq-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes faq-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

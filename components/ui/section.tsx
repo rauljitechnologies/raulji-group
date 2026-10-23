@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { H2 } from "@/lib/typography";
 
 export function Section({
   children,
@@ -46,7 +47,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <As className="text-3xl md:text-4xl lg:text-[2.75rem] lg:leading-tight">{title}</As>
+      <As className={H2}>{title}</As>
       {lead ? (
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{lead}</p>
       ) : null}

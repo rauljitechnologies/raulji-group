@@ -14,9 +14,9 @@ import { breadcrumbSchema, graph, personSchema, type Crumb } from "@/lib/schema"
 export const revalidate = 3600;
 
 export const metadata = pageMeta({
-  title: "Our Team | Raulji Group",
+  title: "Our Team: Registration & Compliance Experts | Raulji Group",
   description:
-    "The people at Raulji Group who handle business registration, compliance and advisory work for businesses across Gujarat.",
+    "Meet the Raulji Group team in Vadodara who handle your business registration, annual compliance and advisory work, led by Chairman Dharmendrasinh Raulji.",
   path: "/team/",
   ogHeadline: "The team behind your registration",
 });
@@ -54,7 +54,7 @@ export default async function TeamPage() {
             src={chairmanPhoto}
             alt={`${LEADERSHIP.chairman.name}, ${LEADERSHIP.chairman.roles[0]}`}
             placeholder="blur"
-            sizes="(min-width: 768px) 14rem, 100vw"
+            sizes="280px"
             className="aspect-[4/5] w-full max-w-[14rem] rounded-2xl border border-border object-cover object-top"
           />
           <div>
@@ -129,16 +129,24 @@ export default async function TeamPage() {
           </ul>
         </Section>
       ) : (
-        /* No placeholder profiles (master rule 13). Stated as a note with the
-           two ways to reach the person who would do the work, rather than a
-           small centred card alone in a full section. */
+        /*
+          No placeholder profiles (master rule 13), and no placeholder heading
+          either. This block used to be headed "Team profiles are being
+          updated", which the audit flagged as visible placeholder text telling
+          every reader and crawler that the page is unfinished (TF-17). The
+          contact routes under it are genuinely useful, so the section keeps
+          them and is headed by what it actually offers. When the team table
+          has profiles, the branch above renders them instead and this never
+          shows.
+        */
         <Section tone="muted">
           <div className="grid gap-6 rounded-2xl border border-border bg-card p-6 sm:p-8 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
             <div>
-              <h2 className="text-xl">Team profiles are being updated</h2>
+              <h2 className="text-xl">Speak to the person who would handle your registration</h2>
               <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
-                Rather than publish placeholder profiles, we would rather you spoke to us directly.
-                Either way you reach the person who would handle your registration.
+                Raulji Group keeps a small team, so an enquiry reaches someone who does the work
+                rather than a call centre. Call or email and you will be speaking to the person who
+                would prepare and file your application.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:w-[15rem] md:flex-col">

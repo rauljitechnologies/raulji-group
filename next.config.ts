@@ -8,7 +8,35 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   images: {
+    /*
+     * The crawl of 15 Oct 2026 found every image being fetched at w=3840
+     * (TF-08), because that is the largest entry in Next's default
+     * deviceSizes ladder and it appears in every srcset. Nothing on this site
+     * is laid out wider than 1920 CSS pixels, so the 2048 and 3840 candidates
+     * were only ever a way for a high-DPR phone to download a desktop file.
+     * Capping the ladder removes them from every srcset at once.
+     */
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    /*
+     * AVIF first, WebP as the fallback. The earlier note here was right that
+     * at the *default* quality of 75 the optimiser encodes AVIF at an
+     * effective quality of 47 and softens photographic detail. That is a
+     * quality problem, not a format problem, and the fix is the explicit
+     * quality below rather than dropping the format: at quality 70 AVIF holds
+     * detail and still lands well under the WebP byte count. Browsers that do
+     * not accept AVIF are served WebP from the same srcset.
+     */
     formats: ["image/avif", "image/webp"],
+    /*
+     * The audit asks for quality 70 (TF-08). There is no `defaultQuality`
+     * option; `qualities` is the allow-list, and when an <Image> passes no
+     * `quality` prop the optimiser picks the allowed value nearest 75. With a
+     * single entry that is unambiguous, so 70 becomes the effective default
+     * for every image on the site. No component passes `quality` explicitly,
+     * and if one ever needs to, its value has to be added here or the build
+     * fails loudly rather than silently falling back to 75.
+     */
+    qualities: [70],
   },
   async redirects() {
     // statusCode 301 rather than `permanent: true`, which emits 308. Both are
@@ -29,34 +57,31 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
-      // Discontinued. /services/ is the closest genuinely relevant destination.
-      {
-        source: "/services/land-investment",
-        destination: "/services/",
-        statusCode: 301,
-      },
+      // /services/land-investment/ answers 410 from its own route handler
+      // (app/services/land-investment/route.ts), per technical audit TF-02.
+      // It is deliberately absent from this list.
       /*
-       * Confirmed by the client on 2026-09-16 as services Raulji Group does not
-       * provide, and redirected to the homepage on their explicit instruction.
-       *
-       * Noted for the record: master rule 15 and 37, and the client's own brief
-       * at section 35, say not to send unrelated pages to the homepage, because
-       * a redirect to a page that does not answer the original query is
+       * Services Raulji Group does not provide, confirmed by the client on
+       * 2026-09-16. They pointed at the homepage until the technical audit of
+       * 15 Oct 2026 (TF-02) reassigned them to the nearest relevant page:
+       * /services/legal/ to the registration pillar, which covers the MCA
+       * filing work those queries are usually after, and /services/finance/
+       * to the services hub. That is also what master rules 15 and 37 ask for,
+       * since a redirect to a page that does not answer the original query is
        * commonly treated as a soft 404 and passes little of the old page's
-       * value. The rule-consistent handling would be 410 for /services/legal/
-       * and /services/finance/, which have no successor, and 301 for
-       * /services/gst-din-mca/ to /services/business-registration/, which
-       * covers MCA filing support. The client asked for the homepage, so that
-       * is what these do, and switching them later is a one line change.
+       * value.
+       *
+       * /services/gst-din-mca/ still goes to the homepage: the audit does not
+       * list it, so the client's 2026-09-16 instruction stands for that one.
        */
       {
         source: "/services/legal",
-        destination: "/",
+        destination: "/services/business-registration/",
         statusCode: 301,
       },
       {
         source: "/services/finance",
-        destination: "/",
+        destination: "/services/",
         statusCode: 301,
       },
       {
@@ -64,10 +89,20 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
-      // Previous services overview, folded into /services/.
+      // Previous services overview, folded into /services/. The technical audit
+      // (TF-20) says to remove this rule when the new /industries/ hub ships,
+      // so that the URL serves the hub instead of redirecting away from it.
       {
         source: "/industries",
         destination: "/services/",
+        statusCode: 301,
+      },
+      // The year in this slug dated the post and would have to change every
+      // January. The post now lives at the yearless slug (audit TF-02); the
+      // old URL had 2 impressions and is the one Google still knows.
+      {
+        source: "/blog/how-to-choose-business-structure-india-2026",
+        destination: "/blog/how-to-choose-business-structure-india/",
         statusCode: 301,
       },
       // Legacy slug consolidated into the Phase 1 registration page.
@@ -118,6 +153,55 @@ const nextConfig: NextConfig = {
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
+          },
+          /*
+           * Content-Security-Policy, report-only to begin with (audit TF-12).
+           *
+           * Report-only is deliberate: an enforced policy that misses one host
+           * silently breaks analytics or the enquiry form, and the audit asks
+           * for two clean weeks before enforcement. Switch the key to
+           * "Content-Security-Policy" once the reports are clean; nothing else
+           * needs to change.
+           *
+           * What each directive is for on this site:
+           *  - script-src: Google Tag Manager, which loads GA4 inside itself.
+           *    'unsafe-inline' is required by the GTM bootstrap snippet and by
+           *    Next's inline hydration scripts.
+           *  - img-src: data: covers the blur placeholders Next inlines;
+           *    www.googletagmanager.com and *.google-analytics.com cover
+           *    measurement pixels.
+           *  - connect-src: GA4 sends its hits by fetch/beacon.
+           *  - frame-src: the GTM noscript iframe.
+           *  - style-src 'unsafe-inline': Tailwind is compiled to a stylesheet,
+           *    but Next emits inline style attributes for next/image sizing.
+           *  - frame-ancestors 'self' mirrors the X-Frame-Options above.
+           * There is no map embed and no third-party form, so no host is
+           * allowed for either. WhatsApp and tel: links are navigations, not
+           * subresources, so they need no directive.
+           */
+          {
+            key: "Content-Security-Policy-Report-Only",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://*.googletagmanager.com",
+              "font-src 'self' data:",
+              "connect-src 'self' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
+              "frame-src https://www.googletagmanager.com",
+              "object-src 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+              "frame-ancestors 'self'",
+              /*
+               * No `upgrade-insecure-requests` while this header is report-only.
+               * Browsers ignore that directive in a report-only policy and log
+               * a console error on every page saying so (Lighthouse
+               * "errors-in-console", audit of 23 Oct 2026). HSTS above already
+               * keeps every request on HTTPS. Add it back in the same commit
+               * that switches the key to the enforced header.
+               */
+            ].join("; "),
           },
         ],
       },

@@ -9,6 +9,25 @@ import gujarat from "@/public/blog/starting-a-business-in-gujarat.webp";
 import mcaProcess from "@/public/blog/mca-company-incorporation-process.webp";
 import structureGuide from "@/public/blog/business-structure-comparison-guide.webp";
 import healthInsurance from "@/public/blog/health-insurance-policy-india.webp";
+import hiPanchmahal from "@/public/blog/health-insurance-panchmahal-gujarat.webp";
+import hiGodhra from "@/public/blog/health-insurance-godhra-gujarat.webp";
+import hiHalol from "@/public/blog/health-insurance-halol-gujarat.webp";
+import hiKalol from "@/public/blog/health-insurance-kalol-gujarat.webp";
+import hiJambughoda from "@/public/blog/health-insurance-jambughoda-panchmahal.webp";
+import hiVillagesGodhra from "@/public/blog/health-insurance-villages-godhra-panchmahal.webp";
+import hiKakanpur from "@/public/blog/health-insurance-kakanpur-panchmahal.webp";
+import hiTuwa from "@/public/blog/health-insurance-tuwa-panchmahal.webp";
+import hiKantadi from "@/public/blog/health-insurance-kantadi-panchmahal.webp";
+// Second batch of business guides, 23 Oct 2026 (scripts/gen-blog-images-batch2.py).
+import gstGujarat from "@/public/blog/gst-registration-gujarat.webp";
+import udyamMsme from "@/public/blog/udyam-registration-msme.webp";
+import gujaratShops from "@/public/blog/gujarat-shops-establishments-registration.webp";
+import partnershipDeed from "@/public/blog/partnership-deed-checklist.webp";
+import afterIncorporation from "@/public/blog/after-company-incorporation-checklist.webp";
+// Third batch, 23 Oct 2026 (scripts/gen-blog-images-batch3.py).
+import trademark from "@/public/blog/trademark-registration-india.webp";
+import fssai from "@/public/blog/fssai-registration-food-licence.webp";
+import iec from "@/public/blog/import-export-code-iec.webp";
 
 /**
  * Featured images for the 2026 Business Guide Series.
@@ -32,39 +51,110 @@ export interface BlogImage {
 export const BLOG_IMAGES = {
   "choose-structure": {
     src: chooseStructure,
-    alt: "Diagram of one decision point branching into four routes, each ending in a card with fewer rules than the last, representing the four business structures and their falling compliance load",
+    alt: "Diagram: one decision branching into four business structures, each with fewer rules",
   },
   "pvt-vs-llp": {
     src: pvtVsLlp,
-    alt: "Diagram of two panels side by side: a grid of share units on the left for a Private Limited Company, and two partners joined by a line on the right for an LLP",
+    alt: "Diagram: a grid of shares for a Private Limited Company beside two joined partners for an LLP",
   },
   "partnership-vs-proprietorship": {
     src: partnershipVsProprietorship,
-    alt: "Diagram of one owner on the left and two joined owners on the right, each under an open dashed arc showing that liability is unlimited in both",
+    alt: "Diagram: one owner and two joined owners, each under an open arc for unlimited liability",
   },
   documents: {
     src: documents,
-    alt: "Diagram of five document rows, four marked with a tick and one marked with a cross, representing the document that comes back for resubmission",
+    alt: "Diagram: five document rows, four ticked and one crossed as the one sent back for resubmission",
   },
   mistakes: {
     src: mistakes,
-    alt: "Diagram of a filing sent from a form to the registry and a dashed return arrow labelled resubmission coming back to it",
+    alt: "Diagram: a filing going to the registry with a dashed resubmission arrow returning",
   },
   gujarat: {
     src: gujarat,
-    alt: "Diagram of two stacked bands: a continuous national layer above and a Gujarat layer below with separate segments filled, representing the state registrations that sit under a central process",
+    alt: "Diagram: a continuous national layer above a Gujarat layer of separate state registrations",
   },
   "mca-process": {
     src: mcaProcess,
-    alt: "Diagram of three stages, name then filing then certificate, with a dashed loop running back from the filing stage to the name stage",
+    alt: "Diagram: name, filing and certificate, with a dashed loop back from filing to name",
   },
   "structure-guide": {
     src: structureGuide,
-    alt: "Diagram of a four column comparison matrix with a header row and five rows of cells, representing the structures compared across ownership, liability, management, compliance and funding",
+    alt: "Diagram: a four column matrix comparing the structures across five rows",
   },
   "health-insurance": {
     src: healthInsurance,
-    alt: "Diagram of a policy document beside a timeline marked at 30 days, 36 months and 60 months, the waiting period and moratorium milestones in a health insurance policy",
+    // The supplied artwork replaced the original timeline diagram, and the alt
+    // text had not followed it. It now describes what is actually shown.
+    alt: "Illustration: a man at a desk with a laptop, beside icons for cover, features and claims",
+  },
+  // The Panchmahal health insurance cluster, drawn by scripts/gen-health-images.py.
+  "health-insurance-panchmahal": {
+    src: hiPanchmahal,
+    alt: "Diagram: Panchmahal linked to Godhra, Halol, Kalol and Jambughoda, with a route to Vadodara",
+  },
+  "health-insurance-godhra": {
+    src: hiGodhra,
+    alt: "Diagram: one shared family floater sum insured beside separate individual sums insured",
+  },
+  "health-insurance-halol": {
+    src: hiHalol,
+    alt: "Diagram: an employer group policy ending with the job beside a personal policy continuing",
+  },
+  "health-insurance-kalol": {
+    src: hiKalol,
+    alt: "Timeline: waiting periods at 30 days, the specific illness period, 36 months and 60 months",
+  },
+  "health-insurance-jambughoda": {
+    src: hiJambughoda,
+    alt: "Diagram: a route from a forested village to a network hospital, branching to a cash claim",
+  },
+  "health-insurance-villages-godhra": {
+    src: hiVillagesGodhra,
+    alt: "Diagram: choose, proposal form, KYC, payment, policy, then the 30-day free look window",
+  },
+  "health-insurance-kakanpur": {
+    src: hiKakanpur,
+    alt: "Diagram: a floater for the couple and children, with a separate policy for the grandparents",
+  },
+  "health-insurance-tuwa": {
+    src: hiTuwa,
+    alt: "Diagram: a hospital bill split into the part the policy pays and the part the family pays",
+  },
+  "health-insurance-kantadi": {
+    src: hiKantadi,
+    alt: "Diagram: a parent's declared condition, its waiting period up to 36 months, then cover",
+  },
+  "gst-gujarat": {
+    src: gstGujarat,
+    alt: "Diagram: GST thresholds, 40 lakh for goods and 20 lakh with services, and the state line",
+  },
+  "udyam-msme": {
+    src: udyamMsme,
+    alt: "Diagram: micro, small and medium categories nested on investment and turnover axes",
+  },
+  "gujarat-shops": {
+    src: gujaratShops,
+    alt: "Diagram: intimation below ten workers, registration from ten, both within 60 days",
+  },
+  "partnership-deed": {
+    src: partnershipDeed,
+    alt: "Diagram: two partners either side of a deed with twelve clause rows, ten agreed and two still open",
+  },
+  "after-incorporation": {
+    src: afterIncorporation,
+    alt: "Timeline: board and auditor by 30 days, share certificates by 2 months, INC-20A by 180 days",
+  },
+  trademark: {
+    src: trademark,
+    alt: "Timeline from filing to registration, with a four-month opposition window after advertisement",
+  },
+  fssai: {
+    src: fssai,
+    alt: "Diagram: FSSAI registration up to 1.5 crore, state licence to 50 crore, central licence above",
+  },
+  iec: {
+    src: iec,
+    alt: "Diagram: trade between India and the world, with IEC equal to PAN and the April to June update",
   },
 } as const satisfies Record<string, BlogImage>;
 

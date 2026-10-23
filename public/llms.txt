@@ -119,7 +119,7 @@ month shown against each one is its position in a January to September editorial
 series, not a publication date; all nine were published on the same date.
 
 - January: How to Choose the Right Business Structure in India in 2026.
-  https://www.raulji.com/blog/how-to-choose-business-structure-india-2026/
+  https://www.raulji.com/blog/how-to-choose-business-structure-india/
 - February: Private Limited Company vs LLP: Which Business Structure Should You
   Consider? https://www.raulji.com/blog/private-limited-company-vs-llp/
 - March: Partnership Firm vs Proprietorship: Understanding the Difference Before
@@ -140,6 +140,47 @@ series, not a publication date; all nine were published on the same date.
 - September: Health Insurance in India: What to Check Before Choosing a Policy.
   Written by Dharmendrasinh Raulji, Chairman, contact +91 9558855668.
   https://www.raulji.com/blog/health-insurance-policy-guide-india/
+
+Nine further guides, published on 2 and 3 October 2026 outside the series, cover
+health insurance for families in Panchmahal district. Panchmahal is the district
+guide and the other eight are town and village guides under it:
+https://www.raulji.com/blog/health-insurance-panchmahal-gujarat/
+https://www.raulji.com/blog/health-insurance-godhra-gujarat/
+https://www.raulji.com/blog/health-insurance-halol-gujarat/
+https://www.raulji.com/blog/health-insurance-kalol-gujarat/
+https://www.raulji.com/blog/health-insurance-jambughoda-panchmahal/
+https://www.raulji.com/blog/health-insurance-villages-godhra-panchmahal/
+https://www.raulji.com/blog/health-insurance-kakanpur-panchmahal/
+https://www.raulji.com/blog/health-insurance-tuwa-panchmahal/
+https://www.raulji.com/blog/health-insurance-kantadi-panchmahal/
+
+Five practical guides published on 23 October 2026, outside the series, cover
+the registrations and obligations that follow the structure decision:
+- GST registration in Gujarat: thresholds, compulsory cases, documents and the
+  REG-01 process. https://www.raulji.com/blog/gst-registration-gujarat-guide/
+- Udyam registration for MSMEs: the 2025 limits, the free official process and
+  the conditions each benefit carries.
+  https://www.raulji.com/blog/udyam-registration-msme-india/
+- Gujarat Shops and Establishments registration: intimation under ten workers,
+  registration from ten, within 60 days of starting business.
+  https://www.raulji.com/blog/gujarat-shops-establishments-registration/
+- Partnership deed checklist: twelve clauses to agree, and what the Indian
+  Partnership Act, 1932 provides when a deed is silent.
+  https://www.raulji.com/blog/partnership-deed-checklist-india/
+- After company incorporation: what is due in the first 30, 60 and 180 days,
+  and every year, for companies and LLPs.
+  https://www.raulji.com/blog/after-company-incorporation-compliance-checklist/
+
+Three guides to activity registrations, also published on 23 October 2026.
+Raulji Group gives guidance on these but does not file them as a service:
+- Trademark registration in India: classes, Form TM-A, examination,
+  opposition and IP India's official fees.
+  https://www.raulji.com/blog/trademark-registration-india-guide/
+- FSSAI registration or food licence: the turnover limits in force from
+  1 April 2026 and perpetual validity.
+  https://www.raulji.com/blog/fssai-registration-food-licence-india/
+- Import Export Code (IEC): who needs it, the DGFT application and the annual
+  April to June update. https://www.raulji.com/blog/import-export-code-iec-guide/
 
 Regulatory statements in these guides cite the Ministry of Corporate Affairs
 (mca.gov.in), Startup India (startupindia.gov.in), the Ministry of Micro, Small

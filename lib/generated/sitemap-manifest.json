@@ -1,0 +1,98 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "lastModified": "2026-10-23T17:18:23.000Z"
+    },
+    {
+      "path": "/about/",
+      "lastModified": "2026-10-23T08:28:57.000Z"
+    },
+    {
+      "path": "/blog/",
+      "lastModified": "2026-10-23T17:18:23.000Z"
+    },
+    {
+      "path": "/compare/",
+      "lastModified": "2026-10-23T13:00:00.000Z"
+    },
+    {
+      "path": "/contact/",
+      "lastModified": "2026-10-23T08:28:57.000Z"
+    },
+    {
+      "path": "/disclaimer/",
+      "lastModified": "2026-09-23T17:55:46.000Z"
+    },
+    {
+      "path": "/faqs/",
+      "lastModified": "2026-10-23T13:00:00.000Z"
+    },
+    {
+      "path": "/gujarat/",
+      "lastModified": "2026-10-23T18:23:48.000Z"
+    },
+    {
+      "path": "/our-clients/",
+      "lastModified": "2026-10-23T08:28:57.000Z"
+    },
+    {
+      "path": "/privacy/",
+      "lastModified": "2026-10-16T15:58:50.000Z"
+    },
+    {
+      "path": "/services/",
+      "lastModified": "2026-10-23T13:00:00.000Z"
+    },
+    {
+      "path": "/services/business-consulting/",
+      "lastModified": "2026-10-23T13:00:00.000Z"
+    },
+    {
+      "path": "/services/business-registration/",
+      "lastModified": "2026-10-23T17:18:23.000Z"
+    },
+    {
+      "path": "/team/",
+      "lastModified": "2026-10-16T15:58:50.000Z"
+    },
+    {
+      "path": "/terms/",
+      "lastModified": "2026-10-16T15:58:50.000Z"
+    }
+  ],
+  "files": {
+    "lib/services.ts": "2026-10-23T13:00:00.000Z",
+    "lib/secondary-services.ts": "2026-10-23T13:00:00.000Z",
+    "lib/cities.ts": "2026-10-16T15:58:50.000Z",
+    "lib/city-services.ts": "2026-10-18T06:12:43.000Z"
+  },
+  "articles": {
+    "after-company-incorporation-compliance-checklist": "2026-10-23T17:18:23.000Z",
+    "how-to-choose-business-structure-india": "2026-10-18T06:12:43.000Z",
+    "documents-required-company-registration-india": "2026-10-23T13:00:00.000Z",
+    "fssai-registration-food-licence-india": "2026-10-23T17:18:23.000Z",
+    "gst-registration-gujarat-guide": "2026-10-23T17:18:23.000Z",
+    "starting-business-gujarat-registration-guide": "2026-10-23T13:00:00.000Z",
+    "gujarat-shops-establishments-registration": "2026-10-23T17:18:23.000Z",
+    "health-insurance-godhra-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-halol-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-jambughoda-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kakanpur-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kalol-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-kantadi-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-panchmahal-gujarat": "2026-10-16T15:58:50.000Z",
+    "health-insurance-tuwa-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-villages-godhra-panchmahal": "2026-10-16T15:58:50.000Z",
+    "health-insurance-policy-guide-india": "2026-10-16T15:58:50.000Z",
+    "import-export-code-iec-guide": "2026-10-23T17:18:23.000Z",
+    "mca-company-registration-process-india": "2026-10-23T13:00:00.000Z",
+    "partnership-deed-checklist-india": "2026-10-23T13:00:00.000Z",
+    "partnership-vs-proprietorship-india": "2026-10-23T13:00:00.000Z",
+    "private-limited-company-vs-llp": "2026-10-18T06:12:43.000Z",
+    "common-business-registration-mistakes-india": "2026-10-23T17:18:23.000Z",
+    "business-structure-guide-new-entrepreneurs-india": "2026-10-18T06:12:43.000Z",
+    "trademark-registration-india-guide": "2026-10-23T17:18:23.000Z",
+    "udyam-registration-msme-india": "2026-10-23T13:00:00.000Z"
+  }
+}

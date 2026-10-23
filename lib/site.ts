@@ -62,11 +62,10 @@ export const SITE = {
  * Founder", the client's confirmation said Chairman only, and a founder claim
  * is company history that needs its own confirmation (master rule 42).
  *
- * `photo` is a PLACEHOLDER. It is the LinkedIn profile picture the client
- * supplied as a stand-in, and it is a casual photograph rather than a corporate
- * portrait. Replace the file at that path with the official photograph when it
- * arrives; nothing else needs to change, because the layout crops to 4:5 and
- * every use points at this one constant.
+ * `photo` is the portrait the client supplied on 2026-10-02, replacing the
+ * casual LinkedIn picture used as a stand-in until then. To change it again,
+ * replace the file at that path; nothing else needs to change, because the
+ * layout crops to 4:5 and every use points at this one constant.
  */
 export const LEADERSHIP = {
   chairman: {
@@ -75,7 +74,7 @@ export const LEADERSHIP = {
     /** Single string form, for schema.org jobTitle. */
     jobTitle: "Chairman, Raulji Group and Director, Raulji Technologies",
     photo: "/leadership/dharmendrasinh-raulji.jpg",
-    photoIsPlaceholder: true,
+    photoIsPlaceholder: false,
   },
 } as const;
 

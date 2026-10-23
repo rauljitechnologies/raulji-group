@@ -58,7 +58,20 @@ function brandNodes() {
 
 export function organizationSchema() {
   return {
-    "@type": "Organization",
+    /*
+     * Two types on one node (technical audit TF-14). Organization is what the
+     * group is; ProfessionalService is a LocalBusiness subtype, and it is the
+     * one that lets the opening hours, telephone and Vadodara locality below
+     * be read as a real place of business rather than loose contact details.
+     * One node with both types keeps a single entity under one @id, which is
+     * what every other node on the site already references.
+     *
+     * Deliberately absent: `founder`. The audit asks for it, but the client's
+     * confirmation of 2026-09-16 covered "Chairman" only, and a founder claim
+     * is company history that needs its own confirmation (master rules 7 and
+     * 13). It goes in when the client confirms it, not before.
+     */
+    "@type": ["Organization", "ProfessionalService"],
     "@id": ORG_ID,
     name: SITE.name,
     url: `${SITE.url}/`,
@@ -110,6 +123,26 @@ export function organizationSchema() {
       areaServed: "IN",
       availableLanguage: ["en", "gu", "hi"],
     },
+    /*
+     * The hours published on the contact page, in the machine-readable form
+     * (audit TF-14). Taken from SITE.hours so the page and the markup cannot
+     * disagree: a structured-data claim the page does not back is worse than
+     * no claim.
+     */
+    openingHoursSpecification: {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: SITE.hours.days.map((day) => `https://schema.org/${day}`),
+      opens: SITE.hours.opens,
+      closes: SITE.hours.closes,
+    },
+    /*
+     * Only the profile this group actually controls and publishes. The audit
+     * also asks for LinkedIn and the Google Business Profile; neither URL
+     * appears anywhere on the site or in the client's brief, and sameAs is an
+     * identity claim, so guessing one would attach the entity to a profile
+     * nobody has verified. Add them here once the client supplies the links.
+     */
+    sameAs: [SITE.technologies],
   };
 }
 

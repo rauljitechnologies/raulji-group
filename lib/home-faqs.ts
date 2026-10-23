@@ -1,4 +1,4 @@
-import type { FAQ } from "./services";
+import { PROFESSIONAL_FEE, type FAQ } from "./services";
 
 /**
  * The general FAQs.
@@ -36,7 +36,7 @@ export const GENERAL_FAQS: FAQ[] = [
   },
   {
     q: "What does registration cost?",
-    a: "Our professional fee is ₹9,999 for a Private Limited Company and ₹7,999 for an LLP. Government filing fees and stamp duty are payable in addition and depend on the state and the capital involved. For Partnership Firm and Proprietorship registration, the cost depends on which registrations your specific activity needs, so we quote after understanding the business.",
+    a: `Our professional fee is ${PROFESSIONAL_FEE.pvt} for a Private Limited Company and ${PROFESSIONAL_FEE.llp} for an LLP. Government filing fees and stamp duty are payable in addition and depend on the state and the capital involved. For Partnership Firm and Proprietorship registration, the cost depends on which registrations your specific activity needs, so we quote after understanding the business.`,
   },
   {
     q: "Do I need to visit your office to register a business?",

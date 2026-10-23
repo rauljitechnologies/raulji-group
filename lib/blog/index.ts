@@ -10,6 +10,23 @@ import { gujaratBusinessSetup } from "./articles/gujarat-business-setup";
 import { mcaProcess } from "./articles/mca-process";
 import { structureGuide } from "./articles/structure-guide";
 import { healthInsurance } from "./articles/health-insurance";
+import { healthInsurancePanchmahal } from "./articles/health-insurance-panchmahal";
+import { healthInsuranceGodhra } from "./articles/health-insurance-godhra";
+import { healthInsuranceHalol } from "./articles/health-insurance-halol";
+import { healthInsuranceKalol } from "./articles/health-insurance-kalol";
+import { healthInsuranceJambughoda } from "./articles/health-insurance-jambughoda";
+import { healthInsuranceVillagesGodhra } from "./articles/health-insurance-villages-godhra";
+import { healthInsuranceKakanpur } from "./articles/health-insurance-kakanpur";
+import { healthInsuranceTuwa } from "./articles/health-insurance-tuwa";
+import { healthInsuranceKantadi } from "./articles/health-insurance-kantadi";
+import { gstRegistrationGujarat } from "./articles/gst-registration-gujarat";
+import { udyamRegistration } from "./articles/udyam-registration";
+import { gujaratShopsEstablishments } from "./articles/gujarat-shops-establishments";
+import { partnershipDeedChecklist } from "./articles/partnership-deed-checklist";
+import { afterIncorporationChecklist } from "./articles/after-incorporation-checklist";
+import { trademarkRegistration } from "./articles/trademark-registration";
+import { fssaiRegistrationLicence } from "./articles/fssai-registration-licence";
+import { importExportCode } from "./articles/import-export-code";
 
 export type { Article, Block, Category, Source, ArticleAuthor } from "./types";
 export { CATEGORIES } from "./types";
@@ -37,6 +54,37 @@ export const ARTICLES: Article[] = [
   mcaProcess,
   structureGuide,
   healthInsurance,
+  // The Panchmahal health insurance cluster, outside the series. The India
+  // guide above is the topic pillar; the Panchmahal guide is the local pillar
+  // and the four town guides sit under it.
+  healthInsurancePanchmahal,
+  healthInsuranceGodhra,
+  healthInsuranceHalol,
+  healthInsuranceKalol,
+  healthInsuranceJambughoda,
+  // Godhra taluka villages, phase 1: one grouped guide and three villages with
+  // a distinct angle each. More villages only where Search Console shows demand.
+  healthInsuranceVillagesGodhra,
+  healthInsuranceKakanpur,
+  healthInsuranceTuwa,
+  healthInsuranceKantadi,
+  // Second batch of business guides, 23 Oct 2026, outside the series: the
+  // registrations that follow a structure decision (GST, Udyam, Gujarat shops
+  // and establishments), the partnership deed, and the first year after
+  // incorporation. docs/blog-content-audit.md records why each is not a
+  // duplicate of an existing page.
+  gstRegistrationGujarat,
+  udyamRegistration,
+  gujaratShopsEstablishments,
+  partnershipDeedChecklist,
+  afterIncorporationChecklist,
+  // Third batch, 23 Oct 2026: activity registrations a new business meets
+  // after its structure and state registrations. docs/five-blog-content-audit.md
+  // records the overlap check, including why GST and Udyam were improved in
+  // place rather than written again.
+  trademarkRegistration,
+  fssaiRegistrationLicence,
+  importExportCode,
 ];
 
 const BY_SLUG = new Map(ARTICLES.map((article) => [article.slug, article]));

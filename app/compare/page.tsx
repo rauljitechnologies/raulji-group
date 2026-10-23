@@ -13,9 +13,9 @@ import { pageMeta } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, graph, type Crumb } from "@/lib/schema";
 
 export const metadata = pageMeta({
-  title: "Pvt Ltd vs LLP vs Partnership vs Proprietorship | Raulji Group",
+  title: "Compare Pvt Ltd, LLP, Partnership & Proprietorship | Raulji",
   description:
-    "Compare Private Limited Company, LLP, Partnership Firm and Proprietorship on liability, compliance, tax and funding before you register.",
+    "See all four Indian business structures side by side on liability, compliance cost, tax and funding, then pick the one that fits. Compare structures now.",
   path: "/compare/",
   ogHeadline: "Choose the Right Business Structure",
 });
@@ -125,12 +125,23 @@ export default function ComparePage() {
         <ol className="mx-auto max-w-3xl space-y-6">
           {DECISION_POINTS.map((point, i) => (
             <li key={point.q} className="rounded-2xl border border-border bg-card p-6">
-              <h2 className="flex items-start gap-3 text-lg">
-                <span className="brand-gradient inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold text-primary-foreground">
+              {/*
+               * The number sits beside the heading, not inside it. Inside, the
+               * heading's text was "1Will you have co-owners?", which is what a
+               * crawler, an answer engine and a screen reader all read. The
+               * <ol> already carries the order, so the badge is decorative.
+               * h3, not h2: these are the five items under the section's own
+               * h2, "Five questions that usually decide it".
+               */}
+              <div className="flex items-start gap-3">
+                <span
+                  aria-hidden="true"
+                  className="brand-gradient inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-bold text-primary-foreground"
+                >
                   {i + 1}
                 </span>
-                {point.q}
-              </h2>
+                <h3 className="text-lg">{point.q}</h3>
+              </div>
               <p className="mt-3 leading-relaxed text-muted-foreground">{point.a}</p>
             </li>
           ))}

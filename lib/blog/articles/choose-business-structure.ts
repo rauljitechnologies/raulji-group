@@ -2,11 +2,11 @@ import type { Article } from "../types";
 import { GROUP_AUTHOR } from "../authors";
 
 export const chooseBusinessStructure: Article = {
-  slug: "how-to-choose-business-structure-india-2026",
+  slug: "how-to-choose-business-structure-india",
   title: "How to Choose the Right Business Structure in India in 2026",
-  metaTitle: "How to Choose a Business Structure in India (2026) | Raulji Group",
+  metaTitle: "How to Choose a Business Structure in India (2026) | Raulji",
   metaDescription:
-    "Private Limited, LLP, Partnership or Proprietorship: how liability, compliance, ownership and funding plans decide which structure fits your business.",
+    "Liability, compliance, ownership and funding plans decide whether a Pvt Ltd, LLP, partnership or proprietorship fits you. Work through the four questions.",
   excerpt:
     "Four structures, one decision, and it is usually settled by liability and compliance rather than by tax. Here is how to work through it before anything is filed.",
   category: "Business Registration",
@@ -32,7 +32,7 @@ export const chooseBusinessStructure: Article = {
     "What it is realistically like to change structure later",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: which business structure should you choose?",
     body: "There is no structure that suits every business. The right one falls out of four questions: how much personal risk the activity carries, how many owners there are and whether that will change, how much annual compliance you are willing to carry, and whether you will need outside investment.",
     points: [
       "**Private Limited Company** suits businesses that will take on outside shareholders or investment, and that need a separate legal entity with limited liability. It carries the heaviest annual compliance of the four.",
@@ -130,7 +130,7 @@ export const chooseBusinessStructure: Article = {
     },
     {
       kind: "p",
-      text: "This is the cost people underestimate, because it recurs whether or not the business trades. A company that earned nothing still needs its accounts audited, its board meetings minuted and its annual forms filed. A dormant LLP still files Form 11 by 30 May and Form 8 by 30 October, with late fees per day and no ceiling.",
+      text: "This is the cost people underestimate, because it recurs whether or not the business trades. A company that earned nothing still needs its accounts audited, its board meetings minuted and its annual forms filed. A dormant LLP still files Form 11 by 30 May and Form 8 by 30 October, and the additional fee for filing late grows with the delay.",
     },
     {
       kind: "p",

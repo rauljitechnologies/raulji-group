@@ -6,7 +6,7 @@ import type { Crumb } from "@/lib/schema";
 export const metadata = pageMeta({
   title: "Privacy Policy | Raulji Group",
   description:
-    "How Raulji Group collects, uses and protects your personal information when you use this website or enquire about our services.",
+    "How Raulji Group collects, uses and protects your personal information when you use this website or enquire about registration or advisory services.",
   path: "/privacy/",
   ogHeadline: "Privacy Policy",
 });

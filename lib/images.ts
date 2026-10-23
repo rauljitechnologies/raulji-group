@@ -62,7 +62,7 @@ export const IMAGES = {
    */
   hero: {
     src: hero,
-    alt: "Raulji Group drawn as one group holding two brands, Raulji Consulting Services and Raulji Technologies, kept separate because they do different work",
+    alt: "Raulji Group as one group holding two brands: Raulji Consulting Services and Raulji Technologies",
     placeholder: false,
   },
   /** Wide band, 21:9. The group and the two brands it runs. */
@@ -84,7 +84,7 @@ export const IMAGES = {
   /** Wide band, 21:9. The four structures a business can register as. */
   registration: {
     src: registration,
-    alt: "The four registration structures side by side: Private Limited, LLP, Partnership and Proprietorship, each with less annual filing than the last",
+    alt: "The four structures side by side: Private Limited, LLP, Partnership, Proprietorship",
     placeholder: false,
   },
   meeting: {
@@ -137,7 +137,7 @@ export const IMAGES = {
    */
   pvtStructure: {
     src: pvtStructure,
-    alt: "A company boundary drawn around a grid of share units, some issued and some not, showing ownership divided into transferable shares",
+    alt: "A company boundary around a grid of shares, some issued, showing transferable ownership",
     placeholder: false,
   },
   llpStructure: {
@@ -152,7 +152,7 @@ export const IMAGES = {
   },
   proprietorshipStructure: {
     src: proprietorshipStructure,
-    alt: "A single owner inside one unbroken ring, showing a person and a business that are the same legal entity",
+    alt: "A single owner in one unbroken ring: the person and the business are one legal entity",
     placeholder: false,
   },
 } as const satisfies Record<string, BrandImageEntry>;

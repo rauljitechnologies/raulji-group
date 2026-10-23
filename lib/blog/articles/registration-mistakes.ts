@@ -4,9 +4,9 @@ import { GROUP_AUTHOR } from "../authors";
 export const registrationMistakes: Article = {
   slug: "common-business-registration-mistakes-india",
   title: "Common Mistakes Entrepreneurs Make During Business Registration",
-  metaTitle: "Common Business Registration Mistakes in India | Raulji Group",
+  metaTitle: "9 Common Business Registration Mistakes in India | Raulji",
   metaDescription:
-    "Nine mistakes that cost founders time and money during business registration in India, from the wrong structure to the obligations after incorporation.",
+    "Nine mistakes that cost founders time and money when registering a business in India, from choosing the wrong structure to missing post-registration filings.",
   excerpt:
     "Registration errors are rarely dramatic. They are small, ordinary and expensive, and almost all of them are made in the week before anything is filed.",
   category: "Entrepreneurship",
@@ -34,7 +34,7 @@ export const registrationMistakes: Article = {
     "How to read a registration quote so the cheapest one is not the most expensive",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: the mistakes that cost founders most",
     body: "Most registration problems fall into three groups: a structure chosen for the wrong reason, paperwork that does not match itself, and an assumption that registration is the end of the process rather than the start of a set of annual obligations.",
     points: [
       "The expensive mistakes are made before filing, in the decisions. The annoying ones are made during filing, in the documents.",
@@ -101,7 +101,7 @@ export const registrationMistakes: Article = {
     { kind: "h2", id: "documents", text: "3. Documents that do not agree with each other" },
     {
       kind: "p",
-      text: "The Registrar reads the file as a whole. A name spelled one way on PAN and another on Aadhaar, an address typed into the form that does not match the bill supporting it, a utility bill that aged past the acceptable window while the rest of the papers were being collected: each of these is small, and each of them sends the application back.",
+      text: "The Registrar reads the file as a whole. A name spelled one way on PAN and another on Aadhaar, an address typed into the form that does not match the bill supporting it, a utility bill that aged past the acceptable window while the rest of the papers were being collected: each of these is small, and each of them sends the application back. Clearing the Registrar is not the same as owning the brand; our [trademark guide](/blog/trademark-registration-india-guide/) explains the difference.",
     },
     {
       kind: "list",
@@ -172,7 +172,7 @@ export const registrationMistakes: Article = {
     },
     {
       kind: "p",
-      text: "These obligations do not wait for the business to start trading. A company that was incorporated and then put aside still accrues an audit requirement and annual filings, and an LLP that never opened a bank account still owes both annual forms, where the late fee runs per day with no ceiling.",
+      text: "These obligations do not wait for the business to start trading. A company that was incorporated and then put aside still accrues an audit requirement and annual filings, and an LLP that never opened a bank account still owes both annual forms, where the additional fee for filing late steps up the longer it is left.",
     },
     {
       kind: "p",
@@ -258,7 +258,7 @@ export const registrationMistakes: Article = {
     },
     {
       q: "What happens if I register a company and do not start the business?",
-      a: "The annual obligations still apply. A company must have its accounts audited every financial year from its first and file its annual returns with the Registrar, whether or not it traded. An LLP must file Form 11 and Form 8 each year, with late fees charged per day and no upper limit. A dormant entity is not a free entity.",
+      a: "The annual obligations still apply. A company must have its accounts audited every financial year from its first and file its annual returns with the Registrar, whether or not it traded. An LLP must file Form 11 and Form 8 each year, and the additional fee for filing them late rises the longer the delay runs. A dormant entity is not a free entity.",
     },
     {
       q: "How long does business registration take in India?",
@@ -278,7 +278,8 @@ export const registrationMistakes: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "after-company-incorporation-compliance-checklist",
+    "how-to-choose-business-structure-india",
     "documents-required-company-registration-india",
     "starting-business-gujarat-registration-guide",
   ],

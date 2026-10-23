@@ -68,7 +68,13 @@ export type Block =
   /** An ordered process with a title and an explanation per step. */
   | { kind: "steps"; items: { title: string; body: RichText }[] }
   /** Internal links placed mid-article, where the reader needs them. */
-  | { kind: "links"; title: string; items: { href: string; label: string; blurb: string }[] };
+  | { kind: "links"; title: string; items: { href: string; label: string; blurb: string }[] }
+  /**
+   * The health insurance enquiry panel. Renders only on an article that
+   * carries `healthCta`, so it cannot route a business enquiry to the
+   * insurance number by being pasted into the wrong article.
+   */
+  | { kind: "insuranceCta" };
 
 export interface Source {
   label: string;
@@ -102,8 +108,15 @@ export interface Article {
    * that a January slot must not be presented as a January publication date
    * when the article was written in September, so `published` below carries
    * the real date and this carries the series position.
+   *
+   * Absent on articles outside the series, such as the Godhra guides.
    */
-  seriesMonth: string;
+  seriesMonth?: string;
+  /**
+   * City slug for an article written for one local market. The city page
+   * lists the articles that name it, so the local cluster links itself.
+   */
+  city?: string;
   /** Real publication date, ISO. Never backdated. */
   published: string;
   updated: string;
@@ -128,6 +141,19 @@ export interface Article {
   /** Shown above the author card on legal, regulatory and insurance articles. */
   disclaimer?: string;
   cta: { title: string; body: string };
+  /**
+   * Present only on health insurance articles. Switches the closing call to
+   * action to the health insurance route (Dharmendrasinh Raulji, by WhatsApp
+   * or phone) and enables `insuranceCta` blocks. `location` pre-fills the
+   * "Location:" line of the WhatsApp message.
+   */
+  healthCta?: { location: string };
+  /**
+   * The article this one sits under in a content cluster, shown as the middle
+   * breadcrumb (Home, Blog, parent, this article). Used by the village guides,
+   * which belong under the Panchmahal guide. `label` is the short crumb name.
+   */
+  parent?: { slug: string; label: string };
 }
 
 export const CATEGORIES = [
@@ -136,6 +162,7 @@ export const CATEGORIES = [
   "Business Consulting",
   "Entrepreneurship",
   "Gujarat Business",
+  "Godhra Business Guides",
   "Insurance Awareness",
 ] as const;
 

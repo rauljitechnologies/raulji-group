@@ -55,7 +55,9 @@ Keep it clean and corporate. Move users onward with: "Explore Service",
 ## 4. Homepage hero
 
 - **Eyebrow:** RAULJI GROUP
-- **H1:** We Don't Just Build Businesses. We Build Futures.
+- **H1:** Business Consulting & Registration Services for Entrepreneurs in India
+  — **changed 2026-10-18, see the note below.**
+- **Brand line under the H1:** We Don't Just Build Businesses. We Build Futures.
 - **Supporting copy:** positions Raulji Group as a consulting-focused business group
   helping entrepreneurs and businesses make informed decisions, solve business
   challenges and move forward with clarity.
@@ -66,14 +68,67 @@ Keep it clean and corporate. Move users onward with: "Explore Service",
 
 The hero must not look like a registration advertisement.
 
+**Changed 2026-10-18, by client instruction.** The H1 was
+"We Don't Just Build Businesses. We Build Futures." under this rule, and the
+2026-10-16 resolution in rule 5 had already declined once to replace it with a
+keyword-carrying headline. The client was shown that conflict, asked for the
+change anyway, and that instruction is recorded here rather than left to
+contradict the code.
+
+The tagline was **not** removed. It sits directly beneath the H1 as the brand
+statement, in its own styling, which is what both the client's brief and this
+rule require of it. `SITE.taglineParts` is still its single source.
+
+This changes only the homepage hero. The tagline remains the brand's line
+everywhere else it appears, and rule 2's "do not look like a registration
+advertisement" still governs the section: the H1 names consulting first, and
+the hero still leads with the group, not with a package.
+
 ## 5. Homepage meta
 
-- **Title:** Raulji Group | Business Consulting & Solutions
-- **Description:** Raulji Group is a business-focused group helping entrepreneurs and
-  businesses with consulting, business solutions, registration and specialized
-  services, with a focus on long-term growth.
+- **Title:** Business Consulting & Registration in India | Raulji Group
+  — **changed 2026-10-18, see the note below.**
+- **Description:** Raulji Group helps entrepreneurs and businesses with business
+  consulting, business structuring, registration and related services across
+  Gujarat and India. — **shortened 2026-10-18, see the note below.**
 
 Not Gujarat-only. Not registration-only.
+
+**Changed 2026-10-18, by client instruction.** This rule previously fixed the
+title as "Raulji Group | Business Consulting & Solutions" and the description
+as a 187-character sentence, and the 2026-10-16 resolution below had already
+declined a registration-led, geography-qualified title once. The client was
+shown that conflict and chose the new wording anyway.
+
+Two adjustments were made to what the client supplied, both on length alone:
+
+- The title as given — "Business Consulting & Registration Services in India |
+  Raulji Group" — was 67 characters, past the ~60 where Google truncates and
+  longer than any of the other 94 pages. "Services" was dropped, giving 58.
+- The description as given was 163 characters. "business structure selection"
+  became "business structuring", the term already used in `SITE.description`
+  and rule 8, giving 155.
+
+Both still lead with consulting and stay India-wide, which is what the rest of
+this rule requires. Every page's title and description is checked against
+those limits by the crawl recorded in `docs/seo-route-inventory.md`.
+
+**Resolved 2026-10-16 — superseded 2026-10-18 for the homepage title, the
+homepage description and the H1, by the note above.** The rest of this
+resolution stands: the sheet's other rows were applied, and its homepage row
+is still not the wording in use. Kept as the record of how the decision moved.
+
+The client's metadata and keyword sheet of 15 Oct 2026
+recommended a different homepage title ("Raulji Group | Business Registration &
+Consulting, Gujarat") and a registration-led description, and also asked for the
+homepage H1 to be changed to something carrying a keyword. The client decided:
+keep this rule's title and description, and keep the H1 as
+"We Don't Just Build Businesses. We Build Futures." (rule 4). Every other page in
+that sheet was updated. Do not re-apply the sheet's homepage row.
+
+Noted for the record: the sheet's own rationale column says "business registration
+in Gujarat" belongs to `/gujarat/` and that the homepage should target the brand,
+which its recommended homepage title contradicted.
 
 ## 6. Homepage sections
 
@@ -178,6 +233,21 @@ header navigation (section 29) and a different enquiry button label
 (section 11). The client chose to keep both as specified here: the navigation
 in rule 16, and "Get Business Guidance" in rule 23.
 
+**Redirect destinations revised 2026-10-16.** The client's technical SEO audit
+of 15 Oct 2026 (TF-02) reassigned three of the discontinued URLs, and that
+supersedes the 2026-09-16 instruction to send them to the homepage:
+
+| URL | Was | Now |
+| --- | --- | --- |
+| `/services/legal/` | 301 homepage | 301 `/services/business-registration/` |
+| `/services/finance/` | 301 homepage | 301 `/services/` |
+| `/services/land-investment/` | 301 `/services/` | **410 Gone** |
+
+`/services/gst-din-mca/` still 301s to the homepage: the audit does not list
+it, so the client's 2026-09-16 instruction stands for that one. `/rentals/`
+was already 410 and stays 410. The new destinations are what rules 15 and 37
+ask for, so the documented exception above no longer applies to these three.
+
 
 Audit for Land Investment, Rentals, Finance, Legal & Compliance and other
 discontinued services. If no longer part of current strategy, remove from main
@@ -225,6 +295,28 @@ priority cities only, with hand-written local content per page.
   structure. A page that would only differ by a substituted city name must not ship.
 - All other cities keep one page covering all four structures.
 - Do not extend this set without a further client decision.
+
+**Extended 2026-10-16, by client decision.** The client's Website SEO
+Implementation Prompt (15 Oct 2026) is that further decision. It permits, in
+addition to the twenty above:
+
+- Private Limited and LLP pages for eight tier-2 towns: Anand, Bharuch, Vapi,
+  Jamnagar, Bhavnagar, Mehsana, Gandhidham, Ankleshwar. Sixteen URLs.
+- GST registration pages for the five priority cities, **only if** Raulji Group
+  offers GST registration. Five URLs.
+- Four `/gujarat/{structure}/` pages, which are state-level, not city-level.
+
+The conditions are not relaxed: each page still needs hand-written local
+content, and the prompt adds a quality gate of its own (at least six of eight
+local fields filled) below which the page ships `noindex` and stays out of the
+sitemap and out of every automatic link module. The client's own technical
+audit also sets the release order: these ship in the last batch, and only for
+towns whose hub page is already indexed.
+
+Still forbidden, from the same prompt's Appendix C: structure pages for the
+other twenty towns, compliance x city, industry x city, industry x structure,
+add-on service x city other than GST in the five cities, locality pages inside
+cities, "near me" pages, and per-city cost pages.
 
 The original concern stands and is not weakened: do not create thousands of thin
 location pages, and do not mass-generate by template.

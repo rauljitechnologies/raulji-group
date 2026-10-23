@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { ServiceCards } from "@/components/shared/service-cards";
 import { SITE, telHref, mailHref, whatsappHref } from "@/lib/site";
+import { H1 } from "@/lib/typography";
 
 /**
  * A real 404. The previous site answered every unknown path with a 200 and the
@@ -79,7 +80,7 @@ export default function NotFound() {
               <p className="text-sm font-semibold uppercase tracking-wider text-primary">
                 Error 404
               </p>
-              <h1 className="mt-3 text-balance text-[2rem] leading-[1.15] sm:text-4xl md:text-5xl md:leading-[1.1]">
+              <h1 className={`mt-3 ${H1}`}>
                 We could not find that page
               </h1>
               <p className="mt-5 max-w-xl text-pretty text-lg leading-relaxed text-muted-foreground">

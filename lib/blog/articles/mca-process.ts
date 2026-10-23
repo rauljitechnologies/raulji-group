@@ -3,16 +3,16 @@ import { GROUP_AUTHOR } from "../authors";
 
 export const mcaProcess: Article = {
   slug: "mca-company-registration-process-india",
-  title: "MCA Company Registration in India: Understanding the Incorporation Process",
-  metaTitle: "MCA Company Registration Process in India Explained | Raulji Group",
+  title: "MCA Company Registration Process, Step by Step",
+  metaTitle: "MCA Company Registration Process, Step by Step | Raulji",
   metaDescription:
-    "How company incorporation works on the MCA portal: name reservation, SPICe+ and its linked filings, and the Certificate of Incorporation.",
+    "What MCA registration is and how company incorporation works on the MCA portal: name reservation, SPICe+ and linked filings, and the incorporation certificate.",
   excerpt:
     "The Ministry of Corporate Affairs is the regulator and the platform. Understanding what it does, and what it expects from an application, is what makes the process predictable.",
   category: "Company Registration",
   seriesMonth: "July",
   published: "2026-09-22",
-  updated: "2026-09-22",
+  updated: "2026-10-23",
   readMinutes: 11,
   primaryKeyword: "MCA company registration",
   secondaryKeywords: [
@@ -34,7 +34,7 @@ export const mcaProcess: Article = {
     "The specific reasons applications are sent back",
   ],
   keyTakeaway: {
-    heading: "The short answer",
+    heading: "The short answer: what is MCA registration?",
     body: "Company incorporation in India is filed on the Ministry of Corporate Affairs portal using SPICe+, a single application in two parts: Part A reserves the name, Part B incorporates the company and carries linked filings for the constitutional documents, declarations and several other registrations. Approval results in a Certificate of Incorporation carrying the company's CIN, with PAN and TAN issued alongside.",
     points: [
       "The MCA is the government ministry that administers company law and runs the filing platform. It grants incorporation; no private firm can.",
@@ -201,7 +201,7 @@ export const mcaProcess: Article = {
     },
     {
       kind: "p",
-      text: "From then on the annual cycle runs: an audit every financial year from the first, regardless of turnover, and annual filings with the Registrar. Directors also have an annual KYC obligation attached to their DIN, and a deactivated DIN will block filings until it is restored.",
+      text: "Our [post-incorporation compliance checklist](/blog/after-company-incorporation-compliance-checklist/) sets out each of these with its deadline. From then on the annual cycle runs: an audit every financial year from the first, regardless of turnover, and annual filings with the Registrar. Directors also have a KYC obligation attached to their DIN, Form DIR-3 KYC, which since 31 March 2026 falls due once every three financial years instead of annually. A deactivated DIN will block filings until it is restored.",
     },
     {
       kind: "links",
@@ -239,7 +239,7 @@ export const mcaProcess: Article = {
         "**Identity mismatches**: a name spelled differently across PAN, Aadhaar and the address proof.",
         "**Address entered differently from the supporting document**, including unit numbers and pin codes.",
         "**Digital signature problems**: a certificate not registered on the portal, expired, or belonging to the wrong person.",
-        "**A DIN that is deactivated** because the director's annual KYC was not filed.",
+        "**A DIN that is deactivated** because the director's DIR-3 KYC was not filed when due.",
         "**Objects drafted loosely**, so that what the company says it will do does not match the name or the activity described elsewhere in the filing.",
       ],
     },
@@ -283,7 +283,8 @@ export const mcaProcess: Article = {
     },
   ],
   related: [
-    "how-to-choose-business-structure-india-2026",
+    "after-company-incorporation-compliance-checklist",
+    "how-to-choose-business-structure-india",
     "private-limited-company-vs-llp",
     "documents-required-company-registration-india",
   ],
@@ -305,6 +306,12 @@ export const mcaProcess: Article = {
     },
   ],
   sources: [
+    {
+      label: "Companies (Appointment and Qualification of Directors) Amendment Rules, 2025, G.S.R. 943(E)",
+      url: "https://www.mca.gov.in/content/mca/global/en/acts-rules/ebooks/rules.html",
+      supports:
+        "Director KYC (Form DIR-3 KYC) once every three financial years from 31 March 2026, due by 30 June, with changed contact details updated within 30 days.",
+    },
     {
       label: "Ministry of Corporate Affairs",
       url: "https://mca.gov.in/",

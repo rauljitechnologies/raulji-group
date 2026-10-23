@@ -34,7 +34,12 @@ export function pageMeta({
   noindex = false,
 }: PageMetaInput): Metadata {
   const url = abs(path);
-  const image = ogImage ?? ogImageUrl(ogHeadline ?? title.replace(/\s*\|\s*Raulji Group\s*$/, ""));
+  // The client's metadata sheet of 15 Oct 2026 shortens several titles to
+  // "| Raulji" or "| Raulji Technologies" to stay inside 60 characters, so the
+  // brand suffix is matched in all three forms rather than only the long one.
+  const image =
+    ogImage ??
+    ogImageUrl(ogHeadline ?? title.replace(/\s*\|\s*Raulji(?:\s+(?:Group|Technologies))?\s*$/, ""));
 
   return {
     // Page titles already end in "| Raulji Group", so bypass the layout template

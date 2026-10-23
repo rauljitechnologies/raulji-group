@@ -76,6 +76,9 @@ const LEGAL_LINKS: FooterLink[] = [
   { name: "Privacy Policy", href: "/privacy/" },
   { name: "Terms of Service", href: "/terms/" },
   { name: "Disclaimer", href: "/disclaimer/" },
+  // Required by the CC BY-SA licence on the Rajkot photographs, not optional
+  // chrome: see lib/image-credits.ts.
+  { name: "Photograph Credits", href: "/image-credits/" },
 ];
 
 export function Footer() {
@@ -194,7 +197,7 @@ export function Footer() {
         </div>
 
         {/* Kept: we must not be mistaken for a government body (spec section 36). */}
-        <p className="mt-4 text-xs leading-relaxed text-secondary-foreground/45">
+        <p className="mt-4 text-xs leading-relaxed text-secondary-foreground/60">
           {AUTHORITY_DISCLAIMER}
         </p>
       </div>
