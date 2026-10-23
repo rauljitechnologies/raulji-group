@@ -56,7 +56,7 @@ export function ClientDirectory({ clients }: { clients: DirectoryClient[] }) {
             Search clients
           </label>
           <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-[#1a7cb0]"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-[#1872a3]"
             strokeWidth={2}
             aria-hidden="true"
           />
@@ -142,7 +142,7 @@ export function ClientDirectory({ clients }: { clients: DirectoryClient[] }) {
                 {names.map((name) => (
                   <li
                     key={name}
-                    className="text-base font-semibold text-[#122640] transition duration-200 hover:translate-x-1 hover:text-[#1a7cb0]"
+                    className="text-base font-semibold text-[#122640] transition duration-200 hover:translate-x-1 hover:text-[#1872a3]"
                   >
                     {name}
                   </li>

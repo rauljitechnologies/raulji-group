@@ -282,7 +282,7 @@ export function VersusComparison({
             key={row.label}
             className="grid gap-2 rounded-lg border border-[#e3e9ef] bg-white p-4 md:grid-cols-[1fr_9rem_1fr] md:items-center md:gap-5 md:p-5"
           >
-            <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0] md:order-2 md:text-center">
+            <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3] md:order-2 md:text-center">
               {row.label}
             </h3>
             <p className="text-sm leading-[1.6] text-[#26354a] md:order-1 md:text-right">

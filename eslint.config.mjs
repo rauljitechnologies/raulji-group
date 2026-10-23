@@ -22,9 +22,14 @@ const config = [
   {
     // Build output, dependencies and the generated sitemap manifest. Linting
     // generated files reports problems nobody can fix at the source.
+    // `.next-*` covers any NEXT_DIST_DIR build (next.config.ts) and the stale
+    // `.next-verify` / `.next-root-owned-old` folders; `.cache/` holds an old
+    // build whose generated types failed `npm run lint` with 12 errors on a
+    // working copy that had one (audit of 23 Oct 2026). Both are gitignored.
     ignores: [
       ".next/**",
-      ".next-verify/**",
+      ".next-*/**",
+      ".cache/**",
       "node_modules/**",
       "next-env.d.ts",
       "lib/generated/**",

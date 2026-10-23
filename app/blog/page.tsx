@@ -238,7 +238,7 @@ export default async function BlogPage() {
             </div>
           </div>
           <div className="flex min-w-0 flex-[1_1_26rem] flex-col justify-center gap-[1.125rem] p-7 sm:p-10 lg:p-[3.25rem]">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]">
               Still deciding?
             </p>
             <h2
@@ -256,7 +256,7 @@ export default async function BlogPage() {
                 href="/contact/"
                 event="primary_cta_click"
                 params={{ label: "blog_still_deciding" }}
-                className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
+                className="inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
               >
                 Talk to an Expert
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -337,7 +337,7 @@ export default async function BlogPage() {
       <section aria-labelledby="rel-h" className="pt-14 md:pt-24">
         <div className="mx-auto flex max-w-[1240px] flex-col gap-7 px-5 sm:px-8">
           <div className="flex flex-col gap-3">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]">
               Related topics
             </p>
             <h2
@@ -358,7 +358,7 @@ export default async function BlogPage() {
                     {link.label}
                     <span
                       aria-hidden="true"
-                      className="flex h-[1.875rem] w-[1.875rem] flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1a7cb0]"
+                      className="flex h-[1.875rem] w-[1.875rem] flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1872a3]"
                     >
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>

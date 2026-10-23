@@ -160,7 +160,7 @@ export function RouteProgress() {
       className="pointer-events-none fixed inset-x-0 top-0 z-[210] h-[3px] bg-transparent"
     >
       <div
-        className="h-full bg-[linear-gradient(90deg,#1a7cb0,#329fd2)] transition-[width,opacity] duration-200 ease-out"
+        className="h-full bg-[linear-gradient(90deg,#1872a3,#329fd2)] transition-[width,opacity] duration-200 ease-out"
         style={{ width: `${width}%`, opacity: width === 100 ? 0 : 1 }}
       />
     </div>

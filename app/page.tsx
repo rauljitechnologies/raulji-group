@@ -110,7 +110,7 @@ export const metadata = pageMeta({
  */
 
 /* Colours from the design, all inside the brand palette (master rule 24). */
-const EYEBROW = "text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+const EYEBROW = "text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const BTN_DARK =
   "inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-6 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-[#0c1a2d]";
 const BTN_OUTLINE =
@@ -324,11 +324,11 @@ export default function HomePage() {
               className={`${H1_LONG} text-[#122640]`}
             >
               Business Consulting & Registration Services{" "}
-              <span className="text-[#1a7cb0]">for Entrepreneurs in India</span>
+              <span className="text-[#1872a3]">for Entrepreneurs in India</span>
             </h1>
             <p className="text-pretty text-lg font-bold leading-[1.35] tracking-[-0.01em] text-[#122640] sm:text-xl">
               {SITE.taglineParts[0]}{" "}
-              <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
+              <span className="text-[#1872a3]">{SITE.taglineParts[1]}</span>
             </p>
           </div>
           <p className="max-w-[32.5rem] text-pretty text-base/[1.7] leading-[1.7] sm:text-lg/[1.7]">
@@ -396,17 +396,25 @@ export default function HomePage() {
       {/* 2. Key facts. The design's figures band, holding verified facts only. */}
       <section aria-label="Key facts" className="bg-[#122640] text-white">
         <dl className={`${CONTAINER} grid gap-6 py-8 sm:grid-cols-2 md:py-10 lg:grid-cols-4`}>
+          {/*
+           * Each group is a <div> holding exactly one <dt> and one <dd>, the
+           * only shape a <dl> allows. The icon used to sit beside a second,
+           * inner <div>, which made the list invalid (Lighthouse
+           * "definition-list" and "dlitem", audit of 23 Oct 2026). It now
+           * lives inside the <dd>, positioned against the group, so the
+           * layout is unchanged: icon on the left, value above label.
+           */}
           {KEY_FACTS.map(({ value, label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-4">
-              <Icon
-                className="h-8 w-8 shrink-0 text-[#329fd2]"
-                strokeWidth={1.4}
-                aria-hidden="true"
-              />
-              <div className="flex flex-col-reverse">
-                <dt className="mt-0.5 text-sm text-[#c9d6e3]">{label}</dt>
-                <dd className="text-xl font-bold tracking-[-0.01em] sm:text-[1.375rem]">{value}</dd>
-              </div>
+            <div key={label} className="relative flex min-h-8 flex-col-reverse justify-center pl-12">
+              <dt className="mt-0.5 text-sm text-[#c9d6e3]">{label}</dt>
+              <dd className="text-xl font-bold tracking-[-0.01em] sm:text-[1.375rem]">
+                <Icon
+                  className="absolute left-0 top-1/2 h-8 w-8 -translate-y-1/2 text-[#329fd2]"
+                  strokeWidth={1.4}
+                  aria-hidden="true"
+                />
+                {value}
+              </dd>
             </div>
           ))}
         </dl>
@@ -420,7 +428,7 @@ export default function HomePage() {
               <p className={EYEBROW}>One Group. End to End.</p>
               <h2 id="e2e-h" className={`${H2} text-balance`}>
                 From the First Decision to Growth,{" "}
-                <span className="text-[#1a7cb0]">in One Place.</span>
+                <span className="text-[#1872a3]">in One Place.</span>
               </h2>
             </div>
             <p className="text-pretty text-base/[1.7] leading-[1.7]">
@@ -437,12 +445,12 @@ export default function HomePage() {
                 <>
                   <span className="flex items-center justify-between">
                     <Icon
-                      className={`h-[1.625rem] w-[1.625rem] ${last ? "text-[#329fd2]" : "text-[#1a7cb0]"}`}
+                      className={`h-[1.625rem] w-[1.625rem] ${last ? "text-[#329fd2]" : "text-[#1872a3]"}`}
                       strokeWidth={1.5}
                       aria-hidden="true"
                     />
                     <span
-                      className={`text-xs font-bold tracking-[0.08em] ${last ? "text-[#329fd2]" : "text-[#1a7cb0]"}`}
+                      className={`text-xs font-bold tracking-[0.08em] ${last ? "text-[#329fd2]" : "text-[#1872a3]"}`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -528,7 +536,7 @@ export default function HomePage() {
                     <h3 className="text-[1.375rem] font-bold tracking-[-0.01em] text-[#122640]">
                       {c.name}
                     </h3>
-                    <span className="rounded-[3px] bg-[#e8f5fb] px-2.5 py-1.5 text-xs font-semibold text-[#1a7cb0]">
+                    <span className="rounded-[3px] bg-[#e8f5fb] px-2.5 py-1.5 text-xs font-semibold text-[#1872a3]">
                       {c.category}
                     </span>
                   </div>
@@ -539,7 +547,7 @@ export default function HomePage() {
                       external
                       event="technology_click"
                       params={{ label: "home_brand_card" }}
-                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1872a3]"
                     >
                       {c.cta}
                       <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -547,7 +555,7 @@ export default function HomePage() {
                   ) : (
                     <Link
                       href={c.href}
-                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                      className="mt-1.5 inline-flex min-h-[2.75rem] items-center gap-2 self-start text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1872a3]"
                     >
                       {c.cta}
                       <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -588,7 +596,7 @@ export default function HomePage() {
               {CONSULTING_AREAS.map(({ label, icon: Icon }) => (
                 <li key={label} className="flex items-center gap-3.5 bg-white p-5 sm:p-[1.375rem]">
                   <Icon
-                    className="h-[1.625rem] w-[1.625rem] shrink-0 text-[#1a7cb0]"
+                    className="h-[1.625rem] w-[1.625rem] shrink-0 text-[#1872a3]"
                     strokeWidth={1.5}
                     aria-hidden="true"
                   />
@@ -625,7 +633,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/services/business-registration/"
-                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1872a3]"
               >
                 View All Registration Services
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -653,7 +661,7 @@ export default function HomePage() {
                     {summary ? (
                       <p className="text-[0.9375rem] leading-[1.6]">{summary.body}</p>
                     ) : null}
-                    <span className="mt-auto pt-2 text-[0.8125rem] font-semibold text-[#1a7cb0]">
+                    <span className="mt-auto pt-2 text-[0.8125rem] font-semibold text-[#1872a3]">
                       Learn more <span aria-hidden="true">→</span>
                     </span>
                   </TrackedLink>
@@ -668,13 +676,13 @@ export default function HomePage() {
               href="https://www.mca.gov.in/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-[#1a7cb0] hover:underline"
+              className="font-semibold text-[#1872a3] hover:underline"
             >
               mca.gov.in
             </a>
             . Raulji Group prepares and files these applications on your behalf and is not a
             government body.{" "}
-            <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/compare/" className="font-semibold text-[#1872a3] hover:underline">
               Compare all four structures
             </Link>
             .
@@ -746,7 +754,7 @@ export default function HomePage() {
                 key={title}
                 className="flex flex-col gap-4 rounded-md border border-[#e3e9ef] px-6 py-7 transition-colors hover:border-[#329fd2]"
               >
-                <Icon className="h-7 w-7 text-[#1a7cb0]" strokeWidth={1.5} aria-hidden="true" />
+                <Icon className="h-7 w-7 text-[#1872a3]" strokeWidth={1.5} aria-hidden="true" />
                 <h3 className="text-base/[1.35] font-bold leading-[1.35] text-[#122640]">{title}</h3>
                 <p className="text-sm/[1.6] leading-[1.6]">{body}</p>
               </li>
@@ -784,7 +792,7 @@ export default function HomePage() {
               className="text-balance text-[2rem] font-extrabold leading-[1.08] tracking-[-0.025em] text-[#122640] sm:text-[2.75rem] lg:text-[3.5rem]"
             >
               Leadership Built on Relationships.{" "}
-              <span className="text-[#1a7cb0]">Trust Built for the Long Term.</span>
+              <span className="text-[#1872a3]">Trust Built for the Long Term.</span>
             </h2>
             <p className="max-w-[37.5rem] text-pretty text-[1.0625rem] leading-[1.75]">
               Every engagement starts with understanding the person behind the business. Raulji
@@ -801,7 +809,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/about/"
-                className="ml-auto inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                className="ml-auto inline-flex min-h-[2.75rem] items-center gap-1.5 text-sm font-semibold text-[#122640] hover:text-[#1872a3]"
               >
                 About Us
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -813,7 +821,12 @@ export default function HomePage() {
 
       {/* 10. Philosophy band. */}
       <section aria-label="Our philosophy" className="px-5 pb-16 sm:px-8 md:pb-24 lg:pb-28">
-        <figure className="relative mx-auto flex min-h-[22.5rem] max-w-[1240px] items-center overflow-hidden rounded-md bg-[#122640] md:aspect-[21/9]">
+        {/*
+         * w-full: without a definite width, aspect-[21/9] turns the 22.5rem
+         * min-height into an 840px minimum width, and between 768px and about
+         * 870px the page scrolled sideways (audit of 23 Oct 2026).
+         */}
+        <figure className="relative mx-auto flex min-h-[22.5rem] w-full max-w-[1240px] items-center overflow-hidden rounded-md bg-[#122640] md:aspect-[21/9]">
           <Image
             src={editorialPhoto}
             alt="An open-plan office with a long meeting table and floor-to-ceiling windows"
@@ -947,7 +960,7 @@ export default function HomePage() {
               </p>
               <Link
                 href="/blog/"
-                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1a7cb0]"
+                className="inline-flex min-h-[2.75rem] items-center gap-2 text-[0.9375rem] font-semibold text-[#122640] hover:text-[#1872a3]"
               >
                 All Business Guides
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -961,13 +974,13 @@ export default function HomePage() {
                   href={`/blog/${guide.slug}/`}
                   className="flex h-full flex-col gap-3.5 rounded-md border border-[#e3e9ef] bg-white px-7 py-8 transition duration-300 hover:-translate-y-[3px] hover:border-[#329fd2] hover:shadow-[0_16px_36px_-20px_rgba(18,38,64,0.35)]"
                 >
-                  <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#1a7cb0]">
+                  <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.1em] text-[#1872a3]">
                     <BookOpen className="h-4 w-4" aria-hidden="true" />
                     {guide.category}
                   </span>
                   <h3 className="text-lg/[1.3] font-bold leading-[1.3] text-[#122640]">{guide.title}</h3>
                   <p className="flex-1 text-[0.9375rem] leading-[1.6]">{guide.excerpt}</p>
-                  <span className="pt-2 text-[0.8125rem] font-semibold text-[#1a7cb0]">
+                  <span className="pt-2 text-[0.8125rem] font-semibold text-[#1872a3]">
                     Read the guide <span aria-hidden="true">→</span>
                   </span>
                 </Link>
@@ -986,7 +999,7 @@ export default function HomePage() {
           </div>
           <p className="text-sm">
             More questions are answered in the{" "}
-            <Link href="/faqs/" className="font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/faqs/" className="font-semibold text-[#1872a3] hover:underline">
               full FAQ library
             </Link>
             .

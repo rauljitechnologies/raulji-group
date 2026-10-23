@@ -23,12 +23,19 @@ import { join, relative, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
-const APP = join(ROOT, ".next/server/app");
+/*
+ * The same dist directory next.config.ts builds into. This was hard-coded to
+ * .next, so a build run with NEXT_DIST_DIR set was followed by a validation of
+ * whatever stale output happened to be in .next -- a pass that said nothing
+ * about the build just made (audit of 23 Oct 2026).
+ */
+const DIST = process.env.NEXT_DIST_DIR ?? ".next";
+const APP = join(ROOT, DIST, "server/app");
 const SITE = "https://www.raulji.com";
 const KB = 1024;
 
 if (!existsSync(APP)) {
-  console.error("seo-validate: no build found at .next/server/app. Run `npm run build` first.");
+  console.error(`seo-validate: no build found at ${DIST}/server/app. Run \`npm run build\` first.`);
   process.exit(1);
 }
 
@@ -54,10 +61,11 @@ const EXCEPTIONS = {
     description: "noindex utility page (master rule 20, audit TF-18). The sheet records it as the one description deliberately under 120 chars.",
     breadcrumb: "noindex; kept out of the site tree.",
   },
-  "/": {
-    description:
-      "The homepage description is fixed verbatim by CLAUDE.md rule 5 and the client reaffirmed it on 2026-10-16 against the sheet's shorter, registration-led rewrite. 165 chars will truncate in the SERP; that is a known, accepted cost of keeping the rule-5 wording.",
-  },
+  /*
+   * The homepage exception for a 165-character description is gone: rule 5
+   * was changed on 2026-10-18 and the description is now 155 characters, so
+   * the page passes the ordinary 120-160 check and should be held to it.
+   */
 };
 
 const excepted = (path, check) => Boolean(EXCEPTIONS[path]?.[check]);

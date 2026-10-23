@@ -67,7 +67,7 @@ const crumbs: Crumb[] = [
 ];
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -289,7 +289,7 @@ export default function AboutPage() {
                     className="h-10 w-auto"
                   />
                   <div>
-                    <p className="text-xs font-bold tracking-[0.1em] text-[#1a7cb0]">RAULJI GROUP</p>
+                    <p className="text-xs font-bold tracking-[0.1em] text-[#1872a3]">RAULJI GROUP</p>
                     <p className="text-[0.8125rem] text-[#3a4656]">
                       {SITE.locality}, {SITE.region}
                     </p>
@@ -309,7 +309,7 @@ export default function AboutPage() {
                       className="flex flex-col gap-1 rounded-[4px] bg-white px-4 py-3.5 transition duration-300 hover:-translate-y-[3px] hover:shadow-[0_12px_24px_-12px_rgba(0,0,0,0.5)]"
                     >
                       <p className="text-[0.9375rem] font-bold text-[#122640]">{name}</p>
-                      <p className="text-xs font-semibold text-[#1a7cb0]">{role}</p>
+                      <p className="text-xs font-semibold text-[#1872a3]">{role}</p>
                     </div>
                   ))}
                 </div>
@@ -466,9 +466,12 @@ export default function AboutPage() {
                 <>
                   <span className="flex items-start justify-between">
                     <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f5fb]">
-                      <Icon className="h-[1.625rem] w-[1.625rem] text-[#1a7cb0]" strokeWidth={1.6} aria-hidden="true" />
+                      <Icon className="h-[1.625rem] w-[1.625rem] text-[#1872a3]" strokeWidth={1.6} aria-hidden="true" />
                     </span>
-                    <span className="text-[0.8125rem] font-bold text-[#9aa7b5]">
+                    {/* Decorative ordinal; the list carries the order, so it is
+                        hidden from assistive tech. Secondary grey rather than
+                        #9aa7b5, which measured 2.45:1 (audit of 23 Oct 2026). */}
+                    <span aria-hidden="true" className="text-[0.8125rem] font-bold text-[#5b6778]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </span>
@@ -541,7 +544,7 @@ export default function AboutPage() {
                   className={
                     i === 0
                       ? "rounded-[3px] bg-[#122640] px-3.5 py-2 text-[0.8125rem] font-bold text-white"
-                      : "rounded-[3px] bg-[#e8f5fb] px-3.5 py-2 text-[0.8125rem] font-bold text-[#1a7cb0]"
+                      : "rounded-[3px] bg-[#e8f5fb] px-3.5 py-2 text-[0.8125rem] font-bold text-[#1872a3]"
                   }
                 >
                   {role}
@@ -564,7 +567,7 @@ export default function AboutPage() {
               </p>
               <p className="mt-2 text-[1.1875rem] font-semibold leading-normal text-[#122640]">
                 {SITE.taglineParts[0]}{" "}
-                <span className="text-[#1a7cb0]">{SITE.taglineParts[1]}</span>
+                <span className="text-[#1872a3]">{SITE.taglineParts[1]}</span>
               </p>
             </div>
             <Link
@@ -665,7 +668,7 @@ export default function AboutPage() {
                 <article
                   className={`flex flex-1 flex-col gap-4 rounded-md border border-[#e3e9ef] bg-white px-[1.875rem] py-9 ${LIFT}`}
                 >
-                  <Icon className="h-[2.125rem] w-[2.125rem] text-[#1a7cb0]" strokeWidth={1.4} aria-hidden="true" />
+                  <Icon className="h-[2.125rem] w-[2.125rem] text-[#1872a3]" strokeWidth={1.4} aria-hidden="true" />
                   <h3 className="text-2xl font-extrabold tracking-[-0.01em] text-[#122640]">{title}</h3>
                   <p className="text-[0.9375rem] leading-[1.65]">{body}</p>
                 </article>
@@ -681,7 +684,7 @@ export default function AboutPage() {
               </p>
             </article>
             <article className="flex flex-col gap-4 rounded-md bg-[#e8f5fb] p-7 text-[#122640] transition duration-[400ms] hover:-translate-y-1.5 hover:shadow-[0_24px_48px_-24px_rgba(26,124,176,0.45)] sm:p-12">
-              <p className="text-xs font-bold tracking-[0.14em] text-[#1a7cb0]">OUR MISSION</p>
+              <p className="text-xs font-bold tracking-[0.14em] text-[#1872a3]">OUR MISSION</p>
               <p className="text-pretty text-xl/[1.4] font-semibold leading-[1.4] sm:text-[1.625rem]">
                 To deliver sustainable success by fostering trust, promoting innovation and providing
                 expert leadership across all business verticals.
@@ -752,7 +755,7 @@ export default function AboutPage() {
                   </span>
                   <h3 className="text-[1.1875rem] font-bold text-[#122640]">{title}</h3>
                   <p className="flex-1 text-sm/[1.6] leading-[1.6]">{body}</p>
-                  <span className="text-sm font-semibold text-[#1a7cb0]">
+                  <span className="text-sm font-semibold text-[#1872a3]">
                     Explore {title} <span aria-hidden="true">→</span>
                   </span>
                 </TrackedLink>
@@ -761,7 +764,7 @@ export default function AboutPage() {
           </ul>
           <p className="text-sm">
             Not sure which fits?{" "}
-            <Link href="/compare/" className="font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/compare/" className="font-semibold text-[#1872a3] hover:underline">
               Compare all four structures
             </Link>
             .

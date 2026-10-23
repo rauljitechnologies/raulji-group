@@ -7,7 +7,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { LeadForm } from "@/components/forms/lead-form";
 import { HighlightComparison } from "@/components/shared/registration-tools";
 import { GujaratCityFinder, RegionCards } from "@/components/shared/gujarat-city-finder";
-import { DISTRICT_REGION, REGIONS } from "@/lib/gujarat-regions";
+import { DISTRICT_REGION, regionSummary } from "@/lib/gujarat-regions";
 import { getArticle } from "@/lib/blog";
 import { coverScale, scaleSizes } from "@/lib/image-sizes";
 import { CITIES, CITY_SLUGS, GUJARAT_DISTRICTS } from "@/lib/cities";
@@ -133,7 +133,7 @@ const GALLERY: { city: string; slug: string; caption: string; photo: Photo }[] =
 const PHOTO = "object-cover";
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -142,7 +142,7 @@ const LIFT =
   "transition duration-[400ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1.5 hover:border-[#329fd2] hover:shadow-[0_24px_48px_-26px_rgba(18,38,64,0.4)]";
 
 /** Inline prose link, so contextual links read as links inside body copy. */
-const INLINE_LINK = "font-semibold text-[#1a7cb0] underline-offset-4 hover:underline";
+const INLINE_LINK = "font-semibold text-[#1872a3] underline-offset-4 hover:underline";
 
 /*
  * Who actually registers each structure. Added 2026-10-22: the Search Console
@@ -241,10 +241,10 @@ export default function GujaratPage() {
       region: DISTRICT_REGION[c.district] ?? "Central",
       photo: CITY_CARD_PHOTOS[c.slug]?.src,
     }));
-  const regionCounts = REGIONS.map((region) => ({
-    region,
-    count: finderCities.filter((c) => c.region === region).length,
-  }));
+  const regionCounts = regionSummary(
+    GUJARAT_DISTRICTS,
+    CITIES.map((c) => c.district),
+  );
   const structures = SERVICES.map((service) => ({
     slug: service.slug,
     name: service.shortName,
@@ -404,7 +404,7 @@ export default function GujaratPage() {
                       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f5fb]">
                         <Icon className="h-[1.625rem] w-[1.625rem] text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
                       </span>
-                      <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold text-[#1a7cb0]">
+                      <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold text-[#1872a3]">
                         {meta.time}
                       </span>
                     </span>
@@ -416,7 +416,7 @@ export default function GujaratPage() {
                       <dt className="text-[#5b6778]">Owners</dt>
                       <dd className="font-semibold text-[#122640]">{meta.owners}</dd>
                     </dl>
-                    <span className="text-sm font-bold text-[#1a7cb0]">
+                    <span className="text-sm font-bold text-[#1872a3]">
                       Explore {service.shortName} <span aria-hidden="true">→</span>
                     </span>
                   </TrackedLink>
@@ -478,7 +478,7 @@ export default function GujaratPage() {
                 className={`flex flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-6 py-[1.625rem] ${LIFT}`}
               >
                 <span className="flex h-[2.875rem] w-[2.875rem] items-center justify-center rounded-full bg-[#e8f5fb]">
-                  <Icon className="h-[1.375rem] w-[1.375rem] text-[#1a7cb0]" strokeWidth={1.7} aria-hidden="true" />
+                  <Icon className="h-[1.375rem] w-[1.375rem] text-[#1872a3]" strokeWidth={1.7} aria-hidden="true" />
                 </span>
                 <h3 className="text-[1.0625rem] font-bold text-[#122640]">{title}</h3>
                 <p className="text-sm/[1.65] leading-[1.65]">{body}</p>
@@ -574,7 +574,7 @@ export default function GujaratPage() {
                       <Link href={row.href} className={`text-[0.9375rem] ${INLINE_LINK}`}>
                         {row.structure}
                       </Link>
-                      <span className="rounded-[3px] bg-white px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[#1a7cb0]">
+                      <span className="rounded-[3px] bg-white px-2 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[#1872a3]">
                         {row.level}
                       </span>
                     </dt>
@@ -584,7 +584,7 @@ export default function GujaratPage() {
               </dl>
               <a
                 href="#enquiry"
-                className="mt-1 inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                className="mt-1 inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
               >
                 Not sure which one applies to you?
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -671,7 +671,7 @@ export default function GujaratPage() {
           <HighlightComparison structures={structures} />
           <Link
             href="/compare/"
-            className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline"
+            className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-semibold text-[#1872a3] hover:underline"
           >
             Read the full comparison guide
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -705,7 +705,7 @@ export default function GujaratPage() {
               href={telHref}
               event="phone_click"
               params={{ label: "gujarat_enquiry" }}
-              className="mt-2 inline-flex min-h-[2.75rem] items-center self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+              className="mt-2 inline-flex min-h-[2.75rem] items-center self-start text-[0.9375rem] font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
             >
               Prefer to talk? {SITE.phone.display}
             </TrackedLink>
@@ -740,7 +740,7 @@ export default function GujaratPage() {
             </h2>
             <a
               href="#enquiry"
-              className="mt-2 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0]"
+              className="mt-2 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
             >
               Send an Enquiry
               <ArrowRight className="h-4 w-4 rotate-90" aria-hidden="true" />
@@ -763,7 +763,7 @@ export default function GujaratPage() {
                   <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640]">{item.q}</h3>
                   <span
                     aria-hidden="true"
-                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
                   >
                     <Plus className="h-4 w-4" />
                   </span>
@@ -794,12 +794,12 @@ export default function GujaratPage() {
                   href={`/blog/${guide.slug}/`}
                   className={`flex flex-1 flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] py-7 ${LIFT}`}
                 >
-                  <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
+                  <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1872a3]">
                     {guide.category}
                   </span>
                   <span className="text-lg/[1.35] font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
                   <span className="flex-1 text-sm/[1.6] leading-[1.6]">{guide.excerpt}</span>
-                  <span className="text-sm font-bold text-[#1a7cb0]">
+                  <span className="text-sm font-bold text-[#1872a3]">
                     Read the guide <span aria-hidden="true">→</span>
                   </span>
                 </Link>

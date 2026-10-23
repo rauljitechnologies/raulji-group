@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
 }
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -302,7 +302,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col gap-3 px-6 py-[1.625rem]">
                     <h3 className="text-xl font-extrabold leading-[1.25] text-[#122640]">
-                      <Link href={local ?? service.path} className="hover:text-[#1a7cb0]">
+                      <Link href={local ?? service.path} className="hover:text-[#1872a3]">
                         {service.name} in {city.name}
                       </Link>
                     </h3>
@@ -325,7 +325,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                     <div className="flex flex-wrap items-center gap-x-[1.125rem] gap-y-2 border-t border-[#eef2f6] pt-3.5">
                       <Link
                         href={local ?? service.path}
-                        className="inline-flex min-h-[2.75rem] items-center text-sm font-bold text-[#1a7cb0] hover:text-[#122640] hover:underline"
+                        className="inline-flex min-h-[2.75rem] items-center text-sm font-bold text-[#1872a3] hover:text-[#122640] hover:underline"
                       >
                         {local ? `${service.shortName} in ${city.name}` : service.cardCta}{" "}
                         <span aria-hidden="true">&nbsp;→</span>
@@ -333,7 +333,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                       {local ? (
                         <Link
                           href={service.path}
-                          className="inline-flex min-h-[2.75rem] items-center text-[0.8125rem] text-[#5b6778] hover:text-[#1a7cb0] hover:underline"
+                          className="inline-flex min-h-[2.75rem] items-center text-[0.8125rem] text-[#5b6778] hover:text-[#1872a3] hover:underline"
                         >
                           Or the general guide
                         </Link>
@@ -423,7 +423,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                     </div>
                   ) : null}
                   <div className="flex flex-col gap-1.5 px-[1.125rem] pb-5 pt-[1.125rem]">
-                    <span className="text-xs font-bold text-[#1a7cb0]">
+                    <span className="text-xs font-bold text-[#1872a3]">
                       {String(i + 1).padStart(2, "0")}
                       {extra ? ` · ${extra.kind}` : ""}
                     </span>
@@ -512,7 +512,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   href={telHref}
                   event="phone_click"
                   params={{ label: `city_contact_${city.slug}` }}
-                  className="font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                  className="font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
                 >
                   {SITE.phone.display}
                 </TrackedLink>
@@ -523,7 +523,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   href={`mailto:${SITE.email}`}
                   event="email_click"
                   params={{ label: `city_contact_${city.slug}` }}
-                  className="font-bold text-[#122640] hover:text-[#1a7cb0] hover:underline"
+                  className="font-bold text-[#122640] hover:text-[#1872a3] hover:underline"
                 >
                   {SITE.email}
                 </TrackedLink>
@@ -612,7 +612,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             </div>
             <p className="text-sm/[1.6]">
               More general questions are answered in the{" "}
-              <Link href="/faqs/" className="font-bold text-[#1a7cb0] hover:text-[#122640] hover:underline">
+              <Link href="/faqs/" className="font-bold text-[#1872a3] hover:text-[#122640] hover:underline">
                 full FAQ library
               </Link>
               .
@@ -625,7 +625,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                   <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640]">{item.q}</h3>
                   <span
                     aria-hidden="true"
-                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
                   >
                     <Plus className="h-4 w-4" />
                   </span>
@@ -654,7 +654,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
               href="/gujarat/"
               event="gujarat_page_click"
               params={{ label: `city_others_${city.slug}` }}
-              className="inline-flex min-h-[2.75rem] items-center text-[0.9375rem] font-bold text-[#1a7cb0] hover:text-[#122640] hover:underline"
+              className="inline-flex min-h-[2.75rem] items-center text-[0.9375rem] font-bold text-[#1872a3] hover:text-[#122640] hover:underline"
             >
               See full Gujarat coverage <span aria-hidden="true">&nbsp;→</span>
             </TrackedLink>

@@ -103,7 +103,7 @@ export function ArticlePage({ article }: { article: Article }) {
             <div className="flex flex-wrap items-center gap-2.5 text-xs font-bold uppercase tracking-[0.12em]">
               <Link
                 href="/blog/"
-                className="rounded-full border border-[#bcd9ea] bg-white px-3 py-1.5 text-[#1a7cb0] transition-colors duration-200 hover:border-[#329fd2] hover:text-[#122640]"
+                className="rounded-full border border-[#bcd9ea] bg-white px-3 py-1.5 text-[#1872a3] transition-colors duration-200 hover:border-[#329fd2] hover:text-[#122640]"
               >
                 {article.category}
               </Link>
@@ -170,7 +170,7 @@ export function ArticlePage({ article }: { article: Article }) {
               {/* A collapsed list below xl, so it does not push the first
                   paragraph off a phone screen; open beside the text above. */}
               <details className="group rounded-lg border border-[#e3e9ef] xl:hidden">
-                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0] [&::-webkit-details-marker]:hidden">
+                <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3] [&::-webkit-details-marker]:hidden">
                   On this page
                   <span aria-hidden="true" className="text-lg leading-none transition-transform duration-200 group-open:rotate-45">
                     +
@@ -181,7 +181,7 @@ export function ArticlePage({ article }: { article: Article }) {
 
               <div className="hidden flex-col gap-6 xl:flex">
                 <nav className="flex flex-col gap-1">
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">On this page</p>
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">On this page</p>
                   <TocLinks contents={contents} />
                 </nav>
                 {!healthCta ? (
@@ -196,7 +196,7 @@ export function ArticlePage({ article }: { article: Article }) {
                       href="/contact/"
                       event="primary_cta_click"
                       params={{ label: `blog_rail_${article.slug}` }}
-                      className="rounded-[4px] bg-[#122640] px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1a7cb0]"
+                      className="rounded-[4px] bg-[#122640] px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1872a3]"
                     >
                       Talk to an Expert <span aria-hidden="true">→</span>
                     </TrackedLink>
@@ -209,7 +209,7 @@ export function ArticlePage({ article }: { article: Article }) {
           <div className="flex min-w-0 max-w-[46.25rem] flex-1 flex-col gap-[1.375rem]">
             {/* The direct answer, above the fold and quotable. */}
             <section aria-labelledby="key-takeaway" className="flex flex-col gap-3 rounded-lg bg-[#f4f7fa] px-5 py-6 sm:px-7">
-              <h2 id="key-takeaway" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">
+              <h2 id="key-takeaway" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">
                 {article.keyTakeaway.heading}
               </h2>
               <p className="text-base leading-[1.7] text-[#122640]">
@@ -231,7 +231,7 @@ export function ArticlePage({ article }: { article: Article }) {
             {/* Where to go next on the site, named per article. */}
             {article.services.length ? (
               <nav aria-labelledby="next-steps" className="mt-6 flex flex-col gap-4 border-t border-[#e3e9ef] pt-8">
-                <h2 id="next-steps" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">
+                <h2 id="next-steps" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">
                   Next steps
                 </h2>
                 <ul className="grid gap-3 sm:grid-cols-2">
@@ -244,7 +244,7 @@ export function ArticlePage({ article }: { article: Article }) {
                         <span className="flex items-center gap-1.5 text-[0.9375rem] font-bold leading-snug text-[#122640]">
                           {service.label}
                           <ArrowRight
-                            className="h-3.5 w-3.5 shrink-0 text-[#1a7cb0] transition-transform duration-200 group-hover:translate-x-0.5"
+                            className="h-3.5 w-3.5 shrink-0 text-[#1872a3] transition-transform duration-200 group-hover:translate-x-0.5"
                             aria-hidden="true"
                           />
                         </span>
@@ -258,7 +258,7 @@ export function ArticlePage({ article }: { article: Article }) {
 
             {article.sources.length ? (
               <section aria-labelledby="sources" className="flex flex-col gap-3 border-t border-[#e3e9ef] pt-8">
-                <h2 id="sources" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">
+                <h2 id="sources" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">
                   Sources
                 </h2>
                 <ul className="flex flex-col gap-3">
@@ -268,7 +268,7 @@ export function ArticlePage({ article }: { article: Article }) {
                         href={source.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-semibold text-[#1a7cb0] hover:underline"
+                        className="inline-flex items-center gap-1.5 font-semibold text-[#1872a3] hover:underline"
                       >
                         {source.label}
                         <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
@@ -288,23 +288,23 @@ export function ArticlePage({ article }: { article: Article }) {
             >
               <AuthorMark isPerson={isPerson} size={64} />
               <div className="flex min-w-0 flex-[1_1_18rem] flex-col gap-1.5">
-                <h2 id="author" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1a7cb0]">
+                <h2 id="author" className="text-xs font-bold uppercase tracking-[0.12em] text-[#1872a3]">
                   Written by
                 </h2>
                 <p className="text-[1.0625rem] font-bold text-[#122640]">{article.author.name}</p>
                 <p className="text-[0.9375rem] leading-[1.65]">{article.author.context}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
-                  <a href={telHref} className="link-target gap-2 font-semibold text-[#1a7cb0] hover:underline">
+                  <a href={telHref} className="link-target gap-2 font-semibold text-[#1872a3] hover:underline">
                     <Phone className="h-4 w-4" aria-hidden="true" />
                     {article.author.phone.display}
                   </a>
                   {isPerson ? (
-                    <Link href="/team/" className="link-target gap-1.5 font-semibold text-[#122640] hover:text-[#1a7cb0]">
+                    <Link href="/team/" className="link-target gap-1.5 font-semibold text-[#122640] hover:text-[#1872a3]">
                       About {article.author.name.split(" ")[0]}
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
                   ) : (
-                    <Link href="/about/" className="link-target gap-1.5 font-semibold text-[#122640] hover:text-[#1a7cb0]">
+                    <Link href="/about/" className="link-target gap-1.5 font-semibold text-[#122640] hover:text-[#1872a3]">
                       About Raulji Group
                       <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
@@ -332,10 +332,10 @@ export function ArticlePage({ article }: { article: Article }) {
               {article.faqs.map((faq, i) => (
                 <details key={faq.q} id={`faq-${i + 1}`} className="group border-b border-[#dde4ec]">
                   <summary className="group/q flex cursor-pointer list-none items-center justify-between gap-5 py-[1.375rem] [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640] transition-colors duration-200 group-hover/q:text-[#1a7cb0]">{faq.q}</h3>
+                    <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640] transition-colors duration-200 group-hover/q:text-[#1872a3]">{faq.q}</h3>
                     <span
                       aria-hidden="true"
-                      className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-lg text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                      className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] bg-white text-lg text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
                     >
                       +
                     </span>
@@ -355,7 +355,7 @@ export function ArticlePage({ article }: { article: Article }) {
               <h2 id="rel-h" className={H2_SECTION}>
                 Keep reading
               </h2>
-              <Link href="/blog/" className="text-[0.9375rem] font-bold text-[#1a7cb0] hover:text-[#122640] hover:underline">
+              <Link href="/blog/" className="text-[0.9375rem] font-bold text-[#1872a3] hover:text-[#122640] hover:underline">
                 All business guides <span aria-hidden="true">→</span>
               </Link>
             </div>
@@ -473,7 +473,7 @@ function RelatedCard({ article }: { article: Article }) {
         />
       ) : null}
       <div className="flex flex-col gap-2.5 px-[1.375rem] pb-6 pt-5">
-        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">{article.category}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1872a3]">{article.category}</p>
         <h3 className="text-pretty text-lg font-bold leading-[1.35] text-[#122640]">{article.title}</h3>
         <p className="text-[0.8125rem] text-[#5b6778]">{article.readMinutes} min read</p>
       </div>

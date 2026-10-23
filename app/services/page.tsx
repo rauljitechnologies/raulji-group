@@ -267,7 +267,7 @@ export default function ServicesPage() {
       <div
         data-progress
         aria-hidden="true"
-        className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[3px] origin-left scale-x-0 bg-[linear-gradient(90deg,#1a7cb0,#329fd2)]"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[200] h-[3px] origin-left scale-x-0 bg-[linear-gradient(90deg,#1872a3,#329fd2)]"
       />
 
       {/* Hero, with the page index on the right. */}
@@ -400,7 +400,7 @@ export default function ServicesPage() {
                     </span>
                     <span
                       className={`rounded-[3px] border px-2.5 py-1.5 text-xs font-bold tracking-[0.08em] ${
-                        c.dark ? "border-[#7cc8ec] text-[#7cc8ec]" : "border-[#1a7cb0] text-[#1a7cb0]"
+                        c.dark ? "border-[#7cc8ec] text-[#7cc8ec]" : "border-[#1872a3] text-[#1872a3]"
                       }`}
                     >
                       {c.label}
@@ -507,7 +507,7 @@ export default function ServicesPage() {
                     </span>
                     <span className="text-[1.3125rem] font-extrabold text-[#122640]">{service.shortName}</span>
                     <span className="flex-1 text-sm leading-[1.6]">{meta?.body ?? service.cardBlurb}</span>
-                    <span className="text-sm font-bold text-[#1a7cb0]">
+                    <span className="text-sm font-bold text-[#1872a3]">
                       Explore {service.shortName} <span aria-hidden="true">→</span>
                     </span>
                   </TrackedLink>
@@ -517,7 +517,7 @@ export default function ServicesPage() {
           </ul>
           <div className="flex flex-wrap items-center justify-between gap-x-7 gap-y-4">
             <p className="text-[0.8125rem] text-[#5b6778]">Bars show annual compliance load.</p>
-            <Link href="/compare/" className="text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/compare/" className="text-[0.9375rem] font-semibold text-[#1872a3] hover:underline">
               Compare all four side by side <span aria-hidden="true">→</span>
             </Link>
           </div>
@@ -559,13 +559,13 @@ export default function ServicesPage() {
                         <span className="flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-white bg-[#122640]">
                           <Icon className="h-[1.375rem] w-[1.375rem] text-white" strokeWidth={1.6} aria-hidden="true" />
                         </span>
-                        <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
+                        <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold uppercase tracking-[0.04em] text-[#1872a3]">
                           {service.group}
                         </span>
                       </span>
                       <span className="text-[1.1875rem] font-bold text-[#122640]">{service.name}</span>
                       <span className="flex-1 text-sm leading-[1.65]">{card.body}</span>
-                      <span className="text-sm font-bold text-[#1a7cb0]">
+                      <span className="text-sm font-bold text-[#1872a3]">
                         Learn more <span aria-hidden="true">→</span>
                       </span>
                     </span>
@@ -657,14 +657,14 @@ export default function ServicesPage() {
       <section aria-labelledby="faq-h" className={SECTION}>
         <div className={`${CONTAINER} grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-20`}>
           <div className="flex min-w-0 flex-col gap-[1.125rem]">
-            <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]">
+            <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]">
               <Dash />
               Quick answers
             </p>
             <h2 id="faq-h" className={H2}>
               Questions about our services.
             </h2>
-            <Link href="/faqs/" className="self-start text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline">
+            <Link href="/faqs/" className="self-start text-[0.9375rem] font-semibold text-[#1872a3] hover:underline">
               All FAQs <span aria-hidden="true">→</span>
             </Link>
           </div>

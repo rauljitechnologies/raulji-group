@@ -177,7 +177,7 @@ export function FaqExplorer({
 
           <div className="faq-rise flex max-w-[42rem] flex-col gap-4 [--d:240ms]" role="search">
             <div className="flex h-14 items-center gap-3 rounded-md bg-white pl-4 pr-2 shadow-[0_24px_48px_-28px_rgba(0,0,0,0.7)] focus-within:ring-[3px] focus-within:ring-[#7cc8ec] sm:h-[3.75rem] sm:pl-[1.125rem]">
-              <Search className="h-5 w-5 flex-none text-[#1a7cb0]" strokeWidth={2} aria-hidden="true" />
+              <Search className="h-5 w-5 flex-none text-[#1872a3]" strokeWidth={2} aria-hidden="true" />
               <label htmlFor="faq-search" className="sr-only">
                 Search the FAQs
               </label>
@@ -260,7 +260,7 @@ export function FaqExplorer({
                       "relative flex min-h-14 flex-none items-center gap-2 whitespace-nowrap px-3.5 text-[0.9375rem] font-semibold transition-colors duration-200 focus-visible:outline-offset-[-3px]",
                       "after:absolute after:inset-x-3.5 after:bottom-0 after:h-[3px] after:rounded-t-sm after:transition-colors after:duration-200",
                       on
-                        ? "text-[#122640] after:bg-[#1a7cb0]"
+                        ? "text-[#122640] after:bg-[#1872a3]"
                         : "text-[#4a5668] after:bg-transparent hover:text-[#122640] hover:after:bg-[#cfd9e3]",
                     )}
                   >
@@ -292,7 +292,7 @@ export function FaqExplorer({
                 <button
                   type="button"
                   onClick={() => search("", true)}
-                  className="link-target font-semibold text-[#1a7cb0] underline-offset-4 hover:underline"
+                  className="link-target font-semibold text-[#1872a3] underline-offset-4 hover:underline"
                 >
                   Clear search
                 </button>
@@ -330,7 +330,7 @@ export function FaqExplorer({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => track("whatsapp_click", { label: "faqs_no_results" })}
-                  className="inline-flex min-h-12 items-center rounded-[4px] bg-[#122640] px-[1.125rem] text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1a7cb0]"
+                  className="inline-flex min-h-12 items-center rounded-[4px] bg-[#122640] px-[1.125rem] text-sm font-semibold text-white transition-colors duration-200 hover:bg-[#1872a3]"
                 >
                   Ask on WhatsApp <span aria-hidden="true">&nbsp;→</span>
                 </a>
@@ -351,9 +351,9 @@ export function FaqExplorer({
                 className="grid scroll-mt-28 gap-6 border-t border-[#e3e9ef] py-10 md:py-14 lg:grid-cols-[18rem_1fr] lg:gap-16 [&[hidden]]:!hidden"
               >
                 <header className="flex flex-col gap-3 lg:sticky lg:top-32 lg:self-start">
-                  <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]">
+                  <p className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]">
                     <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#e8f5fb]">
-                      <Icon className="h-4 w-4 text-[#1a7cb0]" strokeWidth={2} aria-hidden="true" />
+                      <Icon className="h-4 w-4 text-[#1872a3]" strokeWidth={2} aria-hidden="true" />
                     </span>
                     {g.sub}
                   </p>
@@ -372,7 +372,7 @@ export function FaqExplorer({
                   {g.href ? (
                     <Link
                       href={g.href}
-                      className="group/link inline-block self-start py-1 text-sm font-bold text-[#1a7cb0] hover:text-[#122640]"
+                      className="group/link inline-block self-start py-1 text-sm font-bold text-[#1872a3] hover:text-[#122640]"
                     >
                       Learn more about {g.title} registration
                       <ArrowRight
@@ -400,11 +400,11 @@ export function FaqExplorer({
                           >
                             <span
                               aria-hidden="true"
-                              className="mt-[0.2rem] w-6 flex-none text-xs font-bold tabular-nums text-[#1a7cb0]"
+                              className="mt-[0.2rem] w-6 flex-none text-xs font-bold tabular-nums text-[#1872a3]"
                             >
                               {String(k + 1).padStart(2, "0")}
                             </span>
-                            <span className="flex-1 text-base font-semibold leading-[1.45] text-[#122640] transition-colors duration-200 group-hover/q:text-[#1a7cb0] sm:text-[1.0625rem]">
+                            <span className="flex-1 text-base font-semibold leading-[1.45] text-[#122640] transition-colors duration-200 group-hover/q:text-[#1872a3] sm:text-[1.0625rem]">
                               {f.q}
                             </span>
                             <span
@@ -413,7 +413,7 @@ export function FaqExplorer({
                                 "-mt-0.5 flex h-8 w-8 flex-none items-center justify-center rounded-full border transition-colors duration-200",
                                 open
                                   ? "border-[#122640] bg-[#122640] text-white"
-                                  : "border-[#cfd9e3] bg-white text-[#122640] group-hover/q:border-[#1a7cb0]",
+                                  : "border-[#cfd9e3] bg-white text-[#122640] group-hover/q:border-[#1872a3]",
                               )}
                             >
                               <ChevronDown
@@ -435,7 +435,7 @@ export function FaqExplorer({
                               {f.link ? (
                                 <Link
                                   href={f.link.href}
-                                  className="group/link link-target gap-1.5 self-start text-sm font-semibold text-[#1a7cb0] hover:text-[#122640]"
+                                  className="group/link link-target gap-1.5 self-start text-sm font-semibold text-[#1872a3] hover:text-[#122640]"
                                 >
                                   {f.link.label}
                                   <ArrowRight

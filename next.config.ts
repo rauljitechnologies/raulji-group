@@ -193,7 +193,14 @@ const nextConfig: NextConfig = {
               "base-uri 'self'",
               "form-action 'self'",
               "frame-ancestors 'self'",
-              "upgrade-insecure-requests",
+              /*
+               * No `upgrade-insecure-requests` while this header is report-only.
+               * Browsers ignore that directive in a report-only policy and log
+               * a console error on every page saying so (Lighthouse
+               * "errors-in-console", audit of 23 Oct 2026). HSTS above already
+               * keeps every request on HTTPS. Add it back in the same commit
+               * that switches the key to the enforced header.
+               */
             ].join("; "),
           },
         ],

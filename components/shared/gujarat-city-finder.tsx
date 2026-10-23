@@ -5,7 +5,7 @@ import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
 
-import { REGIONS, regionLabel, type Region } from "@/lib/gujarat-regions";
+import { REGIONS, regionLabel, type Region, type RegionSummary } from "@/lib/gujarat-regions";
 import { coverWidth } from "@/lib/image-sizes";
 import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
@@ -69,7 +69,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
             Search city or district
           </label>
           <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-[#1a7cb0]"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-[#1872a3]"
             strokeWidth={2}
             aria-hidden="true"
           />
@@ -115,7 +115,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
           <a
             href={telHref}
             onClick={() => track("phone_click", { label: "gujarat_city_finder_empty" })}
-            className="text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline"
+            className="text-[0.9375rem] font-semibold text-[#1872a3] hover:underline"
           >
             Call {SITE.phone.display}
           </a>
@@ -146,7 +146,7 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
                     <span className="text-[1.0625rem] font-bold text-[#122640]">{city.name}</span>
                     <span
                       aria-hidden="true"
-                      className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1a7cb0] transition-colors group-hover:bg-[#122640] group-hover:text-white"
+                      className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1872a3] transition-colors group-hover:bg-[#122640] group-hover:text-white"
                     >
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
@@ -165,10 +165,15 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
 }
 
 /** The hero's region cards. Each one filters the finder and scrolls to it. */
-export function RegionCards({ counts }: { counts: { region: Region; count: number }[] }) {
+/**
+ * The breakdown under "33 districts served". The large number is districts, to
+ * match that headline; the line under it is how many city pages the finder
+ * will show when the card is clicked. See regionSummary() for why both.
+ */
+export function RegionCards({ counts }: { counts: RegionSummary[] }) {
   return (
     <>
-      {counts.map(({ region, count }) => (
+      {counts.map(({ region, districts, cityPages }) => (
         <button
           key={region}
           type="button"
@@ -178,8 +183,14 @@ export function RegionCards({ counts }: { counts: { region: Region; count: numbe
           }}
           className="flex flex-col gap-1 rounded-md border border-white/[0.12] bg-white/[0.04] px-[1.125rem] py-4 text-left text-white transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-[3px] hover:border-white hover:bg-white hover:text-[#122640]"
         >
-          <span className="text-[1.375rem] font-extrabold">{count}</span>
+          <span className="text-[1.375rem] font-extrabold">
+            {districts}
+            <span className="sr-only">{districts === 1 ? " district in" : " districts in"}</span>
+          </span>
           <span className="text-[0.8125rem] font-semibold opacity-85">{regionLabel(region)}</span>
+          <span className="text-xs opacity-75">
+            {cityPages} {cityPages === 1 ? "city page" : "city pages"}
+          </span>
         </button>
       ))}
     </>

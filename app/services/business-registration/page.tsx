@@ -169,7 +169,7 @@ const GUIDES = [
   .filter((article): article is NonNullable<typeof article> => article !== null);
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -369,7 +369,7 @@ export default function BusinessRegistrationPage() {
                       <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#e8f5fb]">
                         <Icon className="h-[1.625rem] w-[1.625rem] text-[#122640]" strokeWidth={1.6} aria-hidden="true" />
                       </span>
-                      <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold text-[#1a7cb0]">
+                      <span className="rounded-[3px] bg-[#e8f5fb] px-2 py-1 text-xs font-bold text-[#1872a3]">
                         {meta.time}
                       </span>
                     </span>
@@ -381,7 +381,7 @@ export default function BusinessRegistrationPage() {
                       <dt className="text-[#5b6778]">Owners</dt>
                       <dd className="font-semibold text-[#122640]">{meta.owners}</dd>
                     </dl>
-                    <span className="text-sm font-bold text-[#1a7cb0]">
+                    <span className="text-sm font-bold text-[#1872a3]">
                       Explore {service.shortName} <span aria-hidden="true">→</span>
                     </span>
                   </TrackedLink>
@@ -466,7 +466,7 @@ export default function BusinessRegistrationPage() {
           <HighlightComparison structures={structures} />
           <Link
             href="/compare/"
-            className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-semibold text-[#1a7cb0] hover:underline"
+            className="inline-flex min-h-[2.75rem] items-center gap-1.5 self-start text-[0.9375rem] font-semibold text-[#1872a3] hover:underline"
           >
             Read the full comparison guide
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -490,7 +490,7 @@ export default function BusinessRegistrationPage() {
                 className={`flex flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-[1.375rem] py-[1.625rem] ${LIFT}`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold tracking-[0.08em] text-[#1a7cb0]">STEP {i + 1}</span>
+                  <span className="text-xs font-bold tracking-[0.08em] text-[#1872a3]">STEP {i + 1}</span>
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#122640]">
                     <Icon className="h-[1.125rem] w-[1.125rem] text-white" strokeWidth={1.6} aria-hidden="true" />
                   </span>
@@ -560,7 +560,7 @@ export default function BusinessRegistrationPage() {
               href="/gujarat/"
               event="gujarat_page_click"
               params={{ label: "registration_where" }}
-              className="inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
+              className="inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]"
             >
               Gujarat Coverage
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -597,7 +597,7 @@ export default function BusinessRegistrationPage() {
             </h2>
             <a
               href="#finder"
-              className="mt-2 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0]"
+              className="mt-2 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
             >
               Try the Structure Finder
               <ArrowRight className="h-4 w-4 -rotate-90" aria-hidden="true" />
@@ -610,7 +610,7 @@ export default function BusinessRegistrationPage() {
                   <h3 className="text-[1.0625rem] font-semibold leading-[1.4] text-[#122640]">{item.q}</h3>
                   <span
                     aria-hidden="true"
-                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1a7cb0] transition-transform duration-200 group-open:rotate-45"
+                    className="flex h-8 w-8 flex-none items-center justify-center rounded-full border border-[#cfd9e3] text-[#1872a3] transition-transform duration-200 group-open:rotate-45"
                   >
                     <Plus className="h-4 w-4" />
                   </span>
@@ -641,12 +641,12 @@ export default function BusinessRegistrationPage() {
                   href={`/blog/${guide.slug}/`}
                   className={`flex flex-1 flex-col gap-3 rounded-lg border border-[#e3e9ef] bg-white px-[1.625rem] py-7 ${LIFT}`}
                 >
-                  <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1a7cb0]">
+                  <span className="text-xs font-bold uppercase tracking-[0.04em] text-[#1872a3]">
                     {guide.category}
                   </span>
                   <span className="text-lg/[1.35] font-bold leading-[1.35] text-[#122640]">{guide.title}</span>
                   <span className="flex-1 text-sm/[1.6] leading-[1.6]">{guide.excerpt}</span>
-                  <span className="text-sm font-bold text-[#1a7cb0]">
+                  <span className="text-sm font-bold text-[#1872a3]">
                     Read the guide <span aria-hidden="true">→</span>
                   </span>
                 </Link>

@@ -133,7 +133,7 @@ const FAQS = [
 
 
 const EYEBROW =
-  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1a7cb0]";
+  "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#1872a3]";
 const EYEBROW_DARK =
   "flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#7cc8ec]";
 const CONTAINER = "mx-auto max-w-[1240px] px-5 sm:px-8";
@@ -335,13 +335,13 @@ export default function OurClientsPage() {
           <div className="grid gap-6 lg:grid-cols-2">
             {GROUP_SERVICES.map((brand) => {
               const ctaClass =
-                "mt-1.5 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1a7cb0] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]";
+                "mt-1.5 inline-flex min-h-[3.25rem] items-center gap-2 self-start rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3] hover:shadow-[0_10px_22px_-10px_rgba(26,124,176,0.6)]";
               return (
                 <article
                   key={brand.name}
                   className="flex flex-col gap-[1.125rem] rounded-md border border-[#e3e9ef] bg-white p-7 transition duration-[400ms] ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1.5 hover:border-[#329fd2] hover:shadow-[0_24px_48px_-26px_rgba(18,38,64,0.4)] sm:p-11"
                 >
-                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1a7cb0]">
+                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#1872a3]">
                     {brand.role}
                   </p>
                   <h3 className="text-[1.625rem] font-extrabold tracking-[-0.01em] text-[#122640]">
@@ -360,7 +360,7 @@ export default function OurClientsPage() {
                             href={service.href}
                             event="service_card_click"
                             params={{ label: "our-clients-services", service: service.name }}
-                            className="transition-colors hover:text-[#1a7cb0] hover:underline"
+                            className="transition-colors hover:text-[#1872a3] hover:underline"
                           >
                             {service.name}
                           </TrackedLink>
