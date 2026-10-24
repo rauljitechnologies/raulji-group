@@ -20,10 +20,12 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     /*
-     * The sitemap index. Next builds it at /sitemap.xml from the groups in
-     * app/sitemap.ts and it points at each child sitemap, so one line here
-     * covers them all (technical audit TF-04). /_next/ is deliberately not
-     * disallowed: Google needs the CSS and JS to render the page.
+     * The sitemap. One file, built by app/sitemap.ts and served at
+     * /sitemap.xml -- the same URL this line has always carried, and the one
+     * already submitted in Search Console and Bing, so the 2026-10-24 change
+     * from a sitemap index to a single flat sitemap needed no change here.
+     * /_next/ is deliberately not disallowed: Google needs the CSS and JS to
+     * render the page.
      */
     sitemap: `${SITE.url}/sitemap.xml`,
     host: SITE.url,
