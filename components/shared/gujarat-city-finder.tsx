@@ -3,10 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { ArrowRight, Search } from "lucide-react";
-
 import { REGIONS, regionLabel, type Region, type RegionSummary } from "@/lib/gujarat-regions";
-import { coverWidth } from "@/lib/image-sizes";
 import { SITE, telHref } from "@/lib/site";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -63,25 +60,29 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
 
   return (
     <div className="flex flex-col gap-7">
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#e3e9ef] bg-[#f4f7fa] p-4">
-        <div className="relative max-w-[23.75rem] flex-[1_1_16.25rem]">
-          <label htmlFor="city-search" className="sr-only">
-            Search city or district
-          </label>
-          <Search
-            className="pointer-events-none absolute left-3.5 top-1/2 h-[1.125rem] w-[1.125rem] -translate-y-1/2 text-[#1872a3]"
-            strokeWidth={2}
-            aria-hidden="true"
-          />
+      <div className="flex flex-wrap items-center justify-between gap-x-5 gap-y-3.5">
+        {/*
+          A visible label, as in v3. It replaced an `sr-only` label beside a
+          magnifier icon, where the placeholder then had to repeat the label
+          text to say anything at all -- so the field told a sighted user what
+          to type only in grey placeholder text that vanishes on the first
+          keystroke. The placeholder now carries an example instead, which is
+          the thing a label cannot say.
+        */}
+        <label
+          htmlFor="city-search"
+          className="flex max-w-[26.25rem] flex-[1_1_17.5rem] flex-col gap-1.5 text-[0.8125rem] font-semibold text-[#122640]"
+        >
+          Search city or district
           <input
             id="city-search"
             type="search"
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search city or district"
-            className="h-12 w-full rounded-[4px] border border-[#cfd9e3] bg-white pl-[2.625rem] pr-3.5 text-base sm:text-[0.9375rem] text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_3px_rgba(50,159,210,0.18)] focus:outline-none"
+            placeholder="e.g. Surat, Kutch"
+            className="rounded-[4px] border border-[#cfd9e3] bg-white px-3.5 py-[0.8125rem] text-base font-normal text-[#122640] transition hover:border-[#329fd2] focus:border-[#329fd2] focus:shadow-[0_0_0_3px_rgba(50,159,210,0.18)] focus:outline-none sm:text-[0.9375rem]"
           />
-        </div>
+        </label>
         <div role="group" aria-label="Filter by region" className="flex flex-wrap gap-2">
           {(["All", ...REGIONS] as const).map((item) => {
             const on = region === item;
@@ -123,36 +124,61 @@ export function GujaratCityFinder({ cities }: { cities: FinderCity[] }) {
           </a>
         </div>
       ) : (
-        <ul className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        /*
+         * v3's city card: a 16:10 photograph across the top of the card with
+         * the name and district beneath it, in an auto-filling grid.
+         *
+         * This is the part of the section that was never converted. Commit
+         * 39d6c64 moved the finder onto the light grey band "as in v3" and
+         * left the cards as they were: a 72px-wide photo strip down the left
+         * of a horizontal row, which is why the section still read as the old
+         * design next to everything around it.
+         *
+         * The photograph is the point of these cards -- it is what tells
+         * someone they are looking at their own city -- and at 72px wide it
+         * was too small to be recognisable. Every one of the 33 cities has a
+         * confirmed photograph of the place (CITY_CARD_PHOTOS), so no card
+         * falls back to an empty box; the navy behind the image is what shows
+         * while the blur placeholder resolves.
+         *
+         * `loading="lazy"` is next/image's default without `priority`, which
+         * is what v3 asks for: the section sits well below the fold, so none
+         * of these 33 images competes with the hero for LCP (master rule 27).
+         */
+        <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,13.75rem),1fr))] gap-4">
           {shown.map((city) => (
             <li key={city.slug} className="flex min-w-0">
               <Link
                 href={`/${city.slug}/`}
                 onClick={() => track("city_page_click", { city: city.name, label: "gujarat_city_finder" })}
-                className="group flex flex-1 overflow-hidden rounded-lg border border-[#e3e9ef] bg-white transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_18px_36px_-22px_rgba(18,38,64,0.4)]"
+                className="group flex flex-1 flex-col overflow-hidden rounded-lg border border-[#e3e9ef] bg-white transition duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:-translate-y-1 hover:border-[#329fd2] hover:shadow-[0_18px_36px_-22px_rgba(18,38,64,0.4)]"
               >
-                {city.photo ? (
-                  <span className="relative w-[4.5rem] flex-none overflow-hidden bg-[#e8f5fb]">
+                <span className="relative block aspect-[16/10] overflow-hidden bg-[#1b3350]">
+                  {city.photo ? (
                     <Image
                       src={city.photo}
                       alt=""
                       fill
-                      sizes={`${coverWidth(city.photo, 130, 72)}px`}
+                      /*
+                       * Derived from the grid, not guessed. The container is
+                       * 1240px wide with clamp(20px,4vw,32px) of padding, the
+                       * gap is 16px and each column is at least 220px, so
+                       * `auto-fill` gives 2 columns from a ~496px viewport, 3
+                       * from ~752px, 4 from ~992px and 5 at 1240px and up,
+                       * where a card settles at 222px. Each entry below is the
+                       * card width in that band. Getting this wrong is not
+                       * cosmetic: too small and the photo is upscaled and
+                       * blurry, too large and every phone downloads a desktop
+                       * file, which is the fault TF-08 found across the site.
+                       */
+                      sizes="(min-width: 1240px) 14rem, (min-width: 992px) 25vw, (min-width: 752px) 30vw, (min-width: 496px) 46vw, 92vw"
                       placeholder="blur"
                       className="object-cover photo-zoom"
                     />
-                  </span>
-                ) : null}
-                <span className="flex min-w-0 flex-1 flex-col gap-1.5 px-5 py-[1.125rem]">
-                  <span className="flex items-center justify-between gap-2">
-                    <span className="text-[1.0625rem] font-bold text-[#122640]">{city.name}</span>
-                    <span
-                      aria-hidden="true"
-                      className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-[#e8f5fb] text-[#1872a3] transition-colors group-hover:bg-[#122640] group-hover:text-white"
-                    >
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </span>
-                  </span>
+                  ) : null}
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col gap-[0.1875rem] px-4 pb-4 pt-3.5">
+                  <h3 className="text-base font-bold text-[#122640]">{city.name}</h3>
                   <span className="text-[0.8125rem] text-[#5b6778]">
                     {city.district} district · {regionLabel(city.region)}
                   </span>
