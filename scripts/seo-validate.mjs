@@ -231,6 +231,32 @@ if (existsSync(sitemapBody)) {
   if (xml.includes("<sitemapindex")) fail("sitemap: still a sitemap index, expected a single urlset");
   if (!xml.includes("<lastmod>")) fail("sitemap: no lastmod dates");
 
+  /*
+   * Nothing but sitemap elements, ever.
+   *
+   * An owner report of 2026-10-24 described a <script id="datalayer-checker-script">
+   * inside /sitemap.xml. It was not in the response -- it was a browser
+   * extension injecting into Chrome's XML viewer after delivery -- but the
+   * half hour spent proving that is reason enough to have the build assert it.
+   * Any element outside the allow-list fails here, so a script tag, a stray
+   * fragment of HTML or a future <changefreq> creeping back in is a red build
+   * rather than something noticed in a browser weeks later.
+   */
+  const ALLOWED = new Set(["?xml", "urlset", "url", "loc", "lastmod"]);
+  const found = new Set(
+    [...xml.matchAll(/<\/?([a-zA-Z?!][^\s>/]*)/g)].map((m) => m[1].replace(/^[?!]?/, (c) => c)),
+  );
+  for (const el of found) {
+    if (!ALLOWED.has(el)) fail(`sitemap: unexpected <${el}> element in the XML`);
+  }
+
+  // <changefreq> and <priority> were dropped on 2026-10-24: both are optional
+  // and Google ignores them. Caught by the allow-list above; named here so a
+  // failing build says why rather than just "unexpected".
+  for (const dropped of ["changefreq", "priority"]) {
+    if (found.has(dropped)) fail(`sitemap: <${dropped}> is no longer emitted; remove it from app/sitemap.ts`);
+  }
+
   const seen = new Set();
   for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
     const url = m[1];

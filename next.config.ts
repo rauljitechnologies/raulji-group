@@ -156,6 +156,46 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
+      /*
+       * The machine-readable routes, locked down (owner report of 2026-10-24).
+       *
+       * A `<script id="datalayer-checker-script">` was seen inside
+       * /sitemap.xml. It is not in the response: the bytes Vercel serves
+       * contain only urlset, url, loc and lastmod, verified against the
+       * official schema and fetched both as a browser and as Googlebot. It
+       * came from a dataLayer-inspector browser extension, which appends a
+       * script tag into whatever document is open -- Chrome's XML viewer
+       * included -- so it shows up when the file is inspected in that browser
+       * and nowhere else. No crawler sees it.
+       *
+       * Nothing server-side can stop an extension mutating the DOM after
+       * delivery; that is the user's own browser. What this header does is
+       * make such a script inert: an extension injecting into the main world
+       * does so with a script tag, and a tag is subject to the document's CSP,
+       * so `script-src 'none'` stops it executing. Enforced, not report-only,
+       * because there is no legitimate script on these routes to break.
+       *
+       * Deliberately narrow: no `default-src`, so the browser's own XML
+       * stylesheet still renders the file readably for a human. Crawlers
+       * ignore CSP when parsing a sitemap, so none of this can affect
+       * indexing. `X-Content-Type-Options: nosniff` on the rule below already
+       * stops the XML being re-interpreted as HTML.
+       */
+      {
+        source: "/:path(sitemap.xml|robots.txt)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: [
+              "script-src 'none'",
+              "object-src 'none'",
+              "base-uri 'none'",
+              "form-action 'none'",
+              "frame-ancestors 'none'",
+            ].join("; "),
+          },
+        ],
+      },
       {
         source: "/:path*",
         headers: [
