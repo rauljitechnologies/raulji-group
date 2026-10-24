@@ -49,7 +49,10 @@ npm start &   # or PORT=3100 npm start
 - [ ] `/services/land-investment/` → 410
 - [ ] `/no-such-page/` → 404 (not 200 with the homepage)
 - [ ] `/robots.txt` → 200, and `Disallow: /api/` present
-- [ ] `/sitemap.xml` → 200, 4 child sitemaps, 95 URLs between them
+- [ ] `/sitemap.xml` → 200, `application/xml`, one `<urlset>`, 103 URLs, no
+      `<sitemapindex>`
+- [ ] `/sitemap/core.xml` → 301 to `/sitemap.xml` (same for services,
+      locations, blog — the children of the retired index)
 - [ ] `/og/?title=Test` → 200, `image/png`
 - [ ] Security headers present on a page response: `X-Content-Type-Options`,
       `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`,

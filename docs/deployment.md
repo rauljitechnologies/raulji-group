@@ -92,12 +92,16 @@ curl -sI https://www.raulji.com/no-such-page/             | head -1   # 404
 curl -sI https://www.raulji.com/services/legal/   | grep -i location  # /services/business-registration/
 curl -sI https://www.raulji.com/services/finance/ | grep -i location  # /services/
 
-# /sitemap.xml is a sitemap *index*: 4 child sitemaps, 95 URLs between them.
-curl -s https://www.raulji.com/sitemap.xml | grep -c '<loc>'          # 4
+# /sitemap.xml is one flat sitemap: a single <urlset>, 103 URLs.
+curl -sI https://www.raulji.com/sitemap.xml | grep -i content-type    # application/xml
+curl -s https://www.raulji.com/sitemap.xml | grep -c '<loc>'          # 103
+curl -s https://www.raulji.com/sitemap.xml | grep -c '<sitemapindex'  # 0
+
+# The four child sitemaps of the old index are gone and 301 to the one file.
 for s in core services locations blog; do
   printf '%s: ' "$s"
-  curl -s "https://www.raulji.com/sitemap/$s.xml" | grep -c '<loc>'
-done                                            # 15, 9, 53, 18 = 95
+  curl -sI "https://www.raulji.com/sitemap/$s.xml" | head -1
+done                                            # 301 x 4
 
 # Analytics. Empty output means NEXT_PUBLIC_GTM_ID is not set in Vercel and
 # nothing is being recorded, which the page gives no visible sign of.

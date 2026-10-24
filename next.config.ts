@@ -44,6 +44,22 @@ const nextConfig: NextConfig = {
     // redirect map and analytics expect. Destinations carry the trailing slash
     // so no redirect chains into a second hop.
     return [
+      /*
+       * The sitemap was four child sitemaps behind an index at /sitemap.xml
+       * (technical audit TF-04) until the client asked for a single flat file
+       * on 2026-10-24. /sitemap.xml still answers 200 -- it is now the
+       * sitemap itself rather than an index of others -- but the four child
+       * URLs no longer exist, and both Search Console and Bing have them on
+       * record from the earlier submission. A 301 to the one sitemap is what
+       * the sitemaps protocol expects a moved sitemap to do, and it keeps a
+       * crawler that still holds a child URL from recording a 404 against
+       * the site. Remove these once Search Console shows no child sitemap.
+       */
+      {
+        source: "/sitemap/:group(core|services|locations|blog).xml",
+        destination: "/sitemap.xml",
+        statusCode: 301,
+      },
       // /rent and /rent/* are leftovers of the discontinued rentals business.
       // Unlike /rentals/, which still carries a 410 explainer, these paths were
       // never a real service URL, so they go straight to the homepage.

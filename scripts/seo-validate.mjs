@@ -203,49 +203,52 @@ for (const p of pages) {
   }
 }
 
-/* --------------------------------------------------------------- sitemaps */
+/* ---------------------------------------------------------------- sitemap */
 
-const sitemapDir = join(APP, "sitemap");
-const indexBody = join(APP, "sitemap.xml.body");
-if (!existsSync(indexBody)) fail("no sitemap index built at /sitemap.xml");
+/*
+ * One sitemap at /sitemap.xml, built by app/sitemap.ts (client instruction of
+ * 2026-10-24). This used to walk a sitemap index and four children under
+ * app/sitemap/; the checks below are the same ones, against the single file.
+ * A child sitemap left behind under app/sitemap/ is itself a failure: it would
+ * mean generateSitemaps() came back and the index that used to point at the
+ * children is gone, so nothing would reference them.
+ */
+const sitemapBody = join(APP, "sitemap.xml.body");
+if (!existsSync(sitemapBody)) fail("no sitemap built at /sitemap.xml");
+
+const staleDir = join(APP, "sitemap");
+if (existsSync(staleDir) && readdirSync(staleDir).some((f) => f.endsWith(".xml.body"))) {
+  fail("child sitemaps built under /sitemap/ but nothing indexes them");
+}
 
 const byPath = new Map(pages.map((p) => [p.path, p]));
 let sitemapUrls = 0;
 
-if (existsSync(sitemapDir)) {
-  const children = readdirSync(sitemapDir).filter((f) => f.endsWith(".xml.body"));
-  if (existsSync(indexBody)) {
-    const index = readFileSync(indexBody, "utf8");
-    for (const child of children) {
-      const name = child.replace(".xml.body", "");
-      if (!index.includes(`/sitemap/${name}.xml`)) fail(`sitemap index does not list ${name}.xml`);
-    }
-  }
+if (existsSync(sitemapBody)) {
+  const xml = readFileSync(sitemapBody, "utf8");
+
+  if (!xml.includes("<urlset")) fail("sitemap: not a <urlset> document");
+  if (xml.includes("<sitemapindex")) fail("sitemap: still a sitemap index, expected a single urlset");
+  if (!xml.includes("<lastmod>")) fail("sitemap: no lastmod dates");
 
   const seen = new Set();
-  for (const child of children) {
-    const xml = readFileSync(join(sitemapDir, child), "utf8");
-    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
-      const url = m[1];
-      sitemapUrls += 1;
-      if (seen.has(url)) fail(`sitemap: ${url} listed more than once`);
-      seen.add(url);
-      if (!url.startsWith(SITE)) fail(`sitemap: ${url} is not on ${SITE}`);
-      if (!url.endsWith("/")) fail(`sitemap: ${url} has no trailing slash`);
-      const path = url.slice(SITE.length);
-      const page = byPath.get(path);
-      if (!page) {
-        // Dynamically rendered pages are not prerendered to HTML; only flag a
-        // path that matches no route at all.
-        warn(`sitemap: ${path} has no prerendered HTML (dynamic route?)`);
-      } else if ((page.robots ?? "").includes("noindex")) {
-        fail(`sitemap: ${path} is noindex but listed`);
-      }
+  for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+    const url = m[1];
+    sitemapUrls += 1;
+    if (seen.has(url)) fail(`sitemap: ${url} listed more than once`);
+    seen.add(url);
+    if (!url.startsWith(SITE)) fail(`sitemap: ${url} is not on ${SITE}`);
+    if (!url.endsWith("/")) fail(`sitemap: ${url} has no trailing slash`);
+    const path = url.slice(SITE.length);
+    const page = byPath.get(path);
+    if (!page) {
+      // Dynamically rendered pages are not prerendered to HTML; only flag a
+      // path that matches no route at all.
+      warn(`sitemap: ${path} has no prerendered HTML (dynamic route?)`);
+    } else if ((page.robots ?? "").includes("noindex")) {
+      fail(`sitemap: ${path} is noindex but listed`);
     }
-    if (!xml.includes("<lastmod>")) fail(`sitemap ${child}: no lastmod dates`);
   }
-} else {
-  fail("no child sitemaps built under /sitemap/");
 }
 
 if (sitemapUrls < 90) fail(`sitemap lists ${sitemapUrls} URLs; expected 90+`);

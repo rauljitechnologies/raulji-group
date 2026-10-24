@@ -11,7 +11,8 @@ import manifest from "@/lib/generated/sitemap-manifest.json";
 export const revalidate = 3600;
 
 /**
- * The sitemap, assembled without a hand-maintained URL list.
+ * The sitemap: one file at /sitemap.xml, assembled without a hand-maintained
+ * URL list.
  *
  *  - Static pages come from lib/generated/sitemap-manifest.json, which
  *    scripts/gen-sitemap-manifest.mjs builds from app/ before every build. A
@@ -27,15 +28,22 @@ export const revalidate = 3600;
  * Discontinued URLs are absent because their pages are gone: /rentals/ and
  * /services/land-investment/ are route handlers returning 410, not pages.
  *
- * Split into named child sitemaps (technical audit TF-04) by
- * `generateSitemaps()`, which publishes /sitemap/core.xml, /sitemap/locations.xml,
- * /sitemap/services.xml and /sitemap/blog.xml, with Next building the index at
- * /sitemap.xml. At 96 URLs the split is not about the 50,000-URL limit: it is
- * so Search Console reports index coverage per group. "Discovered - currently
- * not indexed" sitting at 37 told us nothing about which kind of page was
- * being skipped; with locations in their own file, the same report would have
- * said so immediately. Add a group here as the compliance, industries and
- * glossary sections ship.
+ * One flat sitemap, by client instruction of 2026-10-24. This was previously
+ * split by `generateSitemaps()` into /sitemap/core.xml, /sitemap/services.xml,
+ * /sitemap/locations.xml and /sitemap/blog.xml, with a hand-written index
+ * route at /sitemap.xml, because technical audit TF-04 wanted Search Console
+ * to report index coverage per group. At ~100 URLs the split was never about
+ * the 50,000-URL limit, and the sitemaps protocol does not require an index
+ * below that, so a single file is valid and is what the client asked for.
+ *
+ * What the change costs, recorded so the decision is not lost: Search Console
+ * now reports coverage for the whole site in one row, so a figure like
+ * "Discovered - currently not indexed: 37" no longer says which kind of page
+ * is being skipped. If that question comes back, the per-group breakdown is
+ * the reason to re-split — not the URL count.
+ *
+ * The four child URLs 301 to /sitemap.xml (next.config.ts), so the submissions
+ * already made in Search Console and Bing do not start answering 404.
  */
 
 type Entry = MetadataRoute.Sitemap[number];
@@ -77,23 +85,7 @@ function latest(...dates: (string | Date | undefined | null)[]) {
   return times.length ? new Date(Math.max(...times)) : undefined;
 }
 
-/**
- * The child sitemaps, in the order they appear in the index.
- *
- * Exported because app/sitemap.xml/route.ts builds the index from this list.
- * Next 15 does not publish an index of its own for `generateSitemaps()`: the
- * build produces /sitemap/core.xml and friends and nothing at /sitemap.xml,
- * which is the URL already submitted in Search Console and referenced from
- * robots.txt. The index route keeps that URL working.
- */
-export const SITEMAP_GROUPS = ["core", "services", "locations", "blog"] as const;
-export type SitemapGroup = (typeof SITEMAP_GROUPS)[number];
-
-export function generateSitemaps() {
-  return SITEMAP_GROUPS.map((id) => ({ id }));
-}
-
-export default async function sitemap({ id }: { id: SitemapGroup }): Promise<MetadataRoute.Sitemap> {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const url = (path: string) => `${SITE.url}${path}`;
 
   // The guides. An article's date is the later of its editorial `updated`
@@ -162,18 +154,24 @@ export default async function sitemap({ id }: { id: SitemapGroup }): Promise<Met
   }));
 
   /*
-   * Which group each set of URLs belongs to. `core` keeps the static pages in
-   * priority order so the file reads in order of importance. Deduplication is
-   * per group, and the groups do not overlap, so no URL can appear twice in
-   * the index either.
+   * One list, in a deliberate order: the static pages by priority, then
+   * services, locations and the blog. Crawlers do not read the order as a
+   * ranking signal, but a human opening the file sees the site's shape, and a
+   * stable order keeps the diff between two builds readable.
+   *
+   * Deduplicated by URL, so a page reachable from two of the sources above
+   * (a static route that is also a data-driven one, say) is emitted once.
    */
-  const byGroup: Record<SitemapGroup, Entry[]> = {
-    core: pages.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0)),
-    services: [...registration, ...secondary],
-    locations: [...cities, ...cityServices],
-    blog: [...guides, ...blog],
-  };
+  const all: Entry[] = [
+    ...pages.sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0)),
+    ...registration,
+    ...secondary,
+    ...cities,
+    ...cityServices,
+    ...guides,
+    ...blog,
+  ];
 
   const seen = new Set<string>();
-  return byGroup[id].filter((entry) => !seen.has(entry.url) && seen.add(entry.url));
+  return all.filter((entry) => !seen.has(entry.url) && seen.add(entry.url));
 }
