@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { AlertCircle, CheckCircle2, ChevronDown, Loader2, Send } from "lucide-react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { AlertCircle, ArrowRight, CheckCircle2, ChevronDown, Loader2, Send } from "lucide-react";
 import { SERVICES } from "@/lib/services";
 import { CITY_INDEX } from "@/lib/city-index";
 import { SITE, telHref } from "@/lib/site";
-import { errorCategory, markLeadCounted, track } from "@/lib/analytics";
+import { errorCategory, track } from "@/lib/analytics";
+import { recordLeadSuccess } from "@/lib/lead-success";
+import { CONFIRMATION_BODY, CONFIRMATION_HEADING, THANK_YOU_PATH } from "@/lib/thank-you";
 import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
@@ -103,6 +106,7 @@ export function LeadForm({
   className,
 }: LeadFormProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const id = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -220,47 +224,38 @@ export function LeadForm({
       };
 
       if (result.success) {
-        setStatus("success");
         /*
-         * `form_submit` is the primary conversion, so it must count real
-         * enquiries only.
-         *
-         * A honeypot-tripped submission is answered `{ success: true }` on
-         * purpose, so the bot cannot tell it was caught. That means a bot
-         * reaches this branch and would be recorded as a conversion. We know
-         * locally which case this is -- a human never fills a field that is
-         * positioned off-screen -- so the event is skipped here instead.
-         * The response is left exactly as it is: the bot learns nothing,
-         * and the conversion count stays clean.
+         * Confirmed capture. The conversion is recorded here, before the route
+         * changes, and the visitor is then sent to /thank-you/ -- in that
+         * order, because the event must not depend on the navigation
+         * succeeding and the thank-you page deliberately counts nothing of its
+         * own. recordLeadSuccess() skips a honeypot submission and
+         * deduplicates on the server's submission id, so one enquiry is one
+         * `generate_lead` however many times this branch is reached.
          */
-        if (!payload.hp_note) {
-          track("form_submit", {
-            registration_type: payload.registrationType || "Not specified",
-            city: payload.city || undefined,
-          });
-          /*
-           * The conversion. `success: true` from this route means the CRM
-           * confirmed it stored the enquiry -- new or duplicate -- so this is
-           * the only place in the codebase it may fire.
-           *
-           * Deduplicated on the server's own submission id, so a re-render, a
-           * Strict Mode double-invoke or a remount cannot count one enquiry
-           * twice. A duplicate enquiry recorded against an existing lead is
-           * still a real enquiry, so it still converts; `lead_duplicate` is
-           * there to separate them in reporting.
-           */
-          if (markLeadCounted(result.requestId ?? "")) {
-            track("generate_lead", {
-              form_id: FORM_ID,
-              form_name: FORM_NAME,
-              registration_type: payload.registrationType || "Not specified",
-              city: payload.city || undefined,
-              submission_id: result.requestId,
-              lead_duplicate: result.duplicate ?? false,
-              lead_source: `Website form (${pathname})`,
-            });
-          }
-        }
+        recordLeadSuccess({
+          formId: FORM_ID,
+          formName: FORM_NAME,
+          sourcePage: pathname,
+          registrationType: payload.registrationType,
+          city: payload.city,
+          submissionId: result.requestId,
+          duplicate: result.duplicate,
+          honeypot: payload.hp_note,
+        });
+        /*
+         * `success` renders the panel below for the moment the navigation
+         * takes, and stays rendered if the router never gets there -- the
+         * panel carries the confirmation and a plain link to the same page, so
+         * a failed client-side navigation is a slower path rather than a lost
+         * one. `inFlightRef` is deliberately left true: this form is done.
+         *
+         * push, not replace, so Back returns to the page they enquired from.
+         * The form remounts empty on the way back, so there is nothing to
+         * resubmit.
+         */
+        setStatus("success");
+        router.push(THANK_YOU_PATH);
       } else {
         inFlightRef.current = false;
         setStatus("error");
@@ -289,6 +284,12 @@ export function LeadForm({
     }
   }
 
+  /*
+   * The transition to /thank-you/, and the fallback if that navigation never
+   * lands. It repeats the confirmation rather than showing a spinner, because
+   * a visitor who has just pressed submit needs to know the enquiry arrived
+   * even if the router is slow; the link gives them the same page by hand.
+   */
   if (status === "success") {
     return (
       <div
@@ -300,16 +301,22 @@ export function LeadForm({
           <CheckCircle2 className="h-8 w-8 text-[#1872a3]" aria-hidden="true" />
         </span>
         <h2 className="text-xl font-extrabold tracking-[-0.01em] text-[#122640] sm:text-2xl">
-          Thank you. Your enquiry has been received.
+          {CONFIRMATION_HEADING}
         </h2>
         <p className="max-w-[28rem] text-[0.9375rem] leading-[1.7] text-[#3a4656]">
-          A Raulji Group representative will contact you using the details provided. If your matter
-          is urgent, call{" "}
+          {CONFIRMATION_BODY} If your matter is urgent, call{" "}
           <a href={telHref} className="font-semibold text-[#1872a3] hover:underline">
             {SITE.phone.display}
           </a>
           .
         </p>
+        <Link
+          href={THANK_YOU_PATH}
+          className="inline-flex items-center gap-2 text-[0.9375rem] font-bold text-[#1872a3] hover:underline"
+        >
+          See what happens next
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
   AlertCircle,
   ArrowLeft,
@@ -21,8 +22,10 @@ import {
 } from "lucide-react";
 
 import { CITY_INDEX } from "@/lib/city-index";
-import { SITE, telHref, whatsappHref } from "@/lib/site";
-import { errorCategory, markLeadCounted, track } from "@/lib/analytics";
+import { SITE, telHref } from "@/lib/site";
+import { errorCategory, track } from "@/lib/analytics";
+import { recordLeadSuccess } from "@/lib/lead-success";
+import { CONFIRMATION_BODY, CONFIRMATION_HEADING, THANK_YOU_PATH } from "@/lib/thank-you";
 import { currentAttribution } from "@/lib/attribution";
 import { cn } from "@/lib/utils";
 
@@ -94,6 +97,7 @@ const inputClass =
 
 export function ContactWizard() {
   const pathname = usePathname();
+  const router = useRouter();
   const id = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const viewedRef = useRef(false);
@@ -207,35 +211,28 @@ export function ContactWizard() {
         requestId?: string;
       };
       if (result.success) {
+        /*
+         * Confirmed capture. Same order as LeadForm: the conversion is
+         * recorded first, from the one helper both forms share, and only then
+         * does the route change. The event must not depend on the navigation
+         * landing, and /thank-you/ counts nothing of its own, so a refresh or
+         * a bookmark of it can never add a lead.
+         */
+        recordLeadSuccess({
+          formId: FORM_ID,
+          formName: FORM_NAME,
+          sourcePage: pathname,
+          registrationType: need,
+          city: fields.city,
+          submissionId: result.requestId,
+          duplicate: result.duplicate,
+          honeypot: hpNote,
+        });
+        // The panel below holds the confirmation while the router navigates,
+        // and remains as the fallback if it never does. `inFlightRef` stays
+        // true: step 3 is finished and must not submit again.
         setStatus("success");
-        // Skipped for a honeypot-tripped submission, which the API answers
-        // `{ success: true }` on purpose so the bot cannot tell it was
-        // caught. See the same guard in components/forms/lead-form.tsx:
-        // `form_submit` is the primary conversion and counts humans only.
-        if (!hpNote) {
-          track("form_submit", {
-            registration_type: need || "Not specified",
-            city: fields.city || undefined,
-          });
-          /*
-           * The conversion, on the same terms as lead-form.tsx: `success:
-           * true` from this route means the CRM confirmed capture, and the
-           * server's submission id deduplicates it so one enquiry cannot be
-           * counted twice by a re-render or a remount.
-           */
-          if (markLeadCounted(result.requestId ?? "")) {
-            track("generate_lead", {
-              form_id: FORM_ID,
-              form_name: FORM_NAME,
-              registration_type: need || "Not specified",
-              city: fields.city || undefined,
-              submission_id: result.requestId,
-              lead_duplicate: result.duplicate ?? false,
-              lead_source: `Website form (${pathname})`,
-            });
-          }
-        }
-        scrollToTop();
+        router.push(THANK_YOU_PATH);
       } else {
         inFlightRef.current = false;
         setStatus("idle");
@@ -313,18 +310,17 @@ export function ContactWizard() {
     return failing;
   }
 
-  function reset() {
-    setStep(1);
-    setNeed("");
-    setWhen("");
-    setFields({ name: "", phone: "", email: "", businessName: "", city: "", message: "" });
-    setErrors({});
-    setStatus("idle");
-    setSubmitError(null);
-  }
-
-  const firstName = fields.name.trim().split(/\s+/)[0] || "there";
-
+  /*
+   * The transition to /thank-you/, and the fallback if that navigation never
+   * lands.
+   *
+   * It used to be the full confirmation: a greeting by first name, the
+   * three-step "what happens next" list, a WhatsApp link with the visitor's
+   * name prefilled, and a "send another enquiry" button that reset the wizard.
+   * All of that now lives on /thank-you/, which is one page for every form on
+   * the site -- so the next steps are written once, and the greeting is gone
+   * on purpose: a shared URL must not carry a name (lib/thank-you.ts).
+   */
   if (status === "success") {
     return (
       <div
@@ -332,61 +328,30 @@ export function ContactWizard() {
         id="lead-form"
         role="status"
         aria-live="polite"
-        className="flex scroll-mt-28 flex-col gap-[1.375rem] rounded-lg bg-white p-7 shadow-[0_40px_90px_-40px_rgba(12,26,45,0.55),0_0_0_1px_rgba(18,38,64,0.06)] sm:p-[3.25rem]"
+        className="flex scroll-mt-28 flex-col items-start gap-[1.375rem] rounded-lg bg-white p-7 shadow-[0_40px_90px_-40px_rgba(12,26,45,0.55),0_0_0_1px_rgba(18,38,64,0.06)] sm:p-[3.25rem]"
       >
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#e8f5fb]">
           <Check className="h-[1.875rem] w-[1.875rem] text-[#1872a3]" strokeWidth={2.2} aria-hidden="true" />
         </span>
         <h2 className="text-2xl font-extrabold tracking-[-0.01em] text-[#122640] sm:text-[2rem]">
-          Thank you, {firstName}. Your enquiry has been received.
+          {CONFIRMATION_HEADING}
         </h2>
         <p className="max-w-[35rem] text-base/[1.7] leading-[1.7] text-[#3a4656]">
-          A Raulji Group representative will contact you using the details provided
+          {CONFIRMATION_BODY}
           {needLabel ? (
             <>
               {" "}
-              about <strong className="text-[#122640]">{needLabel}</strong>
+              We have it down as <strong className="text-[#122640]">{needLabel}</strong>.
             </>
           ) : null}
-          .
         </p>
-        <ol className="ml-2.5 flex flex-col border-l-2 border-[#e3e9ef]">
-          {[
-            ["We talk it through", "To understand what you are building, who is involved and your timeline."],
-            ["You get a written recommendation", "Structure, the documents needed and the cost, before anything is filed."],
-            ["We file, only when you say so", "Then we handle it end to end, with one point of contact."],
-          ].map(([title, body]) => (
-            <li key={title} className="relative pb-[1.125rem] pl-6">
-              <span
-                aria-hidden="true"
-                className="absolute -left-[7px] top-[3px] h-3 w-3 rounded-full bg-[#329fd2] shadow-[0_0_0_4px_#e8f5fb]"
-              />
-              <p className="text-[0.9375rem] font-bold text-[#122640]">{title}</p>
-              <p className="text-sm text-[#3a4656]">{body}</p>
-            </li>
-          ))}
-        </ol>
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a
-            href={whatsappHref(
-              `Hello Raulji Group, I just sent an enquiry about ${needLabel || "my business"}. My name is ${fields.name.trim()}.`,
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("whatsapp_click", { label: "contact_wizard_success" })}
-            className="inline-flex min-h-[3.375rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
-          >
-            Continue on WhatsApp
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-          <button
-            type="button"
-            onClick={reset}
-            className="min-h-[3.375rem] rounded-[4px] border-[1.5px] border-[#cfd9e3] bg-white px-[1.375rem] text-[0.9375rem] font-semibold text-[#122640] transition duration-200 hover:-translate-y-0.5 hover:border-[#122640]"
-          >
-            Send another enquiry
-          </button>
-        </div>
+        <Link
+          href={THANK_YOU_PATH}
+          className="inline-flex min-h-[3.375rem] items-center justify-center gap-2 rounded-[4px] bg-[#122640] px-[1.375rem] text-[0.9375rem] font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-[#1872a3]"
+        >
+          See what happens next
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
       </div>
     );
   }
