@@ -92,7 +92,9 @@ with someone's name in it. A test asserts that a URL carrying
 
 Both enquiry forms carry `form_id` and `form_name`: `lead_form` / "Enquiry
 form" (homepage, service, city, Gujarat, compare) and `contact_wizard` /
-"Contact wizard" (`/contact/`).
+"Contact wizard" (`/contact/`). Both record the conversion and then redirect
+to `/thank-you/`; the full list of call sites is in
+[form-inventory.md](form-inventory.md).
 
 | Event | Fires when | Extra fields |
 | --- | --- | --- |
@@ -122,8 +124,17 @@ See [lead-pipeline.md](lead-pipeline.md).
 
 It therefore cannot fire on: a CTA click · a form start · a validation failure ·
 a submit attempt · any CRM failure · a 200 that carried `success: false` · a
-page load of any kind. There is no thank-you route to load, so the
-"thank-you page without a confirmed submission" case cannot arise.
+page load of any kind.
+
+**Including a load of /thank-you/.** Since 2026-10-25 every form redirects
+there on a confirmed submission, and that page is the obvious place to put a
+conversion tag — so, explicitly: do not. The event is pushed by the form,
+from the branch where the API confirmed capture, *before* the route changes
+(`lib/lead-success.ts`, the only module allowed to push it). A tag on the
+thank-you page view would instead count a refresh, a back-button return, a
+bookmark, a shared link and a direct visit as new leads. The page pushes
+nothing of its own; `docs/form-inventory.md` records the browser run that
+proves it.
 
 **Deduplication.** The route returns a server-generated `requestId`;
 `markLeadCounted()` records the ids already counted in `sessionStorage` and
@@ -172,6 +183,13 @@ use a regex that could match two of them.
 emitted, and a generic click trigger would fire on intent rather than on
 confirmed capture — which would count unconfirmed enquiries as conversions.
 Every trigger above is a Custom Event on the site's own push.
+
+**And do not add a Page View trigger on `/thank-you/`.** It is the one extra
+trigger this container will be tempted into now that the redirect exists, and
+it would double every lead: the form has already pushed `generate_lead` by the
+time that page renders. It would also count refreshes and direct visits. If a
+thank-you-page conversion is ever wanted *instead* of the dataLayer event, the
+`generate_lead` tag has to be removed in the same change — never both.
 
 ## The duplicate `page_view` problem
 
